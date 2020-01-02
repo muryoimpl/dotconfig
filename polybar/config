@@ -407,10 +407,8 @@ ramp-foreground = ${colors.foreground-alt}
 type = custom/menu
 
 expand-right = true
-
 format-spacing = 1
-
-label-open = P
+label-open = "%{F#98c379}"
 ; label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
