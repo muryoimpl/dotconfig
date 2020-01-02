@@ -26,6 +26,8 @@ foreground-alt = #555555
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
+background-bat = #0000ff
+;#00008b
 
 [bar/myi3]
 ;monitor = ${env:MONITOR:HDMI-1}
@@ -53,16 +55,19 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
+;enable_ipc = true
+
 ; font-0 = fixed:pixelsize=10;1
 ; font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 ; font-2 = siji:pixelsize=10;1
-font-0 = Noto Sans CJK JP Bold:size=10;1
-font-1 = Font Awesome 5 Free:size=10;1
+font-0 = Noto Sans CJK JP:style=Bold:pixelsize=10;1
+font-1 = FontAwesome5FreeSolid:pixelsize=16;2
+;font-1 = Font Awesome 5 Free Regular:pixelsize=10;1
 font-2 = Noto Sans Mono CJK JP:size=10;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = filesystem xbacklight alsa pulseaudio wlan eth battery cpu memory temperature date powermenu
+modules-right = filesystem xbacklight alsa pulseaudio wlan eth battery baticon cpu memory temperature date powermenu
 ;modules-center = mpd
 ;modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
 
@@ -167,7 +172,7 @@ label-visible-padding = ${self.label-focused-padding}
 
 ; urgent = Workspace with urgency hint set
 label-urgent = %index%
-label-urgent-background = ${colors.alert}
+label-urgent-background = ${colors.foreground-alt}
 label-urgent-padding = 2
 
 ; Separator in between workspaces
@@ -372,6 +377,12 @@ animation-discharging-1 = 
 animation-discharging-2 = 
 animation-discharging-foreground = ${colors.foreground-alt}
 animation-discharging-framerate = 750
+
+[module/baticon]
+type = custom/script
+exec = /home/muryoimpl/.config/polybar/battery.sh
+interval = 20
+format-padding = 2
 
 [module/temperature]
 type = internal/temperature
