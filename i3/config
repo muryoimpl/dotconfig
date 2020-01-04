@@ -37,6 +37,7 @@ exec --no-startup-id dunst
 exec --no-startup-id "xscreensaver -no-splash"
 exec --no-startup-id franz
 exec --no-startup-id google-chrome-stable
+exec --no-startup-id code
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -231,6 +232,12 @@ exec_always --no-startup-id picom -b -d :0
 exec_always --no-startup-id nitrogen --restore
 ## polybar (i3status の代わり)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+
+## assign
+assign [class="Franz"] $ws1
+assign [class="chrome"] $ws2
+assign [class="Code"] $ws2
+assign [class="Terminator"] $ws3
 
 # color/theme
 ## flat-gray
