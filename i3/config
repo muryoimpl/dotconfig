@@ -233,12 +233,6 @@ exec_always --no-startup-id nitrogen --restore
 ## polybar (i3status の代わり)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 
-## assign
-assign [class="Franz"] $ws1
-assign [class="chrome"] $ws2
-assign [class="Code"] $ws2
-assign [class="Terminator"] $ws3
-
 # color/theme
 ## flat-gray
 client.focused #000000 #000000 #FFFFFF #000000
