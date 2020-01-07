@@ -27,14 +27,12 @@ alert = #bd2c40
 background-bat = #0000ff
 
 [bar/myi3]
-;monitor = ${env:MONITOR:HDMI-1}
 monitor = ${env:MONITOR:}
 width = 100%
 height = 30
 offset-x = 0%
 offset-y = 0%
 radius = 0.0
-;fixed-center = false
 fixed-center = true
 bottom = false
 
@@ -55,19 +53,13 @@ module-margin-right = 1
 
 ;enable_ipc = true
 
-; font-0 = fixed:pixelsize=10;1
-; font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-; font-2 = siji:pixelsize=10;1
 font-0 = Noto Sans CJK JP:style=Bold:pixelsize=10;1
 font-1 = FontAwesome5FreeSolid:pixelsize=12;2
-;font-1 = Font Awesome 5 Free Regular:pixelsize=10;1
 font-2 = Noto Sans Mono CJK JP:size=10;1
 
 modules-left = i3
 modules-center = xwindow
-modules-right = filesystem alsa pulseaudio wlan eth battery baticon cpu memory temperature date powermenu
-;modules-center = mpd
-;modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
+modules-right = filesystem wlan eth battery baticon cpu memory temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -91,22 +83,6 @@ cursor-scroll = ns-resize
 type = internal/xwindow
 label = %title:0:30:...%
 
-; [module/xkeyboard]
-; type = internal/xkeyboard
-; blacklist-0 = num lock
-;
-; format-prefix = " "
-; format-prefix-foreground = ${colors.foreground-alt}
-; format-prefix-underline = ${colors.secondary}
-;
-; label-layout = %layout%
-; label-layout-underline = ${colors.secondary}
-;
-; label-indicator-padding = 2
-; label-indicator-margin = 1
-; label-indicator-background = ${colors.secondary}
-; label-indicator-underline = ${colors.secondary}
-
 [module/filesystem]
 type = internal/fs
 interval = 25
@@ -116,28 +92,6 @@ mount-0 = /
 label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
-
-; [module/bspwm]
-; type = internal/bspwm
-;
-; label-focused = %index%
-; label-focused-background = ${colors.background-alt}
-; label-focused-underline= ${colors.primary}
-; label-focused-padding = 2
-;
-; label-occupied = %index%
-; label-occupied-padding = 2
-;
-; label-urgent = %index%!
-; label-urgent-background = ${colors.alert}
-; label-urgent-padding = 2
-;
-; label-empty = %index%
-; label-empty-foreground = ${colors.foreground-alt}
-; label-empty-padding = 2
-
-; Separator in between workspaces
-; label-separator = |
 
 [module/i3]
 type = internal/i3
@@ -177,42 +131,6 @@ label-urgent-padding = 4
 ; Separator in between workspaces
 ; label-separator = |
 
-
-; [module/mpd]
-; type = internal/mpd
-; format-online = <label-song>  <icon-prev> <icon-stop> <toggle> <icon-next>
-;
-; icon-prev = 
-; icon-stop = 
-; icon-play = 
-; icon-pause = 
-; icon-next = 
-;
-; label-song-maxlen = 25
-; label-song-ellipsis = true
-
-;[module/xbacklight]
-;type = internal/xbacklight
-;
-;format = <label> <bar>
-;label = BL
-;
-;bar-width = 5
-;bar-indicator = |
-;bar-indicator-foreground = #fff
-;bar-indicator-font = 2
-;bar-fill = ─
-;bar-fill-font = 2
-;bar-fill-foreground = #9f78e1
-;bar-empty = ─
-;bar-empty-font = 2
-;bar-empty-foreground = ${colors.foreground-alt}
-
-;[module/backlight-acpi]
-;inherit = module/xbacklight
-;type = internal/backlight
-;card = intel_backlight
-
 [module/cpu]
 type = internal/cpu
 interval = 2
@@ -229,7 +147,6 @@ format-prefix = "%{F#98c379}:"
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #4bffdc
 label = %percentage_used%% (%gb_used%/%gb_total%)
-
 
 [module/wlan]
 type = internal/network
@@ -279,67 +196,11 @@ date-alt = " %Y-%m-%d"
 time = %H:%M
 time-alt = %H:%M:%S
 
-;format-prefix = 
 format-prefix = "%{F#8b4513}:"
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #0a6cf5
 
 label = %date% %time%
-
-; [module/pulseaudio]
-; type = internal/pulseaudio
-;
-; format-volume = <label-volume> <bar-volume>
-; label-volume = VOL %percentage%%
-; label-volume-foreground = ${root.foreground}
-;
-; label-muted = 🔇 muted
-; label-muted-foreground = #666
-;
-; bar-volume-width = 5
-; bar-volume-foreground-0 = #55aa55
-; bar-volume-foreground-1 = #55aa55
-; bar-volume-foreground-2 = #55aa55
-; bar-volume-foreground-3 = #55aa55
-; bar-volume-foreground-4 = #55aa55
-; bar-volume-foreground-5 = #f5a70a
-; bar-volume-foreground-6 = #ff5555
-; bar-volume-gradient = false
-; bar-volume-indicator = |
-; bar-volume-indicator-font = 2
-; bar-volume-fill = ─
-; bar-volume-fill-font = 2
-; bar-volume-empty = ─
-; bar-volume-empty-font = 2
-; bar-volume-empty-foreground = ${colors.foreground-alt}
-
-;[module/alsa]
-;type = internal/alsa
-;
-;format-volume = <label-volume> <bar-volume>
-;label-volume = VOL
-;label-volume-foreground = ${root.foreground}
-;
-;format-muted-prefix = " "
-;format-muted-foreground = ${colors.foreground-alt}
-;label-muted = sound muted
-;
-;bar-volume-width = 5
-;bar-volume-foreground-0 = #55aa55
-;bar-volume-foreground-1 = #55aa55
-;bar-volume-foreground-2 = #55aa55
-;bar-volume-foreground-3 = #55aa55
-;bar-volume-foreground-4 = #55aa55
-;bar-volume-foreground-5 = #f5a70a
-;bar-volume-foreground-6 = #ff5555
-;bar-volume-gradient = false
-;bar-volume-indicator = |
-;bar-volume-indicator-font = 2
-;bar-volume-fill = ─
-;bar-volume-fill-font = 2
-;bar-volume-empty = ─
-;bar-volume-empty-font = 2
-;bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/battery]
 type = internal/battery
@@ -348,35 +209,17 @@ adapter = AC
 full-at = 98
 time-format = %H:%M
 
-format-charging = <animation-charging> <label-charging>
+format-charging = <label-charging>
 format-charging-underline = #ffb52a
 label-charging = BAT: %percentage%%
 
-format-discharging = <animation-discharging> <label-discharging>
+format-discharging = <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 label-discharging = BAT: %percentage%%
 
-; format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 label-full = BAT: %percentage%%
-
-ramp-capacity-0 = 
-ramp-capacity-1 = 
-ramp-capacity-2 = 
-ramp-capacity-foreground = ${colors.foreground-alt}
-
-animation-charging-0 = 
-animation-charging-1 = 
-animation-charging-2 = 
-animation-charging-foreground = ${colors.foreground-alt}
-animation-charging-framerate = 750
-
-animation-discharging-0 = 
-animation-discharging-1 = 
-animation-discharging-2 = 
-animation-discharging-foreground = ${colors.foreground-alt}
-animation-discharging-framerate = 750
 
 [module/baticon]
 type = custom/script
@@ -409,10 +252,8 @@ type = custom/menu
 expand-right = true
 format-spacing = 1
 label-open = "%{F#98c379}"
-; label-open = 
 label-open-foreground = ${colors.secondary}
-label-close =  cancel
-; label-close = 
+label-close = 
 label-close-foreground = ${colors.secondary}
 label-separator = |
 label-separator-foreground = ${colors.foreground-alt}
@@ -441,10 +282,7 @@ screenchange-reload = true
 ;pseudo-transparency = false
 
 [global/wm]
-# margin-top = 5
-# margin-bottom = 5
 margin-top = 0
 margin-bottom = 0
-
 
 ; vim:ft=dosini
