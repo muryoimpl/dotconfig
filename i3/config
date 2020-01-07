@@ -38,6 +38,7 @@ exec --no-startup-id "xscreensaver -no-splash"
 exec --no-startup-id franz
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id code
+exec --no-startup-id pnmixer
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
