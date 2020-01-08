@@ -80,6 +80,21 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[bar/myi3hdmi1]
+inherit = bar/myi3
+modules-right = filesystem xbacklight alsa pulseaudio wlan eth battery baticon cpu memory temperature date powermenu
+tray-position = none
+
+[bar/myi3dp2]
+inherit = bar/myi3
+modules-right = wlan eth cpu memory date powermenu
+tray-position = none
+
+[bar/myi3hdmi2]
+inherit = bar/myi3
+modules-right = wlan eth cpu memory date powermenu
+tray-position = none
+
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:30:...%
@@ -173,19 +188,18 @@ ramp-signal-foreground = ${colors.foreground-alt}
 
 [module/eth]
 type = internal/network
-interface = enp0s31f6
+interface = enp0s20f0u2u3c2
 interval = 3.0
 
 format-connected-underline = #55aa55
-format-connected-prefix = " "
+format-connected-prefix = "Eth: "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = Eth: %local_ip%
 
 format-disconnected =
-;format-disconnected = <label-disconnected>
-;format-disconnected-underline = ${self.format-connected-underline}
-;label-disconnected = %ifname% disconnected
-;label-disconnected-foreground = ${colors.foreground-alt}
+format-disconnected-underline = ${self.format-connected-underline}
+label-disconnected = %ifname% disconnected
+label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/date]
 type = internal/date
