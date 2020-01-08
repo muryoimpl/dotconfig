@@ -194,33 +194,7 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
-
-# Start i3bar to display a workspace bar (plus the system information i3status
-# finds out, if available)
-# bar {
-#     colors {
-#         background #000000
-#         statusline #ffffff
-#         separator  #666666
-#
-#         # <colorclass>     <border> <background> <text>
-#         focused_workspace  #4c7899  #285577      #ffffff
-#         active_workspace   #333333  #5f676a      #ffffff
-#         inactive_workspace #333333  #222222      #888888
-#         urgent_workspace   #2f343a  #900000      #ffffff
-#         binding_mode       #2f343a  #900000      #ffffff
-#     }
-#
-#     mode                    dock
-#     status_command          i3status # i3blocks
-#     position                top
-#     workspace_buttons       yes
-#     tray_output             primary
-#     binding_mode_indicator  yes
-# }
-
 
 # my own setups
 ## launcher
