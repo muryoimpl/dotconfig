@@ -58,9 +58,9 @@ font-0 = Noto Sans CJK JP:style=Bold:pixelsize=10;1
 font-1 = FontAwesome5FreeSolid:pixelsize=12;2
 font-2 = Noto Sans Mono CJK JP:size=10;1
 
-modules-left = i3
+modules-left = i3 wlan eth
 modules-center = xwindow
-modules-right = filesystem wlan eth battery baticon cpu memory temperature date powermenu
+modules-right = filesystem battery baticon cpu memory temperature date powermenu
 
 tray-position = right
 tray-padding = 2
@@ -82,7 +82,7 @@ cursor-scroll = ns-resize
 
 [bar/myi3hdmi1]
 inherit = bar/myi3
-modules-right = filesystem xbacklight alsa pulseaudio wlan eth battery baticon cpu memory temperature date powermenu
+modules-right = filesystem battery baticon cpu memory temperature date powermenu
 tray-position = none
 
 [bar/myi3dp2]
@@ -92,7 +92,7 @@ tray-position = none
 
 [bar/myi3hdmi2]
 inherit = bar/myi3
-modules-right = wlan eth cpu memory date powermenu
+modules-right = cpu memory date powermenu
 tray-position = none
 
 [module/xwindow]
