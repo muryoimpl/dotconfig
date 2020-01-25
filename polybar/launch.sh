@@ -16,7 +16,7 @@ if type "xrandr"; then
       continue
     fi
 
-    if [[ $m == "HDMI1" ]]; then
+    if [[ $m == "HDMI1" || $m == "DisplayPort-2" ]]; then
       hdmi1width=$(polybar --list-monitors | grep "HDMI1" | cut -d":" -f1 | cut -d"x" -f1)
       if [[ $((hdmi1width)) -gt 3000 ]]; then
         MONITOR=$m TRAY_POSITION=none polybar -c $HOME/.config/polybar/config myi3hdmi1 -r &
@@ -26,7 +26,7 @@ if type "xrandr"; then
       continue
     fi
 
-    if [[ $m == "DP2" ]]; then
+    if [[ $m == "DP2" || $m == "DisplayPort-3" ]]; then
       MONITOR=$m TRAY_POSITION=none polybar -c $HOME/.config/polybar/config myi3dp2 -r &
       continue
     fi

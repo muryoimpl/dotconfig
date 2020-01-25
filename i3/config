@@ -130,9 +130,9 @@ set $ws9 "9"
 set $ws10 "10"
 
 workspace 1 output eDP1
-workspace 2 output HDMI2 HDMI1 eDP1
-workspace 3 output HDMI2 HDMI1 eDP1
-workspace 4 output DP2 HDMI1 eDP1
+workspace 2 output HDMI2 HDMI1 DisplayPort-2 eDP1
+workspace 3 output HDMI2 HDMI1 DisplayPort-2 eDP1
+workspace 4 output DP2 HDMI1 DisplayPort-3 eDP1
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
