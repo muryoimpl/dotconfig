@@ -210,10 +210,10 @@ bindsym $mod+Shift+slash exec --no-startup-id "notify-send 'Hello world!' 'This 
 # always
 ## composit
 exec_always --no-startup-id picom -b -d :0
-## wallpaper
-exec_always --no-startup-id nitrogen --restore
 ## polybar (i3status の代わり)
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+## wallpaper
+exec_always --no-startup-id nitrogen --restore
 
 # color/theme
 ## flat-gray
