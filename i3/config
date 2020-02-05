@@ -38,7 +38,7 @@ exec --no-startup-id "xscreensaver -no-splash"
 exec --no-startup-id franz
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id code
-exec --no-startup-id pnmixer
+exec --no-startup-id volumeicon
 exec --no-startup-id stacer
 exec --no-startup-id megasync
 
