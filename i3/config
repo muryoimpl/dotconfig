@@ -201,6 +201,7 @@ bindsym $mod+r mode "resize"
 # my own setups
 ## launcher
 bindsym $mod+bracketleft exec --no-startup-id "$HOME/local/bin/rofi_cmd.sh"
+bindsym $mod+slash exec --no-startup-id "$HOME/local/bin/rofimoji_cmd.sh"
 ## screen lock
 bindsym $mod+Shift+Delete exec --no-startup-id "xscreensaver-command -activate"
 ## screenshot
