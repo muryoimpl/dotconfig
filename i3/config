@@ -41,6 +41,7 @@ exec --no-startup-id code
 exec --no-startup-id volumeicon
 exec --no-startup-id stacer
 exec --no-startup-id megasync
+exec --no-startup-id parcellite
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
