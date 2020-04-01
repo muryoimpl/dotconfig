@@ -33,7 +33,7 @@ font pango:Noto Sans CJK JP Regular,monospace 10
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id alacritty
 exec --no-startup-id nm-applet
-exec --no-startup-id dunst
+# exec --no-startup-id dunst
 exec --no-startup-id "xscreensaver -no-splash"
 exec --no-startup-id franz
 exec --no-startup-id google-chrome-stable
