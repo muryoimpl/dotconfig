@@ -35,6 +35,7 @@ exec --no-startup-id alacritty
 exec --no-startup-id nm-applet
 # exec --no-startup-id dunst
 exec --no-startup-id "xscreensaver -no-splash"
+exec --no-startup-id xautolock -time 5 -locker "xscreensaver-command -lock"
 exec --no-startup-id franz
 exec --no-startup-id google-chrome-stable
 exec --no-startup-id code
@@ -203,7 +204,8 @@ bindsym $mod+r mode "resize"
 bindsym $mod+bracketleft exec --no-startup-id "$HOME/local/bin/rofi_cmd.sh"
 bindsym $mod+slash exec --no-startup-id "$HOME/local/bin/rofimoji_cmd.sh"
 ## screen lock
-bindsym $mod+Shift+Delete exec --no-startup-id "xscreensaver-command -activate"
+# bindsym $mod+Shift+Delete exec --no-startup-id "xscreensaver-command -activate"
+bindsym $mod+Shift+Delete exec --no-startup-id "xautolock -locknow"
 ## screenshot
 bindsym $mod+Print exec --no-startup-id "scrot -e 'mv $f ~/screenshots/ 2>/dev/null'"
 bindsym $mod+Shift+Print exec --no-startup-id "sleep 0.5 && scrot -s '%Y-%m-%d_%H%M%S_scrot.png' -e 'mv $f ~/screenshots/ 2>/dev/null'"
