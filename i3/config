@@ -36,13 +36,14 @@ exec --no-startup-id nm-applet
 # exec --no-startup-id dunst
 exec --no-startup-id "xscreensaver -no-splash"
 exec --no-startup-id xautolock -detectsleep -time 5 -locker "xscreensaver-command -lock"
-# exec --no-startup-id franz
 exec --no-startup-id google-chrome-stable
-exec --no-startup-id code
+# exec --no-startup-id code
 exec --no-startup-id volumeicon
 # exec --no-startup-id stacer
 exec --no-startup-id "megasync --start"
-exec --no-startup-id parcellite
+# exec --no-startup-id parcellite
+exec --no-startup-id "google-chrome-stable --app=https://idobata.io/"
+exec --no-startup-id "google-chrome-stable --app=https://todoist.com/app/"
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
