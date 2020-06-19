@@ -87,7 +87,8 @@ tray-position = none
 
 [bar/myi3dp2]
 inherit = bar/myi3
-modules-right = cpu memory date powermenu
+;modules-right = cpu memory date powermenu
+modules-right = date
 tray-position = none
 
 [bar/myi3hdmi2]
