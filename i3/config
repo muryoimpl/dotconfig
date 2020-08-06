@@ -35,7 +35,7 @@ exec --no-startup-id alacritty
 exec --no-startup-id nm-applet
 # exec --no-startup-id dunst
 exec --no-startup-id "xscreensaver -no-splash"
-exec --no-startup-id xautolock -detectsleep -time 5 -locker "xscreensaver-command -lock"
+exec --no-startup-id xautolock -detectsleep -time 25 -locker "xscreensaver-command -lock"
 exec --no-startup-id google-chrome-stable
 # exec --no-startup-id code
 exec --no-startup-id volumeicon
@@ -133,10 +133,10 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-workspace 1 output eDP1
-workspace 2 output HDMI2 HDMI1 DisplayPort-2 eDP1
-workspace 3 output HDMI2 HDMI1 DisplayPort-2 eDP1
-workspace 4 output DP2 HDMI1 DisplayPort-3 eDP1
+workspace 1 output eDP1 HDMI-A-0
+workspace 2 output HDMI2 HDMI1 HDMI-A-0 DisplayPort-2 eDP1
+workspace 3 output HDMI2 HDMI1 HDMI-A-0 DisplayPort-2 eDP1
+workspace 4 output DP2 HDMI1 DisplayPort-3 eDP1 DisplayPort-2
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1

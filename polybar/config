@@ -80,6 +80,13 @@ tray-padding = 2
 cursor-click = pointer
 cursor-scroll = ns-resize
 
+[bar/myi3-tower]
+inherit = bar/myi3
+
+modules-left = i3 wlan-tower eth-tower
+modules-center = xwindow
+modules-right = filesystem battery baticon cpu memory temperature date powermenu
+
 [bar/myi3hdmi1]
 inherit = bar/myi3
 modules-right = filesystem battery baticon cpu memory temperature date powermenu
@@ -187,6 +194,10 @@ ramp-signal-3 = 
 ramp-signal-4 = 
 ramp-signal-foreground = ${colors.foreground-alt}
 
+[module/wlan-tower]
+inherit = module/wlan
+interface = wlp5s0f3u1
+
 [module/wlan-t495]
 type = internal/network
 interface = wlp1s0
@@ -220,6 +231,10 @@ format-connected-underline = #55aa55
 format-connected-prefix = "Eth: "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 label-connected = %local_ip%
+
+[module/eth-tower]
+inherit = module/eth
+interface = enp4s0
 
 [module/date]
 type = internal/date
