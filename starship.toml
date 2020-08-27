@@ -1,0 +1,92 @@
+add_newline = false
+
+prompt_order = [
+    "username",
+    "hostname",
+    "jobs",
+    "directory",
+    "docker_context",
+    "git_branch",
+    "git_commit",
+    "git_state",
+    "git_status",
+    "cmd_duration",
+
+#   "golang",
+#   "nodejs",
+#   "ruby",
+#   "terraform",
+#    "aws",
+
+    "line_break",
+
+    "time",
+    "character",
+
+#    "memory_usage",
+#    "env_var",
+#    "custom",
+]
+
+[character]
+style_success = "bold white"
+
+[username]
+disabled = false
+show_always = true
+style_user = "bold white"
+
+[hostname]
+disabled = false
+ssh_only = false
+style = "bold white"
+
+[directory]
+disabled = false
+use_logical_path = true
+truncation_length = 10
+fish_style_pwd_dir_length = 10
+style = "bg:purple bold white"
+
+[time]
+disabled = false
+format = "[%F %T]"
+utc_time_offset = "local"
+use_12hr = false
+style = "bold dimmed green"
+
+[cmd_duration]
+min_time = 1_000
+show_milliseconds = true
+prefix = "time: "
+style = "yellow"
+
+[git_commit]
+disabled = false
+only_detached = false
+
+[git_state]
+disabeld = false
+
+[ruby]
+symbol = "ruby: "
+style = "white"
+
+[nodejs]
+symbol = "node: "
+style = "white"
+
+[golang]
+symbol = "go: "
+style = "white"
+
+[terraform]
+symbol = "tf: "
+style = "white"
+
+[aws]
+style = "yellow"
+
+[docker_context]
+disabled = false
+only_with_files = true
