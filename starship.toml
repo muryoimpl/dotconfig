@@ -6,6 +6,10 @@ prompt_order = [
     "jobs",
     "directory",
     "docker_context",
+
+    "line_break",
+    "memory_usage",
+    "aws",
     "git_branch",
     "git_commit",
     "git_state",
@@ -16,14 +20,12 @@ prompt_order = [
 #   "nodejs",
 #   "ruby",
 #   "terraform",
-#    "aws",
 
     "line_break",
 
     "time",
     "character",
 
-#    "memory_usage",
 #    "env_var",
 #    "custom",
 ]
@@ -68,6 +70,14 @@ only_detached = false
 [git_state]
 disabeld = false
 
+[git_status]
+ahead = "↑ "
+behind = "↓ "
+modified = "！"
+
+[git_branch]
+style = "bold white bg:blue"
+
 [ruby]
 symbol = "ruby: "
 style = "white"
@@ -90,3 +100,12 @@ style = "yellow"
 [docker_context]
 disabled = false
 only_with_files = true
+
+[memory_usage]
+disabled = false
+show_percentage = true
+show_swap = true
+threshold = -1
+symbol = "mem:"
+separator = "/"
+style = "bold dimmed white"
