@@ -7,14 +7,16 @@ prompt_order = [
     "directory",
     "docker_context",
 
-    "line_break",
-    "memory_usage",
-    "aws",
     "git_branch",
     "git_commit",
     "git_state",
     "git_status",
+
+    "line_break",
+    "memory_usage",
+    "aws",
     "cmd_duration",
+
 
 #   "golang",
 #   "nodejs",
@@ -95,7 +97,7 @@ symbol = "tf: "
 style = "white"
 
 [aws]
-style = "yellow"
+style = "white"
 
 [docker_context]
 disabled = false
