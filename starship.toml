@@ -1,36 +1,23 @@
 add_newline = false
 
-prompt_order = [
-    "username",
-    "hostname",
-    "jobs",
-    "directory",
-    "docker_context",
-
-    "git_branch",
-    "git_commit",
-    "git_state",
-    "git_status",
-
-    "line_break",
-    "memory_usage",
-    "aws",
-    "cmd_duration",
-
-
-#   "golang",
-#   "nodejs",
-#   "ruby",
-#   "terraform",
-
-    "line_break",
-
-    "time",
-    "character",
-
-#    "env_var",
-#    "custom",
-]
+format = """\
+    $username\
+    $hostname\
+    $jobs\
+    $directory\
+    $docker_context\
+    $git_branch\
+    $git_commit\
+    $git_state\
+    $git_status\
+    $line_break\
+    $memory_usage\
+    $aws\
+    $cmd_duration\
+    $line_break\
+    $time\
+    $character\
+"""
 
 [character]
 style_success = "bold white"
@@ -54,16 +41,16 @@ style = "bg:purple bold white"
 
 [time]
 disabled = false
-format = "[%F %T]"
 utc_time_offset = "local"
 use_12hr = false
 style = "bold dimmed green"
+time_format = "[%F %T]"
 
 [cmd_duration]
 min_time = 1_000
 show_milliseconds = true
-prefix = "time: "
 style = "yellow"
+format = "time: [$duration]($style)"
 
 [git_commit]
 disabled = false
