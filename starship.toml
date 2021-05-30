@@ -21,6 +21,9 @@ format = """\
 
 [character]
 style_success = "bold white"
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vicmd_symbol = "[❮](bold green)"
 
 [username]
 disabled = false
