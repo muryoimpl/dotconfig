@@ -133,10 +133,11 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-workspace 1 output eDP1 HDMI-A-0
-workspace 2 output HDMI2 HDMI1 HDMI-A-0 DisplayPort-2 eDP1
-workspace 3 output HDMI2 HDMI1 HDMI-A-0 DisplayPort-2 eDP1
-workspace 4 output DP2 HDMI1 DisplayPort-3 eDP1 DisplayPort-2
+workspace 1 output eDP1 DisplayPort-1
+workspace 2 output DisplayPort-1 eDP1
+workspace 3 output DisplayPort-1 eDP1
+workspace 4 output DisplayPort-2 eDP1
+workspace 5 output HDMI-A-0 eDP1
 
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
@@ -206,6 +207,7 @@ bindsym $mod+bracketleft exec --no-startup-id "$HOME/local/bin/rofi_cmd.sh"
 bindsym $mod+slash exec --no-startup-id "$HOME/local/bin/rofimoji_cmd.sh"
 ## screen lock
 bindsym $mod+Shift+Delete exec --no-startup-id "xscreensaver-command -lock"
+bindsym $mod+Shift+Ctrl+Delete exec --no-startup-id "xscreensaver-command -lock"
 
 ## screenshot
 bindsym $mod+Print exec --no-startup-id "scrot -e 'mv $f ~/screenshots/ 2>/dev/null'"
