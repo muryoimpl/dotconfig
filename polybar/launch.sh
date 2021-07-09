@@ -9,6 +9,8 @@ while pgrep -u $UID -x polybar >/dev/null; do sleep 1; done
 # Launch Polybar, using default config location ~/.config/polybar/config
 # polybar -c $HOME/.config/polybar/config myi3 -r &
 
+export TZ=Asia/Tokyo
+
 for d in $(polybar --list-monitors | cut -d":" -f1); do
   if [[ $d == "HDMI-A-0" ]]; then
     TOWER=1
@@ -23,7 +25,7 @@ if type "xrandr"; then
         continue
       fi
 
-      if [[ $m == "DisplayPort-1" ]]; then
+      if [[ $m == "DisplayPort-0" || $m == "DisplayPort-1" ]]; then
         MONITOR=$m TRAY_POSITION=right polybar -c $HOME/.config/polybar/config myi3-tower -r &
         continue
       fi
