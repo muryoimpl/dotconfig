@@ -105,6 +105,10 @@ Icon
 Session.vim
 .netrwhist
 *~
+/.vim/autoload/
+/.vim/plugged/
+/.vim/tmp/
+/.vim/undodir/
 
 ##########
 #for tags
