@@ -42,7 +42,6 @@ exec --no-startup-id volumeicon
 # exec --no-startup-id stacer
 exec --no-startup-id "megasync --start"
 # exec --no-startup-id parcellite
-exec --no-startup-id "google-chrome-stable --app=https://idobata.io/"
 exec --no-startup-id "google-chrome-stable --app=https://todoist.com/app/"
 
 # Use pactl to adjust volume in PulseAudio.
