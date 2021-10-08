@@ -119,6 +119,7 @@ tags
 !tags/
 .tag
 .tags
+.ctagsignore
 
 # Files that might appear on external disk
 .Spotlight-V100
