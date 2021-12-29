@@ -20,7 +20,6 @@ format = """\
 """
 
 [character]
-style_success = "bold white"
 success_symbol = "[❯](bold green)"
 error_symbol = "[❯](bold red)"
 vicmd_symbol = "[❮](bold green)"
@@ -60,7 +59,7 @@ disabled = false
 only_detached = false
 
 [git_state]
-disabeld = false
+disabled = false
 
 [git_status]
 ahead = "↑ "
@@ -95,9 +94,6 @@ only_with_files = true
 
 [memory_usage]
 disabled = false
-show_percentage = true
-show_swap = true
 threshold = -1
 symbol = "mem:"
-separator = "/"
 style = "bold dimmed white"
