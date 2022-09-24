@@ -20,6 +20,8 @@ require('jetpack').startup(function (use)
   use { 'Yggdroot/indentLine' }
   use { 'junegunn/fzf', run = 'fzf#install()' }
   use { 'junegunn/fzf.vim' }
+
+  use { 'dense-analysis/ale' }
 end)
 
 -- Install plugins if they are not installed.
@@ -36,6 +38,7 @@ require('plugins/fugitive')
 require('plugins/gitgutter')
 require('plugins/lightline')
 require('plugins/fzf')
+require('plugins/ale')
 
 -- whitespace
 vim.cmd([[
