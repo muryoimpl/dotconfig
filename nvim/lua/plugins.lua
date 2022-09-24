@@ -22,6 +22,7 @@ require('jetpack').startup(function (use)
   use { 'junegunn/fzf.vim' }
 
   use { 'dense-analysis/ale' }
+  use { 'vim-test/vim-test' }
 end)
 
 -- Install plugins if they are not installed.
@@ -77,4 +78,17 @@ vim.cmd([[
   nnoremap tk  :pop<Return>
   "履歴一覧
   nnoremap tl  :tags<Return>
+]])
+
+-- vim-test
+vim.cmd([[
+  " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
+  nmap <silent> t<C-n> :TestNearest<CR>
+  nmap <silent> t<C-f> :TestFile<CR>
+  nmap <silent> t<C-s> :TestSuite<CR>
+  nmap <silent> t<C-l> :TestLast<CR>
+  nmap <silent> t<C-g> :TestVisit<CR>
+
+  let g:test#preserve_screen = 1
+  let test#strategy = 'neovim'
 ]])
