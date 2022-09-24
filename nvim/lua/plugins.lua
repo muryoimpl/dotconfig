@@ -38,13 +38,19 @@ vim.cmd([[
 ]])
 
 vim.cmd([[
-  source ~/.config/nvim/lua/plugins/fugitive.vim
-  source ~/.config/nvim/lua/plugins/fzf.vim
-  source ~/.config/nvim/lua/plugins/gitgutter.vim
-  source ~/.config/nvim/lua/plugins/lightline.vim
-  source ~/.config/nvim/lua/plugins/ale.vim
-  source ~/.config/nvim/lua/plugins/tags.vim
-  source ~/.config/nvim/lua/plugins/vim-test.vim
+  let files = [
+  \  "fugitive.vim",
+  \  "fzf.vim",
+  \  "gitgutter.vim",
+  \  "lightline.vim",
+  \  "ale.vim",
+  \  "tags.vim",
+  \  "vim-test.vim",
+  \]
+
+  for f in files
+    exe "source" "~/.config/nvim/lua/plugins/".f
+  endfor
 ]])
 
 -- whitespace
