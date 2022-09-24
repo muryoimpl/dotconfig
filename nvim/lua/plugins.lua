@@ -35,11 +35,13 @@ vim.cmd([[
   endfor
 ]])
 
-require('plugins/fugitive')
-require('plugins/gitgutter')
-require('plugins/lightline')
-require('plugins/fzf')
-require('plugins/ale')
+vim.cmd([[
+  source ~/.config/nvim/lua/plugins/fugitive.vim
+  source ~/.config/nvim/lua/plugins/fzf.vim
+  source ~/.config/nvim/lua/plugins/gitgutter.vim
+  source ~/.config/nvim/lua/plugins/lightline.vim
+  source ~/.config/nvim/lua/plugins/ale.vim
+]])
 
 -- whitespace
 vim.cmd([[

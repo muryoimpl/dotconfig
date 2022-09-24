@@ -1,6 +1,5 @@
-vim.opt.laststatus=2
+set laststatus=2
 
-vim.cmd([[
 if !has('gui_running')
   set t_Co=256
 endif
@@ -137,4 +136,3 @@ function! MyCharCode()
 
   return "'". char ."' ". nr
 endfunction
-]])
