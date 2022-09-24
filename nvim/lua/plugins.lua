@@ -23,6 +23,8 @@ require('jetpack').startup(function (use)
 
   use { 'dense-analysis/ale' }
   use { 'vim-test/vim-test' }
+
+  use { 'soramugi/auto-ctags.vim' }
 end)
 
 -- Install plugins if they are not installed.
