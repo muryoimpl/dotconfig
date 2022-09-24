@@ -25,6 +25,17 @@ require('jetpack').startup(function (use)
   use { 'vim-test/vim-test' }
 
   use { 'soramugi/auto-ctags.vim' }
+
+  -- lsp
+  use { 'neovim/nvim-lspconfig' }
+  use { 'williamboman/mason.nvim' }
+  use { 'williamboman/mason-lspconfig.nvim' }
+
+  use { 'hrsh7th/nvim-cmp' }
+  use { 'hrsh7th/cmp-vsnip' }
+  use { 'hrsh7th/vim-vsnip' }
+  use { 'hrsh7th/cmp-nvim-lsp' }
+  use { 'hrsh7th/cmp-buffer' }
 end)
 
 -- Install plugins if they are not installed.
@@ -71,3 +82,6 @@ vim.cmd([[
   let g:indentLine_color_term = 239
   let g:indentLine_char_list = ['|']
 ]])
+
+-- LSP
+require('plugins/lsp')
