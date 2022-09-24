@@ -42,6 +42,7 @@ vim.cmd([[
   source ~/.config/nvim/lua/plugins/lightline.vim
   source ~/.config/nvim/lua/plugins/ale.vim
   source ~/.config/nvim/lua/plugins/tags.vim
+  source ~/.config/nvim/lua/plugins/vim-test.vim
 ]])
 
 -- whitespace
@@ -61,17 +62,4 @@ vim.cmd([[
   let g:indentLine_enabled = 1
   let g:indentLine_color_term = 239
   let g:indentLine_char_list = ['|']
-]])
-
--- vim-test
-vim.cmd([[
-  " these "Ctrl mappings" work well when Caps Lock is mapped to Ctrl
-  nmap <silent> t<C-n> :TestNearest<CR>
-  nmap <silent> t<C-f> :TestFile<CR>
-  nmap <silent> t<C-s> :TestSuite<CR>
-  nmap <silent> t<C-l> :TestLast<CR>
-  nmap <silent> t<C-g> :TestVisit<CR>
-
-  let g:test#preserve_screen = 1
-  let test#strategy = 'neovim'
 ]])
