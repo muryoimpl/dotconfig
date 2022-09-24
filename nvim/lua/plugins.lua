@@ -18,6 +18,8 @@ require('jetpack').startup(function (use)
   use { 'nvim-treesitter/nvim-treesitter' }
   use { 'justinmk/vim-dirvish' }
   use { 'Yggdroot/indentLine' }
+  use { 'junegunn/fzf', run = 'fzf#install()' }
+  use { 'junegunn/fzf.vim' }
 end)
 
 -- Install plugins if they are not installed.
@@ -33,6 +35,7 @@ vim.cmd([[
 require('plugins/fugitive')
 require('plugins/gitgutter')
 require('plugins/lightline')
+require('plugins/fzf')
 
 -- whitespace
 vim.cmd([[
