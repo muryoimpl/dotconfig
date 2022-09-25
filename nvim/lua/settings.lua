@@ -41,7 +41,7 @@ vim.cmd([[
 ]])
 
 -- 検索のハイライトを消す
-vim.api.nvim_set_keymap("n", "<Esc><Esc>", ':set nohlsearch!<CR>', {})
+vim.api.nvim_set_keymap("n", "<Esc><Esc>", ':set nohlsearch<CR>', {})
 
 -- 日本語入力設定らしい ------------------------------------------------
 vim.opt.imsearch=0
