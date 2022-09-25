@@ -18,8 +18,9 @@ require('jetpack').startup(function (use)
   use { 'nvim-treesitter/nvim-treesitter' }
   use { 'justinmk/vim-dirvish' }
   use { 'Yggdroot/indentLine' }
-  use { 'junegunn/fzf', run = 'fzf#install()' }
-  use { 'junegunn/fzf.vim' }
+
+  use { 'ibhagwan/fzf-lua' }
+  use { 'kyazdani42/nvim-web-devicons' }
 
   use { 'dense-analysis/ale' }
   use { 'vim-test/vim-test' }
@@ -51,7 +52,6 @@ vim.cmd([[
 vim.cmd([[
   let files = [
   \  "fugitive.vim",
-  \  "fzf.vim",
   \  "gitgutter.vim",
   \  "lightline.vim",
   \  "ale.vim",
@@ -85,3 +85,5 @@ vim.cmd([[
 
 -- LSP
 require('plugins/lsp')
+-- fzf
+require('plugins/fzf')
