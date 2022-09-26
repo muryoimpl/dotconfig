@@ -31,6 +31,8 @@ vim.api.nvim_set_keymap('n', '<space>gc', "<CMD>lua require('fzf-lua').git_commi
 vim.api.nvim_set_keymap('n', '<space>h',  "<CMD>lua require('fzf-lua').command_history()<CR>",  kopts)
 vim.api.nvim_set_keymap('n', '<space>lr', "<CMD>lua require('fzf-lua').lsp_references()<CR>",   kopts)
 vim.api.nvim_set_keymap('n', '<space>ld', "<CMD>lua require('fzf-lua').lsp_definitions()<CR>",  kopts)
+vim.api.nvim_set_keymap('n', '<space>gp', "<CMD>lua require('fzf-lua').live_grep()<CR>",        kopts)
+vim.api.nvim_set_keymap('n', '<space>gc', "<CMD>lua require('fzf-lua').grep_cword()<CR>",       kopts)
 
 -- resize 時に redraw
 -- vim.api.nvim_create_autocmd("VimResized", {
