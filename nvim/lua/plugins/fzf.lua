@@ -16,7 +16,10 @@ require('fzf-lua').setup({
     glob_flag = "--iglob",
     search = "",
     continue_last_search = true,
-  }
+  },
+  lsp = {
+    sync = true,
+  },
 })
 
 -- keymap
@@ -30,7 +33,7 @@ vim.api.nvim_set_keymap('n', '<space>lr', "<CMD>lua require('fzf-lua').lsp_refer
 vim.api.nvim_set_keymap('n', '<space>ld', "<CMD>lua require('fzf-lua').lsp_definitions()<CR>",  kopts)
 
 -- resize 時に redraw
-vim.api.nvim_create_autocmd("VimResized", {
-  pattern = '*',
-  command = 'lua require("fzf-lua").redraw()'
-})
+-- vim.api.nvim_create_autocmd("VimResized", {
+--   pattern = '*',
+--   command = 'lua require("fzf-lua").redraw()'
+-- })
