@@ -13,6 +13,7 @@ require('jetpack').startup(function (use)
   use {'w0ng/vim-hybrid', }
   use { 'tpope/vim-fugitive' }
   use { 'itchyny/lightline.vim' }
+  use { 'maximbaz/lightline-ale' }
   use { 'airblade/vim-gitgutter' }
   use { 'bronson/vim-trailing-whitespace' }
   use { 'nvim-treesitter/nvim-treesitter' }
