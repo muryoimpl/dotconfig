@@ -19,7 +19,7 @@ vim.opt.ignorecase=true		    -- 検索の時に大文字小文字を区別しな
 vim.opt.incsearch=true		    -- インクリメンタルサーチ
 vim.opt.showmatch=true		    -- 対応する括弧を表示する
 vim.opt.hlsearch=true		      -- 検索の強調表示
- 
+
 -- 全角スペースその他を目立たせる
 -- https://gist.github.com/pgtwitter/cb31d497aa02f221164fc2dd846d24dc
 vim.cmd([[
@@ -41,7 +41,7 @@ vim.cmd([[
 ]])
 
 -- 検索のハイライトを消す
-vim.api.nvim_set_keymap("n", "<Esc><Esc>", ':set nohlsearch<CR>', {})
+vim.api.nvim_set_keymap("n", "<Esc><Esc>", ':set nohlsearch!<CR>', {})
 
 -- 日本語入力設定らしい ------------------------------------------------
 vim.opt.imsearch=0
@@ -72,7 +72,7 @@ vim.cmd([[
   end
 
   vnoremap <LeftRelease> "*ygv
-  vnoremap <2-LeftRelease> "*ygv 
+  vnoremap <2-LeftRelease> "*ygv
 ]])
 
 -- === 補完 ===================================================
