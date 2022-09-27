@@ -58,7 +58,7 @@ vim.opt.splitbelow=true
 vim.opt.termguicolors=true
 
 -- ambiguous width 対応
-vim.opt.ambiwidth='double'
+-- vim.opt.ambiwidth='double'
 
 vim.opt.guifont='Noto Mono Regular:h16'
 
