@@ -1,5 +1,6 @@
 require('settings')
 require('plugins')
+require('filetype')
 
 -- colorscheme
 vim.opt.background='dark'
