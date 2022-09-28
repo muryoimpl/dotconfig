@@ -6,4 +6,7 @@ nmap <silent> t<C-l> :TestLast<CR>
 nmap <silent> t<C-g> :TestVisit<CR>
 
 let g:test#preserve_screen = 1
-let test#strategy = 'neovim'
+let g:test#strategy = 'neovim'
+
+" terminal -> normal を ESC で
+tnoremap <Esc> <C-\><C-n>
