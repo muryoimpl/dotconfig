@@ -112,3 +112,16 @@ local _filename = vim.fn.expand('%:r')
 if _filename == 'Makefile' then
   vim.opt.expandtab=false
 end
+
+-- " copen のショートカット
+vim.cmd([[
+function! ToggleQuickfix()
+    let l:nr = winnr('$')
+    cwindow
+    let l:nr2 = winnr('$')
+    if l:nr == l:nr2
+        cclose
+    endif
+endfunction
+nnoremap <script> <silent> <Space>o :call ToggleQuickfix()<CR>
+]])
