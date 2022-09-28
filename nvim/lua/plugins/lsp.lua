@@ -17,6 +17,10 @@ local on_attach = function(client, bufnr)
 end
 
 require('mason').setup()
+require('mason-lspconfig').setup({
+  ensure_installed = { "tsserver", "eslint", "solargraph" },
+  automatic_installation = true,
+})
 require('mason-lspconfig').setup_handlers({ function(server)
   local opts = {
     capabilities = require('cmp_nvim_lsp').update_capabilities(

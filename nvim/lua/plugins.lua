@@ -29,9 +29,9 @@ require('jetpack').startup(function (use)
   use { 'soramugi/auto-ctags.vim' }
 
   -- lsp
-  use { 'neovim/nvim-lspconfig' }
   use { 'williamboman/mason.nvim' }
   use { 'williamboman/mason-lspconfig.nvim' }
+  use { 'neovim/nvim-lspconfig' }
 
   use { 'hrsh7th/nvim-cmp' }
   use { 'hrsh7th/cmp-vsnip' }
