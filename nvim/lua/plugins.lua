@@ -42,6 +42,8 @@ require('jetpack').startup(function (use)
   -- function list
   use { 'stevearc/aerial.nvim' }
   use { 'onsails/lspkind-nvim' }
+
+  use { 't9md/vim-quickhl' }
 end)
 
 -- Install plugins if they are not installed.
@@ -94,3 +96,11 @@ require('plugins/aerial')
 require('plugins/lsp')
 -- fzf
 require('plugins/fzf')
+
+-- quickhl
+vim.cmd([[
+nmap <Space>m <Plug>(quickhl-manual-this)
+xmap <Space>m <Plug>(quickhl-manual-this)
+nmap <Space>M <Plug>(quickhl-manual-reset)
+xmap <Space>M <Plug>(quickhl-manual-reset)
+]])
