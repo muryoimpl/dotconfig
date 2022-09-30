@@ -38,6 +38,10 @@ require('jetpack').startup(function (use)
   use { 'hrsh7th/vim-vsnip' }
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer' }
+
+  -- function list
+  use { 'stevearc/aerial.nvim' }
+  use { 'onsails/lspkind-nvim' }
 end)
 
 -- Install plugins if they are not installed.
@@ -84,6 +88,8 @@ vim.cmd([[
   let g:indentLine_char_list = ['|']
 ]])
 
+-- aerial
+require('plugins/aerial')
 -- LSP
 require('plugins/lsp')
 -- fzf
