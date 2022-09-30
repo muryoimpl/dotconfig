@@ -57,6 +57,9 @@ vim.opt.completeopt='menu,menuone,noselect'
 local cmp = require('cmp')
 
 cmp.setup({
+  formatting = {
+    format = require('lspkind').cmp_format(),
+  },
   snippet = {
     expand = function(args)
       vim.fn["vsnip#anonymous"](args.body)
