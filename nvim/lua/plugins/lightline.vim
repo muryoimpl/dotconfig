@@ -15,6 +15,7 @@ let g:lightline = {
       \   'left':  [
       \              [ 'mode', 'paste' ],
       \              [ 'gitgutter', 'fugitive', 'filename', 'readonly' ],
+      \              [ 'relativepath'],
       \            ],
       \   'right': [
       \              ['percent'],
