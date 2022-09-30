@@ -1,6 +1,6 @@
 " Set this variable to 1 to fix files when you save them.
 let g:ale_fix_on_save = 1
-let g:ale_lint_on_insert_leave = 0
+let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_enter = 0
 let g:ale_lint_on_text_change = 0
 
