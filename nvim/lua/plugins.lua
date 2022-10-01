@@ -38,6 +38,7 @@ require('jetpack').startup(function (use)
   use { 'hrsh7th/vim-vsnip' }
   use { 'hrsh7th/cmp-nvim-lsp' }
   use { 'hrsh7th/cmp-buffer' }
+  use { 'hrsh7th/cmp-cmdline' }
 
   -- function list
   use { 'stevearc/aerial.nvim' }
@@ -104,3 +105,13 @@ xmap <Space>m <Plug>(quickhl-manual-this)
 nmap <Space>M <Plug>(quickhl-manual-reset)
 xmap <Space>M <Plug>(quickhl-manual-reset)
 ]])
+
+-- cmp-cmdline
+local cmp = require('cmp')
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+
+  sources = {
+    { name = 'cmdline' }
+  }
+})
