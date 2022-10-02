@@ -23,8 +23,8 @@ require('jetpack').startup(function (use)
   use { 'ibhagwan/fzf-lua' }
   use { 'kyazdani42/nvim-web-devicons' }
 
-  use { 'dense-analysis/ale' }
-  use { 'vim-test/vim-test' }
+  use { 'dense-analysis/ale', opt = 1 }
+  use { 'vim-test/vim-test', opt = 1 }
 
   use { 'soramugi/auto-ctags.vim' }
 
