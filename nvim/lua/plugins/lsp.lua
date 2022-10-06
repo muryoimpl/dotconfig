@@ -1,6 +1,7 @@
 -- https://zenn.dev/botamotch/articles/21073d78bc68bf
 -- nvim-lspconfig のキーバインドを設定する
 local on_attach = function(client, bufnr)
+  -- print(client.name)
   local lspopts = { noremap=true, silent=true }
   vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', lspopts)
   vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', lspopts)
@@ -35,6 +36,36 @@ local on_attach = function(client, bufnr)
   end
 
   require('aerial').on_attach(client, bufnr)
+
+  -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
+  if client.supports_method("textDocument/formatting") then
+    -- if you want to set up formatting on save, you can use this as a callback
+    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+
+    local lsp_formatting = function(bufnr)
+      vim.lsp.buf.format({
+        filter = function(client)
+          -- apply whatever logic you want (in this example, we'll only use null-ls)
+          return (
+            client.name == "eslint" or
+            client.name == "rubocop" or
+            client.name == "goimports" or
+            client.name == "stylelint_lsp"
+          )
+        end,
+        bufnr = bufnr,
+        timeout_ms = 2000,
+      })
+    end
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        lsp_formatting(bufnr)
+      end,
+    })
+  end
 end
 
 require('mason').setup()
@@ -57,7 +88,7 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
 )
 
-vim.cmd [[ autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ timeout_ms = 2000 }) ]]
+-- vim.cmd [[ autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ timeout_ms = 2000 }) ]]
 
 vim.cmd [[
   highlight! DiagnosticLineNrError guibg=#51202A guifg=#FF0000 gui=bold
