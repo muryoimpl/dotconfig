@@ -15,6 +15,25 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', lspopts)
   vim.keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', lspopts)
 
+  if client.server_capabilities.documentHighlightProvider then
+    vim.cmd [[
+      hi! LspReferenceRead cterm=bold ctermbg=235 guibg=RoyalBlue4
+      hi! LspReferenceText cterm=bold ctermbg=235 guibg=RoyalBlue4
+      hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=RoyalBlue4
+    ]]
+    vim.api.nvim_create_augroup('lsp_document_highlight', {})
+    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+      group = 'lsp_document_highlight',
+      buffer = 0,
+      callback = vim.lsp.buf.document_highlight,
+    })
+    vim.api.nvim_create_autocmd('CursorMoved', {
+      group = 'lsp_document_highlight',
+      buffer = 0,
+      callback = vim.lsp.buf.clear_references,
+    })
+  end
+
   require('aerial').on_attach(client, bufnr)
 end
 
