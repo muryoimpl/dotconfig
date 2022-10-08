@@ -12,13 +12,16 @@ require('jetpack').startup(function (use)
   use { 'tani/vim-jetpack', opt = 1 }
   use {'w0ng/vim-hybrid', }
   use { 'tpope/vim-fugitive' }
-  use { 'itchyny/lightline.vim' }
-  use { 'maximbaz/lightline-ale' }
+  -- use { 'itchyny/lightline.vim' }
+  -- use { 'maximbaz/lightline-ale' }
   use { 'airblade/vim-gitgutter' }
   use { 'bronson/vim-trailing-whitespace' }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'justinmk/vim-dirvish' }
   use { 'Yggdroot/indentLine' }
+
+  use { 'nvim-lualine/lualine.nvim' }
+  use { 'arkav/lualine-lsp-progress' }
 
   use { 'ibhagwan/fzf-lua' }
   use { 'kyazdani42/nvim-web-devicons' }
@@ -61,11 +64,11 @@ vim.cmd([[
   let files = [
   \  "fugitive.vim",
   \  "gitgutter.vim",
-  \  "lightline.vim",
   \  "ale.vim",
   \  "tags.vim",
   \  "vim-test.vim",
   \]
+  "lightline.vim",
 
   for f in files
     exe "source" "~/.config/nvim/lua/plugins/".f
@@ -91,6 +94,8 @@ vim.cmd([[
   let g:indentLine_char_list = ['|']
 ]])
 
+-- lualine
+require('plugins/lualine')
 -- aerial
 require('plugins/aerial')
 -- LSP
