@@ -36,8 +36,6 @@ local on_attach = function(client, bufnr)
     })
   end
 
-  require('aerial').on_attach(client, bufnr)
-
   -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
   if client.supports_method("textDocument/formatting") then
     -- if you want to set up formatting on save, you can use this as a callback
