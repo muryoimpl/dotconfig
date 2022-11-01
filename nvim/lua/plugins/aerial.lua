@@ -23,6 +23,24 @@ require('aerial').setup({
   backends = {
     ['_'] = {"treesitter", "lsp"},
   },
+
+  lsp = {
+    -- Fetch document symbols when LSP diagnostics update.
+    -- If false, will update on buffer changes.
+    diagnostics_trigger_update = true,
+
+    -- Set to false to not update the symbols when there are LSP errors
+    update_when_errors = true,
+
+    -- How long to wait (in ms) after a buffer change before updating
+    -- Only used when diagnostics_trigger_update = false
+    update_delay = 500,
+  },
+
+  treesitter = {
+    -- How long to wait (in ms) after a buffer change before updating
+    update_delay = 500,
+  },
 })
 
 vim.keymap.set('n', '<Space>a', '<cmd>AerialToggle!<CR>', {})
