@@ -18,7 +18,7 @@ require('jetpack').startup(function (use)
   use { 'bronson/vim-trailing-whitespace' }
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'justinmk/vim-dirvish' }
-  use { 'roginfarrer/vim-dirvish-dovish' }
+  use { 'roginfarrer/vim-dirvish-dovish', ft = 'dirvish' }
   use { 'Yggdroot/indentLine' }
 
   use { 'nvim-lualine/lualine.nvim' }
