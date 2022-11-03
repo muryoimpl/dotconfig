@@ -128,14 +128,20 @@ require('nvim-treesitter.configs').setup({
   auto_install = true,
   highlight = {
     enable= true,
+    disable = function(lang, buf)
+      -- 特定ファイルのみdisableにする
+      if lang == "ruby" or lang == "eruby" then
+        return true
+      end
+
+      -- サイズ制限
+      local max_filesize = 100 * 1024 -- 100 KB
+      local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+      if ok and stats and stats.size > max_filesize then
+        return true
+      end
+    end,
   },
   incremental_selection = { enable = true },
   textobjects = { enable = true },
-  disable = function(lang, buf)
-    local max_filesize = 100 * 1024 -- 100 KB
-    local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
-    if ok and stats and stats.size > max_filesize then
-      return true
-    end
-  end,
 })
