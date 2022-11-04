@@ -44,6 +44,8 @@ require('jetpack.packer').startup(function (use)
   use { 'stevearc/aerial.nvim' }
   use { 'onsails/lspkind-nvim' }
 
+  use { 'NvChad/nvim-colorizer.lua' }
+
   use { 't9md/vim-quickhl' }
 
   use ({ 'projekt0n/github-nvim-theme' })
@@ -101,6 +103,9 @@ require('plugins/aerial')
 require('plugins/lsp')
 -- fzf
 require('plugins/fzf')
+
+-- colorizer
+require 'colorizer'.setup()
 
 -- quickhl
 vim.cmd([[
