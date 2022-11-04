@@ -18,11 +18,11 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>q', '<cmd>lua vim.diagnostic.setqflist()<CR>', lspopts)
 
   if client.server_capabilities.documentHighlightProvider then
-    vim.cmd [[
-      hi! LspReferenceRead cterm=bold ctermbg=235 guibg=RoyalBlue4
-      hi! LspReferenceText cterm=bold ctermbg=235 guibg=RoyalBlue4
-      hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=RoyalBlue4
-    ]]
+--   vim.cmd [[
+--     hi! LspReferenceRead cterm=bold ctermbg=235 guibg=Midnightblue
+--     hi! LspReferenceText cterm=bold ctermbg=235 guibg=Midnightblue
+--     hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=Midnightblue
+--   ]]
     vim.api.nvim_create_augroup('lsp_document_highlight', {})
     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
       group = 'lsp_document_highlight',
