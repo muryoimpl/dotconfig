@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 -- https://github.com/ibhagwan/fzf-lua#commands
 -- https://github.com/ibhagwan/fzf-lua#customization
 require('fzf-lua').setup({

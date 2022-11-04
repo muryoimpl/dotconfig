@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 -- Download and load if jetpack-vim is not installed.
 local fn = vim.fn
 local jetpackfile = fn.stdpath('data') .. '/site/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
@@ -49,6 +50,8 @@ require('jetpack.packer').startup(function (use)
   use { 't9md/vim-quickhl' }
 
   use ({ 'projekt0n/github-nvim-theme' })
+
+  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 end)
 
 -- Install plugins if they are not installed.
@@ -152,7 +155,7 @@ require('nvim-treesitter.configs').setup({
 require("github-theme").setup({
   theme_style = "dark_default",
  -- -- Overwrite the highlight groups
-  overrides = function(c)
+  overrides = function(_)
     return {
       Type = { fg = '#dc143c' },
     }

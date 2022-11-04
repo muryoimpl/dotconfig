@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 -- 基本的な設定 ---------------------------------------------------------
 vim.opt.scrolloff=5                         -- スクロール時の余白確保
 vim.opt.hidden=true                         -- 編集中でも他のファイルを開けるようにする

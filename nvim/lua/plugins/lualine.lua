@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 local colors = {
   yellow = '#ECBE7B',
   cyan = '#008080',

@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 -- https://zenn.dev/botamotch/articles/21073d78bc68bf
 -- nvim-lspconfig のキーバインドを設定する
 local on_attach = function(client, bufnr)

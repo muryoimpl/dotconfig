@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 -- go
 vim.api.nvim_create_autocmd(
   "FileType",

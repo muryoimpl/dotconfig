@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 require('settings')
 require('plugins')
 require('filetype')

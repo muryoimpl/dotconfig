@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 require('aerial').setup({
   layout = {
     -- These control the width of the aerial window.
