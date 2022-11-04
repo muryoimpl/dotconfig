@@ -12,11 +12,8 @@ require('jetpack').startup(function (use)
   use { 'tani/vim-jetpack', opt = 1 }
   use {'w0ng/vim-hybrid', }
   use { 'tpope/vim-fugitive' }
-  -- use { 'itchyny/lightline.vim' }
-  -- use { 'maximbaz/lightline-ale' }
   use { 'airblade/vim-gitgutter' }
   use { 'bronson/vim-trailing-whitespace' }
-  use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
   use { 'justinmk/vim-dirvish' }
   use { 'roginfarrer/vim-dirvish-dovish', ft = 'dirvish' }
   use { 'Yggdroot/indentLine' }
