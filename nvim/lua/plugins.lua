@@ -65,11 +65,11 @@ vim.cmd([[
   let files = [
   \  "fugitive.vim",
   \  "gitgutter.vim",
-  \  "ale.vim",
   \  "tags.vim",
   \  "vim-test.vim",
   \]
   "lightline.vim",
+  "\  "ale.vim",
 
   for f in files
     exe "source" "~/.config/nvim/lua/plugins/".f
