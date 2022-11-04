@@ -4,7 +4,6 @@ require('filetype')
 
 -- colorscheme
 vim.opt.background='dark'
-vim.cmd 'colorscheme hybrid'
 
 -- underline
 vim.opt.cursorline=true

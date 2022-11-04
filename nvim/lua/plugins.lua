@@ -10,7 +10,6 @@ end
 vim.cmd('packadd vim-jetpack')
 require('jetpack.packer').startup(function (use)
   use { 'tani/vim-jetpack', opt = 1 }
-  use {'w0ng/vim-hybrid', }
   use { 'tpope/vim-fugitive' }
   use { 'airblade/vim-gitgutter' }
   use { 'bronson/vim-trailing-whitespace' }
@@ -46,6 +45,8 @@ require('jetpack.packer').startup(function (use)
   use { 'onsails/lspkind-nvim' }
 
   use { 't9md/vim-quickhl' }
+
+  use ({ 'projekt0n/github-nvim-theme' })
 end)
 
 -- Install plugins if they are not installed.
@@ -141,4 +142,14 @@ require('nvim-treesitter.configs').setup({
   },
   incremental_selection = { enable = true },
   textobjects = { enable = true },
+})
+
+require("github-theme").setup({
+  theme_style = "dark_default",
+ -- -- Overwrite the highlight groups
+  overrides = function(c)
+    return {
+      Type = { fg = '#dc143c' },
+    }
+  end
 })
