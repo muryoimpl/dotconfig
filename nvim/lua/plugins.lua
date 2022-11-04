@@ -8,7 +8,7 @@ end
 
 -- Load plugins with pqcker style
 vim.cmd('packadd vim-jetpack')
-require('jetpack').startup(function (use)
+require('jetpack.packer').startup(function (use)
   use { 'tani/vim-jetpack', opt = 1 }
   use {'w0ng/vim-hybrid', }
   use { 'tpope/vim-fugitive' }
