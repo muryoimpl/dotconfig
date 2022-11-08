@@ -52,6 +52,8 @@ require('jetpack.packer').startup(function(use)
   use { 'projekt0n/github-nvim-theme' }
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+
+  use { "folke/trouble.nvim" }
 end)
 
 -- Install plugins if they are not installed.
@@ -165,3 +167,8 @@ require("github-theme").setup({
     }
   end
 })
+
+require("trouble").setup()
+vim.keymap.set("n", "<space>O", "<cmd>TroubleToggle<cr>",
+  { silent = true, noremap = true }
+)
