@@ -72,7 +72,7 @@ vim.cmd([[
   \  "vim-test.vim",
   \]
   "lightline.vim",
-  "\  "ale.vim",
+  " \  "ale.vim",
 
   for f in files
     exe "source" "~/.config/nvim/lua/plugins/".f
@@ -154,10 +154,14 @@ require('nvim-treesitter.configs').setup({
 
 require("github-theme").setup({
   theme_style = "dark_default",
- -- -- Overwrite the highlight groups
+  comment_style = "NONE",
+  keyword_style = "NONE",
+  function_style = "NONE",
+  variable_style = "NONE",
+  -- -- Overwrite the highlight groups
   overrides = function(_)
     return {
-      Type = { fg = '#dc143c' },
+      Type = { fg = '#FF72FF' },
     }
   end
 })
