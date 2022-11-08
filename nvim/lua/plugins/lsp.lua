@@ -43,18 +43,9 @@ local on_attach = function(client, bufnr)
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 
-    local lsp_formatting = function(bufnr)
+    local lsp_formatting = function(lbufnr)
       vim.lsp.buf.format({
-        filter = function(client)
-          -- apply whatever logic you want (in this example, we'll only use null-ls)
-          return (
-            client.name == "eslint" or
-            client.name == "rubocop" or
-            client.name == "goimports" or
-            client.name == "stylelint_lsp"
-          )
-        end,
-        bufnr = bufnr,
+        bufnr = lbufnr,
         timeout_ms = 2000,
       })
     end
