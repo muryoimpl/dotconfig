@@ -9,7 +9,7 @@ end
 
 -- Load plugins with pqcker style
 vim.cmd('packadd vim-jetpack')
-require('jetpack.packer').startup(function (use)
+require('jetpack.packer').startup(function(use)
   use { 'tani/vim-jetpack', opt = 1 }
   use { 'tpope/vim-fugitive' }
   use { 'airblade/vim-gitgutter' }
@@ -49,7 +49,7 @@ require('jetpack.packer').startup(function (use)
 
   use { 't9md/vim-quickhl' }
 
-  use ({ 'projekt0n/github-nvim-theme' })
+  use { 'projekt0n/github-nvim-theme' }
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 end)
@@ -133,7 +133,7 @@ require('nvim-treesitter.configs').setup({
   sync_install = true,
   auto_install = true,
   highlight = {
-    enable= true,
+    enable = true,
     disable = function(lang, buf)
       -- 特定ファイルのみdisableにする
       if lang == "ruby" or lang == "eruby" then

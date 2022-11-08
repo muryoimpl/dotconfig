@@ -3,10 +3,10 @@
 -- nvim-lspconfig のキーバインドを設定する
 local on_attach = function(client, bufnr)
   -- print(client.name)
-  local lspopts = { noremap=true, silent=true }
+  local lspopts = { noremap = true, silent = true }
   vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', lspopts)
   vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', lspopts)
-  vim.keymap.set('n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>', lspopts)
+  vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', lspopts)
   vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.format()<CR>', lspopts)
   vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', lspopts)
   vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', lspopts)
@@ -19,11 +19,11 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', '<space>o', '<cmd>lua vim.diagnostic.setqflist()<CR>', lspopts)
 
   if client.server_capabilities.documentHighlightProvider then
---   vim.cmd [[
---     hi! LspReferenceRead cterm=bold ctermbg=235 guibg=Midnightblue
---     hi! LspReferenceText cterm=bold ctermbg=235 guibg=Midnightblue
---     hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=Midnightblue
---   ]]
+    --   vim.cmd [[
+    --     hi! LspReferenceRead cterm=bold ctermbg=235 guibg=Midnightblue
+    --     hi! LspReferenceText cterm=bold ctermbg=235 guibg=Midnightblue
+    --     hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=Midnightblue
+    --   ]]
     vim.api.nvim_create_augroup('lsp_document_highlight', {})
     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
       group = 'lsp_document_highlight',
@@ -94,7 +94,7 @@ vim.cmd [[
 ]]
 
 -- comp
-vim.opt.completeopt='menu,menuone,noselect'
+vim.opt.completeopt = 'menu,menuone,noselect'
 local cmp = require('cmp')
 
 cmp.setup({
