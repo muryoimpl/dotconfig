@@ -163,7 +163,8 @@ require("github-theme").setup({
   -- -- Overwrite the highlight groups
   overrides = function(_)
     return {
-      Type = { fg = '#FF72FF' },
+      --      Type = { fg = '#FF72FF' },
+      Type = { fg = '#0087D1' },
     }
   end
 })
