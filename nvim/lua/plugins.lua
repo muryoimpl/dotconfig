@@ -138,7 +138,7 @@ require('nvim-treesitter.configs').setup({
     enable = true,
     disable = function(lang, buf)
       -- 特定ファイルのみdisableにする
-      if lang == "ruby" or lang == "eruby" then
+      if lang == "lua" then
         return true
       end
 
@@ -163,8 +163,8 @@ require("github-theme").setup({
   -- -- Overwrite the highlight groups
   overrides = function(_)
     return {
-      --      Type = { fg = '#FF72FF' },
-      Type = { fg = '#0087D1' },
+      Type = { fg = '#ffa657' }, -- dark_default.syntax.variable
+      Operator = { fg = '#79c0ff' }, -- dark_default.syntax.constant
     }
   end
 })
