@@ -165,6 +165,7 @@ require("github-theme").setup({
     return {
       Type = { fg = '#ffa657' }, -- dark_default.syntax.variable
       Operator = { fg = '#79c0ff' }, -- dark_default.syntax.constant
+      Identifier = { fg = '#c9d1d9' }, -- dark_default.fg
     }
   end
 })
