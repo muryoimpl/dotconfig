@@ -54,6 +54,8 @@ require('jetpack.packer').startup(function(use)
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   use { "folke/trouble.nvim" }
+
+  use { 'lewis6991/gitsigns.nvim' }
 end)
 
 -- Install plugins if they are not installed.
@@ -69,12 +71,13 @@ vim.cmd([[
 vim.cmd([[
   let files = [
   \  "fugitive.vim",
-  \  "gitgutter.vim",
   \  "tags.vim",
   \  "vim-test.vim",
   \]
   "lightline.vim",
   " \  "ale.vim",
+  " \  "gitgutter.vim",
+
 
   for f in files
     exe "source" "~/.config/nvim/lua/plugins/".f
@@ -174,3 +177,39 @@ require("trouble").setup()
 vim.keymap.set("n", "<space>O", "<cmd>TroubleToggle<cr>",
   { silent = true, noremap = true }
 )
+
+-- gitsigns.nvim
+require('gitsigns').setup({
+  signs      = {
+    add          = { hl = 'GitSignsAdd', text = '+', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
+    change       = { hl = 'GitSignsChange', text = '+', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
+    delete       = { hl = 'GitSignsDelete', text = '_', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
+    topdelete    = { hl = 'GitSignsDelete', text = '‾', numhl = 'GitSignsDeleteNr', linehl = 'GitSignsDeleteLn' },
+    changedelete = { hl = 'GitSignsChange', text = '~', numhl = 'GitSignsChangeNr', linehl = 'GitSignsChangeLn' },
+    untracked    = { hl = 'GitSignsAdd', text = '┆', numhl = 'GitSignsAddNr', linehl = 'GitSignsAddLn' },
+  },
+  signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
+  on_attach  = function(bufnr)
+    local gs = package.loaded.gitsigns
+
+    local function map(mode, l, r, opts)
+      opts = opts or {}
+      opts.buffer = bufnr
+      vim.keymap.set(mode, l, r, opts)
+    end
+
+    -- Navigation
+    map('n', '<Space>]', function()
+      if vim.wo.diff then return '<Space>]' end
+      vim.schedule(function() gs.next_hunk() end)
+      return '<Ignore>'
+    end, { expr = true })
+
+    map('n', '<Space>[', function()
+      if vim.wo.diff then return '<Space>[' end
+      vim.schedule(function() gs.prev_hunk() end)
+      return '<Ignore>'
+    end, { expr = true })
+  end,
+})
