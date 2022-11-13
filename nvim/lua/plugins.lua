@@ -12,7 +12,6 @@ vim.cmd('packadd vim-jetpack')
 require('jetpack.packer').startup(function(use)
   use { 'tani/vim-jetpack', opt = 1 }
   use { 'tpope/vim-fugitive' }
-  use { 'airblade/vim-gitgutter' }
   use { 'bronson/vim-trailing-whitespace' }
   use { 'justinmk/vim-dirvish' }
   use { 'roginfarrer/vim-dirvish-dovish', ft = 'dirvish' }
@@ -24,7 +23,6 @@ require('jetpack.packer').startup(function(use)
   use { 'ibhagwan/fzf-lua' }
   use { 'kyazdani42/nvim-web-devicons' }
 
-  use { 'dense-analysis/ale' }
   use { 'vim-test/vim-test' }
 
   use { 'soramugi/auto-ctags.vim' }
@@ -74,10 +72,6 @@ vim.cmd([[
   \  "tags.vim",
   \  "vim-test.vim",
   \]
-  "lightline.vim",
-  " \  "ale.vim",
-  " \  "gitgutter.vim",
-
 
   for f in files
     exe "source" "~/.config/nvim/lua/plugins/".f
