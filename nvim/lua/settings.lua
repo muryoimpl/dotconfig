@@ -58,6 +58,9 @@ vim.opt.splitbelow = true
 -- true color
 vim.opt.termguicolors = true
 
+-- gutter系signの表示
+vim.opt.signcolumn = "yes"
+
 -- ambiguous width 対応
 -- vim.opt.ambiwidth='double'
 
