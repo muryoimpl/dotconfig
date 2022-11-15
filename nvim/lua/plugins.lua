@@ -160,9 +160,17 @@ require("github-theme").setup({
   -- -- Overwrite the highlight groups
   overrides = function(_)
     return {
-      Type = { fg = '#ffa657' }, -- dark_default.syntax.variable
-      Operator = { fg = '#79c0ff' }, -- dark_default.syntax.constant
-      Identifier = { fg = '#c9d1d9' }, -- dark_default.fg
+      -- Type = { fg = '#ffa657' }, -- dark_default.syntax.variable
+      -- Operator = { fg = '#79b8ff' }, -- dark_default.syntax.constant
+      -- Identifier = { fg = '#c9d1d9' }, -- dark_default.fg
+      -- Type = { fg = '#2188ff' },
+      Type = { fg = '#58a6ff' },
+      -- Identifier = { fg = '#58a6ff' },
+      -- Identifier = { fg = '#73b7f2' },
+      -- Identifier = { fg = '#79b8ff' }, -- dark_default.syntax.constant
+      -- Identifier = { fg = '#2188ff' },
+      Constant = { fg = '#fff' },
+
     }
   end
 })
