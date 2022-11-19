@@ -47,13 +47,16 @@ require('jetpack.packer').startup(function(use)
 
   use { 't9md/vim-quickhl' }
 
-  use { 'projekt0n/github-nvim-theme' }
-
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 
   use { "folke/trouble.nvim" }
 
   use { 'lewis6991/gitsigns.nvim' }
+
+  -- theme
+  use { 'projekt0n/github-nvim-theme' }
+  -- use "rebelot/kanagawa.nvim"
+
 end)
 
 -- Install plugins if they are not installed.
@@ -158,19 +161,17 @@ require("github-theme").setup({
   function_style = "NONE",
   variable_style = "NONE",
   -- -- Overwrite the highlight groups
+  colors = {
+    syntax = {
+      constant = "#2188ff",
+      variable = "#fff",
+    },
+  },
   overrides = function(_)
     return {
-      -- Type = { fg = '#ffa657' }, -- dark_default.syntax.variable
-      -- Operator = { fg = '#79b8ff' }, -- dark_default.syntax.constant
-      -- Identifier = { fg = '#c9d1d9' }, -- dark_default.fg
-      -- Type = { fg = '#2188ff' },
-      Type = { fg = '#58a6ff' },
-      -- Identifier = { fg = '#58a6ff' },
-      -- Identifier = { fg = '#73b7f2' },
-      -- Identifier = { fg = '#79b8ff' }, -- dark_default.syntax.constant
-      -- Identifier = { fg = '#2188ff' },
+      Type = { fg = "#FFA066" },
+      Keyword = { fg = "#E46876" },
       Constant = { fg = '#fff' },
-
     }
   end
 })
