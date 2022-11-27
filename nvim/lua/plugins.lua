@@ -48,6 +48,7 @@ require('jetpack.packer').startup(function(use)
   use { 't9md/vim-quickhl' }
 
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  use { 'nvim-treesitter/playground', }
 
   use { "folke/trouble.nvim" }
 
