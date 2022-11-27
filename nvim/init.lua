@@ -2,12 +2,13 @@
 require('settings')
 require('plugins')
 require('filetype')
+require('theme')
 
 -- colorscheme
-vim.opt.background='dark'
+vim.opt.background = 'dark'
 
 -- underline
-vim.opt.cursorline=true
+vim.opt.cursorline = true
 vim.cmd 'highlight CursorLine gui=underline cterm=underline'
 
 -- aerial

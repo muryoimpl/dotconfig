@@ -155,28 +155,6 @@ require('nvim-treesitter.configs').setup({
   textobjects = { enable = true },
 })
 
-require("github-theme").setup({
-  theme_style = "dark_default",
-  comment_style = "NONE",
-  keyword_style = "NONE",
-  function_style = "NONE",
-  variable_style = "NONE",
-  -- -- Overwrite the highlight groups
-  colors = {
-    syntax = {
-      constant = "#2188ff",
-      variable = "#fff",
-    },
-  },
-  overrides = function(_)
-    return {
-      Type = { fg = "#FFA066" },
-      Keyword = { fg = "#E46876" },
-      Constant = { fg = '#fff' },
-    }
-  end
-})
-
 require("trouble").setup()
 vim.keymap.set("n", "<space>O", "<cmd>TroubleToggle<cr>",
   { silent = true, noremap = true }
