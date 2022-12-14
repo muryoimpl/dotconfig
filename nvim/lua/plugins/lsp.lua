@@ -43,17 +43,14 @@ local on_attach = function(client, bufnr)
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
     vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
 
-    local lsp_formatting = function(lbufnr)
-      vim.lsp.buf.format({
-        bufnr = lbufnr,
-        timeout_ms = 2000,
-      })
-    end
     vim.api.nvim_create_autocmd("BufWritePre", {
       group = augroup,
       buffer = bufnr,
-      callback = function()
-        lsp_formatting(bufnr)
+      callback = function(buf)
+        vim.lsp.buf.format({
+          bufnr = buf,
+          timeout_ms = 3000,
+        })
       end,
     })
   end
