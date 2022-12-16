@@ -1,3 +1,46 @@
+local null_ls = require('null-ls')
+local formatting = null_ls.builtins.formatting
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
+null_ls.setup({
+  sources = {
+    null_ls.builtins.diagnostics.rubocop.with({
+      diagnostic_config = {
+        virtual_text = false,
+      },
+    }),
+    null_ls.builtins.diagnostics.eslint.with({
+      diagnostic_config = {
+        virtual_text = false,
+      },
+    }),
+    null_ls.builtins.diagnostics.golangci_lint,
+    null_ls.builtins.formatting.rubocop.with({
+      command = "bundle",
+      args = vim.list_extend({ 'exec', 'rubocop' }, formatting.rubocop._opts.args),
+    }),
+    null_ls.builtins.formatting.prettier.with({
+      prefer_local = "node_modules/.bin",
+    }),
+    null_ls.builtins.formatting.goimports,
+  },
+  -- you can reuse a shared lspconfig on_attach callback here
+  on_attach = function(client, bufnr)
+    if client.supports_method("textDocument/formatting") then
+      vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
+      vim.api.nvim_create_autocmd("BufWritePre", {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format({
+            bufnr = bufnr,
+            timeout_ms = 3000,
+          })
+        end,
+      })
+    end
+  end,
+})
+
 ---@diagnostic disable:undefined-global
 -- https://zenn.dev/botamotch/articles/21073d78bc68bf
 -- nvim-lspconfig のキーバインドを設定する
@@ -34,24 +77,6 @@ local on_attach = function(client, bufnr)
       group = 'lsp_document_highlight',
       buffer = 0,
       callback = vim.lsp.buf.clear_references,
-    })
-  end
-
-  -- https://github.com/jose-elias-alvarez/null-ls.nvim/wiki/Avoiding-LSP-formatting-conflicts
-  if client.supports_method("textDocument/formatting") then
-    -- if you want to set up formatting on save, you can use this as a callback
-    local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
-    vim.api.nvim_clear_autocmds({ group = augroup, buffer = bufnr })
-
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      group = augroup,
-      buffer = bufnr,
-      callback = function()
-        vim.lsp.buf.format({
-          bufnr = bufnr,
-          timeout_ms = 3000,
-        })
-      end,
     })
   end
 end

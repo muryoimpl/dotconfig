@@ -39,6 +39,9 @@ require('jetpack.packer').startup(function(use)
   use { 'hrsh7th/cmp-buffer' }
   use { 'hrsh7th/cmp-cmdline' }
 
+  use { 'jose-elias-alvarez/null-ls.nvim' }
+  use { "nvim-lua/plenary.nvim" }
+
   -- function list
   use { 'stevearc/aerial.nvim' }
   use { 'onsails/lspkind-nvim' }
