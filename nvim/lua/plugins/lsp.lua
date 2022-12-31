@@ -23,6 +23,8 @@ null_ls.setup({
     }),
     null_ls.builtins.formatting.goimports,
   },
+  auto_open = true,
+  auto_preview = true,
   -- you can reuse a shared lspconfig on_attach callback here
   on_attach = function(client, bufnr)
     if client.supports_method("textDocument/formatting") then
