@@ -183,7 +183,10 @@ require('nvim-treesitter.configs').setup({
   },
 })
 
-require("trouble").setup()
+require("trouble").setup({
+  auto_open = true,
+  auto_close = true,
+})
 vim.keymap.set("n", "<space>O", "<cmd>TroubleToggle<cr>",
   { silent = true, noremap = true }
 )
