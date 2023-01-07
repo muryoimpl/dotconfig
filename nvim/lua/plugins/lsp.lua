@@ -1,5 +1,4 @@
 local null_ls = require('null-ls')
-local formatting = null_ls.builtins.formatting
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 null_ls.setup({
   sources = {
@@ -7,19 +6,28 @@ null_ls.setup({
       diagnostic_config = {
         virtual_text = false,
       },
+      command = 'bundle',
+      args = vim.list_extend({ 'exec', 'rubocop' }, null_ls.builtins.diagnostics.rubocop._opts.args),
     }),
+
     null_ls.builtins.diagnostics.eslint.with({
+      command = 'yarn',
+      args = { 'eslint', '-f', 'json', '--stdin', '--stdin-filename', '$FILENAME' },
       diagnostic_config = {
         virtual_text = false,
       },
     }),
+
     null_ls.builtins.diagnostics.golangci_lint,
+
     null_ls.builtins.formatting.rubocop.with({
       command = "bundle",
-      args = vim.list_extend({ 'exec', 'rubocop' }, formatting.rubocop._opts.args),
+      args = vim.list_extend({ 'exec', 'rubocop' }, null_ls.builtins.formatting.rubocop._opts.args),
     }),
-    null_ls.builtins.formatting.prettier.with({
-      prefer_local = "node_modules/.bin",
+
+    null_ls.builtins.formatting.eslint.with({
+      command = 'yarn',
+      args = { "eslint", "--fix-dry-run", "--format", "json", "--stdin", "--stdin-filename", "$FILENAME" }
     }),
     null_ls.builtins.formatting.goimports,
   },
@@ -35,7 +43,7 @@ null_ls.setup({
         callback = function()
           vim.lsp.buf.format({
             bufnr = bufnr,
-            timeout_ms = 3000,
+            timeout_ms = 2000,
           })
         end,
       })
