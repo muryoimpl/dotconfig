@@ -10,7 +10,7 @@ end
 -- Load plugins with pqcker style
 vim.cmd('packadd vim-jetpack')
 require('jetpack.packer').startup(function(use)
-  use { 'tani/vim-jetpack', opt = 1 }
+  use { 'tani/vim-jetpack' }
   use { 'tpope/vim-fugitive' }
   use { 'bronson/vim-trailing-whitespace' }
   use { 'justinmk/vim-dirvish' }
