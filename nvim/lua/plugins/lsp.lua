@@ -18,6 +18,14 @@ null_ls.setup({
       },
     }),
 
+    null_ls.builtins.diagnostics.tsc.with({
+      command = 'yarn',
+      args = { 'tsc', '--pretty', 'false', '--noEmit' },
+      diagnostic_config = {
+        virtual_text = false,
+      },
+    }),
+
     null_ls.builtins.diagnostics.golangci_lint,
 
     null_ls.builtins.formatting.rubocop.with({
