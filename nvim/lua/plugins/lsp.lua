@@ -51,7 +51,7 @@ null_ls.setup({
         callback = function()
           vim.lsp.buf.format({
             bufnr = bufnr,
-            timeout_ms = 2000,
+            timeout_ms = 5000,
           })
         end,
       })
