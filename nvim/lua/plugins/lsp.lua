@@ -107,7 +107,7 @@ end
 
 require('mason').setup()
 require('mason-lspconfig').setup({
-  ensure_installed = { "tsserver", "eslint", "solargraph", "gopls", },
+  ensure_installed = { "tsserver", "eslint", "gopls", },
   automatic_installation = true,
 })
 require('mason-lspconfig').setup_handlers({ function(server)
