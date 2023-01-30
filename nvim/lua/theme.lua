@@ -16,6 +16,7 @@ require("github-theme").setup({
       Type = { fg = "#FFA066" },
       Keyword = { fg = "#E46876" },
       Constant = { fg = '#fff' },
+      Search = { fg = '#fff', bg = '#8A2BE2' },
     }
   end
 })
