@@ -51,6 +51,17 @@ local diagnostics_opts = {
   },
 }
 
+local diff_opts = {
+  'diff',
+  colored = true,
+  diff_color = {
+    added    = 'DiffAdd',    -- Changes the diff's added color
+    modified = 'DiffChange', -- Changes the diff's modified color
+    removed  = 'DiffDelete', -- Changes the diff's removed color you
+  },
+  symbols = {added = '+', modified = '~', removed = '-'}, -- Changes the symbols used by the diff.
+}
+
 local config = {
   options = {
     icons_enabled = true,
@@ -72,7 +83,7 @@ local config = {
   },
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'diff', 'branch'},
+    lualine_b = { diff_opts, 'branch'},
     lualine_c = { lsp_name_opts, filename_opts, },
     lualine_x = { 'location', diagnostics_opts, },
     lualine_y = { fileformat_opts, 'encoding', filetype_opts, },
