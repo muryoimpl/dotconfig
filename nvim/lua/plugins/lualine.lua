@@ -52,7 +52,7 @@ local lsp_name_opts = {
     vim.list_extend(buf_client_names, registered[null_ls.methods.DIAGNOSTICS_ON_SAVE] or {})
 
     local unique_client_names = vim.fn.uniq(buf_client_names)
-    local language_servers = table.concat(unique_client_names, ", ")
+    local language_servers = table.concat(unique_client_names, ",")
     return language_servers
   end,
   icon = 'LSP:',
