@@ -64,7 +64,7 @@ vim.opt.signcolumn = "yes"
 -- ambiguous width 対応
 -- vim.opt.ambiwidth='double'
 
-vim.opt.guifont = 'Noto Mono Regular:h12'
+vim.opt.guifont = 'HackGen Console NF:h12'
 
 -- clipboard
 vim.cmd([[
