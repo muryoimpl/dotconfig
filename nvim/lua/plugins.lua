@@ -62,6 +62,8 @@ require('jetpack.packer').startup(function(use)
   -- use "rebelot/kanagawa.nvim"
 
   use { 'terrortylor/nvim-comment' }
+
+  use { 'luukvbaal/nnn.nvim' }
 end)
 
 -- Install plugins if they are not installed.
@@ -234,3 +236,21 @@ require("nvim_comment").setup({
   line_mapping = "<leader>cl",
   operator_mapping = "<leader>c",
 })
+
+-- nnn.nvim
+local builtin = require("nnn").builtin
+require("nnn").setup({
+  mappings = {
+    { "<C-s>", builtin.open_in_split },     -- open file(s) in split
+    { "<C-v>", builtin.open_in_vsplit },    -- open file(s) in vertical split
+    { "<C-p>", builtin.open_in_preview },   -- open file in preview split keeping nnn focused
+    { "<C-w>", builtin.cd_to_path },        -- cd to file directory
+  },
+  auto_close = true,
+})
+vim.keymap.set("n", "<space>n", "<cmd>NnnExplorer<cr>",
+  { silent = true, noremap = true }
+)
+vim.keymap.set("n", "<space>p", "<cmd>NnnPicker<cr>",
+  { silent = true, noremap = true }
+)
