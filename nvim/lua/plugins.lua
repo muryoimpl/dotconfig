@@ -12,7 +12,7 @@ vim.cmd('packadd vim-jetpack')
 require('jetpack.packer').startup(function(use)
   use { 'tani/vim-jetpack' }
   use { 'tpope/vim-fugitive' }
-  use { 'bronson/vim-trailing-whitespace' }
+  -- use { 'bronson/vim-trailing-whitespace' }
   use { 'justinmk/vim-dirvish' }
   use { 'roginfarrer/vim-dirvish-dovish', ft = 'dirvish' }
   use { 'Yggdroot/indentLine' }
@@ -61,6 +61,7 @@ require('jetpack.packer').startup(function(use)
   use { 'projekt0n/github-nvim-theme' }
   -- use "rebelot/kanagawa.nvim"
 
+  use { 'terrortylor/nvim-comment' }
 end)
 
 -- Install plugins if they are not installed.
@@ -226,4 +227,10 @@ require('gitsigns').setup({
       return '<Ignore>'
     end, { expr = true })
   end,
+})
+
+-- nvim-comment
+require("nvim_comment").setup({
+  line_mapping = "<leader>cl",
+  operator_mapping = "<leader>c",
 })
