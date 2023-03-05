@@ -64,6 +64,8 @@ require('jetpack.packer').startup(function(use)
   use { 'terrortylor/nvim-comment' }
 
   use { 'luukvbaal/nnn.nvim' }
+
+  use { 'ii14/neorepl.nvim', on = ':Repl' }
 end)
 
 -- Install plugins if they are not installed.
