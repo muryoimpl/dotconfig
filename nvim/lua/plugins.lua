@@ -66,6 +66,8 @@ require('jetpack.packer').startup(function(use)
   use { 'luukvbaal/nnn.nvim' }
 
   use { 'ii14/neorepl.nvim', on = ':Repl' }
+
+  use { 'nvim-pack/nvim-spectre' }
 end)
 
 -- Install plugins if they are not installed.
@@ -256,3 +258,19 @@ vim.keymap.set("n", "<space>n", "<cmd>NnnExplorer<cr>",
 vim.keymap.set("n", "<space>p", "<cmd>NnnPicker<cr>",
   { silent = true, noremap = true }
 )
+
+-- nvim-spectre
+require('spectre').setup()
+
+vim.keymap.set('n', '<space>S', '<cmd>lua require("spectre").open()<CR>', {
+    desc = "Open Spectre"
+})
+vim.keymap.set('n', '<space>sw', '<cmd>lua require("spectre").open_visual({select_word=true})<CR>', {
+    desc = "Search current word"
+})
+vim.keymap.set('v', '<space>sw', '<esc><cmd>lua require("spectre").open_visual()<CR>', {
+    desc = "Search current word"
+})
+-- vim.keymap.set('n', '<space>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
+--     desc = "Search on current file"
+-- })
