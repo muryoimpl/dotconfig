@@ -1,6 +1,6 @@
 daemonize
 ignore-empty-password
-font=monospace term
+font=HackGen Console NF
 font-size=50
 indicator-radius=192
 indicator-thickness=75
@@ -12,5 +12,9 @@ separator-color=1d99f322
 text-color=ffffff
 text-clear-color=ffffff
 text-caps-lock-color=ffffff
+key-hl-color=3daee9
 
-ignore-empty-password
+clock
+datestr=%Y-%m-%d %a
+
+image=/usr/share/pixmaps/arch-25.png
