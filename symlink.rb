@@ -8,13 +8,17 @@ ignored =
   when /darwin/
     IGNORE_FILES
   when /linux/
-    IGNORE_FILES + %w(dunst i3 picom polybar rofi systemd)
+    IGNORE_FILES + %w(picom polybar systemd)
   end
 
 current_dir = Dir.pwd
 dotconfigs = Dir.glob('*').reject {|f| ignored.include?(f) }
 
 dotconfigs.each do |dotconf|
+  file_in_home = "#{ENV['HOME']}/.config/#{dotconf}"
+  FileUtils.safe_unlink(file_in_home) if FileTest.symlink?(file_in_home)
   FileUtils.ln_s("#{current_dir}/#{dotconf}", "#{ENV['HOME']}/.config/#{dotconf}", force: true)
   puts "#{current_dir}/#{dotconf}  ->  #{ENV['HOME']}/.config/#{dotconf}"
+rescue
+  puts "Error occurred. #{dotconf}, file_in_home: #{file_in_home}"
 end

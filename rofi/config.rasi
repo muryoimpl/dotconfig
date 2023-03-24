@@ -5,7 +5,8 @@ configuration {
 /*  lines: 15;*/
 /*  columns: 1;*/
 /*  font: "mono 12";*/
-  font: "Noto Sans Mono CJK JP Regular 16";
+/*  font: "HackGen Console NF Regular 16";*/
+  font: "FiraCode Nerd Font Mono 16";
 /*  bw: 1;*/
 /*  location: 0;*/
 /*  padding: 5;*/
