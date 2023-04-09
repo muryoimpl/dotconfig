@@ -13,7 +13,7 @@ vim.opt.writebackup = false -- ファイルの上書きの前にバックアッ�
 vim.opt.title = true -- タイトルを表示
 vim.opt.bomb = false -- BOMを入れない
 vim.opt.errorbells = false -- エラーベル無効
-
+vim.opt.shell = 'zsh'
 -- ---  検索関連  -------------------------------------------------------
 vim.opt.wrapscan = true -- 最後まで検索したら先頭へ
 vim.opt.ignorecase = true -- 検索の時に大文字小文字を区別しない。
