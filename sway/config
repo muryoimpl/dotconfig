@@ -269,10 +269,6 @@ bindsym $mod+Shift+Print exec grimshot --notify save area  $HOME/screenshots/$(d
 
 bindsym $mod+Shift+slash exec --no-startup-id "notify-send 'Hello world!' 'This is an example notification.' -i ~/.config/dunst/test.jpg"
 
-# always
-## polybar (i3status の代わり)
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-
 # wob
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
 exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
@@ -281,12 +277,16 @@ exec rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
 exec --no-startup-id nm-applet --indicator
 exec --no-startup-id fcitx5 -d
 
+exec --no-startup-id 1password --silent &
+
+exec --no-startup-id greenclip daemon
+
 exec --no-startup-id blueman-applet
 for_window [app_id="blueman-manager"] floating enable
 
 
 # cursor size
-seat seat0 xcursor_theme Default 52
+seat seat0 xcursor_theme Default 48
 
 ## flat-gray
 client.focused #000000 #000000 #FFFFFF #000000
