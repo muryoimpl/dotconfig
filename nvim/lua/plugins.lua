@@ -276,3 +276,29 @@ vim.keymap.set('v', '<space>sw', '<esc><cmd>lua require("spectre").open_visual()
 -- vim.keymap.set('n', '<space>sp', '<cmd>lua require("spectre").open_file_search({select_word=true})<CR>', {
 --     desc = "Search on current file"
 -- })
+
+-- github/copilit
+vim.cmd([[
+" nodenv の指定: https://rcmdnk.com/blog/2022/09/28/computer-vim/
+function! CheckNodeForCopilot(nodev)
+  let l:nodev = split(a:nodev, '\.')[0]
+  if stridx(l:nodev, 'v') == 0
+    let l:nodev = nodev[1:]
+  endif
+  return l:nodev > 11 && l:nodev < 18
+endfunction
+
+let s:nodev = system('node --version')
+if !CheckNodeForCopilot(s:nodev)
+  let s:nodev = system('nodenv whence node|grep -v "^18"|sort -n|tail -n1|tr -d "\n"')
+  if CheckNodeForCopilot(s:nodev)
+    let g:copilot_node_command = "~/.nodenv/versions/" . s:nodev . "/bin/node"
+  endif
+endif
+
+
+" copilot の候補を表示する
+imap <silent> <M-n> <Plug>(copilot-next)
+imap <silent> <M-p> <Plug>(copilot-previous)
+imap <silent> <S-Tab> <Plug>(copilot-dismiss)
+]])
