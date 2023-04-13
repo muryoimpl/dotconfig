@@ -290,7 +290,7 @@ endfunction
 
 let s:nodev = system('node --version')
 if !CheckNodeForCopilot(s:nodev)
-  let s:nodev = system('nodenv whence node|grep -v "^18"|sort -n|tail -n1|tr -d "\n"')
+  let s:nodev = system('nodenv whence node|sort -n|tail -n1|tr -d "\n"')
   if CheckNodeForCopilot(s:nodev)
     let g:copilot_node_command = "~/.nodenv/versions/" . s:nodev . "/bin/node"
   endif
