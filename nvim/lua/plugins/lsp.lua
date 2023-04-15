@@ -19,6 +19,9 @@ null_ls.setup({
       diagnostic_config = {
         virtual_text = false,
       },
+      condition = function(utils)
+        return utils.root_has_file({".eslintrc.js", ".eslintrc.yml"})
+      end,
     }),
 
     null_ls.builtins.diagnostics.tsc.with({
@@ -41,7 +44,10 @@ null_ls.setup({
 
     null_ls.builtins.formatting.eslint.with({
       command = 'yarn',
-      args = { "eslint", "--fix-dry-run", "--format", "json", "--stdin", "--stdin-filename", "$FILENAME" }
+      args = { "eslint", "--fix-dry-run", "--format", "json", "--stdin", "--stdin-filename", "$FILENAME" },
+      condition = function(utils)
+        return utils.root_has_file({".eslintrc.js", ".eslintrc.yml"})
+      end,
     }),
     null_ls.builtins.formatting.goimports,
   },
