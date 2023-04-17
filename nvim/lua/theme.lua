@@ -1,9 +1,12 @@
 require("github-theme").setup({
-  theme_style = "dark_default",
-  comment_style = "NONE",
-  keyword_style = "NONE",
-  function_style = "NONE",
-  variable_style = "NONE",
+  options = {
+    styles = {
+      comments = "NONE",
+      keywords = "NONE",
+      functions = "NONE",
+      variables = "NONE",
+    },
+  },
   -- -- Overwrite the highlight groups
   colors = {
     syntax = {
@@ -20,3 +23,5 @@ require("github-theme").setup({
     }
   end
 })
+
+vim.cmd('colorscheme github_dark_default')
