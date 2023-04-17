@@ -68,6 +68,8 @@ require('jetpack.packer').startup(function(use)
   use { 'ii14/neorepl.nvim', on = ':Repl' }
 
   use { 'github/copilot.vim' }
+
+  use { 'Numkil/ag.nvim' }
 end)
 
 -- Install plugins if they are not installed.
