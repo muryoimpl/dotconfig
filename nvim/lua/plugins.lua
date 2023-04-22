@@ -216,8 +216,8 @@ require('jetpack.packer').startup(function(use)
         nnoremap <Space>gs :<C-u>Git<Enter>
         nnoremap <Space>gl :<C-u>Gclog<Enter>
         nnoremap <Space>ga :<C-u>Gwrite<Enter>
-        nnoremap <Space>gc :<C-u>Git commit<Enter>
-        nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
+        " nnoremap <Space>gc :<C-u>Git commit<Enter>
+        " nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
         nnoremap <Space>gb :<C-u>Git blame<Enter>
       ]])
     end,
