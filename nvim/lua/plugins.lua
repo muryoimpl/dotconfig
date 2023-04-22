@@ -303,6 +303,8 @@ require('jetpack.packer').startup(function(use)
       ]])
     end,
   }
+  use { "MunifTanjim/nui.nvim" }
+  use { "nvim-telescope/telescope.nvim" }
   use {
     "jackMort/ChatGPT.nvim",
     requires = {
