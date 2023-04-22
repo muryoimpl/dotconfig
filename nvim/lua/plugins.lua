@@ -49,6 +49,15 @@ require('jetpack.packer').startup(function(use)
     end,
   }
   use { 'Numkil/ag.nvim', cmd = ':Ag' }
+  use {
+    'kevinhwang91/nvim-bqf',
+    config = function()
+      require('bqf').setup({
+        auto_enable = true,
+        auto_resize_height = true,
+      })
+    end,
+  }
 
   -- filer
   use {
