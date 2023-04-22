@@ -129,3 +129,12 @@ function! ToggleQuickfix()
 endfunction
 nnoremap <script> <silent> <Space>o :call ToggleQuickfix()<CR>
 ]])
+
+
+-- :T で、terminal を下半分に表示
+-- https://zenn.dev/ryo_kawamata/articles/improve-neovmi-terminal
+vim.cmd([[
+command! -nargs=* T split | resize 30 | terminal <args>
+autocmd TermOpen * setlocal nonumber norelativenumber
+autocmd TermOpen * startinsert
+]])
