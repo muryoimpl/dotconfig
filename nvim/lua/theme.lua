@@ -8,22 +8,22 @@ require("github-theme").setup({
     },
   },
   -- -- Overwrite the highlight groups
-  colors = {
+  specs = {
     syntax = {
       constant = "#2188ff",
-      variable = "#fff",
+      variable = "#ffffff",
     },
   },
-  overrides = function(_)
-    return {
+  groups = {
+    all = {
       Type = { fg = "#FFA066" },
       Keyword = { fg = "#E46876" },
-      Constant = { fg = '#fff' },
-      Search = { fg = '#fff', bg = '#8A2BE2' },
-    }
-  end
+      Constant = { fg = "#ffffff" },
+      Search = { fg = "#ffffff", bg = '#8A2BE2' },
+    },
+  },
 })
 
 vim.cmd([[
-colorscheme github_dark_default
+colorscheme github_dark
 ]])
