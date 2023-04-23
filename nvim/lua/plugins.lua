@@ -343,6 +343,21 @@ require('jetpack.packer').startup(function(use)
             delete_session = "d",
           },
         },
+        popup_input = {
+          prompt = "  ",
+          border = {
+            highlight = "FloatBorder",
+            style = "rounded",
+            text = {
+              top_align = "center",
+              top = " Prompt ",
+            },
+          },
+          win_options = {
+            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
+          },
+          submit = "<C-t>",
+        },
         openai_params = {
           model = "gpt-3.5-turbo",
           frequency_penalty = 0,
