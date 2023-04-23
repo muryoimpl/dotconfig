@@ -10,6 +10,12 @@ local colors = {
   blue = '#51afef',
   red = '#ec5f67',
   white = '#ffffff',
+  gray1  = '#262626',
+  gray2  = '#303030',
+  gray4  = '#585858',
+  gray5  = '#606060',
+  gray7  = '#9e9e9e',
+  gray10 = '#f0f0f0',
 }
 
 local fileformat_opts = {
@@ -81,6 +87,13 @@ local diff_opts = {
   symbols = {added = '+', modified = '~', removed = '-'}, -- Changes the symbols used by the diff.
 }
 
+local buffer_lines = {
+  function()
+    return vim.fn.line('$')
+  end,
+  color = { fg = colors.white, bg = colors.gray4 },
+}
+
 local config = {
   options = {
     icons_enabled = true,
@@ -106,7 +119,7 @@ local config = {
     lualine_c = { lsp_name_opts, filename_opts, },
     lualine_x = { 'location', diagnostics_opts, },
     lualine_y = { fileformat_opts, 'encoding', filetype_opts, },
-    lualine_z = {'progress',},
+    lualine_z = { 'progress', buffer_lines, },
   },
   inactive_sections = {
     lualine_a = {},
@@ -114,7 +127,7 @@ local config = {
     lualine_c = { filename_opts, },
     lualine_x = {'location'},
     lualine_y = { fileformat_opts, 'encoding', filetype_opts, },
-    lualine_z = {}
+    lualine_z = { buffer_lines }
   },
   tabline = {},
   winbar = {},
