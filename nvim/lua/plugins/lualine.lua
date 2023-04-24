@@ -127,7 +127,7 @@ local config = {
     lualine_c = { filename_opts, },
     lualine_x = {'location'},
     lualine_y = { fileformat_opts, 'encoding', filetype_opts, },
-    lualine_z = { buffer_lines }
+    lualine_z = {}
   },
   tabline = {},
   winbar = {},
