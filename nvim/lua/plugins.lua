@@ -50,6 +50,12 @@ require('jetpack.packer').startup(function(use)
   }
   use { 'Numkil/ag.nvim', cmd = ':Ag' }
   use {
+    'junegunn/fzf',
+    run = function()
+      vim.fn['fzf#install']()
+    end
+  }
+  use {
     'kevinhwang91/nvim-bqf',
     config = function()
       require('bqf').setup({
