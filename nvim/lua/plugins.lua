@@ -1,18 +1,17 @@
----@diagnostic disable:undefined-global
--- Download and load if jetpack-vim is not installed.
-local fn = vim.fn
-local jetpackfile = fn.stdpath('data') .. '/site/pack/jetpack/opt/vim-jetpack/plugin/jetpack.vim'
-local jetpackurl = 'https://raw.githubusercontent.com/tani/vim-jetpack/master/plugin/jetpack.vim'
-if fn.filereadable(jetpackfile) == 0 then
-  fn.system('curl -fsSLo ' .. jetpackfile .. ' --create-dirs ' .. jetpackurl)
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
 end
+local packer_bootstrap = ensure_packer()
 
--- Load plugins with pqcker style
-vim.cmd('packadd vim-jetpack')
-require('jetpack.packer').startup(function(use)
-  -- plugin manager
-  use { 'tani/vim-jetpack' }
-
+require('packer').startup(function(use)
+  use 'wbthomason/packer.nvim'
   -- theme
   use { 'projekt0n/github-nvim-theme' }
 
@@ -48,7 +47,7 @@ require('jetpack.packer').startup(function(use)
       require('plugins/fzf')
     end,
   }
-  use { 'Numkil/ag.nvim', cmd = ':Ag' }
+  use { 'Numkil/ag.nvim', opt = true, cmd = ':Ag' }
   use {
     'junegunn/fzf',
     run = function()
@@ -279,7 +278,7 @@ require('jetpack.packer').startup(function(use)
   }
 
   -- conding
-  use { 'ii14/neorepl.nvim', on = ':Repl' }
+  use { 'ii14/neorepl.nvim', opt = true, cmd = ':Repl' }
   use {
     'github/copilot.vim',
     config = function()
@@ -309,8 +308,6 @@ require('jetpack.packer').startup(function(use)
       ]])
     end,
   }
-  use { "MunifTanjim/nui.nvim" }
-  use { "nvim-telescope/telescope.nvim" }
   use {
     "jackMort/ChatGPT.nvim",
     requires = {
@@ -318,6 +315,7 @@ require('jetpack.packer').startup(function(use)
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
+    opt = true,
     cmd = ":ChatGPT",
     config = function()
       -- chatbot
@@ -393,16 +391,11 @@ require('jetpack.packer').startup(function(use)
       })
     end
   }
-end)
 
--- Install plugins if they are not installed.
-local jetpack = require('jetpack')
-for _, name in ipairs(jetpack.names()) do
-  if not jetpack.tap(name) then
-    jetpack.sync()
-    break
+  if packer_bootstrap then
+    require('packer').sync()
   end
-end
+end)
 
 vim.cmd([[
   let files = [

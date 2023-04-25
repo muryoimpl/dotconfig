@@ -17,3 +17,10 @@ vim.cmd([[
   hi AerialLineNC gui=reverse cterm=reverse
   hi AerialLine   gui=reverse cterm=reverse
 ]])
+
+vim.cmd([[
+augroup packer_user_config
+  autocmd!
+  autocmd BufWritePost plugins.lua source <afile> | PackerSync
+augroup end
+]])
