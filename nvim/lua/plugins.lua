@@ -382,6 +382,17 @@ require('jetpack.packer').startup(function(use)
       })
     end
   }
+
+  use {
+    "lukoshkin/trailing-whitespace",
+    config = function()
+      require'trailing-whitespace'.setup({
+        patterns = { '\\s\\+$' },
+        palette = { markdown = 'RosyBrown' },
+        default_color = 'PaleVioletRed',
+      })
+    end
+  }
 end)
 
 -- Install plugins if they are not installed.
