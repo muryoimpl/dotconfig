@@ -47,7 +47,7 @@ require('packer').startup(function(use)
       require('plugins/fzf')
     end,
   }
-  use { 'Numkil/ag.nvim', opt = true, cmd = ':Ag' }
+  use { 'Numkil/ag.nvim' }
   use {
     'junegunn/fzf',
     run = function()
