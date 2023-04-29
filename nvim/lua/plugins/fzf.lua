@@ -27,7 +27,7 @@ require('fzf-lua').setup({
 local kopts = { noremap = true, silent = true }
 vim.api.nvim_set_keymap('n', '<space>f',  "<CMD>lua require('fzf-lua').files()<CR>",            kopts)
 vim.api.nvim_set_keymap('n', '<space>g',  "<CMD>lua require('fzf-lua').git_files()<CR>",        kopts)
-vim.api.nvim_set_keymap('n', '<space>b',  "<CMD>lua require('fzf-lua').buffers()<CR>",          kopts)
+vim.api.nvim_set_keymap('n', '<space>B',  "<CMD>lua require('fzf-lua').buffers()<CR>",          kopts)
 vim.api.nvim_set_keymap('n', '<space>bl', "<CMD>lua require('fzf-lua').blines()<CR>",           kopts)
 vim.api.nvim_set_keymap('n', '<space>gc', "<CMD>lua require('fzf-lua').git_commits()<CR>",      kopts)
 vim.api.nvim_set_keymap('n', '<space>h',  "<CMD>lua require('fzf-lua').command_history()<CR>",  kopts)
