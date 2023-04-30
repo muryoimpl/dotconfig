@@ -40,7 +40,7 @@ vim.api.nvim_set_keymap('v', '<space>g',  "<CMD>lua require('fzf-lua').grep_visu
 vim.api.nvim_set_keymap('v', '<space>tg', "<CMD>lua require('fzf-lua').tags_grep_visual()<CR>", kopts)
 
 -- resize 時に redraw
--- vim.api.nvim_create_autocmd("VimResized", {
---   pattern = '*',
---   command = 'lua require("fzf-lua").redraw()'
--- })
+vim.api.nvim_create_autocmd("VimResized", {
+  pattern = '*',
+  command = 'lua require("fzf-lua").redraw()'
+})

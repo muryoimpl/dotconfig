@@ -43,6 +43,7 @@ require('packer').startup(function(use)
   -- finder
   use {
     'ibhagwan/fzf-lua',
+    requires = { "nvim-tree/nvim-web-devicons" },
     config = function()
       require('plugins/fzf')
     end,
@@ -50,9 +51,7 @@ require('packer').startup(function(use)
   use { 'Numkil/ag.nvim' }
   use {
     'junegunn/fzf',
-    run = function()
-      vim.fn['fzf#install']()
-    end
+    run = "./install --bin"
   }
   use {
     'kevinhwang91/nvim-bqf',
