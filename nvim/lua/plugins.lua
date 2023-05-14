@@ -314,8 +314,6 @@ require('packer').startup(function(use)
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    opt = true,
-    cmd = ":ChatGPT",
     config = function()
       -- chatbot
       require("chatgpt").setup({
@@ -344,6 +342,17 @@ require('packer').startup(function(use)
             select_session = "<Space>",
             rename_session = "r",
             delete_session = "d",
+          },
+        },
+        popup_layout = {
+          default = "center",
+          center = {
+            width = "80%",
+            height = "80%",
+          },
+          right = {
+            width = "30%",
+            width_settings_open = "50%",
           },
         },
         popup_input = {
