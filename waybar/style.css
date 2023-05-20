@@ -5,11 +5,12 @@
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
+    border-bottom: 2px solid rgba(100, 114, 125, 0.5);
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;
+    background-color: #333333;
+    margin-bottom: 2px;
 }
 
 window#waybar.hidden {
@@ -79,8 +80,11 @@ button:hover {
 #idle_inhibitor,
 #scratchpad,
 #mpd {
-    padding: 0 5px;
+    padding: 0 8px;
     color: #ffffff;
+    border-radius: 4px;
+    margin-right: 2px;
+    margin-bottom: 2px;
 }
 
 #window,
@@ -99,7 +103,7 @@ button:hover {
 }
 
 #clock {
-    background-color: #64727D;
+  background-color: #333333;
 }
 
 #battery {
@@ -134,16 +138,15 @@ label:focus {
 }
 
 #cpu {
-    background-color: #2ecc71;
-    color: #000000;
+    background-color: #333333;
 }
 
 #memory {
-    background-color: #9b59b6;
+    background-color: #333333;
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: #333333;
 }
 
 #backlight {
@@ -192,7 +195,7 @@ label:focus {
 }
 
 #temperature {
-    background-color: #f0932b;
+    background-color: #333333;
 }
 
 #temperature.critical {
@@ -247,8 +250,8 @@ label:focus {
 }
 
 #keyboard-state {
-    background: #97e1ad;
-    color: #000000;
+    background: #333333;
+    color: #ffffff;
     padding: 0 0px;
     margin: 0 5px;
     min-width: 16px;

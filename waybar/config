@@ -7,7 +7,7 @@
     "spacing": 1, // Gaps between modules (4px)
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "tray"],
     "modules-center": ["sway/window"],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": false,
@@ -104,6 +104,11 @@
       "interval": 30,
       "format": "Disk: {percentage_used}%",
       "path": "/"
+    },
+    "backlight": {
+      "device": "intel_backlight",
+      "format": "{percent}% {icon}",
+      "format-icons": ["", ""]
     }
   },
   {
