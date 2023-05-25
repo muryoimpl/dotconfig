@@ -264,6 +264,8 @@ include /etc/sway/config.d/*
 bindsym $mod+bracketleft exec --no-startup-id "$HOME/.config/rofi/rofi_cmd.sh"
 bindsym $mod+slash exec --no-startup-id "$HOME/.config/rofi/rofimoji_cmd.sh"
 
+bindsym $mod+Shift+backslash exec --no-startup-id "$HOME/.config/rofi/rofi_cmd_asashi.sh"
+
 ## screenshot
 # アクティブウィンドウのスクリーンショット
 bindsym $mod+Print exec grimshot --notify save window $HOME/screenshots/$(date "+%y%m%d%H%M%S").png
