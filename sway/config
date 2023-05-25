@@ -1,10 +1,6 @@
 # Default config for sway
 #
-# Copy this to ~/.config/sway/config and edit it to your liking.
-#
-# Read `man 5 sway` for a complete reference.
-
-### Variables
+# Copy this to ~/.config/sway/config and edit it to your liking. # # Read `man 5 sway` for a complete reference. ### Variables
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -81,11 +77,20 @@ exec swayidle -w \
       natural_scroll enabled
     }
 
-    input type:keyboard {
-      repeat_delay 300
-      repeat_rate 30      
+    input type:touchpad {
+      natural_scroll enabled
     }
 
+    input type:keyboard {
+      repeat_delay 300
+      repeat_rate 30
+    }
+
+    input type:keyboard {
+      # Capslock key should work as escape key
+      # See /usr/share/X11/xkb/rules/xorg.lst for options
+      xkb_options ctrl:nocaps
+    }
 ### Key bindings
 #
 # Basics:
