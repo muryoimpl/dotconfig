@@ -390,12 +390,18 @@ require('packer').startup(function(use)
   }
 
   use {
-    "lukoshkin/trailing-whitespace",
+    "lukoshkin/highlight-whitespace",
     config = function()
-      require'trailing-whitespace'.setup({
-        patterns = { '\\s\\+$' },
-        palette = { markdown = 'RosyBrown' },
-        default_color = 'PaleVioletRed',
+      require'highlight-whitespace'.setup({
+        tws = '\\s\\+$',
+        user_palette = {
+          markdown = {
+            tws = 'RosyBrown',
+          },
+          other = {
+            tws = 'PaleVioletRed',
+          }
+        },
       })
     end
   }
