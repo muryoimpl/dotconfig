@@ -389,23 +389,6 @@ require('packer').startup(function(use)
     end
   }
 
-  use {
-    "lukoshkin/highlight-whitespace",
-    config = function()
-      require'highlight-whitespace'.setup({
-        tws = '\\s\\+$',
-        user_palette = {
-          markdown = {
-            tws = 'RosyBrown',
-          },
-          other = {
-            tws = 'PaleVioletRed',
-          }
-        },
-      })
-    end
-  }
-
   if packer_bootstrap then
     require('packer').sync()
   end

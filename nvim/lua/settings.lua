@@ -150,3 +150,11 @@ vim.api.nvim_set_keymap("n", "<C-W>t", "<cmd>T<cr>", { noremap = true })
 vim.api.nvim_set_keymap("n", "<C-W><C-T>", "<cmd>T<cr>", { noremap = true })
 vim.api.nvim_set_keymap("t", "<C-W>t", "<cmd>quit<cr>", { noremap = true })
 vim.api.nvim_set_keymap("t", "<C-W><C-T>", "<cmd>quit<cr>", { noremap = true })
+
+vim.cmd([[
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
+]])
