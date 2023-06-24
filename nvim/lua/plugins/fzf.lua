@@ -25,18 +25,22 @@ require('fzf-lua').setup({
 
 -- keymap
 local kopts = { noremap = true, silent = true }
+-- よく使う normal
 vim.api.nvim_set_keymap('n', '<space>f',  "<CMD>lua require('fzf-lua').files()<CR>",            kopts)
-vim.api.nvim_set_keymap('n', '<space>g',  "<CMD>lua require('fzf-lua').git_files()<CR>",        kopts)
-vim.api.nvim_set_keymap('n', '<space>bf',  "<CMD>lua require('fzf-lua').buffers()<CR>",          kopts)
+vim.api.nvim_set_keymap('n', '<space>bf', "<CMD>lua require('fzf-lua').buffers()<CR>",          kopts)
+vim.api.nvim_set_keymap('n', '<space>gp', "<CMD>lua require('fzf-lua').live_grep()<CR>",        kopts)
+vim.api.nvim_set_keymap('n', '<space>gw', "<CMD>lua require('fzf-lua').grep_cword()<CR>",       kopts)
+vim.api.nvim_set_keymap('n', '<space>lr', "<CMD>lua require('fzf-lua').lsp_references()<CR>",   kopts)
+vim.api.nvim_set_keymap('n', '<space>ld', "<CMD>lua require('fzf-lua').lsp_definitions()<CR>",  kopts)
+vim.api.nvim_set_keymap('n', '<space>gf', "<CMD>lua require('fzf-lua').git_files()<CR>",        kopts)
+
 vim.api.nvim_set_keymap('n', '<space>bl', "<CMD>lua require('fzf-lua').blines()<CR>",           kopts)
 vim.api.nvim_set_keymap('n', '<space>gc', "<CMD>lua require('fzf-lua').git_commits()<CR>",      kopts)
 vim.api.nvim_set_keymap('n', '<space>h',  "<CMD>lua require('fzf-lua').command_history()<CR>",  kopts)
-vim.api.nvim_set_keymap('n', '<space>lr', "<CMD>lua require('fzf-lua').lsp_references()<CR>",   kopts)
-vim.api.nvim_set_keymap('n', '<space>ld', "<CMD>lua require('fzf-lua').lsp_definitions()<CR>",  kopts)
-vim.api.nvim_set_keymap('n', '<space>gp', "<CMD>lua require('fzf-lua').live_grep()<CR>",        kopts)
-vim.api.nvim_set_keymap('n', '<space>gw', "<CMD>lua require('fzf-lua').grep_cword()<CR>",       kopts)
 vim.api.nvim_set_keymap('n', '<space>tg', "<CMD>lua require('fzf-lua').tags_grep_cword()<CR>",  kopts)
-vim.api.nvim_set_keymap('v', '<space>g',  "<CMD>lua require('fzf-lua').grep_visual()<CR>",      kopts)
+
+-- よく使う visual
+vim.api.nvim_set_keymap('v', '<space>gp',  "<CMD>lua require('fzf-lua').grep_visual()<CR>",      kopts)
 vim.api.nvim_set_keymap('v', '<space>tg', "<CMD>lua require('fzf-lua').tags_grep_visual()<CR>", kopts)
 
 -- resize 時に redraw
