@@ -10,7 +10,7 @@ vim.opt.background = 'dark'
 
 -- underline
 vim.opt.cursorline = true
-vim.cmd 'highlight CursorLine gui=underline cterm=underline'
+-- vim.cmd 'highlight CursorLine gui=underline cterm=underline'
 
 -- aerial
 vim.cmd([[
