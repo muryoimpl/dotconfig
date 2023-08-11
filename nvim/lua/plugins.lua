@@ -433,30 +433,7 @@ require('packer').startup(function(use)
             delete_session = "d",
           },
         },
-        popup_layout = {
-          default = "center",
-          center = {
-            width = "80%",
-            height = "80%",
-          },
-          right = {
-            width = "30%",
-            width_settings_open = "50%",
-          },
-        },
         popup_input = {
-          prompt = "  ",
-          border = {
-            highlight = "FloatBorder",
-            style = "rounded",
-            text = {
-              top_align = "center",
-              top = " Prompt ",
-            },
-          },
-          win_options = {
-            winhighlight = "Normal:Normal,FloatBorder:FloatBorder",
-          },
           submit = "<C-t>",
         },
         openai_params = {

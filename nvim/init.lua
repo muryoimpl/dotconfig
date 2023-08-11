@@ -3,7 +3,6 @@ require('settings')
 require('plugins')
 require('filetype')
 require('theme')
-require('ag')
 
 -- colorscheme
 vim.opt.background = 'dark'
