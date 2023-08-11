@@ -70,7 +70,7 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{icon} {temperatureC}°C",
-        "format-icons": ["", "", ""]
+        "format-icons": ["🆒", "🌡️", "🥵"]
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -175,7 +175,7 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{icon} {temperatureC}°C",
-        "format-icons": ["", "", ""]
+        "format-icons": ["🆒", "🌡️", "🥵"]
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
@@ -254,7 +254,7 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{icon} {temperatureC}°C",
-        "format-icons": ["", "", ""]
+        "format-icons": ["🆒", "🌡️", "🥵"]
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
