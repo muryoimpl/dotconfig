@@ -85,6 +85,7 @@ require('packer').startup(function(use)
               ["<C-k>"] = actions.move_selection_previous,
             },
           },
+          file_ignore_patterns = { "node_modules", ".git" },
         },
       })
 
