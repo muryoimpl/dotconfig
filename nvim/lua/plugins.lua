@@ -56,8 +56,6 @@ require('packer').startup(function(use)
       local actions = require("telescope.actions")
       local telescope_ag = require("telescope-ag")
 
-      telescope.load_extension("ag")
-
       telescope.setup({
         defaults = {
           initial_mode = "normal",
@@ -75,7 +73,6 @@ require('packer').startup(function(use)
           mappings = {
             i = {
               ["<C-u>"] = false,
-              ["<C-j>"] = false,
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
             },
@@ -83,6 +80,7 @@ require('packer').startup(function(use)
               ["<C-u>"] = false,
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
+              ["<C-c>"] = actions.close,
             },
           },
           file_ignore_patterns = { "node_modules", ".git" },
@@ -118,7 +116,7 @@ require('packer').startup(function(use)
       vim.keymap.set('n', '<space>bl', function()
         builtin.current_buffer_fuzzy_find(theme_conf)
       end, kopts)
-      vim.keymap.set('n', '<space>h',  function()
+      vim.keymap.set('n', '<space>ch',  function()
         builtin.command_history(theme_conf)
       end, kopts)
       vim.keymap.set('n', '<space>qf', function()
@@ -147,6 +145,7 @@ require('packer').startup(function(use)
         builtin.live_grep(themes.get_ivy({ default_text = text}))
       end, kopts)
 
+      telescope.load_extension('ag')
       telescope_ag.setup({
         cmd = telescope_ag.cmds.ag,
       })
@@ -202,6 +201,15 @@ require('packer').startup(function(use)
       vim.keymap.set("n", "<space>O", "<cmd>TroubleToggle<cr>",
         { silent = true, noremap = true }
       )
+    end
+  }
+  use {
+    'adoyle-h/lsp-toggle.nvim',
+    config = function()
+      require('lsp-toggle').setup {
+        create_cmds = true,
+        telescope = true,
+      }
     end
   }
 
