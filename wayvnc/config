@@ -1,0 +1,8 @@
+address=0.0.0.0
+enable_auth=true
+username=muryoimpl
+password=mer0-veilles0
+private_key_file=/home/muryoimpl/.config/wayvnc/key.pem
+certificate_file=/home/muryoimpl/.config/wayvnc/cert.pem
+xkb_options=ctrl:nocaps,compose:menu
+xkb_layout=en
