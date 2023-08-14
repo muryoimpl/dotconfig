@@ -44,7 +44,6 @@ require('packer').startup(function(use)
   use {
     'justinmk/vim-dirvish',
     requires = { 'roginfarrer/vim-dirvish-dovish' },
-    keys = { "-" },
     config = function()
       vim.cmd([[
         let g:dirvish_mode = ':sort ,^\v(.*[\/])|\ze,'
