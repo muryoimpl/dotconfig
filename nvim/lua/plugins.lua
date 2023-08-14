@@ -165,6 +165,7 @@ require('packer').startup(function(use)
   }
   use {
     'luukvbaal/nnn.nvim' ,
+    opt = true,
     keys = { "<space>n", "<space>p" },
     config = function()
       -- nnn.nvim
@@ -207,6 +208,7 @@ require('packer').startup(function(use)
   }
   use {
     'adoyle-h/lsp-toggle.nvim',
+    opt = true,
     cmd = { 'ToggleLSP', 'ToggleNullLSP' },
     config = function()
       require('lsp-toggle').setup {
