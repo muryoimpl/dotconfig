@@ -156,6 +156,7 @@ require('packer').startup(function(use)
   use {
     'justinmk/vim-dirvish',
     requires = { 'roginfarrer/vim-dirvish-dovish' },
+    keys = { "-" },
     config = function()
       vim.cmd([[
         let g:dirvish_mode = ':sort ,^\v(.*[\/])|\ze,'
@@ -164,6 +165,7 @@ require('packer').startup(function(use)
   }
   use {
     'luukvbaal/nnn.nvim' ,
+    keys = { "<space>n", "<space>p" },
     config = function()
       -- nnn.nvim
       local builtin = require("nnn").builtin
@@ -205,6 +207,7 @@ require('packer').startup(function(use)
   }
   use {
     'adoyle-h/lsp-toggle.nvim',
+    cmd = { 'ToggleLSP', 'ToggleNullLSP' },
     config = function()
       require('lsp-toggle').setup {
         create_cmds = true,
@@ -237,6 +240,7 @@ require('packer').startup(function(use)
   -- function list
   use {
     'stevearc/aerial.nvim',
+    keys = { "<space>a" },
     config = function()
       require('plugins/aerial')
     end,
@@ -321,14 +325,13 @@ require('packer').startup(function(use)
   -- git
   use {
     'tpope/vim-fugitive',
+    keys = { "<space>gb" },
     config = function()
       vim.cmd([[
         nnoremap <Space>gd :<C-u>Gdiff<Enter>
         nnoremap <Space>gs :<C-u>Git<Enter>
         nnoremap <Space>gl :<C-u>Gclog<Enter>
         nnoremap <Space>ga :<C-u>Gwrite<Enter>
-        " nnoremap <Space>gc :<C-u>Git commit<Enter>
-        " nnoremap <Space>gC :<C-u>Git commit --amend<Enter>
         nnoremap <Space>gb :<C-u>Git blame<Enter>
       ]])
     end,
@@ -412,6 +415,7 @@ require('packer').startup(function(use)
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
     },
+    cmd = { "ChatGPT", "ChatGPTEdit" },
     config = function()
       -- chatbot
       require("chatgpt").setup({
