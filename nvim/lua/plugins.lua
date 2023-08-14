@@ -40,118 +40,6 @@ require('packer').startup(function(use)
     end,
   }
 
-  -- telescope
-  use {
-    "kelly-lin/telescope-ag",
-    requires = { "nvim-telescope/telescope.nvim" },
-  }
-
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} },
-    config = function()
-      local telescope = require("telescope")
-      local builtin = require('telescope.builtin')
-      local themes = require("telescope.themes")
-      local actions = require("telescope.actions")
-      local telescope_ag = require("telescope-ag")
-
-      telescope.setup({
-        defaults = {
-          initial_mode = "normal",
-          vimgrep_arguments = {
-            "ag",
-            "--vimgrep",
-            "--nocolor",
-            "--noheading",
-            "--filename",
-            "--numbers",
-            "--column",
-            "--smart-case",
-          },
-          layout_strategy = "cursor",
-          mappings = {
-            i = {
-              ["<C-u>"] = false,
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
-            },
-            n = {
-              ["<C-u>"] = false,
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
-              ["<C-c>"] = actions.close,
-            },
-          },
-          file_ignore_patterns = { "node_modules", ".git" },
-        },
-      })
-
-      local kopts = { noremap = true, silent = true }
-      local theme_conf = themes.get_ivy()
-      vim.keymap.set('n', '<space>f',  function()
-        builtin.find_files(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>bf', function()
-        builtin.buffers(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>gp', function()
-        builtin.live_grep(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>gw', function()
-        builtin.grep_string(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>lr', function()
-        builtin.lsp_references(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>ld', function()
-        builtin.lsp_definitions(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>gf', function()
-        builtin.git_files(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>gc', function()
-        builtin.git_commits(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>bl', function()
-        builtin.current_buffer_fuzzy_find(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>ch',  function()
-        builtin.command_history(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>qf', function()
-        builtin.quickfix(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>lc', function()
-        builtin.loclist(theme_conf)
-      end, kopts)
-
-      -- https://github.com/nvim-telescope/telescope.nvim/issues/1923
-      function vim.getVisualSelection()
-        vim.cmd('noau normal! "vy"')
-        local text = vim.fn.getreg('v')
-        vim.fn.setreg('v', {})
-
-        text = string.gsub(text, "\n", "")
-        if #text > 0 then
-          return text
-        else
-          return ''
-        end
-      end
-
-      vim.keymap.set('v', '<space>gp', function()
-        local text = vim.getVisualSelection()
-        builtin.live_grep(themes.get_ivy({ default_text = text}))
-      end, kopts)
-
-      telescope.load_extension('ag')
-      telescope_ag.setup({
-        cmd = telescope_ag.cmds.ag,
-      })
-    end,
-  }
-
   -- filer
   use {
     'justinmk/vim-dirvish',
@@ -200,6 +88,7 @@ require('packer').startup(function(use)
       require("trouble").setup({
         auto_open = true,
         auto_close = true,
+        use_diagnostic_signs = true,
       })
       vim.keymap.set("n", "<space>O", "<cmd>TroubleToggle<cr>",
         { silent = true, noremap = true }
@@ -217,6 +106,7 @@ require('packer').startup(function(use)
       }
     end
   }
+  require('plugins/lsp')
 
   -- completion
   use { 'hrsh7th/nvim-cmp' }
@@ -470,6 +360,118 @@ require('packer').startup(function(use)
     end
   }
 
+  -- telescope
+  use {
+    "kelly-lin/telescope-ag",
+    requires = { "nvim-telescope/telescope.nvim" },
+  }
+
+  use {
+    'nvim-telescope/telescope.nvim', tag = '0.1.x',
+    requires = { {'nvim-lua/plenary.nvim'} },
+    config = function()
+      local telescope = require("telescope")
+      local builtin = require('telescope.builtin')
+      local themes = require("telescope.themes")
+      local actions = require("telescope.actions")
+      local telescope_ag = require("telescope-ag")
+
+      telescope.setup({
+        defaults = {
+          initial_mode = "normal",
+          vimgrep_arguments = {
+            "ag",
+            "--vimgrep",
+            "--nocolor",
+            "--noheading",
+            "--filename",
+            "--numbers",
+            "--column",
+            "--smart-case",
+          },
+          layout_strategy = "cursor",
+          mappings = {
+            i = {
+              ["<C-u>"] = false,
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
+            },
+            n = {
+              ["<C-u>"] = false,
+              ["<C-j>"] = actions.move_selection_next,
+              ["<C-k>"] = actions.move_selection_previous,
+              ["<C-c>"] = actions.close,
+            },
+          },
+          file_ignore_patterns = { "node_modules", ".git" },
+        },
+      })
+
+      local kopts = { noremap = true, silent = true }
+      local theme_conf = themes.get_ivy()
+      vim.keymap.set('n', '<space>f',  function()
+        builtin.find_files(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>bf', function()
+        builtin.buffers(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>gp', function()
+        builtin.live_grep(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>gw', function()
+        builtin.grep_string(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>lr', function()
+        builtin.lsp_references(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>ld', function()
+        builtin.lsp_definitions(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>gf', function()
+        builtin.git_files(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>gc', function()
+        builtin.git_commits(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>bl', function()
+        builtin.current_buffer_fuzzy_find(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>ch',  function()
+        builtin.command_history(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>qf', function()
+        builtin.quickfix(theme_conf)
+      end, kopts)
+      vim.keymap.set('n', '<space>lc', function()
+        builtin.loclist(theme_conf)
+      end, kopts)
+
+      -- https://github.com/nvim-telescope/telescope.nvim/issues/1923
+      function vim.getVisualSelection()
+        vim.cmd('noau normal! "vy"')
+        local text = vim.fn.getreg('v')
+        vim.fn.setreg('v', {})
+
+        text = string.gsub(text, "\n", "")
+        if #text > 0 then
+          return text
+        else
+          return ''
+        end
+      end
+
+      vim.keymap.set('v', '<space>gp', function()
+        local text = vim.getVisualSelection()
+        builtin.live_grep(themes.get_ivy({ default_text = text}))
+      end, kopts)
+
+      telescope.load_extension('ag')
+      telescope_ag.setup({
+        cmd = telescope_ag.cmds.ag,
+      })
+    end,
+  }
+
   if packer_bootstrap then
     require('packer').sync()
   end
@@ -486,5 +488,3 @@ vim.cmd([[
   endfor
 ]])
 
--- LSP
-require('plugins/lsp')
