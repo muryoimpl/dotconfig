@@ -50,7 +50,7 @@ require('packer').startup(function(use)
           mode = "buffers", -- set to "tabs" to only show tabpages instead
           style_preset = bufferline.style_preset.no_italic, -- bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
           themable = true,
-          numbers = "ordinal",
+          numbers = "none",
           diagnostics = "nvim_lsp",
           color_icons = true,
           separator_style = "thick", -- "splant" | "slope" | "thick" | "thin" | { 'any', 'any' },
@@ -59,6 +59,22 @@ require('packer').startup(function(use)
             local icon = level:match("error") and " " or ""
             return " " .. icon .. count
           end,
+          indicator = {
+            icon = '▎',
+            style = "underline",
+          },
+          show_tab_indicators = true,
+        },
+        highlights = {
+          buffer_selected = {
+            bg = "#494949",
+            bold = true,
+            italic = false,
+          },
+          indicator_selected = {
+            fg = '#a9a1e1',
+            bg = '#a9a1e1',
+          },
         },
       })
 
