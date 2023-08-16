@@ -433,6 +433,8 @@ require('packer').startup(function(use)
               ["<C-u>"] = false,
               ["<C-j>"] = actions.move_selection_next,
               ["<C-k>"] = actions.move_selection_previous,
+              ["<C-c>"] = actions.close,
+              ["<C-h>"] = "which_key"
             },
             n = {
               ["<C-u>"] = false,
@@ -441,48 +443,81 @@ require('packer').startup(function(use)
               ["<C-c>"] = actions.close,
             },
           },
-          file_ignore_patterns = { "node_modules", ".git" },
+          file_ignore_patterns = { "^node_modules", "^.git" },
+          preview = {
+            treesitter = true,
+          },
+        },
+        pickers = {
+          find_files = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          buffers = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          live_grep = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          grep_string = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          lsp_references = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          lsp_definitions = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          git_files = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          git_commits = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          current_buffer_fuzzy_find = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          command_history = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          quickfix = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          loclist = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
+          autocommands = {
+            theme = "ivy",
+            prompt_prefix="🔍 ",
+          },
         },
       })
 
       local kopts = { noremap = true, silent = true }
-      local theme_conf = themes.get_ivy()
-      vim.keymap.set('n', '<space>f',  function()
-        builtin.find_files(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>bf', function()
-        builtin.buffers(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>gp', function()
-        builtin.live_grep(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>gw', function()
-        builtin.grep_string(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>lr', function()
-        builtin.lsp_references(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>ld', function()
-        builtin.lsp_definitions(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>gf', function()
-        builtin.git_files(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>gc', function()
-        builtin.git_commits(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>bl', function()
-        builtin.current_buffer_fuzzy_find(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>ch',  function()
-        builtin.command_history(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>qf', function()
-        builtin.quickfix(theme_conf)
-      end, kopts)
-      vim.keymap.set('n', '<space>lc', function()
-        builtin.loclist(theme_conf)
-      end, kopts)
+      vim.keymap.set('n', '<space>f',  function() builtin.find_files()                end, kopts)
+      vim.keymap.set('n', '<space>bf', function() builtin.buffers()                   end, kopts)
+      vim.keymap.set('n', '<space>gp', function() builtin.live_grep()                 end, kopts)
+      vim.keymap.set('n', '<space>gw', function() builtin.grep_string()               end, kopts)
+      vim.keymap.set('n', '<space>lr', function() builtin.lsp_references()            end, kopts)
+      vim.keymap.set('n', '<space>ld', function() builtin.lsp_definitions()           end, kopts)
+      vim.keymap.set('n', '<space>gf', function() builtin.git_files()                 end, kopts)
+      vim.keymap.set('n', '<space>gc', function() builtin.git_commits()               end, kopts)
+      vim.keymap.set('n', '<space>bl', function() builtin.current_buffer_fuzzy_find() end, kopts)
+      vim.keymap.set('n', '<space>ch', function() builtin.command_history()           end, kopts)
+      vim.keymap.set('n', '<space>qf', function() builtin.quickfix()                  end, kopts)
+      vim.keymap.set('n', '<space>lc', function() builtin.loclist()                   end, kopts)
+      vim.keymap.set('n', '<space>au', function() builtin.autocommands()              end, kopts)
 
       -- https://github.com/nvim-telescope/telescope.nvim/issues/1923
       function vim.getVisualSelection()
