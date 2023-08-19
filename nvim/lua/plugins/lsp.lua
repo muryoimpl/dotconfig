@@ -1,12 +1,17 @@
+local lspconfig = require('lspconfig')
+local util = require('lspconfig/util')
 ---@diagnostic disable:undefined-global
 -- https://zenn.dev/botamotch/articles/21073d78bc68bf
 -- nvim-lspconfig のキーバインドを設定する
 local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
+
   -- print(client.name)
-  local lspopts = { noremap = true, silent = true }
+  local lspopts = { noremap = true, silent = true, buffer = ev.buf }
   vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', lspopts)
   vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', lspopts)
-  vim.keymap.set('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', lspopts)
+  vim.keymap.set('n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>', lspopts)
   vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.format()<CR>', lspopts)
   vim.keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', lspopts)
   vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', lspopts)
@@ -17,24 +22,60 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', lspopts)
   vim.keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', lspopts)
   -- vim.keymap.set('n', '<space>o', '<cmd>lua vim.diagnostic.setqflist()<CR>', lspopts)
+  vim.keymap.set('n', '<space>t', function()
+    vim.lsp.buf.format { async = true }
+  end, lspopts)
 
-  if client.server_capabilities.documentHighlightProvider then
-    --   vim.cmd [[
-    --     hi! LspReferenceRead cterm=bold ctermbg=235 guibg=Midnightblue
-    --     hi! LspReferenceText cterm=bold ctermbg=235 guibg=Midnightblue
-    --     hi! LspReferenceWrite cterm=bold ctermbg=235 guibg=Midnightblue
-    --   ]]
-    -- vim.api.nvim_create_augroup('lsp_document_highlight', {})
-    -- vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-    --   group = 'lsp_document_highlight',
-    --   buffer = 0,
-    --   callback = vim.lsp.buf.document_highlight,
-    -- })
-    -- vim.api.nvim_create_autocmd('CursorMoved', {
-    --   group = 'lsp_document_highlight',
-    --   buffer = 0,
-    --   callback = vim.lsp.buf.clear_references,
-    -- })
+  if not lspconfig.configs.ruby_ls then
+    configs.ruby_ls = {
+      default_config = {
+        cmd = { 'ruby-lsp' },
+        filetypes = { 'ruby' },
+        root_dir = util.root_pattern('.git', 'Gemfile'),
+        init_options = {
+          enabled_features = {
+            "codeActions",
+            "documentHighlights",
+            "documentSymbols",
+            "selectionRanges",
+            -- "semanticHighlightings",
+            "formatting",
+            "diagnostic",
+            "pathCompletion",
+            "definitions",
+          },
+        },
+        settings = {},
+      },
+    }
+
+    -- https://github.com/Shopify/ruby-lsp/issues/188#issuecomment-1384373777
+    callback = function()
+      local params = vim.lsp.util.make_text_document_params(bufnr)
+
+      client.request(
+        'textDocument/diagnostic',
+        { textDocument = params },
+        function(err, result)
+          if err then
+            local err_msg = string.format("diagnostics error - %s", vim.inspect(err))
+            vim.lsp.log.error(err_msg)
+          end
+          if not result then return end
+
+          vim.lsp.diagnostic.on_publish_diagnostics(
+            nil,
+            vim.tbl_extend('keep', params, { diagnostics = result.items }),
+            { client_id = client.id }
+          )
+        end
+      )
+    end
+
+    vim.api.nvim_create_autocmd({ 'BufEnter', 'BufWritePre', 'CursorHold' }, {
+      buffer = bufnr,
+      callback = callback,
+    })
   end
 end
 
