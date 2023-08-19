@@ -464,58 +464,19 @@ require('packer').startup(function(use)
           },
         },
         pickers = {
-          find_files = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          buffers = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          live_grep = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          grep_string = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          lsp_references = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          lsp_definitions = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          git_files = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          git_commits = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          current_buffer_fuzzy_find = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          command_history = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          quickfix = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          loclist = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
-          autocommands = {
-            theme = "ivy",
-            prompt_prefix="🔍 ",
-          },
+          find_files                = { theme = "ivy", prompt_prefix="🔍 ",  },
+          buffers                   = { theme = "ivy", prompt_prefix="🔍 ",  },
+          live_grep                 = { theme = "ivy", prompt_prefix="🔍 ",  },
+          grep_string               = { theme = "ivy", prompt_prefix="🔍 ",  },
+          lsp_references            = { theme = "ivy", prompt_prefix="🔍 ",  },
+          lsp_definitions           = { theme = "ivy", prompt_prefix="🔍 ",  },
+          git_files                 = { theme = "ivy", prompt_prefix="🔍 ",  },
+          git_commits               = { theme = "ivy", prompt_prefix="🔍 ",  },
+          current_buffer_fuzzy_find = { theme = "ivy", prompt_prefix="🔍 ",  },
+          command_history           = { theme = "ivy", prompt_prefix="🔍 ",  },
+          quickfix                  = { theme = "ivy", prompt_prefix="🔍 ",  },
+          loclist                   = { theme = "ivy", prompt_prefix="🔍 ",  },
+          autocommands              = { theme = "ivy", prompt_prefix="🔍 ",  },
         },
       })
 
