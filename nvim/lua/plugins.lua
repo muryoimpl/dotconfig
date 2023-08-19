@@ -481,7 +481,7 @@ require('packer').startup(function(use)
       })
 
       local kopts = { noremap = true, silent = true }
-      vim.keymap.set('n', '<space>f',  function() builtin.find_files()                end, kopts)
+      vim.keymap.set('n', '<space>ff', function() builtin.find_files()                end, kopts)
       vim.keymap.set('n', '<space>bf', function() builtin.buffers()                   end, kopts)
       vim.keymap.set('n', '<space>gp', function() builtin.live_grep()                 end, kopts)
       vim.keymap.set('n', '<space>gw', function() builtin.grep_string()               end, kopts)
