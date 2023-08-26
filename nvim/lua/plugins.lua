@@ -97,15 +97,6 @@ require('packer').startup(function(use)
 
   -- filer
   use {
-    'justinmk/vim-dirvish',
-    requires = { 'roginfarrer/vim-dirvish-dovish' },
-    config = function()
-      vim.cmd([[
-        let g:dirvish_mode = ':sort ,^\v(.*[\/])|\ze,'
-      ]])
-    end,
-  }
-  use {
     'luukvbaal/nnn.nvim' ,
     opt = true,
     keys = { "<space>n", "<space>p" },
@@ -514,13 +505,14 @@ require('packer').startup(function(use)
                 ["y"] = fb_actions.copy,
                 ["d"] = fb_actions.remove,
                 ["o"] = fb_actions.open,
-                ["g"] = fb_actions.goto_parent_dir,
+                -- ["g"] = fb_actions.goto_parent_dir,
                 ["e"] = fb_actions.goto_home_dir,
                 ["w"] = fb_actions.goto_cwd,
                 ["t"] = fb_actions.change_cwd,
                 ["f"] = fb_actions.toggle_browser,
                 ["h"] = fb_actions.toggle_hidden,
                 ["s"] = fb_actions.toggle_all,
+                ["-"] = fb_actions.goto_parent_dir,
               },
             },
           },
@@ -568,6 +560,7 @@ require('packer').startup(function(use)
 
       telescope.load_extension("file_browser")
       vim.api.nvim_set_keymap('n', '<space>fb', ":Telescope file_browser<CR>", kopts)
+      vim.api.nvim_set_keymap('n', '-', ":Telescope file_browser path=%:p:h<CR>", kopts)
     end,
   }
 
