@@ -487,7 +487,7 @@ require('packer').startup(function(use)
           file_browser = {
             theme = "ivy",
             hidden = true,
-            hijack_netrw = true,
+            hijack_netrw = false,
             prompt_prefix="🔍 ",
             mappings = {
               ["i"] = {
