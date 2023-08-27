@@ -403,6 +403,9 @@ require('packer').startup(function(use)
       })
     end
   }
+  use {
+    "MaximilianLloyd/tw-values.nvim",
+  }
 
   -- telescope
   use {
