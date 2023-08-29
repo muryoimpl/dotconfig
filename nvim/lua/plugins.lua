@@ -305,7 +305,7 @@ require("lazy").setup({
         if stridx(l:nodev, 'v') == 0
           let l:nodev = nodev[1:]
         endif
-        return l:nodev > 11 && l:nodev < 18
+        return l:nodev > 11 && l:nodev < 21
       endfunction
 
       let s:nodev = system('node --version')
