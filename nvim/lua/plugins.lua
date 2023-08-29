@@ -1,26 +1,26 @@
-local ensure_packer = function()
-  local fn = vim.fn
-  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-  if fn.empty(fn.glob(install_path)) > 0 then
-    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-    vim.cmd [[packadd packer.nvim]]
-    return true
-  end
-  return false
+-- https://github.com/folke/lazy.nvim#-installation
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
-local packer_bootstrap = ensure_packer()
+vim.opt.rtp:prepend(lazypath)
 
-require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
+require("lazy").setup({
   -- theme
-  use { 'projekt0n/github-nvim-theme' }
+  { 'projekt0n/github-nvim-theme' },
 
   -- util
-  use { "nvim-lua/plenary.nvim" }
-  use { 'kyazdani42/nvim-web-devicons' }
-  use { 'vim-test/vim-test' }
-  use { 'soramugi/auto-ctags.vim' }
-  use {
+  { "nvim-lua/plenary.nvim" },
+  { 'vim-test/vim-test' },
+  { 'soramugi/auto-ctags.vim' },
+  {
     'Yggdroot/indentLine',
     config = function()
       -- indent
@@ -32,17 +32,17 @@ require('packer').startup(function(use)
         let g:indentLine_fileTypeExclude = ['markdown']
       ]])
     end,
-  }
-  use {
+  },
+  {
     'nvim-lualine/lualine.nvim',
     config = function()
       require('plugins/lualine')
     end,
-  }
-  use {
+  },
+  {
     'akinsho/bufferline.nvim',
-    tag = "*",
-    requires = 'nvim-tree/nvim-web-devicons',
+    version = "*",
+    dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
       local bufferline = require('bufferline')
       bufferline.setup({
@@ -93,12 +93,12 @@ require('packer').startup(function(use)
       vim.keymap.set('n', 'tn', function() bufferline.cycle(1, true);  end, kopts)
       vim.keymap.set('n', 'tp', function() bufferline.cycle(-1, true); end, kopts)
     end
-  }
+  },
 
   -- filer
-  use {
+  {
     'luukvbaal/nnn.nvim' ,
-    opt = true,
+    lazy = true,
     keys = { "<space>n", "<space>p" },
     config = function()
       -- nnn.nvim
@@ -119,14 +119,14 @@ require('packer').startup(function(use)
         { silent = true, noremap = true }
       )
     end,
-  }
+  },
 
   -- lsp
-  use { 'arkav/lualine-lsp-progress' }
-  use { 'williamboman/mason.nvim' }
-  use { 'williamboman/mason-lspconfig.nvim' }
-  use { 'neovim/nvim-lspconfig' }
-  use {
+  { 'arkav/lualine-lsp-progress' },
+  { 'williamboman/mason.nvim' },
+  { 'williamboman/mason-lspconfig.nvim' },
+  { 'neovim/nvim-lspconfig' },
+  {
     "folke/trouble.nvim",
     config = function()
       require("trouble").setup({
@@ -138,10 +138,10 @@ require('packer').startup(function(use)
         { silent = true, noremap = true }
       )
     end
-  }
-  use {
+  },
+  {
     'adoyle-h/lsp-toggle.nvim',
-    opt = true,
+    lazy = true,
     cmd = { 'ToggleLSP', 'ToggleNullLSP' },
     config = function()
       require('lsp-toggle').setup {
@@ -149,8 +149,8 @@ require('packer').startup(function(use)
         telescope = true,
       }
     end
-  }
-  use {
+  },
+  {
     'mhartington/formatter.nvim',
     config = function()
       local filetypes = require("formatter.filetypes")
@@ -198,8 +198,8 @@ require('packer').startup(function(use)
         augroup END
       ]])
     end,
-  }
-  use {
+  },
+  {
     "mfussenegger/nvim-lint",
     config = function()
       require("lint").linters_by_ft = {
@@ -218,17 +218,18 @@ require('packer').startup(function(use)
           require("lint").try_lint()
         end,
       })
+
+      require('plugins/lsp')
     end,
-  }
-  require('plugins/lsp')
+  },
 
   -- completion
-  use { 'hrsh7th/nvim-cmp' }
-  use { 'hrsh7th/cmp-vsnip' }
-  use { 'hrsh7th/vim-vsnip' }
-  use { 'hrsh7th/cmp-nvim-lsp' }
-  use { 'hrsh7th/cmp-buffer' }
-  use {
+  { 'hrsh7th/nvim-cmp' },
+  { 'hrsh7th/cmp-vsnip' },
+  { 'hrsh7th/vim-vsnip' },
+  { 'hrsh7th/cmp-nvim-lsp' },
+  { 'hrsh7th/cmp-buffer' },
+  {
     'hrsh7th/cmp-cmdline',
     config = function()
       -- cmp-cmdline
@@ -241,26 +242,26 @@ require('packer').startup(function(use)
         }
       })
     end,
-  }
+  },
 
   -- function list
-  use {
+  {
     'stevearc/aerial.nvim',
     keys = { "<space>a" },
     config = function()
       require('plugins/aerial')
     end,
-  }
-  use { 'onsails/lspkind-nvim' }
+  },
+  { 'onsails/lspkind-nvim' },
 
   -- color
-  use {
+  {
     'NvChad/nvim-colorizer.lua',
     config = function()
       require 'colorizer'.setup()
     end,
-  }
-  use {
+  },
+  {
     't9md/vim-quickhl',
     config = function()
       vim.cmd([[
@@ -270,13 +271,13 @@ require('packer').startup(function(use)
       xmap <Space>M <Plug>(quickhl-manual-reset)
       ]])
     end,
-  }
-  use {
+  },
+  {
     'nvim-treesitter/nvim-treesitter',
-    requires = {
+    dependencies = {
       'nvim-treesitter/playground'
     },
-    run = ':TSUpdate',
+    build = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup({
         sync_install = true,
@@ -326,10 +327,10 @@ require('packer').startup(function(use)
        },
       })
     end,
-  }
+  },
 
   -- git
-  use {
+  {
     'tpope/vim-fugitive',
     keys = { "<space>gb" },
     config = function()
@@ -341,8 +342,8 @@ require('packer').startup(function(use)
         nnoremap <Space>gb :<C-u>Git blame<Enter>
       ]])
     end,
-  }
-  use {
+  },
+  {
     'lewis6991/gitsigns.nvim',
     config = function()
       -- gitsigns.nvim
@@ -381,11 +382,11 @@ require('packer').startup(function(use)
         end,
       })
     end,
-  }
+  },
 
   -- conding
-  use { 'ii14/neorepl.nvim', opt = true, cmd = ':Repl' }
-  use {
+  { 'ii14/neorepl.nvim' },
+  {
     'github/copilot.vim',
     config = function()
       -- github/copilit
@@ -413,10 +414,10 @@ require('packer').startup(function(use)
       imap <silent> <S-Tab> <Plug>(copilot-dismiss)
       ]])
     end,
-  }
-  use {
+  },
+  {
     "jackMort/ChatGPT.nvim",
-    requires = {
+    dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
       "nvim-telescope/telescope.nvim",
@@ -472,24 +473,24 @@ require('packer').startup(function(use)
         },
       })
     end
-  }
-  use {
+  },
+  {
     "MaximilianLloyd/tw-values.nvim",
-  }
+  },
 
   -- telescope
-  use {
+  {
     "kelly-lin/telescope-ag",
-    requires = { "nvim-telescope/telescope.nvim" },
-  }
-  use {
+    dependencies = { "nvim-telescope/telescope.nvim" },
+  },
+  {
     "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  }
+    dependencies = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  },
 
-  use {
-    'nvim-telescope/telescope.nvim', tag = '0.1.x',
-    requires = { {'nvim-lua/plenary.nvim'} },
+  {
+    'nvim-telescope/telescope.nvim', tag = '0.1.2',
+    dependencies = { {'nvim-lua/plenary.nvim'} },
     config = function()
       local telescope = require("telescope")
       local builtin = require('telescope.builtin')
@@ -635,12 +636,8 @@ require('packer').startup(function(use)
       vim.api.nvim_set_keymap('n', '<space>fb', ":Telescope file_browser<CR>", kopts)
       vim.api.nvim_set_keymap('n', '-', ":Telescope file_browser path=%:p:h<CR>", kopts)
     end,
-  }
-
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+  },
+})
 
 vim.cmd([[
   let files = [
