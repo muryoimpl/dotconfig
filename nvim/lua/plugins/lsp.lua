@@ -112,6 +112,9 @@ end })
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, { virtual_text = false }
 )
+vim.diagnostic.config({
+  virtual_text = false,
+})
 
 -- vim.cmd [[ autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ timeout_ms = 2000 }) ]]
 
