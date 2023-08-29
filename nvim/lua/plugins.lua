@@ -218,8 +218,6 @@ require("lazy").setup({
           require("lint").try_lint()
         end,
       })
-
-      require('plugins/lsp')
     end,
   },
 
@@ -667,3 +665,5 @@ vim.cmd([[
     exe "source" "~/.config/nvim/lua/plugins/".f
   endfor
 ]])
+
+require('plugins/lsp')
