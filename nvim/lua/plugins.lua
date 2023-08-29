@@ -44,54 +44,7 @@ require("lazy").setup({
     version = "*",
     dependencies = 'nvim-tree/nvim-web-devicons',
     config = function()
-      local bufferline = require('bufferline')
-      bufferline.setup({
-        options = {
-          mode = "buffers", -- set to "tabs" to only show tabpages instead
-          style_preset = bufferline.style_preset.no_italic, -- bufferline.style_preset.default, -- or bufferline.style_preset.minimal,
-          themable = true,
-          numbers = "none",
-          diagnostics = "nvim_lsp",
-          color_icons = true,
-          separator_style = "thick", -- "splant" | "slope" | "thick" | "thin" | { 'any', 'any' },
-          always_show_bufferline = true,
-          diagnostics_indicator = function(count, level)
-            local icon = level:match("error") and " " or ""
-            return " " .. icon .. count
-          end,
-          indicator = {
-            icon = '▎',
-            style = "underline",
-          },
-          show_tab_indicators = true,
-        },
-        highlights = {
-          buffer_selected = {
-            bg = "#494949",
-            bold = true,
-            italic = false,
-          },
-          indicator_selected = {
-            fg = '#a9a1e1',
-            bg = '#a9a1e1',
-          },
-        },
-      })
-
-      local kopts = { silent = true, noremap = true }
-      vim.keymap.set('n', '<space>1', function() bufferline.go_to(1,  true); end, kopts)
-      vim.keymap.set('n', '<space>2', function() bufferline.go_to(2,  true); end, kopts)
-      vim.keymap.set('n', '<space>3', function() bufferline.go_to(3,  true); end, kopts)
-      vim.keymap.set('n', '<space>4', function() bufferline.go_to(4,  true); end, kopts)
-      vim.keymap.set('n', '<space>5', function() bufferline.go_to(5,  true); end, kopts)
-      vim.keymap.set('n', '<space>6', function() bufferline.go_to(6,  true); end, kopts)
-      vim.keymap.set('n', '<space>7', function() bufferline.go_to(7,  true); end, kopts)
-      vim.keymap.set('n', '<space>8', function() bufferline.go_to(8,  true); end, kopts)
-      vim.keymap.set('n', '<space>9', function() bufferline.go_to(9,  true); end, kopts)
-      vim.keymap.set('n', '<space>$', function() bufferline.go_to(-1, true); end, kopts)
-
-      vim.keymap.set('n', 'tn', function() bufferline.cycle(1, true);  end, kopts)
-      vim.keymap.set('n', 'tp', function() bufferline.cycle(-1, true); end, kopts)
+      require("plugins/bufferline")
     end
   },
 
@@ -153,50 +106,7 @@ require("lazy").setup({
   {
     'mhartington/formatter.nvim',
     config = function()
-      local filetypes = require("formatter.filetypes")
-
-      require("formatter").setup({
-        filetype = {
-          typescript = {
-            filetypes.typescript.prettier,
-            filetypes.typescript.eslint_d,
-          },
-          typescriptreact = {
-            filetypes.typescriptreact.prettier,
-            filetypes.typescriptreact.eslint_d,
-          },
-          javascript = {
-            filetypes.javascript.prettier,
-            filetypes.javascript.eslint_d,
-          },
-          javascriptreact = {
-            filetypes.javascriptreact.prettier,
-            filetypes.javascriptreact.eslint_d,
-          },
-          css = {
-            filetypes.css.prettier,
-          },
-          scss = {
-            filetypes.css.prettier,
-          },
-          go = {
-            filetypes.go.goimports,
-          },
-          ruby = {
-            filetypes.ruby.rubocop,
-          },
-          ["*"] = {
-            require("formatter.filetypes.any").remove_trailing_whitespace,
-          },
-        },
-      })
-
-      vim.cmd([[
-        augroup FormatAutogroup
-          autocmd!
-          autocmd BufWritePost * FormatWrite
-        augroup END
-      ]])
+      require("plugins/formatter")
     end,
   },
   {
@@ -424,50 +334,8 @@ require("lazy").setup({
     config = function()
       -- chatbot
       require("chatgpt").setup({
-        yank_register = "+",
-        edit_with_instructions = {
-          diff = false,
-          keymaps = {
-            accept = "<C-y>",
-            toggle_diff = "<C-d>",
-            toggle_settings = "<C-o>",
-            cycle_windows = "<Tab>",
-            use_output_as_input = "<C-i>",
-          },
-        },
-        chat = {
-          max_line_length = 120,
-          keymaps = {
-            close = { "<C-c>" },
-            yank_last = "<C-y>",
-            yank_last_code = "<C-k>",
-            scroll_up = "<C-u>",
-            scroll_down = "<C-d>",
-            toggle_settings = "<C-o>",
-            new_session = "<C-n>",
-            cycle_windows = "<Tab>",
-            select_session = "<Space>",
-            rename_session = "r",
-            delete_session = "d",
-          },
-        },
         popup_input = {
           submit = "<C-t>",
-        },
-        openai_params = {
-          model = "gpt-3.5-turbo",
-          frequency_penalty = 0,
-          presence_penalty = 0,
-          max_tokens = 300,
-          temperature = 0,
-          top_p = 1,
-          n = 1,
-        },
-        openai_edit_params = {
-          model = "code-davinci-edit-001",
-          temperature = 0,
-          top_p = 1,
-          n = 1,
         },
       })
     end
@@ -490,149 +358,7 @@ require("lazy").setup({
     'nvim-telescope/telescope.nvim', tag = '0.1.2',
     dependencies = { {'nvim-lua/plenary.nvim'} },
     config = function()
-      local telescope = require("telescope")
-      local builtin = require('telescope.builtin')
-      local themes = require("telescope.themes")
-      local actions = require("telescope.actions")
-      local telescope_ag = require("telescope-ag")
-      local fb_actions = require "telescope".extensions.file_browser.actions
-
-      telescope.setup({
-        defaults = {
-          initial_mode = "normal",
-          vimgrep_arguments = {
-            "ag",
-            "--vimgrep",
-            "--nocolor",
-            "--noheading",
-            "--filename",
-            "--numbers",
-            "--column",
-            "--smart-case",
-          },
-          layout_strategy = "cursor",
-          mappings = {
-            i = {
-              ["<C-u>"] = false,
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
-              ["<C-c>"] = actions.close,
-              ["<C-h>"] = "which_key"
-            },
-            n = {
-              ["<C-u>"] = false,
-              ["<C-j>"] = actions.move_selection_next,
-              ["<C-k>"] = actions.move_selection_previous,
-              ["<C-c>"] = actions.close,
-            },
-          },
-          file_ignore_patterns = { "^node_modules", "^.git" },
-          preview = {
-            treesitter = true,
-          },
-        },
-        pickers = {
-          find_files                = { theme = "ivy", prompt_prefix="🔍 ",  },
-          buffers                   = { theme = "ivy", prompt_prefix="🔍 ",  },
-          live_grep                 = { theme = "ivy", prompt_prefix="🔍 ",  },
-          grep_string               = { theme = "ivy", prompt_prefix="🔍 ",  },
-          lsp_references            = { theme = "ivy", prompt_prefix="🔍 ",  },
-          lsp_definitions           = { theme = "ivy", prompt_prefix="🔍 ",  },
-          git_files                 = { theme = "ivy", prompt_prefix="🔍 ",  },
-          git_commits               = { theme = "ivy", prompt_prefix="🔍 ",  },
-          current_buffer_fuzzy_find = { theme = "ivy", prompt_prefix="🔍 ",  },
-          command_history           = { theme = "ivy", prompt_prefix="🔍 ",  },
-          quickfix                  = { theme = "ivy", prompt_prefix="🔍 ",  },
-          loclist                   = { theme = "ivy", prompt_prefix="🔍 ",  },
-          autocommands              = { theme = "ivy", prompt_prefix="🔍 ",  },
-        },
-        extensions = {
-          file_browser = {
-            theme = "ivy",
-            hidden = true,
-            hijack_netrw = false,
-            prompt_prefix="🔍 ",
-            mappings = {
-              ["i"] = {
-                ["<A-c>"] = fb_actions.create,
-                ["<S-CR>"] = fb_actions.create_from_prompt,
-                ["<A-r>"] = fb_actions.rename,
-                ["<A-m>"] = fb_actions.move,
-                ["<A-y>"] = fb_actions.copy,
-                ["<A-d>"] = fb_actions.remove,
-                ["<C-o>"] = fb_actions.open,
-                ["<C-g>"] = fb_actions.goto_parent_dir,
-                ["<C-e>"] = fb_actions.goto_home_dir,
-                ["<C-w>"] = fb_actions.goto_cwd,
-                ["<C-t>"] = fb_actions.change_cwd,
-                ["<C-f>"] = fb_actions.toggle_browser,
-                ["<C-h>"] = fb_actions.toggle_hidden,
-                ["<C-s>"] = fb_actions.toggle_all,
-                ["<bs>"] = fb_actions.backspace,
-              },
-              ["n"] = {
-                ["c"] = fb_actions.create,
-                ["r"] = fb_actions.rename,
-                ["m"] = fb_actions.move,
-                ["y"] = fb_actions.copy,
-                ["d"] = fb_actions.remove,
-                ["o"] = fb_actions.open,
-                -- ["g"] = fb_actions.goto_parent_dir,
-                ["e"] = fb_actions.goto_home_dir,
-                ["w"] = fb_actions.goto_cwd,
-                ["t"] = fb_actions.change_cwd,
-                ["f"] = fb_actions.toggle_browser,
-                ["h"] = fb_actions.toggle_hidden,
-                ["s"] = fb_actions.toggle_all,
-                ["-"] = fb_actions.goto_parent_dir,
-              },
-            },
-          },
-        },
-      })
-
-      local kopts = { noremap = true, silent = true }
-      vim.keymap.set('n', '<space>ff', function() builtin.find_files()                end, kopts)
-      vim.keymap.set('n', '<space>bf', function() builtin.buffers()                   end, kopts)
-      vim.keymap.set('n', '<space>gp', function() builtin.live_grep()                 end, kopts)
-      vim.keymap.set('n', '<space>gw', function() builtin.grep_string()               end, kopts)
-      vim.keymap.set('n', '<space>lr', function() builtin.lsp_references()            end, kopts)
-      vim.keymap.set('n', '<space>ld', function() builtin.lsp_definitions()           end, kopts)
-      vim.keymap.set('n', '<space>gf', function() builtin.git_files()                 end, kopts)
-      vim.keymap.set('n', '<space>gc', function() builtin.git_commits()               end, kopts)
-      vim.keymap.set('n', '<space>bl', function() builtin.current_buffer_fuzzy_find() end, kopts)
-      vim.keymap.set('n', '<space>ch', function() builtin.command_history()           end, kopts)
-      vim.keymap.set('n', '<space>qf', function() builtin.quickfix()                  end, kopts)
-      vim.keymap.set('n', '<space>lc', function() builtin.loclist()                   end, kopts)
-      vim.keymap.set('n', '<space>au', function() builtin.autocommands()              end, kopts)
-
-      -- https://github.com/nvim-telescope/telescope.nvim/issues/1923
-      function vim.getVisualSelection()
-        vim.cmd('noau normal! "vy"')
-        local text = vim.fn.getreg('v')
-        vim.fn.setreg('v', {})
-
-        text = string.gsub(text, "\n", "")
-        if #text > 0 then
-          return text
-        else
-          return ''
-        end
-      end
-
-      vim.keymap.set('v', '<space>gp', function()
-        local text = vim.getVisualSelection()
-        builtin.live_grep(themes.get_ivy({ default_text = text}))
-      end, kopts)
-
-      telescope.load_extension('ag')
-      telescope_ag.setup({
-        cmd = telescope_ag.cmds.ag,
-      })
-
-      telescope.load_extension("file_browser")
-      vim.api.nvim_set_keymap('n', '<space>fb', ":Telescope file_browser<CR>", kopts)
-      vim.api.nvim_set_keymap('n', '-', ":Telescope file_browser path=%:p:h<CR>", kopts)
+      require("plugins/telescope")
     end,
   },
 },
