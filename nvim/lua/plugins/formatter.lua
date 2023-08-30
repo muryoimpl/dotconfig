@@ -1,4 +1,5 @@
 local filetypes = require("formatter.filetypes")
+local util = require("formatter.util")
 
 require("formatter").setup({
   filetype = {
@@ -28,7 +29,23 @@ require("formatter").setup({
       filetypes.go.goimports,
     },
     ruby = {
-      filetypes.ruby.rubocop,
+      -- bundle exec rubocop (null-lsのformatterを参考にした)
+      -- https://github.com/jose-elias-alvarez/null-ls.nvim/blob/0010ea927ab7c09ef0ce9bf28c2b573fc302f5a7/lua/null-ls/builtins/formatting/rubocop.lua#L15-L26
+      function()
+        return {
+          exe = "bundle",
+          args = {
+            "exec",
+            "rubocop",
+            "-a",
+            "-f quiet",
+            "--stderr",
+            "--stdin",
+            util.escape_path(util.get_current_buffer_file_path()),
+          },
+          stdin = true,
+        }
+      end
     },
     ["*"] = {
       require("formatter.filetypes.any").remove_trailing_whitespace,

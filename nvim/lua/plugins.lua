@@ -104,32 +104,44 @@ require("lazy").setup({
     end
   },
   {
-    'mhartington/formatter.nvim',
+    "mhartington/formatter.nvim",
     config = function()
       require("plugins/formatter")
     end,
   },
-  {
-    "mfussenegger/nvim-lint",
-    config = function()
-      require("lint").linters_by_ft = {
-        ruby =            { "rubocop" },
-        go =              { "golangcilint" },
-        typescript =      { "eslint" },
-        typescriptreact = { "eslint" },
-        javascript =      { "eslint" },
-        javascriptreact = { "eslint" },
-        css =             { "stylelint" },
-        scss =            { "stylelint" },
-      }
+ {
+   "mfussenegger/nvim-lint",
+   config = function()
+     -- bundle exec rubocop の設定
+     require("lint").linters.bundle_rubocop = {
+       cmd = "bundle",
+       stdin = true,
+       args = { "exec", "rubocop", "--format",  '{source}:{line}:{col}:{severity}:{rule_id}:{desc}'},
+       stream = 'stdout',
+       ignore_exitcode = true,
+       parser = require('lint.parser').from_errorformat('%f:%l:%c:%t:%n:%m', {
+         source = 'robocop',
+       }),
+     }
 
-      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-        callback = function()
-          require("lint").try_lint()
-        end,
-      })
-    end,
-  },
+     require("lint").linters_by_ft = {
+       ruby =            { "bundle_rubocop" },
+       go =              { "golangcilint" },
+       typescript =      { "eslint" },
+       typescriptreact = { "eslint" },
+       javascript =      { "eslint" },
+       javascriptreact = { "eslint" },
+       css =             { "stylelint" },
+       scss =            { "stylelint" },
+     }
+
+     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+       callback = function()
+         require("lint").try_lint()
+       end,
+     })
+   end,
+ },
 
   -- completion
   { 'hrsh7th/nvim-cmp' },
