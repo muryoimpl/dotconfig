@@ -39,6 +39,9 @@ require("lazy").setup({
       require('plugins/lualine')
     end,
   },
+  {
+    'nvim-tree/nvim-web-devicons',
+  },
 
   -- filer
   -- lsp
