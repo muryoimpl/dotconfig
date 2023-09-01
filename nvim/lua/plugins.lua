@@ -39,41 +39,8 @@ require("lazy").setup({
       require('plugins/lualine')
     end,
   },
-  {
-    'akinsho/bufferline.nvim',
-    version = "*",
-    dependencies = 'nvim-tree/nvim-web-devicons',
-    config = function()
-      require("plugins/bufferline")
-    end
-  },
 
   -- filer
-  {
-    'luukvbaal/nnn.nvim' ,
-    lazy = true,
-    keys = { "<space>n", "<space>p" },
-    config = function()
-      -- nnn.nvim
-      local builtin = require("nnn").builtin
-      require("nnn").setup({
-        mappings = {
-          { "<C-s>", builtin.open_in_split },     -- open file(s) in split
-          { "<C-v>", builtin.open_in_vsplit },    -- open file(s) in vertical split
-          { "<C-p>", builtin.open_in_preview },   -- open file in preview split keeping nnn focused
-          { "<C-w>", builtin.cd_to_path },        -- cd to file directory
-        },
-        auto_close = true,
-      })
-      vim.keymap.set("n", "<space>n", "<cmd>NnnExplorer<cr>",
-        { silent = true, noremap = true }
-      )
-      vim.keymap.set("n", "<space>p", "<cmd>NnnPicker<cr>",
-        { silent = true, noremap = true }
-      )
-    end,
-  },
-
   -- lsp
   { 'arkav/lualine-lsp-progress' },
   { 'williamboman/mason.nvim' },
@@ -104,45 +71,10 @@ require("lazy").setup({
     end
   },
   {
-    "mhartington/formatter.nvim",
-    config = function()
-      require("plugins/formatter")
-    end,
+    'creativenull/efmls-configs-nvim',
+    version = 'v1.x.x', -- version is optional, but recommended
+    dependencies = { 'neovim/nvim-lspconfig' },
   },
- {
-   "mfussenegger/nvim-lint",
-   config = function()
-     -- bundle exec rubocop の設定
-     require("lint").linters.bundle_rubocop = {
-       cmd = "bundle",
-       stdin = true,
-       args = { "exec", "rubocop", "--format",  '{source}:{line}:{col}:{severity}:{rule_id}:{desc}'},
-       stream = 'stdout',
-       ignore_exitcode = true,
-       parser = require('lint.parser').from_errorformat('%f:%l:%c:%t:%n:%m', {
-         source = 'robocop',
-       }),
-     }
-
-     require("lint").linters_by_ft = {
-       ruby =            { "bundle_rubocop" },
-       go =              { "golangcilint" },
-       typescript =      { "eslint" },
-       typescriptreact = { "eslint" },
-       javascript =      { "eslint" },
-       javascriptreact = { "eslint" },
-       css =             { "stylelint" },
-       scss =            { "stylelint" },
-     }
-
-     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-       callback = function()
-         require("lint").try_lint()
-       end,
-     })
-   end,
- },
-
   -- completion
   { 'hrsh7th/nvim-cmp' },
   { 'hrsh7th/cmp-vsnip' },
@@ -165,13 +97,6 @@ require("lazy").setup({
   },
 
   -- function list
-  {
-    'stevearc/aerial.nvim',
-    keys = { "<space>a" },
-    config = function()
-      require('plugins/aerial')
-    end,
-  },
   { 'onsails/lspkind-nvim' },
 
   -- color
@@ -179,17 +104,6 @@ require("lazy").setup({
     'NvChad/nvim-colorizer.lua',
     config = function()
       require 'colorizer'.setup()
-    end,
-  },
-  {
-    't9md/vim-quickhl',
-    config = function()
-      vim.cmd([[
-      nmap <Space>m <Plug>(quickhl-manual-this)
-      xmap <Space>m <Plug>(quickhl-manual-this)
-      nmap <Space>M <Plug>(quickhl-manual-reset)
-      xmap <Space>M <Plug>(quickhl-manual-reset)
-      ]])
     end,
   },
   {
@@ -404,4 +318,4 @@ vim.cmd([[
   endfor
 ]])
 
-require('plugins/lsp')
+require('plugins.lsp')
