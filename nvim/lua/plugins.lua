@@ -319,3 +319,4 @@ vim.cmd([[
 ]])
 
 require('plugins.lsp')
+require('plugins.efm')
