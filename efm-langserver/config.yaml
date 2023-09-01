@@ -1,0 +1,119 @@
+---
+version: 2
+root-markers:
+  - .git/
+lint-debounce: 1s
+commands:
+  - command: nvim
+    arguments:
+      - ${INPUT}
+    title: neovim
+
+log-file: ~/.config/efm-langserver/output.log
+log-level: 1
+
+tools:
+  css-prettier: &css-prettier
+    format-command: 'npx prettier --parser css'
+    root-markers:
+      - package.json
+
+  scss-prettier: &css-prettier
+    format-command: 'npx prettier --parser scss'
+    root-markers:
+      - package.json
+
+  style-lint: &style-lint
+    lint-command: 'npx stylelint --no-color --formatter verbose --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%.%#: line %l col %c, %trror - %m"
+      - "%.%#: line %l, col %c, %tarning - %m"
+    root-markers:
+      - .stylelintrc
+      - package.json
+
+  eslint-lint: &eslint-lint
+    lint-command: 'npx eslint --stdin --stdin-filename ${INPUT}'
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%f(%l,%c): %tarning %m"
+      - "%f(%l,%c): %rror %m"
+    root-markers:
+      - .prettierrc
+      - package.json
+
+  eslint-format: &eslint-format
+    format-command: 'npx eslint --fix ${INPUT}'
+    format-stdin: false
+    root-markers:
+      - package.json
+      - .eslintrc
+
+  javascript-prettier: &javascript-prettier
+    format-command: 'npx prettier ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - .prettierrc
+      - package.json
+
+  json-jq: &json-jq
+    lint-command: "jq ."
+
+  rubocop-lint: &rubocop-lint
+    prefix: rubocop
+    lint-ignore-exit-code: true
+    lint-stdin: true
+    lint-formats:
+      - "%f:%l:%c: %t: %m"
+    lint-command: 'bundle exec rubocop --stdin ${INPUT}'
+    root-markers:
+      - Gemfile
+      - ".rubocop.yml"
+
+  rubocop-format: &rubocop-format
+    prefix: rubocop
+    format-command: 'bundle exec rubocop -a -f quiet --stderr --stdin ${INPUT}'
+    format-stdin: true
+    root-markers:
+      - Gemfile
+      - ".rubocop.yml"
+
+  go-golangci-lint: &go-golangci-lint
+    lint-command: 'golangci-lint run --color never --out-format tab ${INPUT}'
+    lint-formats:
+      - "%.%#:%l:%c %m"
+
+  go-goipmorts: &go-goimpots
+    format-command: 'goimports'
+    format-stdin: true
+    root-markers:
+      - go.mod
+      - go.sum
+
+
+languages:
+  css:
+    - <<: *css-prettier
+    - <<: *style-lint
+  scss:
+    - <<: *scss-prettier
+    - <<: *style-lint
+  json:
+    - <<: *json-jq
+  javascript:
+    - <<: *eslint-lint
+    - <<: *eslint-format
+    - <<: *javascript-prettier
+  typescript:
+    - <<: *eslint-lint
+    - <<: *eslint-format
+    - <<: *javascript-prettier
+  go:
+    - <<: *go-golangci-lint
+    - <<: *go-goimports
+  ruby:
+    - <<: *rubocop-lint
+    - <<: *rubocop-format
