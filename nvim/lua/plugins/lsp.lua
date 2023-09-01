@@ -116,7 +116,16 @@ vim.diagnostic.config({
   virtual_text = false,
 })
 
--- vim.cmd [[ autocmd BufWritePre <buffer> lua vim.lsp.buf.format({ timeout_ms = 2000 }) ]]
+-- LSP format
+vim.api.nvim_create_autocmd(
+{
+  'BufWritePre',
+}, {
+  pattern = '*',
+  callback = function()
+    vim.lsp.buf.format({ timeout_ms = 2000 })
+  end,
+})
 
 vim.cmd [[
   highlight! DiagnosticLineNrError guibg=#51202A guifg=#FF0000 gui=bold
