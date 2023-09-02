@@ -9,7 +9,7 @@ commands:
       - ${INPUT}
     title: neovim
 
-log-file: ~/.config/efm-langserver/output.log
+log-file: ./output.log
 log-level: 1
 
 tools:
@@ -18,7 +18,7 @@ tools:
     root-markers:
       - package.json
 
-  scss-prettier: &css-prettier
+  scss-prettier: &scss-prettier
     format-command: 'npx prettier --parser scss'
     root-markers:
       - package.json
@@ -86,7 +86,7 @@ tools:
     lint-formats:
       - "%.%#:%l:%c %m"
 
-  go-goipmorts: &go-goimpots
+  go-goipmorts: &go-goimports
     format-command: 'goimports'
     format-stdin: true
     root-markers:
