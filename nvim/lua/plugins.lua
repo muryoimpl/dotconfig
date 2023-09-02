@@ -42,6 +42,19 @@ require("lazy").setup({
   {
     'nvim-tree/nvim-web-devicons',
   },
+  {
+    'tomiis4/BufferTabs.nvim',
+    dependencies = { 'kyazdani42/nvim-web-devicons' },
+    config = function()
+      require("buffertabs").setup({
+        border = 'single',
+        padding = 0,
+        display = 'column',
+        horizontal = 'right',
+        vertical = 'bottom',
+      })
+    end,
+  },
 
   -- filer
   -- lsp
