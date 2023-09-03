@@ -21,16 +21,13 @@ require("lazy").setup({
   { 'vim-test/vim-test' },
   { 'soramugi/auto-ctags.vim' },
   {
-    'Yggdroot/indentLine',
+    'lukas-reineke/indent-blankline.nvim',
     config = function()
-      -- indent
-      vim.cmd([[
-        " https://github.com/Yggdroot/indentLine#customization
-        let g:indentLine_enabled = 1
-        let g:indentLine_color_term = 239
-        let g:indentLine_char_list = ['|']
-        let g:indentLine_fileTypeExclude = ['markdown']
-      ]])
+      require("indent_blankline").setup({
+        -- space_char_blankline = " ",
+        show_current_context = true,
+        show_current_context_start = true,
+      })
     end,
   },
   {
