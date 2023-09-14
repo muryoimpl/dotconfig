@@ -62,7 +62,7 @@ require("lazy").setup({
     "folke/trouble.nvim",
     config = function()
       require("trouble").setup({
-        auto_open = true,
+        auto_open = false,
         auto_close = true,
         use_diagnostic_signs = true,
       })
