@@ -69,7 +69,6 @@ local lsp_name_opts = {
 }
 local diagnostics_opts = {
   'diagnostics',
-  sources = { 'ale', },
   sections = { 'error', 'warn', 'info' },
   symbols = { error = ' ', warn = ' ', info = ' ' },
   diagnostics_color = {
