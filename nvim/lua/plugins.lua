@@ -18,7 +18,21 @@ require("lazy").setup({
 
   -- util
   { "nvim-lua/plenary.nvim" },
-  { 'vim-test/vim-test' },
+  {
+    "klen/nvim-test",
+    config = function()
+      require("nvim-test").setup({
+      })
+
+      -- vim-test のキーマッピングを継承する
+      local t_opts = { noremap = true, silent = true }
+      vim.api.nvim_set_keymap('n', 't<C-n>', "<cmd>:TestNearest", t_opts);
+      vim.api.nvim_set_keymap('n', 't<C-f>', "<cmd>:TestFile",    t_opts);
+      vim.api.nvim_set_keymap('n', 't<C-s>', "<cmd>:TestSuite",   t_opts);
+      vim.api.nvim_set_keymap('n', 't<C-l>', "<cmd>:TestLast",    t_opts);
+      vim.api.nvim_set_keymap('n', 't<C-g>', "<cmd>:TestVisit",   t_opts);
+    end
+  },
   { 'soramugi/auto-ctags.vim' },
   {
     'lukas-reineke/indent-blankline.nvim',
@@ -62,7 +76,7 @@ require("lazy").setup({
     "folke/trouble.nvim",
     config = function()
       require("trouble").setup({
-        auto_open = false,
+        auto_open = true,
         auto_close = true,
         use_diagnostic_signs = true,
       })
@@ -323,7 +337,6 @@ require("lazy").setup({
 vim.cmd([[
   let files = [
   \  "tags.vim",
-  \  "vim-test.vim",
   \]
 
   for f in files
