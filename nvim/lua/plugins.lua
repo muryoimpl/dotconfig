@@ -65,8 +65,25 @@ require("lazy").setup({
       })
     end,
   },
+  {
+    "sontungexpt/stcursorword",
+    event = "VeryLazy",
+    config = function()
+      require("stcursorword").setup({
+        excluded = {
+          buftypes = {
+            "terminal",
+          },
+        },
+        highlight = {
+          underline = true,
+          fg = "#ffffff",
+          bg = "#8A2BE2",
+        },
+      })
+    end,
+  },
 
-  -- filer
   -- lsp
   { 'arkav/lualine-lsp-progress' },
   { 'williamboman/mason.nvim' },
