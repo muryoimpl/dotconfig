@@ -89,7 +89,7 @@ local on_attach = function(client, bufnr)
   vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
   -- print(client.name)
-  local lspopts = { noremap = true, silent = true, buffer = ev.buf }
+  local lspopts = { noremap = true, bufnr = bufnr }
   vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', lspopts)
   vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', lspopts)
   vim.keymap.set('n', 'K',  '<cmd>lua vim.lsp.buf.hover()<CR>', lspopts)
