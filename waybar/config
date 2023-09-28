@@ -70,7 +70,7 @@
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{icon} {temperatureC}°C",
+        "format": "M.2: {icon} {temperatureC}°C",
         "format-icons": ["🆒", "🌡️", "🥵"]
     },
     "network": {
@@ -118,7 +118,7 @@
     "position": "top",
     "height": 20,
     "spacing": 1,
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "tray", "keyboard-state"],
+    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "tray"],
     "modules-center": ["sway/window"],
     "modules-right": ["cpu", "memory", "disk", "temperature", "clock"],
     "sway/workspaces": {
@@ -176,7 +176,7 @@
         "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{icon} {temperatureC}°C",
+        "format": "M.2: {icon} {temperatureC}°C",
         "format-icons": ["🆒", "🌡️", "🥵"]
     },
     "network": {
@@ -256,7 +256,7 @@
         "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{icon} {temperatureC}°C",
+        "format": "M.2: {icon} {temperatureC}°C",
         "format-icons": ["🆒", "🌡️", "🥵"]
     },
     "network": {
