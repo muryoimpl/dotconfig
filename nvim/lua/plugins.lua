@@ -36,10 +36,18 @@ require("lazy").setup({
   { 'soramugi/auto-ctags.vim' },
   {
     'lukas-reineke/indent-blankline.nvim',
+    main = "ibl",
+    opts = {},
     config = function()
-      require("indent_blankline").setup({
-        show_current_context = true,
-        show_current_context_start = false,
+      require("ibl").setup({
+        indent = {
+          char = "│",
+        },
+        scope = {
+          enabled = true,
+          highlight = { "DiffAdd" },
+          show_start = false,
+        },
       })
     end,
   },
