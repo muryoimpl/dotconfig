@@ -22,15 +22,19 @@ require("lazy").setup({
     "klen/nvim-test",
     config = function()
       require("nvim-test").setup({
+        termOpts = {
+          direction = "horizontal",
+          stopinsert = true,
+        },
       })
 
       -- vim-test のキーマッピングを継承する
       local t_opts = { noremap = true, silent = true }
-      vim.api.nvim_set_keymap('n', 't<C-n>', "<cmd>:TestNearest", t_opts);
-      vim.api.nvim_set_keymap('n', 't<C-f>', "<cmd>:TestFile",    t_opts);
-      vim.api.nvim_set_keymap('n', 't<C-s>', "<cmd>:TestSuite",   t_opts);
-      vim.api.nvim_set_keymap('n', 't<C-l>', "<cmd>:TestLast",    t_opts);
-      vim.api.nvim_set_keymap('n', 't<C-g>', "<cmd>:TestVisit",   t_opts);
+      vim.api.nvim_set_keymap('n', 't<C-n>', "<cmd>:TestNearest<CR>", t_opts);
+      vim.api.nvim_set_keymap('n', 't<C-f>', "<cmd>:TestFile<CR>",    t_opts);
+      vim.api.nvim_set_keymap('n', 't<C-s>', "<cmd>:TestSuite<CR>",   t_opts);
+      vim.api.nvim_set_keymap('n', 't<C-l>', "<cmd>:TestLast<CR>",    t_opts);
+      vim.api.nvim_set_keymap('n', 't<C-g>', "<cmd>:TestVisit<CR>",   t_opts);
     end
   },
   { 'soramugi/auto-ctags.vim' },
