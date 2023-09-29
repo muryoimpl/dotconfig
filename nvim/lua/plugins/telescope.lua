@@ -41,7 +41,6 @@ telescope.setup({
   },
   pickers = {
     find_files                = { theme = "ivy", prompt_prefix="🔍 ",  },
-    buffers                   = { theme = "ivy", prompt_prefix="🔍 ",  },
     live_grep                 = { theme = "ivy", prompt_prefix="🔍 ",  },
     grep_string               = { theme = "ivy", prompt_prefix="🔍 ",  },
     lsp_references            = { theme = "ivy", prompt_prefix="🔍 ",  },
@@ -53,6 +52,18 @@ telescope.setup({
     quickfix                  = { theme = "ivy", prompt_prefix="🔍 ",  },
     loclist                   = { theme = "ivy", prompt_prefix="🔍 ",  },
     autocommands              = { theme = "ivy", prompt_prefix="🔍 ",  },
+    buffers                   = {
+      theme = "ivy",
+      prompt_prefix="🔍 ",
+      mappings = {
+        i = {
+          ["<C-d>"] = actions.delete_buffer,
+        },
+        n = {
+          ["<C-d>"] = actions.delete_buffer,
+        },
+      },
+    },
   },
   extensions = {
     file_browser = {
