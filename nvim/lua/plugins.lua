@@ -131,25 +131,14 @@ require("lazy").setup({
     dependencies = { 'neovim/nvim-lspconfig' },
   },
   -- completion
-  { 'hrsh7th/nvim-cmp' },
   { 'hrsh7th/cmp-vsnip' },
   { 'hrsh7th/vim-vsnip' },
+  { 'hrsh7th/vim-vsnip-integ' },
   { 'hrsh7th/cmp-nvim-lsp' },
   { 'hrsh7th/cmp-buffer' },
-  {
-    'hrsh7th/cmp-cmdline',
-    config = function()
-      -- cmp-cmdline
-      local cmp = require('cmp')
-      cmp.setup.cmdline(':', {
-        mapping = cmp.mapping.preset.cmdline(),
-
-        sources = {
-          { name = 'cmdline' }
-        }
-      })
-    end,
-  },
+  { 'hrsh7th/cmp-cmdline' },
+  { 'hrsh7th/cmp-path' },
+  { 'hrsh7th/nvim-cmp' },
 
   -- function list
   { 'onsails/lspkind-nvim' },
@@ -375,3 +364,4 @@ vim.cmd([[
 
 require('plugins.lsp')
 require('plugins.efm')
+require('plugins.cmp')

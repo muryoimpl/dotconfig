@@ -1,0 +1,48 @@
+{
+  "useState": {
+    "prefix": "useS",
+    "body": [
+      "const [${1}, set${1}] = useState($0)"
+    ],
+    "description": "useState"
+  },
+  "useEffect": {
+    "prefix": "useE",
+    "body": [
+      "useEffect(() => {",
+      "\t$0",
+      "}, [])"
+    ],
+    "description": "useEffect"
+  },
+  "useContext": {
+    "prefix": "useC",
+    "body": [
+      "const ${1} = useContext(${0})"
+    ],
+    "description": "useContext"
+  },
+  "useCallback": {
+    "prefix": "useCB",
+    "body": [
+      "const ${1} = useCallback(() => {",
+      "\t$0",
+      "}, [])"
+    ],
+    "description": "useCallback"
+  },
+  "functionComponent": {
+    "prefix": "sfce",
+    "body": [
+      "import type { ReactElement } from \"react\"\n",
+      "export function ${1}({  }:Props): ReactElement {",
+      "\treturn (",
+      "\t\t<>",
+      "\t\t\t$0",
+      "\t\t</>",
+      "\t)",
+      "}"
+    ],
+    "description": "Function Component Export"
+  }
+}

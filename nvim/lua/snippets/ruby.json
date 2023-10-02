@@ -1,0 +1,64 @@
+{
+  "rubydef": {
+    "prefix": "def",
+    "body": [
+      "def ${1}",
+      "\t$0",
+      "end"
+    ],
+    "description": "Ruby's def"
+  },
+  "rubyclass": {
+    "prefix": "class",
+    "body": [
+      "class ${1}",
+      "\t$0",
+      "end"
+    ],
+    "description": "Ruby's class"
+  },
+  "RSpec.describe": {
+    "prefix": "rspec",
+    "body": [
+      "require \"rails_helper\"\n",
+      "describe \"${1}\", type: ${2} do",
+      "\t$0",
+      "end"
+    ],
+    "description": "RSpec describe"
+  },
+  "RSpec describe": {
+    "prefix": "describespec",
+    "body": [
+      "describe \"${1}\" do",
+      "\t$0",
+      "end"
+    ],
+    "description": "RSpec describe"
+  },
+  "RSpec context": {
+    "prefix": "contextspec",
+    "body": [
+      "context \"${1}\" do",
+      "\t$0",
+      "end"
+    ],
+    "description": "RSpec context"
+  },
+  "RSpec let!": {
+    "prefix": "let!",
+    "body": [
+      "let!(:${1}) do",
+      "\t$0",
+      "end"
+    ],
+    "description": "RSpec let!"
+  },
+  "RSpec let! do": {
+    "prefix": "let!",
+    "body": [
+      "let!(:${1}) { $0 }"
+    ],
+    "description": "RSpec let! do"
+  }
+}
