@@ -1,0 +1,164 @@
+{
+  "import": {
+    "prefix": "im",
+    "body": [
+      "import \"${1:package}"
+    ],
+    "description": "import"
+  },
+  "multiple import": {
+    "prefix": "ims",
+    "body": [
+      "import (\n",
+      "\t${1:package}",
+      ")"
+    ],
+    "description": "multiple import"
+  },
+  "single constant": {
+    "prefix": "co",
+    "body": [
+      "const ${1:name} = ${2:value}"
+    ],
+    "description": "single constant"
+  },
+  "type function declaration": {
+    "prefix": "tyf",
+    "body": [
+      "type ${1:name} func($3) $4"
+    ],
+    "description": "type function declaration"
+  },
+  "type struct declaration": {
+    "prefix": "tys",
+    "body": [
+      "type ${1:name} struct {",
+      "\t$0",
+      "}"
+    ],
+    "description": "type struct declaration"
+  },
+  "package main": {
+    "prefix": "pacmain",
+    "body": [
+      "package main\n",
+      "func main() {",
+      "\t$0",
+      "}"
+    ],
+    "description": "package main"
+  },
+  "function declaration": {
+    "prefix": "function",
+    "body": [
+      "func $1($2) $3 {",
+      "\t$0",
+      "}"
+    ],
+    "description": "function declaration"
+  },
+  "single var": {
+    "prefix": "var",
+    "body": [
+      "var ${1:name} ${2:type}"
+    ],
+    "description": "single var"
+  },
+  "multiple vars": {
+    "prefix": "vars",
+    "body": [
+      "var (",
+      "\t${1:name} ${2:type}",
+      ")"
+    ],
+    "description": "multiple vars"
+  },
+  "switch statement": {
+    "prefix": "switch",
+    "body": [
+      "switch ${1:exp} {",
+      "case ${2:condition}:",
+      "\t$0",
+      "}"
+    ],
+    "description": "switch statement"
+  },
+  "select statement": {
+    "prefix": "select",
+    "body": [
+      "select {",
+      "case ${1:condition}:",
+      "\t$0",
+      "}"
+    ],
+    "description": "select statement"
+  },
+  "for statement": {
+    "prefix": "for",
+    "body": [
+      "for ${1:i} := ${2:0}; $1 < ${3:count}; $1${4:++} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "for statement"
+  },
+  "for range statement": {
+    "prefix": "forrange",
+    "body": [
+      "for ${1:_, }${2:v} := range ${3:v} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "for range statement"
+  },
+  "defer func": {
+    "prefix": "df",
+    "body": [
+      "defer func() {",
+      "\t$0",
+      "}()"
+    ],
+    "description": "defer function"
+  },
+  "channel declaration": {
+    "prefix": "chan",
+    "body": [
+      "chan ${1:type}"
+    ],
+    "description": "channel declaration"
+  },
+  "map declaration": {
+    "prefix": "map",
+    "body": [
+      "map[${1:type}]${2:type}"
+    ],
+    "description": "map declaration"
+  },
+  "if statement": {
+    "prefix": "if",
+    "body": [
+      "if ${1:condition} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "if statement"
+  },
+  "if err statement": {
+    "prefix": "iferr",
+    "body": [
+      "if err != nil {",
+	    "\t${1:return ${2:nil, }${3:err}}",
+      "}"
+    ],
+    "description": "if err statement"
+  },
+  "goroutine anonymous function": {
+    "prefix": "go",
+    "body": [
+      "go func($1) {",
+	    "\t$0",
+      "}($2)"
+    ],
+    "description": "goroutine anonymous function"
+  }
+}
