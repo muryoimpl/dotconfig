@@ -72,6 +72,6 @@ vim.g.vsnip_snippet_dirs = {
   vim.fn.expand('~/.config/nvim/lua/snippets'),
 }
 vim.g.vsnip_filetypes = {
-  javascriptreact = { "javascript" },
+  javascriptreact = { "javascript", "typescript" },
   typescriptreact = { "typescript" },
 }
