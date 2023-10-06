@@ -55,15 +55,8 @@ require("lazy").setup({
       })
     end,
   },
-  {
-    'nvim-lualine/lualine.nvim',
-    config = function()
-      require('plugins/lualine')
-    end,
-  },
-  {
-    'nvim-tree/nvim-web-devicons',
-  },
+  { 'nvim-lualine/lualine.nvim' },
+  { 'nvim-tree/nvim-web-devicons' },
   {
     'tomiis4/BufferTabs.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' },
@@ -328,9 +321,6 @@ require("lazy").setup({
   {
     'nvim-telescope/telescope.nvim', tag = '0.1.2',
     dependencies = { {'nvim-lua/plenary.nvim'} },
-    config = function()
-      require("plugins/telescope")
-    end,
   },
 },
 {
@@ -362,6 +352,8 @@ vim.cmd([[
   endfor
 ]])
 
+require('plugins.lualine')
+require('plugins.telescope')
 require('plugins.lsp')
 require('plugins.efm')
 require('plugins.cmp')
