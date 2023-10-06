@@ -58,17 +58,6 @@ vim.diagnostic.config({
   underline = true,
 })
 
--- LSP format
-vim.api.nvim_create_autocmd(
-{
-  'BufWritePre',
-}, {
-  pattern = '*',
-  callback = function()
-    vim.lsp.buf.format({ timeout_ms = 2000, async = true })
-  end,
-})
-
 vim.cmd [[
   highlight! DiagnosticLineNrError guibg=#51202A guifg=#FF0000 gui=bold
   highlight! DiagnosticLineNrWarn guibg=#51412A guifg=#FFA500 gui=bold
