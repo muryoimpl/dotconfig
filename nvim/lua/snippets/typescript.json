@@ -44,5 +44,44 @@
       "}"
     ],
     "description": "Function Component Export"
+  },
+  "export const": {
+    "prefix": "exportcon",
+    "body": [
+      "export const ${1:name}:${2:type} = ${2};"
+    ],
+    "description": "export const"
+  },
+  "export function": {
+    "prefix": "exportfunc",
+    "body": [
+      "export function ${1:func}({  }:${2:type}): ${3:retType} {",
+      "\t$0",
+      "}"
+    ],
+    "description": "export function"
+  },
+  "zod object": {
+    "prefix": "zodobj",
+    "body": [
+      "const ${1:name} = z.object({",
+      "\t$0",
+      "});"
+    ],
+    "description": "zod object"
+  },
+  "zod infer": {
+    "prefix": "zodinfer",
+    "body": [
+      "type ${1:name} = z.infer<typeof ${2:typeName}>;"
+    ],
+    "description": "zod infer"
+  },
+  "export default": {
+    "prefix": "exportdefault",
+    "body": [
+      "export default ${1:name}"
+    ],
+    "description": "export default"
   }
 }
