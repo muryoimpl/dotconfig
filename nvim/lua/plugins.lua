@@ -119,6 +119,25 @@ require("lazy").setup({
     end
   },
   {
+    "lewis6991/hover.nvim",
+    config = function()
+      require("hover").setup({
+        init = function()
+          require("hover.providers.lsp")
+        end,
+        preview_opts = {
+          border = nil,
+        },
+        preview_window = false,
+        title = true,
+      })
+
+      -- Setup keymaps
+      vim.keymap.set("n", "K", require("hover").hover, {desc = "hover.nvim"})
+      vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "hover.nvim (select)"})
+    end
+  },
+  {
     'creativenull/efmls-configs-nvim',
     version = 'v1.x.x', -- version is optional, but recommended
     dependencies = { 'neovim/nvim-lspconfig' },
