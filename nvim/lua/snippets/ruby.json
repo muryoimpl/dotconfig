@@ -8,6 +8,16 @@
     ],
     "description": "Ruby's def"
   },
+  "privatedef": {
+    "prefix": "privatedef",
+    "body": [
+      "private\n",
+      "def ${1:method}",
+      "\t$0",
+      "end"
+    ],
+    "description": "private def"
+  },
   "rubyclass": {
     "prefix": "class",
     "body": [
@@ -16,6 +26,29 @@
       "end"
     ],
     "description": "Ruby's class"
+  },
+  "rubymodule": {
+    "prefix": "module",
+    "body": [
+      "class ${1}",
+      "\t$0",
+      "end"
+    ],
+    "description": "Ruby's module"
+  },
+  "oneline scope": {
+    "prefix": "scope",
+    "body": [
+      "scope :${1:name}, -> { ${2:query} }"
+    ],
+    "description": "oneline scope"
+  },
+  "oneline scope with args": {
+    "prefix": "scopearg",
+    "body": [
+      "scope :${1:name}, ->(${2:arg}) { $0 }"
+    ],
+    "description": "oneline scope with arg"
   },
   "RSpec.describe": {
     "prefix": "rspec",
