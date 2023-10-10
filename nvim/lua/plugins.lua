@@ -22,6 +22,7 @@ require("lazy").setup({
     "klen/nvim-test",
     config = function()
       require("nvim-test").setup({
+        silent = true,
         termOpts = {
           direction = "horizontal",
           stopinsert = true,
