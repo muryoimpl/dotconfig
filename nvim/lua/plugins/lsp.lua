@@ -70,36 +70,6 @@ vim.cmd [[
   sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticLineNrHint
 ]]
 
--- comp
-vim.opt.completeopt = 'menu,menuone,noselect'
-local cmp = require('cmp')
-
-cmp.setup({
-  formatting = {
-    format = require('lspkind').cmp_format(),
-  },
-  snippet = {
-    expand = function(args)
-      vim.fn["vsnip#anonymous"](args.body)
-    end,
-  },
-  window = {
-  },
-  mapping = cmp.mapping.preset.insert({
-    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-y>'] = cmp.mapping.complete(),
-    ['<C-e>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }),
-  }),
-  sources = cmp.config.sources({
-    { name = 'nvim_lsp' },
-    { name = 'vsnip' },
-  }, {
-    { name = 'buffer' },
-  })
-})
-
 -- Show sign
 -- アイコンはここから選んだ https://www.nerdfonts.com/cheat-sheet
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
