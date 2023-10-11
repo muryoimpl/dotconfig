@@ -109,13 +109,12 @@ cmp.setup({
     },
   },
   sources = cmp.config.sources({
-    { name = "nvim_lsp" },
-    { name = "vsnip" },
-    { name = "copilot" },
+    { name = "copilot", group_index = 2 },
+    { name = "nvim_lsp", group_index = 2 },
+    { name = "vsnip", group_index = 2 },
+    { name = "buffer", group_index = 2 },
   },
-  {
-    { name = "buffer" },
-  }),
+  {}),
 })
 
 -- cmdline & path source
