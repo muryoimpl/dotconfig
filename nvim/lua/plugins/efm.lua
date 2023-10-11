@@ -15,13 +15,6 @@ local stylelint_fmt = {
   formatCommand = 'stylelint --fix --stdin --stdin-filename ${INPUT}',
   formatStdin = true,
 }
-local ruby_lsp = {
-  lintCommand = 'ruby-lsp',
-  rootMarkers = {
-    "Gemfile",
-    ".rubocop.yml"
-  },
-}
 local rubocop_formatter = {
   formatCommand = 'bundle exec rubocop -a -f quiet --stderr --stdin ${INPUT}',
   formatStdin = true,
@@ -62,7 +55,6 @@ local languages = {
   },
   ruby = {
     rubocop,
-    ruby_lsp,
     rubocop_formatter,
   },
 }
