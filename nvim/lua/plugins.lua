@@ -279,33 +279,21 @@ require("lazy").setup({
   -- conding
   { 'ii14/neorepl.nvim' },
   {
-    'github/copilot.vim',
+    "zbirenbaum/copilot.lua",
+    cmd = { "Copilot" },
+    event = { "InsertEnter", "LspAttach" },
     config = function()
-      -- github/copilit
-      vim.cmd([[
-      " nodenv の指定: https://rcmdnk.com/blog/2022/09/28/computer-vim/
-      function! CheckNodeForCopilot(nodev)
-        let l:nodev = split(a:nodev, '\.')[0]
-        if stridx(l:nodev, 'v') == 0
-          let l:nodev = nodev[1:]
-        endif
-        return l:nodev > 11 && l:nodev < 21
-      endfunction
-
-      let s:nodev = system('node --version')
-      if !CheckNodeForCopilot(s:nodev)
-        let s:nodev = system('nodenv whence node|sort -n|tail -n1|tr -d "\n"')
-        if CheckNodeForCopilot(s:nodev)
-          let g:copilot_node_command = "~/.nodenv/versions/" . s:nodev . "/bin/node"
-        endif
-      endif
-
-      " copilot の候補を表示する
-      imap <silent> <M-n> <Plug>(copilot-next)
-      imap <silent> <M-p> <Plug>(copilot-previous)
-      imap <silent> <S-Tab> <Plug>(copilot-dismiss)
-      ]])
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = false },
+      })
     end,
+  },
+  {
+    "zbirenbaum/copilot-cmp",
+    config = function ()
+      require("copilot_cmp").setup()
+    end
   },
   {
     "jackMort/ChatGPT.nvim",
