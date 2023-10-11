@@ -10,32 +10,62 @@ end
 
 -- comp
 vim.opt.completeopt = 'menu,menuone,noselect'
+local kind_icons = {
+  Text = "",
+  Method = "󰆧",
+  Function = "󰊕",
+  Constructor = "",
+  Field = "󰇽",
+  Variable = "󰂡",
+  Class = "󰠱",
+  Interface = "",
+  Module = "",
+  Property = "󰜢",
+  Unit = "",
+  Value = "󰎠",
+  Enum = "",
+  Keyword = "󰌋",
+  Snippet = "",
+  Color = "󰏘",
+  File = "󰈙",
+  Reference = "",
+  Folder = "󰉋",
+  EnumMember = "",
+  Constant = "󰏿",
+  Struct = "",
+  Event = "",
+  Operator = "󰆕",
+  TypeParameter = "󰅲",
+  Copilot = "",
+}
 local cmp = require('cmp')
 cmp.setup({
   formatting = {
     fields = { "kind", "abbr", "menu" },
     format = function(entry, vim_item)
-      local lspkind = require('lspkind')
-
       vim_item.menu = ({
         buffer = "[Buffer]",
         nvim_lsp = "[LSP]",
         vsnip = "[VSnip]",
       })[entry.source.name]
 
-      if vim.tbl_contains({ 'path' }, entry.source.name) then
-        local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
-        if icon then
-          vim_item.kind = icon
-          vim_item.kind_hl_group = hl_group
-          return vim_item
-        end
-      end
-
-      return lspkind.cmp_format({
-        mode = "symbol",
-        symbol_map = { Copilot = "" },
-      })(entry, vim_item)
+      vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind)
+      return vim_item
+--    nvim-web-devicons 使うならこちら
+--     if vim.tbl_contains({ 'path' }, entry.source.name) then
+--       local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+--       if icon then
+--         vim_item.kind = icon
+--         vim_item.kind_hl_group = hl_group
+--         return vim_item
+--       end
+--     end
+--
+--     local lspkind = require('lspkind')
+--     return lspkind.cmp_format({
+--       mode = "symbol",
+--       symbol_map = { Copilot = "" },
+--     })(entry, vim_item)
     end
   },
   snippet = {
@@ -59,7 +89,6 @@ cmp.setup({
         fallback()
       end
     end),
-    ['<S-Tab>'] = nil,
   }),
   sorting = {
     priority_weight = 2,
