@@ -138,11 +138,18 @@ require("lazy").setup({
       vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "hover.nvim (select)"})
     end
   },
+-- { -- 使う際は Mason から efm を再インストールすること
+--   'creativenull/efmls-configs-nvim',
+--   version = 'v1.x.x', -- version is optional, but recommended
+--   dependencies = { 'neovim/nvim-lspconfig' },
+-- },
   {
-    'creativenull/efmls-configs-nvim',
-    version = 'v1.x.x', -- version is optional, but recommended
-    dependencies = { 'neovim/nvim-lspconfig' },
+    'nvimtools/none-ls.nvim',
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+    },
   },
+
   -- completion
   { 'hrsh7th/cmp-vsnip' },
   { 'hrsh7th/vim-vsnip' },
@@ -363,5 +370,6 @@ vim.cmd([[
 require('plugins.lualine')
 require('plugins.telescope')
 require('plugins.lsp')
-require('plugins.efm')
+--require('plugins.efm')
+require('plugins.null_ls')
 require('plugins.cmp')
