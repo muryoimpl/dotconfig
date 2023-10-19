@@ -90,6 +90,15 @@ require("lazy").setup({
       })
     end,
   },
+  {
+    'stevearc/aerial.nvim',
+    opts = {},
+    -- Optional dependencies
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-tree/nvim-web-devicons"
+    },
+  },
 
   -- lsp
   { 'arkav/lualine-lsp-progress' },
@@ -375,3 +384,4 @@ require('plugins.lsp')
 --require('plugins.efm')
 require('plugins.null_ls')
 require('plugins.cmp')
+require('plugins.aerial')

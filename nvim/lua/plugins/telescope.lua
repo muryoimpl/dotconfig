@@ -107,6 +107,13 @@ telescope.setup({
         },
       },
     },
+    aerial = {
+      show_nesting = {
+        ["_"] = false, -- This key will be the default
+        json = true, -- You can set the option for specific filetypes
+        yaml = true,
+      },
+    },
   },
 })
 
@@ -152,3 +159,9 @@ telescope_ag.setup({
 telescope.load_extension("file_browser")
 vim.api.nvim_set_keymap('n', '<space>fb', ":Telescope file_browser<CR>", kopts)
 vim.api.nvim_set_keymap('n', '-', ":Telescope file_browser path=%:p:h<CR>", kopts)
+
+-- aerial.nvim
+telescope.load_extension("aerial")
+vim.keymap.set('n', 'ta<space>', function()
+  telescope.extensions.aerial.aerial(themes.get_ivy())
+end, kopts)
