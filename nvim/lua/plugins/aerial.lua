@@ -5,7 +5,7 @@ require("aerial").setup({
   layout = {
     max_width = { 45, 0.25 },
     width = nil,
-    min_width = 10,
+    min_width = 25,
   },
 
   -- A list of all symbols to display. Set to false to display all symbols.
@@ -21,6 +21,8 @@ require("aerial").setup({
     "Method",
     "Struct",
   },
+
+  autojump = true,
 
   nerd_font = "auto",
 
