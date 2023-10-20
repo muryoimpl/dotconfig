@@ -83,9 +83,9 @@ require("lazy").setup({
           },
         },
         highlight = {
-          underline = true,
+          underline = false,
           fg = "#ffffff",
-          bg = "#8A2BE2",
+          bg = "#5055F9",
         },
       })
     end,
