@@ -17,9 +17,9 @@ vim.cmd([[
   hi AerialLine   gui=reverse cterm=reverse
 ]])
 
-vim.cmd([[
-augroup packer_user_config
-  autocmd!
-  autocmd BufWritePost plugins.lua source <afile> | lua require("lazy").sync({ show = false })
-augroup end
-]])
+-- vim.cmd([[
+-- augroup packer_user_config
+--   autocmd!
+--   autocmd BufWritePost plugins.lua source <afile> | lua require("lazy").sync({ show = false })
+-- augroup end
+-- ]])
