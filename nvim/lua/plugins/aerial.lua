@@ -31,7 +31,7 @@ require("aerial").setup({
   -- Call this function when aerial attaches to a buffer.
   on_attach = function(bufnr)
     local opts = { buffer = bufnr }
-    vim.keymap.set("n", "a<space>", "<cmd>AerialToggle!<CR>", opts)
+    vim.keymap.set("n", "A<space>", "<cmd>AerialToggle!<CR>", opts)
     vim.keymap.set("n", "{", "<cmd>AerialPrev<CR>", opts)
     vim.keymap.set("n", "}", "<cmd>AerialNext<CR>", opts)
   end,
