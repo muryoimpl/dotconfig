@@ -99,6 +99,19 @@ require("lazy").setup({
       "nvim-tree/nvim-web-devicons"
     },
   },
+  {
+    "folke/todo-comments.nvim",
+    dependencies = { "nvim-lua/plenary.nvim" },
+    config = function()
+      require("todo-comments").setup({
+        signs = false,
+      })
+
+      vim.keymap.set("n", "<space>td", "<cmd>TodoTelescope<cr>",
+        { silent = true, noremap = true }
+      )
+    end,
+  },
 
   -- lsp
   { 'arkav/lualine-lsp-progress' },
