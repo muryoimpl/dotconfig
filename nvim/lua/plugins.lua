@@ -112,6 +112,14 @@ require("lazy").setup({
       )
     end,
   },
+  {
+    'numToStr/Comment.nvim',
+    lazy = false,
+    config = function()
+      require('Comment').setup({
+      })
+    end,
+  },
 
   -- lsp
   { 'arkav/lualine-lsp-progress' },
