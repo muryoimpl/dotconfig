@@ -22,9 +22,6 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', lspopts)
   vim.keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', lspopts)
   -- vim.keymap.set('n', '<space>o', '<cmd>lua vim.diagnostic.setqflist()<CR>', lspopts)
-  vim.keymap.set('n', '<space>t', function()
-    vim.lsp.buf.format { async = true }
-  end, lspopts)
 end
 
 require('mason').setup()
