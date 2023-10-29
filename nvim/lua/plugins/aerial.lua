@@ -7,7 +7,7 @@ require("aerial").setup({
     width = nil,
     min_width = 25,
     -- default_direction = "prefer_right",
-    default_direction = "prefer_left",
+    default_direction = "left",
   },
 
   -- A list of all symbols to display. Set to false to display all symbols.
