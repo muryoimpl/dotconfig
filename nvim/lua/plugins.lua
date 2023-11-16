@@ -123,7 +123,10 @@ require("lazy").setup({
 
   -- lsp
   { 'arkav/lualine-lsp-progress' },
-  { 'williamboman/mason.nvim' },
+  {
+    'williamboman/mason.nvim',
+    build = ':MasonUpdate',
+  },
   { 'williamboman/mason-lspconfig.nvim' },
   { 'neovim/nvim-lspconfig' },
   {
