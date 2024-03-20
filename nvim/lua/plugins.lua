@@ -339,6 +339,72 @@ require("lazy").setup({
     end
   },
   {
+    "CopilotC-Nvim/CopilotChat.nvim",
+    branch = "canary",
+    dependencies = {
+      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+    },
+    config = function ()
+      local prompts = require("CopilotChat")
+      local select = require('CopilotChat.select')
+
+      prompts.setup({
+        -- See Configuration section for rest
+        debug = true, -- Enable debug logging
+
+        system_prompt = prompts.COPILOT_INSTRUCTIONS, -- System prompt to use
+        model = 'gpt-4', -- GPT model to use, 'gpt-3.5-turbo' or 'gpt-4'
+        temperature = 0.1, -- GPT temperature
+
+        auto_follow_cursor = true, -- Auto-follow cursor in chat
+        clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
+
+        history_path = vim.fn.stdpath('data') .. '/copilotchat_history', -- Default path to stored history
+
+        -- default prompts
+        prompts = {
+          Explain = {
+            prompt = '/COPILOT_EXPLAIN 上記のコードの説明を段落を使って書いてください。',
+          },
+          Tests = {
+            prompt = '/COPILOT_TESTS 上記のコードの詳細な単体テストを書いてください。',
+          },
+          Fix = {
+            prompt = '/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き換えてください。',
+          },
+          Optimize = {
+            prompt = '/COPILOT_REFACTOR 選択したコードを最適化し、パフォーマンスと可読性を向上させてください。',
+          },
+          Docs = {
+            prompt = '/COPILOT_REFACTOR 選択したコードのドキュメントを書いてください。回答は、ドキュメントをコメントとして追加した元のコードを含むコードブロックでなければなりません。使用するプログラミング言語に最も適したドキュメントスタイルを使用してください（例：RubyのRDoc、JavaScriptのJSDocなど）',
+          },
+          FixDiagnostic = {
+            prompt = '以下にある、このファイルに関するdiagnosticの問題を解決してください:',
+            selection = select.diagnostics,
+          },
+          Commit = {
+            prompt = 'コミットメッセージをコミット規約に従って記述します。タイトルは最大25文字で、メッセージは36文字で折り返す。メッセージ全体をgitcommit言語でコードブロックにまとめでください。',
+            selection = select.gitdiff,
+          },
+          CommitStaged = {
+            prompt = 'コミットメッセージをコミット規約に従って記述します。タイトルは最大25文字で、メッセージは36文字で折り返す。メッセージ全体をgitcommit言語でコードブロックにまとめでください。',
+            selection = function(source)
+              return select.gitdiff(source, true)
+            end,
+          },
+        },
+      })
+
+      vim.api.nvim_create_autocmd('BufEnter', {
+        pattern = 'copilot-*',
+        callback = function()
+          vim.opt_local.relativenumber = true
+        end
+      })
+    end
+  },
+  {
     "jackMort/ChatGPT.nvim",
     dependencies = {
       "MunifTanjim/nui.nvim",

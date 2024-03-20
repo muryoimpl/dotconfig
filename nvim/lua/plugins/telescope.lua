@@ -132,6 +132,26 @@ vim.keymap.set('n', '<space>qf', function() builtin.quickfix()                  
 vim.keymap.set('n', '<space>lc', function() builtin.loclist()                   end, kopts)
 vim.keymap.set('n', '<space>au', function() builtin.autocommands()              end, kopts)
 
+-- CopilotChat
+vim.keymap.set( -- Show Copilot helps
+  "n",
+  "<space>ch",
+  function()
+    local actions = require("CopilotChat.actions")
+    require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+  end,
+  kopts
+)
+vim.keymap.set( -- Show Copilot actions
+  "n",
+  "<space>cp",
+  function()
+    local actions = require("CopilotChat.actions")
+    require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+  end,
+  kopts
+)
+
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1923
 function vim.getVisualSelection()
   vim.cmd('noau normal! "vy"')
