@@ -13,7 +13,7 @@ null_ls.setup({
       end
     }),
 
-    null_ls.builtins.diagnostics.eslint.with({
+    require("none-ls.diagnostics.eslint").with({
       command = 'yarn',
       args = { 'eslint', '-f', 'json', '--stdin', '--stdin-filename', '$FILENAME' },
       diagnostic_config = {
@@ -22,14 +22,6 @@ null_ls.setup({
       condition = function(utils)
         return utils.root_has_file({".eslintrc.js", ".eslintrc.yml"})
       end,
-    }),
-
-    null_ls.builtins.diagnostics.tsc.with({
-      command = 'yarn',
-      args = { 'tsc', '--pretty', 'false', '--noEmit' },
-      diagnostic_config = {
-        virtual_text = false,
-      },
     }),
 
     null_ls.builtins.diagnostics.golangci_lint,
@@ -42,7 +34,7 @@ null_ls.setup({
       end
     }),
 
-    null_ls.builtins.formatting.eslint.with({
+    require("none-ls.formatting.eslint").with({
       command = 'yarn',
       args = { "eslint", "--fix-dry-run", "--format", "json", "--stdin", "--stdin-filename", "$FILENAME" },
       condition = function(utils)
