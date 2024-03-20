@@ -23,18 +23,18 @@ set $term alacritty
 output * bg ~/.config/i3/wallpaper.jpg fill
 
 output HDMI-A-1 {
-  pos 0,480
-  mode 2560x1440@59Hz
+  pos 0,1200
+  mode 3840x2160@30Hz
 }
 
 output DP-2 {
-  pos 2560,768
-  mode 2048x1152@60Hz
+  pos 3840,1200
+  mode 3840x2160@60Hz
 }
 
 output DP-3 {
-  pos 4608,0
-  mode 1920x1080@60Hz
+  pos 7680,800
+  mode 2560x1440@59Hz
   transform 270
 }
 
