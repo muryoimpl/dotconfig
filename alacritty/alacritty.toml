@@ -1,0 +1,85 @@
+live_config_reload = true
+
+[colors]
+draw_bold_text_with_bright_colors = true
+
+[colors.bright]
+black = "0x7f7f7f"
+blue = "0x5c5cff"
+cyan = "0x00ffff"
+green = "0x00ff00"
+magenta = "0xff00ff"
+red = "0xff0000"
+white = "0xffffff"
+yellow = "0xffff00"
+
+[colors.normal]
+black = "0x000000"
+blue = "0x0050ff"
+cyan = "0x00cdcd"
+green = "0x00cd00"
+magenta = "0xcd00cd"
+red = "0xcd0000"
+white = "0xe5e5e5"
+yellow = "0xcdcd00"
+
+[colors.primary]
+background = "0x000000"
+foreground = "0xffffff"
+
+[cursor]
+style = "Block"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 10
+
+[font.bold]
+family = "terminal-font"
+style = "Bold"
+
+[font.bold_italic]
+family = "terminal-font"
+style = "Bold Italic"
+
+[font.italic]
+family = "terminal-font"
+style = "Italic"
+
+[font.normal]
+family = "terminal-font"
+style = "Regular"
+
+[[hints.enabled]]
+command = "xdg-open"
+post_processing = true
+regex = "(ipfs:|ipns:|magnet:|mailto:|gemini:|gopher:|https:|http:|news:|file:|git:|ssh:|ftp:)[^\u0000-\u001F\u007F-<>\"\\s{-}\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key = "U"
+mods = "Control|Shift"
+
+[hints.enabled.mouse]
+enabled = true
+mods = "None"
+
+[[mouse.bindings]]
+action = "Copy"
+mouse = "Right"
+
+[scrolling]
+history = 10000
+multiplier = 3
+
+[window]
+decorations = "full"
+decorations_theme_variant = "Dark"
+opacity = 1.0
+startup_mode = "Windowed"
+title = "Alacritty"
+
+[window.class]
+general = "Alacritty"
+instance = "Alacritty"
