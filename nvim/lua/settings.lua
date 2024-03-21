@@ -72,7 +72,8 @@ vim.cmd([[
   if has("mac")
     set clipboard^=unnamed
   else
-    set clipboard^=unnamedplus
+    "set clipboard^=unnamedplus
+    set clipboard=unnamedplus
   end
 
   vnoremap <LeftRelease> "*ygv
