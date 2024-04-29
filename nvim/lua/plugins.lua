@@ -318,6 +318,13 @@ require("lazy").setup({
       })
     end,
   },
+  {
+    "yutkat/git-rebase-auto-diff.nvim",
+    ft = { "gitrebase" },
+    config = function()
+      require("git-rebase-auto-diff").setup()
+    end,
+  },
 
   -- conding
   { 'ii14/neorepl.nvim' },
