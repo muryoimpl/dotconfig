@@ -416,6 +416,7 @@ require("lazy").setup({
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
+      "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim",
     },
     cmd = { "ChatGPT", "ChatGPTEdit" },
@@ -424,6 +425,9 @@ require("lazy").setup({
       require("chatgpt").setup({
         popup_input = {
           submit = "<C-t>",
+        },
+        openai_params = {
+          model = "gpt-4"
         },
       })
     end
