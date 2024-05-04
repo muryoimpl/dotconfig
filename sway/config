@@ -289,9 +289,10 @@ exec --no-startup-id 1password --silent &
 exec --no-startup-id greenclip daemon
 
 exec --no-startup-id blueman-applet
-for_window [app_id="blueman-manager"] floating enable
 
 exec --no-startup-id wayvnc &
+
+exec --no-startup-id swaymsg layout default
 
 # cursor size
 seat seat0 xcursor_theme Default 48
