@@ -326,7 +326,11 @@ require("lazy").setup({
     end,
   },
 
-  -- conding
+  -- coding
+  {
+    "numToStr/Comment.nvim",
+    lazy = false,
+  },
   { 'ii14/neorepl.nvim' },
   {
     "zbirenbaum/copilot.lua",
