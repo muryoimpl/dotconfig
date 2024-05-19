@@ -118,19 +118,20 @@ telescope.setup({
 })
 
 local kopts = { noremap = true, silent = true }
-vim.keymap.set('n', '<space>ff', function() builtin.find_files()                end, kopts)
-vim.keymap.set('n', '<space>bf', function() builtin.buffers()                   end, kopts)
-vim.keymap.set('n', '<space>gp', function() builtin.live_grep()                 end, kopts)
-vim.keymap.set('n', '<space>gw', function() builtin.grep_string()               end, kopts)
-vim.keymap.set('n', '<space>lr', function() builtin.lsp_references()            end, kopts)
-vim.keymap.set('n', '<space>ld', function() builtin.lsp_definitions()           end, kopts)
-vim.keymap.set('n', '<space>gf', function() builtin.git_files()                 end, kopts)
-vim.keymap.set('n', '<space>gc', function() builtin.git_commits()               end, kopts)
-vim.keymap.set('n', '<space>bl', function() builtin.current_buffer_fuzzy_find() end, kopts)
-vim.keymap.set('n', '<space>ch', function() builtin.command_history()           end, kopts)
-vim.keymap.set('n', '<space>qf', function() builtin.quickfix()                  end, kopts)
-vim.keymap.set('n', '<space>lc', function() builtin.loclist()                   end, kopts)
-vim.keymap.set('n', '<space>au', function() builtin.autocommands()              end, kopts)
+local bltin = builtin
+vim.keymap.set('n', '<space>ff', function() bltin.find_files()                end, kopts)
+vim.keymap.set('n', '<space>bf', function() bltin.buffers()                   end, kopts)
+vim.keymap.set('n', '<space>gp', function() bltin.live_grep()                 end, kopts)
+vim.keymap.set('n', '<space>gw', function() bltin.grep_string()               end, kopts)
+vim.keymap.set('n', '<space>lr', function() bltin.lsp_references()            end, kopts)
+vim.keymap.set('n', '<space>ld', function() bltin.lsp_definitions()           end, kopts)
+vim.keymap.set('n', '<space>gf', function() bltin.git_files()                 end, kopts)
+vim.keymap.set('n', '<space>gc', function() bltin.git_commits()               end, kopts)
+vim.keymap.set('n', '<space>bl', function() bltin.current_buffer_fuzzy_find() end, kopts)
+vim.keymap.set('n', '<space>ch', function() bltin.command_history()           end, kopts)
+vim.keymap.set('n', '<space>qf', function() bltin.quickfix()                  end, kopts)
+vim.keymap.set('n', '<space>lc', function() bltin.loclist()                   end, kopts)
+vim.keymap.set('n', '<space>au', function() bltin.autocommands()              end, kopts)
 
 -- CopilotChat
 vim.keymap.set( -- Show Copilot helps
