@@ -262,16 +262,16 @@ require("lazy").setup({
     build = ':TSUpdate',
     config = function()
       require('nvim-treesitter.configs').setup({
-        sync_install = true,
+        sync_install = false,
         auto_install = true,
         indent = { enable = true },
         highlight = {
           enable = true,
           disable = function(lang, buf)
             -- 特定ファイルのみdisableにする
-            if lang == "lua" then
-              return true
-            end
+            -- if lang == "lua" then
+            --   return true
+            -- end
 
             -- サイズ制限
             local max_filesize = 100 * 1024 -- 100 KB
@@ -289,6 +289,7 @@ require("lazy").setup({
           "c",
           "cpp",
           "css",
+          "csv",
           "dockerfile",
           "go",
           "html",
@@ -373,6 +374,7 @@ require("lazy").setup({
 
   -- coding
   { 'ii14/neorepl.nvim' },
+  { "folke/neodev.nvim", opts = {} },
   {
     "zbirenbaum/copilot.lua",
     cmd = { "Copilot" },
