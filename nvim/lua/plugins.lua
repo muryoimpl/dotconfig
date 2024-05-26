@@ -19,6 +19,12 @@ require("lazy").setup({
   -- util
   { "nvim-lua/plenary.nvim" },
   {
+    "szw/vim-maximizer",
+    keys = {
+      { "<Space>sm", "<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split" }
+    },
+  },
+  {
     "klen/nvim-test",
     config = function()
       require("nvim-test").setup({
