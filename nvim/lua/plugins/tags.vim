@@ -25,5 +25,5 @@ let g:auto_ctags_tags_name = 'tags'
 let g:auto_ctags_tags_args = ['--tag-relative=yes', '--recurse=yes', '--sort=yes']
 let g:auto_ctags_warn_once = 1
 let g:auto_ctags_filetype_mode = 1
-let g:auto_ctags_directory_list = ['.git', 'tmp']
+let g:auto_ctags_directory_list = ['.git', 'tmp', '.']
 " au BufWritePost *.rb,*.js,*.ts silent! !ctags -R -f .tags &
