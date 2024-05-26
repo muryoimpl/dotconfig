@@ -176,7 +176,10 @@ require("lazy").setup({
     build = ':MasonUpdate',
   },
   { 'williamboman/mason-lspconfig.nvim' },
-  { 'neovim/nvim-lspconfig' },
+  {
+    'neovim/nvim-lspconfig',
+    event = { "BufReadPre", "BufNewFile" },
+  },
   {
     "folke/trouble.nvim",
     config = function()
