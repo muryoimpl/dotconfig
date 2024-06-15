@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     -- Enable completion triggered by <c-x><c-o>
     vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
 
-    local opts = { buffer= ev.buf, silent = true }
+    local opts = {} -- { buffer= ev.buf, silent = true }
     local keymap = vim.keymap
 
     keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)

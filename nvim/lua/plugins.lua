@@ -189,7 +189,7 @@ require("lazy").setup({
         auto_close = true,
         use_diagnostic_signs = true,
       })
-      vim.keymap.set("n", "<space>O", "<cmd>TroubleToggle<cr>",
+      vim.keymap.set("n", "<space>O", "<cmd>Trouble diagnostics toggle<cr>",
         { silent = true, noremap = true }
       )
     end
