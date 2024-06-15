@@ -130,39 +130,3 @@ function! ToggleQuickfix()
 endfunction
 nnoremap <script> <silent> <Space>o :call ToggleQuickfix()<CR>
 ]])
-
-
--- :T で、terminal を下半分に表示
--- https://zenn.dev/ryo_kawamata/articles/improve-neovmi-terminal
-vim.api.nvim_create_user_command(
-  'T',
-  'split | resize 40 | terminal <args>',
-  { nargs = '*' }
-)
-vim.api.nvim_create_autocmd("TermOpen", {
-  pattern = "*",
-  command = "setlocal nonumber norelativenumber",
-})
-vim.api.nvim_create_autocmd("TermOpen", {
-  pattern = "*",
-  command = "startinsert",
-})
-vim.api.nvim_set_keymap("n", "<C-W>t", "<cmd>T<cr>", { noremap = true })
-vim.api.nvim_set_keymap("n", "<C-W><C-T>", "<cmd>T<cr>", { noremap = true })
-vim.api.nvim_set_keymap("t", "<C-W>t", "<cmd>quit<cr>", { noremap = true })
-vim.api.nvim_set_keymap("t", "<C-W><C-T>", "<cmd>quit<cr>", { noremap = true })
-
-vim.cmd([[
-augroup HighlightTrailingSpaces
-  autocmd!
-  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Gray ctermbg=Gray
-  autocmd VimEnter,WinEnter *
-    \ if &filetype ==# 'aerial'
-    \ | match none
-    \ | else
-    \ | match TrailingSpaces /\s\+$/
-    \ | endif
-augroup END
-]])
-
-vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true })
