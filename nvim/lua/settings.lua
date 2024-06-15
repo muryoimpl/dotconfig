@@ -130,3 +130,11 @@ function! ToggleQuickfix()
 endfunction
 nnoremap <script> <silent> <Space>o :call ToggleQuickfix()<CR>
 ]])
+
+vim.api.nvim_create_autocmd('TermOpen', {
+  pattern = '*',
+  callback = function()
+    vim.cmd('startinsert') -- insert mode で開始
+    vim.opt.number = false -- 行番号非表示
+  end
+})
