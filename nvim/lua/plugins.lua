@@ -35,6 +35,11 @@ require("lazy").setup({
           signature = { enabled = false },
           message = { enabled = false },
         },
+        views = {
+          cmdline_popup = {
+            position = { row = "40%", col = "50%" }
+          }
+        }
       })
     end
   },
