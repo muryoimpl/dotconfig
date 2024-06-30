@@ -8,7 +8,7 @@ local mason_lspconfig = require('mason-lspconfig')
 require('mason').setup()
 
 mason_lspconfig.setup({
-  ensure_installed = { "tsserver", "eslint", "gopls", },
+  -- ensure_installed = { "tsserver", "eslint", "gopls", },
   automatic_installation = true,
 })
 
