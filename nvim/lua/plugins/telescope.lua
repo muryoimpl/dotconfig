@@ -25,7 +25,8 @@ telescope.setup({
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-c>"] = actions.close,
-        ["<C-h>"] = "which_key"
+        ["<C-h>"] = "which_key",
+        ["<C-r>"] = actions.to_fuzzy_refine,
       },
       n = {
         ["<C-u>"] = false,
