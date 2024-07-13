@@ -65,6 +65,7 @@ require("github-theme").setup({
 
       CmpItemKindCopilot = { fg ="#6CC644" },
       -- nvim-cmp の配色 end
+      Visual = { fg = "#DDE5F5", bg = "#6C8ED4" },
     },
   },
 })
