@@ -45,6 +45,7 @@ telescope.setup({
       "--numbers",
       "--column",
       "--smart-case",
+      "--hidden"
     },
     layout_strategy = "cursor",
     mappings = {
@@ -108,6 +109,7 @@ telescope.setup({
     file_browser = {
       theme = "ivy",
       hidden = true,
+      no_ignore = true,
       hijack_netrw = false,
       prompt_prefix="🔍 ",
       mappings = {
