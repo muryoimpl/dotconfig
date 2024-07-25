@@ -436,7 +436,7 @@ require("lazy").setup({
         debug = true, -- Enable debug logging
 
         system_prompt = prompts.COPILOT_INSTRUCTIONS, -- System prompt to use
-        model = 'gpt-4', -- GPT model to use, 'gpt-3.5-turbo' or 'gpt-4'
+        model = 'gpt-4o', -- GPT model to use, 'gpt-4o' or 'gpt-4o-mini'
         temperature = 0.1, -- GPT temperature
 
         auto_follow_cursor = true, -- Auto-follow cursor in chat
