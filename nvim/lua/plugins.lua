@@ -195,6 +195,15 @@ require("lazy").setup({
       })
     end,
   },
+  {
+    'cappyzawa/trim.nvim',
+    config = function()
+      require('trim').setup({
+        trim_on_write = true,
+        highlight = true
+      })
+    end
+  },
 
   -- lsp
   { 'arkav/lualine-lsp-progress' },
