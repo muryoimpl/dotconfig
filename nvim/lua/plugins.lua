@@ -432,6 +432,7 @@ require("lazy").setup({
   {
     "CopilotC-Nvim/CopilotChat.nvim",
     branch = "canary",
+    build = "make tiktoken",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
@@ -445,7 +446,7 @@ require("lazy").setup({
         debug = true, -- Enable debug logging
 
         system_prompt = prompts.COPILOT_INSTRUCTIONS, -- System prompt to use
-        model = 'gpt-4o', -- GPT model to use, 'gpt-4o' or 'gpt-4o-mini'
+        model = 'gpt-4o-mini', -- GPT model to use, 'gpt-4o' or 'gpt-4o-mini'
         temperature = 0.1, -- GPT temperature
 
         auto_follow_cursor = true, -- Auto-follow cursor in chat
@@ -480,6 +481,12 @@ require("lazy").setup({
           },
           CommitStaged = {
             prompt = 'コミットメッセージをコミット規約に従って記述します。タイトルは最大25文字で、メッセージは36文字で折り返す。メッセージ全体をgitcommit言語でコードブロックにまとめでください。',
+            selection = function(source)
+              return select.gitdiff(source, true)
+            end,
+          },
+          CommitStagedEn = {
+            prompt = 'Write commit message for the change with commitizen convention in English. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
             selection = function(source)
               return select.gitdiff(source, true)
             end,
