@@ -590,6 +590,12 @@ vim.cmd([[
   endfor
 ]])
 
+-- aerial
+vim.cmd([[
+  hi AerialLineNC gui=reverse cterm=reverse
+  hi AerialLine   gui=reverse cterm=reverse
+]])
+
 require('plugins.lualine')
 require('plugins.telescope')
 require('plugins.lsp')
