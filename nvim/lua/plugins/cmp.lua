@@ -144,4 +144,5 @@ vim.g.vsnip_snippet_dirs = {
 vim.g.vsnip_filetypes = {
   javascriptreact = { "javascript", "typescript" },
   typescriptreact = { "typescript" },
+  yaml = { "yaml" }
 }
