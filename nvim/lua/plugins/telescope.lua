@@ -64,7 +64,7 @@ telescope.setup({
         ["<C-c>"] = actions.close,
       },
     },
-    file_ignore_patterns = { "^node_modules", "^.git" },
+    file_ignore_patterns = { "^node_modules" },
     preview = {
       treesitter = true,
     },
