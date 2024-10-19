@@ -64,11 +64,11 @@ require("lazy").setup({
 
       -- vim-test のキーマッピングを継承する
       local t_opts = { noremap = true, silent = true }
-      vim.api.nvim_set_keymap('n', 't<C-n>', "<cmd>:TestNearest<CR>", t_opts);
-      vim.api.nvim_set_keymap('n', 't<C-f>', "<cmd>:TestFile<CR>",    t_opts);
-      vim.api.nvim_set_keymap('n', 't<C-s>', "<cmd>:TestSuite<CR>",   t_opts);
-      vim.api.nvim_set_keymap('n', 't<C-l>', "<cmd>:TestLast<CR>",    t_opts);
-      vim.api.nvim_set_keymap('n', 't<C-g>', "<cmd>:TestVisit<CR>",   t_opts);
+      vim.api.nvim_set_keymap('n', '<space>tn', "<cmd>:TestNearest<CR>", t_opts);
+      vim.api.nvim_set_keymap('n', '<space>tf', "<cmd>:TestFile<CR>",    t_opts);
+      vim.api.nvim_set_keymap('n', '<space>ts', "<cmd>:TestSuite<CR>",   t_opts);
+      vim.api.nvim_set_keymap('n', '<space>tl', "<cmd>:TestLast<CR>",    t_opts);
+      vim.api.nvim_set_keymap('n', '<space>tg', "<cmd>:TestVisit<CR>",   t_opts);
     end
   },
   { 'soramugi/auto-ctags.vim' },
