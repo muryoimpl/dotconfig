@@ -419,8 +419,6 @@ require("lazy").setup({
   },
 
   -- coding
-  { 'ii14/neorepl.nvim' },
-  { "folke/neodev.nvim", opts = {} },
   {
     "zbirenbaum/copilot.lua",
     cmd = { "Copilot" },
