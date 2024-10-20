@@ -319,7 +319,7 @@ require("lazy").setup({
         },
         incremental_selection = { enable = true },
         textobjects = { enable = true },
-        autotag = { enable = ture },
+        autotag = { enable = true },
         ensure_installed = {
           "bash",
           "c",
