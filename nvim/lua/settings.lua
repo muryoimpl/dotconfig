@@ -21,26 +21,6 @@ vim.opt.incsearch = true -- インクリメンタルサーチ
 vim.opt.showmatch = true -- 対応する括弧を表示する
 vim.opt.hlsearch = true -- 検索の強調表示
 
--- 全角スペースその他を目立たせる
--- https://gist.github.com/pgtwitter/cb31d497aa02f221164fc2dd846d24dc
-vim.cmd([[
-  set list
-  set listchars=tab:>-,eol:\ ,trail:-
-
-  function! ZenkakuSpace()
-    highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
-  endfunction
-
-  if has('syntax')
-      augroup ZenkakuSpace
-          autocmd!
-          autocmd ColorScheme       * call ZenkakuSpace()
-          autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
-      augroup END
-      call ZenkakuSpace()
-  endif
-]])
-
 -- 検索のハイライトを消す
 vim.api.nvim_set_keymap("n", "<Esc><Esc>", ':set nohlsearch!<CR>', {})
 
@@ -98,43 +78,66 @@ vim.opt.tabstop = 2 -- タブの表示を2に
 vim.opt.ts = 2 -- タブのスペースを２に
 vim.opt.showtabline = 2 -- "タブ表示を常に
 
--- " swapの作成場所 :echo stdpath('data')
-local swpdir = vim.fn.stdpath('data') .. '/tmp'
-if vim.fn.empty(vim.fn.glob(swpdir)) > 0 then
-  vim.fn.system({ 'mkdir', '-p', swpdir })
-end
-vim.opt.directory = swpdir
--- " undodir の設定
-vim.opt.undofile = true
-local undodir = vim.fn.stdpath('data') .. '/undo'
-if vim.fn.empty(vim.fn.glob(undodir)) > 0 then
-  vim.fn.system({ 'mkdir', '-p', undodir })
-end
-vim.opt.undodir = undodir
-
--- " Makefile は tab を tab として入力する
-local _filename = vim.fn.expand('%:r')
-if _filename == 'Makefile' then
-  vim.opt.expandtab = false
-end
-
--- " copen のショートカット
-vim.cmd([[
-function! ToggleQuickfix()
-    let l:nr = winnr('$')
-    cwindow
-    let l:nr2 = winnr('$')
-    if l:nr == l:nr2
-        cclose
-    endif
-endfunction
-nnoremap <script> <silent> <Space>o :call ToggleQuickfix()<CR>
-]])
-
-vim.api.nvim_create_autocmd('TermOpen', {
-  pattern = '*',
-  callback = function()
-    vim.cmd('startinsert') -- insert mode で開始
-    vim.opt.number = false -- 行番号非表示
+if (vim.g.vscode ) then
+  -- noop
+else
+  -- " swapの作成場所 :echo stdpath('data')
+  local swpdir = vim.fn.stdpath('data') .. '/tmp'
+  if vim.fn.empty(vim.fn.glob(swpdir)) > 0 then
+    vim.fn.system({ 'mkdir', '-p', swpdir })
   end
-})
+  vim.opt.directory = swpdir
+  -- " undodir の設定
+  vim.opt.undofile = true
+  local undodir = vim.fn.stdpath('data') .. '/undo'
+  if vim.fn.empty(vim.fn.glob(undodir)) > 0 then
+    vim.fn.system({ 'mkdir', '-p', undodir })
+  end
+  vim.opt.undodir = undodir
+
+  -- " Makefile は tab を tab として入力する
+  local _filename = vim.fn.expand('%:r')
+  if _filename == 'Makefile' then
+    vim.opt.expandtab = false
+  end
+
+  -- " copen のショートカット
+  vim.cmd([[
+  function! ToggleQuickfix()
+      let l:nr = winnr('$')
+      cwindow
+      let l:nr2 = winnr('$')
+      if l:nr == l:nr2
+          cclose
+      endif
+  endfunction
+  nnoremap <script> <silent> <Space>o :call ToggleQuickfix()<CR>
+  ]])
+
+  vim.api.nvim_create_autocmd('TermOpen', {
+    pattern = '*',
+    callback = function()
+      vim.cmd('startinsert') -- insert mode で開始
+      vim.opt.number = false -- 行番号非表示
+    end
+  })
+  -- 全角スペースその他を目立たせる
+  -- https://gist.github.com/pgtwitter/cb31d497aa02f221164fc2dd846d24dc
+  vim.cmd([[
+    set list
+    set listchars=tab:>-,eol:\ ,trail:-
+
+    function! ZenkakuSpace()
+      highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+    endfunction
+
+    if has('syntax')
+        augroup ZenkakuSpace
+            autocmd!
+            autocmd ColorScheme       * call ZenkakuSpace()
+            autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+        augroup END
+        call ZenkakuSpace()
+    endif
+  ]])
+end
