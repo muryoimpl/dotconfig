@@ -174,13 +174,14 @@ vim.keymap.set('n', '<space>qf', function() bltin.quickfix()                  en
 vim.keymap.set('n', '<space>lc', function() bltin.loclist()                   end, kopts)
 vim.keymap.set('n', '<space>au', function() bltin.autocommands()              end, kopts)
 
+local chat_actions = require("CopilotChat.actions")
+local chat_telescope_integ = require("CopilotChat.integrations.telescope")
 -- CopilotChat
 vim.keymap.set( -- Show Copilot helps
   "n",
   "<space>ch",
   function()
-    local actions = require("CopilotChat.actions")
-    require("CopilotChat.integrations.telescope").pick(actions.help_actions())
+    chat_telescope_integ.pick(chat_actions.help_actions())
   end,
   kopts
 )
@@ -188,8 +189,7 @@ vim.keymap.set( -- Show Copilot actions
   "n",
   "<space>cp",
   function()
-    local actions = require("CopilotChat.actions")
-    require("CopilotChat.integrations.telescope").pick(actions.prompt_actions())
+    chat_telescope_integ.pick(chat_actions.prompt_actions())
   end,
   kopts
 )
