@@ -169,7 +169,7 @@ vim.keymap.set('n', '<space>ld', function() bltin.lsp_definitions()           en
 vim.keymap.set('n', '<space>gf', function() bltin.git_files()                 end, kopts)
 vim.keymap.set('n', '<space>gc', function() bltin.git_commits()               end, kopts)
 vim.keymap.set('n', '<space>bl', function() bltin.current_buffer_fuzzy_find() end, kopts)
-vim.keymap.set('n', '<space>ch', function() bltin.command_history()           end, kopts)
+vim.keymap.set('n', '<space>hi', function() bltin.command_history()           end, kopts)
 vim.keymap.set('n', '<space>qf', function() bltin.quickfix()                  end, kopts)
 vim.keymap.set('n', '<space>lc', function() bltin.loclist()                   end, kopts)
 vim.keymap.set('n', '<space>au', function() bltin.autocommands()              end, kopts)
