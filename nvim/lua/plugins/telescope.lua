@@ -5,6 +5,8 @@ local actions = require("telescope.actions")
 local telescope_ag = require("telescope-ag")
 local fb_actions = require "telescope".extensions.file_browser.actions
 
+-- directory を絞り込む
+-- https://github.com/nvim-telescope/telescope.nvim/issues/2201#issuecomment-2090398559
 local select_dir_for_grep = function(prompt_bufnr)
   local action_state = require("telescope.actions.state")
   local fb = require("telescope").extensions.file_browser
@@ -75,10 +77,10 @@ telescope.setup({
       theme = "ivy", prompt_prefix="🔍 ",
       mappings = {
         i = {
-          ["<C-f>"] = select_dir_for_grep,
+          ["<C-f>"] = select_dir_for_grep, -- directory絞り込み
         },
         n = {
-          ["<C-f>"] = select_dir_for_grep,
+          ["<C-f>"] = select_dir_for_grep, -- directory絞り込み
         },
       },
     },
