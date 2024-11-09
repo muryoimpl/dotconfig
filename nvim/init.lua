@@ -16,9 +16,9 @@ if vim.fn.has('wsl') == 1 then
 end
 
 require('settings')
+require('plugins')
 
 if ( not vim.g.vscode ) then
-  require('plugins')
   require('filetype')
   require('theme')
 end
