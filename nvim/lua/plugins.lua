@@ -438,7 +438,7 @@ require("lazy").setup({
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "canary",
+    branch = "main",
     build = "make tiktoken",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
