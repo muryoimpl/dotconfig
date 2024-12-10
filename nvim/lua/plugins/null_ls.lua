@@ -42,6 +42,25 @@ null_ls.setup({
       end,
     }),
     null_ls.builtins.formatting.goimports,
+
+    null_ls.builtins.diagnostics.textlint.with({
+      command = "npx",
+      args = vim.list_extend(
+               { 'textlint' },
+               null_ls.builtins.diagnostics.textlint._opts.args),
+      diagnostic_config = {
+        virtual_text = false,
+      }
+    }),
+    null_ls.builtins.formatting.textlint.with({
+      command = 'npx',
+      args = vim.list_extend(
+               { 'textlint' },
+               null_ls.builtins.formatting.textlint._opts.args),
+      diagnostic_config = {
+        virtual_text = false,
+      },
+    }),
   },
   auto_open = true,
   auto_preview = true,
