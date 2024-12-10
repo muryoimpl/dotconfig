@@ -141,3 +141,6 @@ else
     endif
   ]])
 end
+
+-- https://zenn.dev/hidehic0/articles/6bde5d5398384a
+vim.api.nvim_set_keymap("n", "x", '"_x', { noremap = true, silent = true })
