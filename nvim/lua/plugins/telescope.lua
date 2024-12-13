@@ -95,6 +95,7 @@ telescope.setup({
         },
       },
     },
+    help_tags                 = { theme = "ivy", prompt_prefix="🔍 ",  },
     lsp_references            = { theme = "ivy", prompt_prefix="🔍 ",  },
     lsp_definitions           = { theme = "ivy", prompt_prefix="🔍 ",  },
     git_files                 = { theme = "ivy", prompt_prefix="🔍 ",  },
@@ -185,6 +186,7 @@ vim.keymap.set('n', '<space>hi', function() bltin.command_history()           en
 vim.keymap.set('n', '<space>qf', function() bltin.quickfix()                  end, kopts)
 vim.keymap.set('n', '<space>lc', function() bltin.loclist()                   end, kopts)
 vim.keymap.set('n', '<space>au', function() bltin.autocommands()              end, kopts)
+vim.keymap.set('n', '<space>hp', function() bltin.help_tags()                 end, kopts)
 
 local chat_actions = require("CopilotChat.actions")
 local chat_telescope_integ = require("CopilotChat.integrations.telescope")
