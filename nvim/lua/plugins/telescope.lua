@@ -98,6 +98,7 @@ telescope.setup({
     help_tags                 = { theme = "ivy", prompt_prefix="🔍 ",  },
     lsp_references            = { theme = "ivy", prompt_prefix="🔍 ",  },
     lsp_definitions           = { theme = "ivy", prompt_prefix="🔍 ",  },
+    git_stash                 = { theme = "ivy", prompt_prefix="🔍 ",  },
     git_files                 = { theme = "ivy", prompt_prefix="🔍 ",  },
     git_commits               = { theme = "ivy", prompt_prefix="🔍 ",  },
     current_buffer_fuzzy_find = { theme = "ivy", prompt_prefix="🔍 ",  },
@@ -179,6 +180,7 @@ vim.keymap.set('n', '<space>gp', function() bltin.live_grep()                 en
 vim.keymap.set('n', '<space>gw', function() bltin.grep_string()               end, kopts)
 vim.keymap.set('n', '<space>lr', function() bltin.lsp_references()            end, kopts)
 vim.keymap.set('n', '<space>ld', function() bltin.lsp_definitions()           end, kopts)
+vim.keymap.set('n', '<space>gs', function() bltin.git_stash()                 end, kopts)
 vim.keymap.set('n', '<space>gf', function() bltin.git_files()                 end, kopts)
 vim.keymap.set('n', '<space>gc', function() bltin.git_commits()               end, kopts)
 vim.keymap.set('n', '<space>bl', function() bltin.current_buffer_fuzzy_find() end, kopts)
