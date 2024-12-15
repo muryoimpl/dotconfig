@@ -121,6 +121,7 @@ telescope.setup({
         },
       },
     },
+    man_pages                 = { theme = "ivy", prompt_prefix="🔍 ",  },
   },
   extensions = {
     file_browser = {
@@ -194,6 +195,7 @@ vim.keymap.set('n', '<space>lc', function() bltin.loclist()                   en
 vim.keymap.set('n', '<space>au', function() bltin.autocommands()              end, kopts)
 vim.keymap.set('n', '<space>hp', function() bltin.help_tags()                 end, kopts)
 vim.keymap.set('n', '<space>ts', function() bltin.treesitter()                end, kopts)
+vim.keymap.set('n', '<space>ma', function() bltin.man_pages()                 end, kopts)
 
 local chat_actions = require("CopilotChat.actions")
 local chat_telescope_integ = require("CopilotChat.integrations.telescope")
