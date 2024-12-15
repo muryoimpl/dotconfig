@@ -73,6 +73,7 @@ telescope.setup({
   },
   pickers = {
     find_files                = { theme = "ivy", prompt_prefix="🔍 ",  },
+    fd                        = { theme = "ivy", prompt_prefix="🔍 ",  },
     live_grep                 = {
       theme = "ivy", prompt_prefix="🔍 ",
       mappings = {
@@ -95,6 +96,7 @@ telescope.setup({
         },
       },
     },
+    treesitter                = { theme = "ivy", prompt_prefix="🔍 ",  },
     help_tags                 = { theme = "ivy", prompt_prefix="🔍 ",  },
     lsp_references            = { theme = "ivy", prompt_prefix="🔍 ",  },
     lsp_definitions           = { theme = "ivy", prompt_prefix="🔍 ",  },
