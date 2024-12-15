@@ -85,17 +85,7 @@ telescope.setup({
         },
       },
     },
-    grep_string               = {
-      theme = "ivy", prompt_prefix="🔍 ",
-      mappings = {
-        i = {
-          ["<C-f>"] = select_dir_for_grep, -- directory絞り込み
-        },
-        n = {
-          ["<C-f>"] = select_dir_for_grep, -- directory絞り込み
-        },
-      },
-    },
+    grep_string               = { theme = "ivy", prompt_prefix="🔍 ",  },
     treesitter                = { theme = "ivy", prompt_prefix="🔍 ",  },
     help_tags                 = { theme = "ivy", prompt_prefix="🔍 ",  },
     lsp_references            = { theme = "ivy", prompt_prefix="🔍 ",  },
