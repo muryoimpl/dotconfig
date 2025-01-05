@@ -30,7 +30,7 @@ require("lazy").setup({
         popupmenu = { enabled = false },
         notify = { enabled = false },
         lsp = {
-          progress = { enabled = false },
+          progress = { enabled = true },
           hover = { enabled = false },
           signature = { enabled = false },
           message = { enabled = false },
