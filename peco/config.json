@@ -5,5 +5,8 @@
     "C-f": "peco.ScrollPageDown",
     "C-b": "peco.ScrollPageUp",
     "C-[": "peco.Cancel"
+  },
+  "Style": {
+    "Selected": ["underline", "on_magenta", "white"]
   }
 }
