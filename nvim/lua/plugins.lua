@@ -92,6 +92,7 @@ require("lazy").setup({
     end,
   },
   { 'nvim-lualine/lualine.nvim' },
+  { 'AndreM222/copilot-lualine' },
   { 'nvim-tree/nvim-web-devicons' },
   {
     'tomiis4/BufferTabs.nvim',

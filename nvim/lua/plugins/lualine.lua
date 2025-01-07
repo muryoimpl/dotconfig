@@ -119,7 +119,7 @@ local config = {
     lualine_a = {'mode'},
     lualine_b = { diff_opts, 'branch'},
     lualine_c = { lsp_name_opts, filename_opts, },
-    lualine_x = { 'location', diagnostics_opts, },
+    lualine_x = { 'copilot', 'location', diagnostics_opts, },
     lualine_y = { fileformat_opts, 'encoding', filetype_opts, },
     lualine_z = { 'progress', buffer_lines, },
   },
