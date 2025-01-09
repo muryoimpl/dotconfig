@@ -64,6 +64,8 @@ telescope.setup({
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-c>"] = actions.close,
+        ["<C-c>"] = actions.close,
+        ["q"] = actions.send_to_qflist + actions.open_qflist,
       },
     },
     file_ignore_patterns = { "^node_modules/", "^.git/", "^vendor/bundle" },
