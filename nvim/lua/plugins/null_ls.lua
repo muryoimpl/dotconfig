@@ -50,7 +50,10 @@ null_ls.setup({
                null_ls.builtins.diagnostics.textlint._opts.args),
       diagnostic_config = {
         virtual_text = false,
-      }
+      },
+      condition = function(utils)
+        return utils.root_has_file({ ".textlintrc" })
+      end,
     }),
     null_ls.builtins.formatting.textlint.with({
       command = 'npx',
@@ -60,6 +63,9 @@ null_ls.setup({
       diagnostic_config = {
         virtual_text = false,
       },
+      condition = function(utils)
+        return utils.root_has_file({ ".textlintrc" })
+      end,
     }),
   },
   auto_open = true,
