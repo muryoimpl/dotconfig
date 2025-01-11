@@ -558,21 +558,12 @@ require("lazy").setup({
   },
 
   {
-    'uga-rosa/ugaterm.nvim',
+    'rebelot/terminal.nvim',
     config = function()
-      require('ugaterm').setup({
-        open_cmd = function()
-          local height = vim.api.nvim_get_option("lines")
-          local width = vim.api.nvim_get_option("columns")
-          vim.api.nvim_open_win(0, true, {
-            win = 0,
-            split = 'below',
-          })
-        end
-      })
+      require("terminal").setup()
 
-      vim.api.nvim_set_keymap("n", "<space>T", "<cmd>UgatermOpen -toggle<CR>", { noremap = true })
-      vim.api.nvim_set_keymap("t", "<space>T", "<cmd>UgatermOpen -toggle<CR>", { noremap = true })
+      local term_map = require("terminal.mappings")
+      vim.keymap.set({ "n", "t" }, "<space>T", term_map.toggle)
     end
   },
 },
