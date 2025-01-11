@@ -33,32 +33,10 @@ local lsp_name_opts = {
       return msg
     end
 
-    local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-
     local buf_client_names = {}
     for _, client in ipairs(vim.lsp.get_active_clients { bufnr = 0 }) do
       table.insert(buf_client_names, client.name)
     end
-
---   for _, client in pairs(buf_clients) do
---     if client.name ~= "null-ls" then
---       table.insert(buf_client_names, client.name)
---     end
---   end
-
---   local s = require "null-ls.sources"
---   local available_sources = s.get_available(buf_ft)
---   local registered = {}
---   for _, source in ipairs(available_sources) do
---     for method in pairs(source.methods) do
---       registered[method] = registered[method] or {}
---       table.insert(registered[method], source.name)
---     end
---   end
-
---   local null_ls = require "null-ls"
---   vim.list_extend(buf_client_names, registered[null_ls.methods.FORMATTING] or {})
---   vim.list_extend(buf_client_names, registered[null_ls.methods.DIAGNOSTICS_ON_SAVE] or {})
 
     local unique_client_names = vim.fn.uniq(buf_client_names)
     local language_servers = table.concat(unique_client_names, ",")
