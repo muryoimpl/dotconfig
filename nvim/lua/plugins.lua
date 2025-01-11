@@ -58,7 +58,7 @@ require("lazy").setup({
         silent = true,
         termOpts = {
           direction = "horizontal",
-          stopinsert = true,
+          stopinsert = false,
         },
       })
 
