@@ -1,4 +1,4 @@
--- https://github.com/folke/lazy.nvim#-installation
+-- https://github.com/folme/lazy.nvim#-installation
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system({
@@ -204,6 +204,10 @@ require("lazy").setup({
         highlight = true
       })
     end
+  },
+  {
+    'kevinhwang91/nvim-bqf',
+    ft = 'qf'
   },
 
   -- lsp
@@ -614,3 +618,4 @@ require('plugins.lsp')
 require('plugins.null_ls')
 require('plugins.cmp')
 require('plugins.aerial')
+require('plugins.bqf')
