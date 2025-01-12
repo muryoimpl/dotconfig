@@ -71,7 +71,7 @@ require("lazy").setup({
       vim.api.nvim_set_keymap('n', '<space>tg', "<cmd>:TestVisit<CR>",   t_opts);
     end
   },
-  { 'soramugi/auto-ctags.vim' },
+  -- { 'soramugi/auto-ctags.vim' },
   {
     'lukas-reineke/indent-blankline.nvim',
     main = "ibl",
