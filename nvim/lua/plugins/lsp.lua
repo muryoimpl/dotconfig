@@ -8,7 +8,8 @@ local mason_lspconfig = require('mason-lspconfig')
 require('mason').setup()
 
 mason_lspconfig.setup({
-  ensure_installed = { "ts_ls", "eslint", "gopls", },
+  -- ensure_installed = { "ts_ls", "eslint", "gopls", },
+  ensure_installed = { "ruby_lsp", "rubocop", },
   automatic_installation = true,
 })
 
