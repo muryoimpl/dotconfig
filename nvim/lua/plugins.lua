@@ -395,7 +395,7 @@ require("lazy").setup({
           changedelete = {  text = '~',  },
           untracked    = {  text = '┆',  },
         },
-        signs_staged_enabled = true,
+        signs_staged_enable = true,
         signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
         numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
         linehl     = false,
