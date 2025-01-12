@@ -7,12 +7,6 @@ local mason_lspconfig = require('mason-lspconfig')
 
 require('mason').setup()
 
-mason_lspconfig.setup({
-  -- ensure_installed = { "ts_ls", "eslint", "gopls", },
-  ensure_installed = { "ruby_lsp", "rubocop", },
-  automatic_installation = true,
-})
-
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
   callback = function(ev)
@@ -71,9 +65,6 @@ mason_lspconfig.setup_handlers({
       },
     })
   end,
--- ["xxx"] = function()
---
--- end,
 })
 
 -- LSP handlers

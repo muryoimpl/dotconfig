@@ -216,7 +216,16 @@ require("lazy").setup({
     'williamboman/mason.nvim',
     build = ':MasonUpdate',
   },
-  { 'williamboman/mason-lspconfig.nvim' },
+  {
+    'williamboman/mason-lspconfig.nvim',
+    config = function()
+      mason_lspconfig = require('mason-lspconfig').setup({
+        -- ensure_installed = { "ts_ls", "eslint", "gopls", },
+        ensure_installed = { "ruby_lsp", "rubocop", },
+        automatic_installation = true,
+      })
+    end
+  },
   {
     'neovim/nvim-lspconfig',
     event = { "BufReadPre", "BufNewFile" },
