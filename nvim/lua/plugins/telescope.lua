@@ -177,6 +177,7 @@ vim.keymap.set('n', '<space>gp', function() bltin.live_grep()                 en
 vim.keymap.set('n', '<space>gw', function() bltin.grep_string()               end, kopts)
 vim.keymap.set('n', '<space>lr', function() bltin.lsp_references()            end, kopts)
 vim.keymap.set('n', '<space>ld', function() bltin.lsp_definitions()           end, kopts)
+vim.keymap.set('n', '<space>lt', function() bltin.lsp_type_definitions()      end, kopts)
 vim.keymap.set('n', '<space>gs', function() bltin.git_stash()                 end, kopts)
 vim.keymap.set('n', '<space>gbr', function() bltin.git_branches()             end, kopts)
 vim.keymap.set('n', '<space>gf', function() bltin.git_files()                 end, kopts)
