@@ -113,6 +113,7 @@ enter = 'mode main'
 esc = 'mode main'
 
 
+# NOTE: `lsappinfo info -only bundleid "kitty"` で確認する
 [[on-window-detected]]
 if.app-id = 'com.apple.systempreferences'
 run = ['layout floating']
@@ -120,6 +121,26 @@ run = ['layout floating']
 [[on-window-detected]]
 if.app-id = 'com.1password.1password'
 run = ['layout floating']
+
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+run = 'move-node-to-workspace 1'
+
+[[on-window-detected]]
+if.app-id = 'net.kovidgoyal.kitty'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.tinyspeck.slackmacgap'
+run = 'move-node-to-workspace 3'
+
+[[on-window-detected]]
+if.app-id = 'notion.id'
+run = 'move-node-to-workspace 4'
+
+[[on-window-detected]]
+if.app-id = 'com.microsoft.rdc.macos'
+run = 'move-node-to-workspace 5'
 
 [workspace-to-monitor-force-assignment]
 1 = 1                            # Monitor sequence number from left to right. 1-based indexing
