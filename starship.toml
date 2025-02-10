@@ -69,7 +69,7 @@ behind = "↓ "
 modified = "！"
 
 [git_branch]
-style = "bold white bg:blue"
+style = "bold fg:white inverted"
 
 [ruby]
 symbol = "ruby: "
