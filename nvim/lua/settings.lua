@@ -144,3 +144,6 @@ end
 
 -- https://zenn.dev/hidehic0/articles/6bde5d5398384a
 vim.api.nvim_set_keymap("n", "x", '"_x', { noremap = true, silent = true })
+
+-- terminal で normal mode 移行を alt-j に変更する
+vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
