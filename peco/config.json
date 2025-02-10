@@ -7,6 +7,6 @@
     "C-[": "peco.Cancel"
   },
   "Style": {
-    "Selected": ["underline", "on_magenta", "white"]
+    "Selected": ["underline", "on_black", "reverse", "bold"]
   }
 }
