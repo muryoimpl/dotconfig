@@ -10,7 +10,7 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 local select_dir_for_grep = function(prompt_bufnr)
   local action_state = require("telescope.actions.state")
   local fb = require("telescope").extensions.file_browser
-  local live_grep = require("telescope.builtin").live_grep
+  local live_grep = builtin.live_grep
   local current_line = action_state.get_current_line()
 
   fb.file_browser({
@@ -170,27 +170,26 @@ telescope.setup({
 })
 
 local kopts = { noremap = true, silent = true }
-local bltin = builtin
-vim.keymap.set('n', '<space>ff', function() bltin.find_files()                end, kopts)
-vim.keymap.set('n', '<space>bf', function() bltin.buffers()                   end, kopts)
-vim.keymap.set('n', '<space>gp', function() bltin.live_grep()                 end, kopts)
-vim.keymap.set('n', '<space>gw', function() bltin.grep_string()               end, kopts)
-vim.keymap.set('n', '<space>lr', function() bltin.lsp_references()            end, kopts)
-vim.keymap.set('n', '<space>ld', function() bltin.lsp_definitions()           end, kopts)
-vim.keymap.set('n', '<space>lt', function() bltin.lsp_type_definitions()      end, kopts)
-vim.keymap.set('n', '<space>gs', function() bltin.git_stash()                 end, kopts)
-vim.keymap.set('n', '<space>gbr', function() bltin.git_branches()             end, kopts)
-vim.keymap.set('n', '<space>gf', function() bltin.git_files()                 end, kopts)
-vim.keymap.set('n', '<space>gc', function() bltin.git_commits()               end, kopts)
-vim.keymap.set('n', '<space>gt', function() bltin.git_status()                end, kopts)
-vim.keymap.set('n', '<space>bl', function() bltin.current_buffer_fuzzy_find() end, kopts)
-vim.keymap.set('n', '<space>hi', function() bltin.command_history()           end, kopts)
-vim.keymap.set('n', '<space>qf', function() bltin.quickfix()                  end, kopts)
-vim.keymap.set('n', '<space>lc', function() bltin.loclist()                   end, kopts)
-vim.keymap.set('n', '<space>au', function() bltin.autocommands()              end, kopts)
-vim.keymap.set('n', '<space>hp', function() bltin.help_tags()                 end, kopts)
-vim.keymap.set('n', '<space>tr', function() bltin.treesitter()                end, kopts)
-vim.keymap.set('n', '<space>ma', function() bltin.man_pages()                 end, kopts)
+vim.keymap.set('n', '<space>ff', function() buitin.find_files()                end, kopts)
+vim.keymap.set('n', '<space>bf', function() buitin.buffers()                   end, kopts)
+vim.keymap.set('n', '<space>gp', function() buitin.live_grep()                 end, kopts)
+vim.keymap.set('n', '<space>gw', function() buitin.grep_string()               end, kopts)
+vim.keymap.set('n', '<space>lr', function() buitin.lsp_references()            end, kopts)
+vim.keymap.set('n', '<space>ld', function() buitin.lsp_definitions()           end, kopts)
+vim.keymap.set('n', '<space>lt', function() buitin.lsp_type_definitions()      end, kopts)
+vim.keymap.set('n', '<space>gs', function() buitin.git_stash()                 end, kopts)
+vim.keymap.set('n', '<space>gbr', function() buitin.git_branches()             end, kopts)
+vim.keymap.set('n', '<space>gf', function() buitin.git_files()                 end, kopts)
+vim.keymap.set('n', '<space>gc', function() buitin.git_commits()               end, kopts)
+vim.keymap.set('n', '<space>gt', function() buitin.git_status()                end, kopts)
+vim.keymap.set('n', '<space>bl', function() buitin.current_buffer_fuzzy_find() end, kopts)
+vim.keymap.set('n', '<space>hi', function() buitin.command_history()           end, kopts)
+vim.keymap.set('n', '<space>qf', function() buitin.quickfix()                  end, kopts)
+vim.keymap.set('n', '<space>lc', function() buitin.loclist()                   end, kopts)
+vim.keymap.set('n', '<space>au', function() buitin.autocommands()              end, kopts)
+vim.keymap.set('n', '<space>hp', function() buitin.help_tags()                 end, kopts)
+vim.keymap.set('n', '<space>tr', function() buitin.treesitter()                end, kopts)
+vim.keymap.set('n', '<space>ma', function() buitin.man_pages()                 end, kopts)
 
 local chat_actions = require("CopilotChat.actions")
 local chat_telescope_integ = require("CopilotChat.integrations.telescope")
