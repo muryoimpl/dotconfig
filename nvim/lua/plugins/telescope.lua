@@ -2,7 +2,6 @@ local telescope = require("telescope")
 local builtin = require('telescope.builtin')
 local themes = require("telescope.themes")
 local actions = require("telescope.actions")
-local telescope_ag = require("telescope-ag")
 local fb_actions = require "telescope".extensions.file_browser.actions
 
 -- directory を絞り込む
@@ -229,11 +228,6 @@ vim.keymap.set('v', '<space>gp', function()
   local text = vim.getVisualSelection()
   builtin.live_grep(themes.get_ivy({ default_text = text}))
 end, kopts)
-
-telescope.load_extension('ag')
-telescope_ag.setup({
-  cmd = telescope_ag.cmds.ag,
-})
 
 telescope.load_extension("file_browser")
 vim.api.nvim_set_keymap('n', '<space>fb', ":Telescope file_browser<CR>", kopts)
