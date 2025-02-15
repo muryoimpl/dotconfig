@@ -195,14 +195,6 @@ vim.keymap.set('n', '<space>ma', function() buitin.man_pages()                 e
 local chat_actions = require("CopilotChat.actions")
 local chat_telescope_integ = require("CopilotChat.integrations.telescope")
 -- CopilotChat
-vim.keymap.set( -- Show Copilot helps
-  "n",
-  "<space>ch",
-  function()
-    chat_telescope_integ.pick(chat_actions.help_actions())
-  end,
-  kopts
-)
 vim.keymap.set( -- Show Copilot actions
   "n",
   "<space>cp",
