@@ -103,7 +103,7 @@ require("lazy").setup({
         padding = 0,
         display = 'column',
         horizontal = 'right',
-        vertical = 'bottom',
+        vertical = 'center',
       })
     end,
   },
