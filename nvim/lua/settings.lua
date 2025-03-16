@@ -147,3 +147,6 @@ vim.api.nvim_set_keymap("n", "x", '"_x', { noremap = true, silent = true })
 
 -- terminal で normal mode 移行を alt-j に変更する
 vim.keymap.set("t", "<C-n>", "<C-\\><C-n>")
+
+-- cursor style を block に
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor,sm:block-blinkwait175-blinkoff150-blinkon175"
