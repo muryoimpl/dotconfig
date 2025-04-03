@@ -462,58 +462,157 @@ require("lazy").setup({
       { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
     },
     config = function ()
-      local prompts = require("CopilotChat")
-      local select = require('CopilotChat.select')
+      local select = require("CopilotChat.select")
 
-      prompts.setup({
-        -- See Configuration section for rest
-        debug = true, -- Enable debug logging
+      require("CopilotChat").setup({
+        -- Shared config starts here (can be passed to functions at runtime and configured via setup function)
 
-        system_prompt = prompts.COPILOT_INSTRUCTIONS, -- System prompt to use
-        model = 'gpt-4o-mini', -- GPT model to use, 'gpt-4o' or 'gpt-4o-mini'
-        temperature = 0.1, -- GPT temperature
+        system_prompt = 'COPILOT_INSTRUCTIONS', -- System prompt to use (can be specified manually in prompt via /).
 
+        model = 'gpt-4o-2024-11-20', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+        agent = 'copilot', -- Default agent to use, see ':CopilotChatAgents' for available agents (can be specified manually in prompt via @).
+        context = nil, -- Default context or array of contexts to use (can be specified manually in prompt via #).
+        sticky = nil, -- Default sticky prompt or array of sticky prompts to use at start of every new chat.
+
+        temperature = 0.1, -- GPT result temperature
+        headless = false, -- Do not write to chat buffer and use history (useful for using custom processing)
+        stream = nil, -- Function called when receiving stream updates (returned string is appended to the chat buffer)
+        callback = nil, -- Function called when full response is received (retuned string is stored to history)
+        remember_as_sticky = true, -- Remember model/agent/context as sticky prompts when asking questions
+
+        -- default selection
+        -- see select.lua for implementation
+        selection = function(source)
+          return select.visual(source) or select.buffer(source)
+        end,
+
+        -- default window options
+        window = {
+          layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace', or a function that returns the layout
+          width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
+          height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
+          -- Options below only apply to floating windows
+          relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
+          border = 'single', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+          row = nil, -- row position of the window, default is centered
+          col = nil, -- column position of the window, default is centered
+          title = 'Copilot Chat', -- title of chat window
+          footer = nil, -- footer of chat window
+          zindex = 1, -- determines if window is on top or below other floating windows
+        },
+
+        show_help = true, -- Shows help message as virtual lines when waiting for user input
+        highlight_selection = true, -- Highlight selection
+        highlight_headers = true, -- Highlight headers in chat, disable if using markdown renderers (like render-markdown.nvim)
+        references_display = 'virtual', -- 'virtual', 'write', Display references in chat as virtual text or write to buffer
         auto_follow_cursor = true, -- Auto-follow cursor in chat
+        auto_insert_mode = false, -- Automatically enter insert mode when opening window and on new prompt
+        insert_at_end = false, -- Move cursor to end of buffer when inserting text
         clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
 
+        -- Static config starts here (can be configured only via setup function)
+
+        debug = false, -- Enable debug logging (same as 'log_level = 'debug')
+        log_level = 'info', -- Log level to use, 'trace', 'debug', 'info', 'warn', 'error', 'fatal'
+        proxy = nil, -- [protocol://]host[:port] Use this proxy
+        allow_insecure = false, -- Allow insecure server connections
+
+        chat_autocomplete = true, -- Enable chat autocompletion (when disabled, requires manual `mappings.complete` trigger)
+
+        log_path = vim.fn.stdpath('state') .. '/CopilotChat.log', -- Default path to log file
         history_path = vim.fn.stdpath('data') .. '/copilotchat_history', -- Default path to stored history
 
-        -- default prompts
+        question_header = '# User ', -- Header to use for user questions
+        answer_header = '# Copilot ', -- Header to use for AI answers
+        error_header = '# Error ', -- Header to use for errors
+        separator = '───', -- Separator to use in chat
+
+        -- prompts
+        -- see config/prompts.lua for implementation
         prompts = {
           Explain = {
-            prompt = '/COPILOT_EXPLAIN 上記のコードの説明を段落を使って書いてください。',
+            prompt = '上記のコードの説明を段落を使って書いてください。',
+            system_prompt = 'COPILOT_EXPLAIN',
+          },
+          Review = {
+            prompt = '選択したコードをレビューしてください。',
+            system_prompt = 'COPILOT_REVIEW',
           },
           Tests = {
-            prompt = '/COPILOT_TESTS 上記のコードの詳細な単体テストを書いてください。',
+            prompt = '上記のコードの詳細な単体テストを書いてください。',
           },
           Fix = {
-            prompt = '/COPILOT_FIX このコードには問題があります。バグを修正したコードに書き換えてください。',
+            prompt = 'このコードには問題があります。バグを修正したコードに書き換えてください。',
           },
           Optimize = {
-            prompt = '/COPILOT_REFACTOR 選択したコードを最適化し、パフォーマンスと可読性を向上させてください。',
+            prompt = '選択したコードを最適化し、パフォーマンスと可読性を向上させてください。また、実施した最適化の戦略と、変更することによる利点を説明してください。',
           },
           Docs = {
-            prompt = '/COPILOT_REFACTOR 選択したコードのドキュメントを書いてください。回答は、ドキュメントをコメントとして追加した元のコードを含むコードブロックでなければなりません。使用するプログラミング言語に最も適したドキュメントスタイルを使用してください（例：RubyのRDoc、JavaScriptのJSDocなど）',
-          },
-          FixDiagnostic = {
-            prompt = '以下にある、このファイルに関するdiagnosticの問題を解決してください:',
-            selection = select.diagnostics,
+            prompt = '選択したコードのドキュメントを書いてください。回答は、ドキュメントをコメントとして追加した元のコードを含むコードブロックでなければなりません。使用するプログラミング言語に最も適したドキュメントスタイルを使用してください（例：RubyのRDoc、JavaScriptのJSDocなど）',
           },
           Commit = {
             prompt = 'コミットメッセージをコミット規約に従って記述します。タイトルは最大25文字で、メッセージは36文字で折り返す。メッセージ全体をgitcommit言語でコードブロックにまとめでください。',
-            selection = select.gitdiff,
+            context = 'git:staged',
           },
-          CommitStaged = {
-            prompt = 'コミットメッセージをコミット規約に従って記述します。タイトルは最大25文字で、メッセージは36文字で折り返す。メッセージ全体をgitcommit言語でコードブロックにまとめでください。',
-            selection = function(source)
-              return select.gitdiff(source, true)
-            end,
-          },
-          CommitStagedEn = {
+          CommitEn = {
             prompt = 'Write commit message for the change with commitizen convention in English. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
-            selection = function(source)
-              return select.gitdiff(source, true)
-            end,
+            context = 'git:staged',
+          },
+        },
+
+        -- default mappings
+        -- see config/mappings.lua for implementation
+        mappings = {
+          complete = {
+            insert = '<Tab>',
+          },
+          close = {
+            normal = 'q',
+            insert = '<C-c>',
+          },
+          reset = {
+            normal = '<C-l>',
+            insert = '<C-l>',
+          },
+          submit_prompt = {
+            normal = '<C-s>',
+            insert = '<C-s>',
+          },
+          toggle_sticky = {
+            normal = 'grr',
+          },
+          clear_stickies = {
+            normal = 'grx',
+          },
+          accept_diff = {
+            normal = '<C-y>',
+            insert = '<C-y>',
+          },
+          jump_to_diff = {
+            normal = 'gj',
+          },
+          quickfix_answers = {
+            normal = 'gqa',
+          },
+          quickfix_diffs = {
+            normal = 'gqd',
+          },
+          yank_diff = {
+            normal = 'gy',
+            register = '"', -- Default register to use for yanking
+          },
+          show_diff = {
+            normal = 'gd',
+            full_diff = false, -- Show full diff instead of unified diff when showing diff window
+          },
+          show_info = {
+            normal = 'gi',
+          },
+          show_context = {
+            normal = 'gc',
+          },
+          show_help = {
+            normal = 'gh',
           },
         },
       })
