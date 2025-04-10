@@ -69,6 +69,12 @@ require("lazy").setup({
       vim.api.nvim_set_keymap('n', '<space>ts', "<cmd>:TestSuite<CR>",   t_opts);
       vim.api.nvim_set_keymap('n', '<space>tl', "<cmd>:TestLast<CR>",    t_opts);
       vim.api.nvim_set_keymap('n', '<space>tg', "<cmd>:TestVisit<CR>",   t_opts);
+
+      require('nvim-test.runners.rspec'):setup({
+        command = "bundle",
+        file_pattern = "\\v(spec_[^.]+|[^.]+_spec)\\.rb$",
+        find_files = { "{name}_spec.rb" },
+      })
     end
   },
   -- { 'soramugi/auto-ctags.vim' },
@@ -469,7 +475,7 @@ require("lazy").setup({
 
         system_prompt = 'COPILOT_INSTRUCTIONS', -- System prompt to use (can be specified manually in prompt via /).
 
-        model = 'gpt-4o-2024-11-20', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+        model = 'gpt-4o', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
         agent = 'copilot', -- Default agent to use, see ':CopilotChatAgents' for available agents (can be specified manually in prompt via @).
         context = nil, -- Default context or array of contexts to use (can be specified manually in prompt via #).
         sticky = nil, -- Default sticky prompt or array of sticky prompts to use at start of every new chat.
@@ -633,15 +639,19 @@ require("lazy").setup({
       "folke/trouble.nvim",
       "nvim-telescope/telescope.nvim",
     },
-    cmd = { "ChatGPT", "ChatGPTEdit" },
     config = function()
+      local home = vim.fn.expand("$HOME")
+      local actions_path = home .. "/.config/nvim/lua/plugins/actions.json"
       -- chatbot
       require("chatgpt").setup({
         popup_input = {
-          submit = "<C-t>",
+          submit = "<C-s>",
         },
         openai_params = {
-          model = "gpt-4o-mini"
+          model = "gpt-4o"
+        },
+        actions_paths = {
+          actions_path
         },
       })
     end

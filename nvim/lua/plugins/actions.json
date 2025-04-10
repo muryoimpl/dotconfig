@@ -1,0 +1,22 @@
+{
+  "branch_name": {
+    "type": "chat",
+    "opts": {
+      "title": "Branch name",
+      "template": "以下の文字列をgitのbranch名に変換してください。branch名は英語で、単語はハイフンつなぎしてください。\n\n{{argument}}",
+      "strategy": "display",
+      "params": {
+        "model": "gpt-4o-mini",
+        "temperature": 0.5,
+        "frequency_penalty": 0.8
+      }
+    },
+    "args": {
+      "argument": {
+        "type": "string",
+        "optional": "true",
+        "default": "japanese"
+      }
+    }
+  }
+}
