@@ -1,7 +1,6 @@
 local lspconfig = require('lspconfig')
 local util = require('lspconfig/util')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
-local mason_lspconfig = require('mason-lspconfig')
 ---@diagnostic disable:undefined-global
 -- https://zenn.dev/botamotch/articles/21073d78bc68bf
 
@@ -43,28 +42,18 @@ local capabilities = cmp_nvim_lsp.default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
-mason_lspconfig.setup_handlers({
-  function(server_name)
-    local opts = {
-      capabilities = capabilities,
-    }
-    lspconfig[server_name].setup(opts)
-  end,
-  ["lua_ls"] = function()
-    lspconfig["lua_ls"].setup({
-      cappabilities = capabilities,
-      settings = {
-        Lua = {
-          diagnostics = {
-            globals = { "vim" },
-          },
-          completion = {
-            callSnippet = "Replace",
-          }
-        },
+vim.lsp.config("lua_ls", {
+  cappabilities = capabilities,
+  settings = {
+    Lua = {
+      diagnostics = {
+        globals = { "vim" },
       },
-    })
-  end,
+      completion = {
+        callSnippet = "Replace",
+      }
+    },
+  },
 })
 
 -- LSP handlers
