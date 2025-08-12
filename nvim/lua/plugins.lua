@@ -674,6 +674,10 @@ require("lazy").setup({
   },
 
   {
+    'nvim-telescope/telescope-ui-select.nvim'
+  },
+
+  {
     'rebelot/terminal.nvim',
     config = function()
       require("terminal").setup()
