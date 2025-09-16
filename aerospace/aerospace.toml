@@ -140,10 +140,10 @@ if.app-id = 'notion.id'
 run = 'move-node-to-workspace 4'
 
 [[on-window-detected]]
-if.app-id = 'com.microsoft.rdc.macos'
+if.app-id = 'com.hnc.Discord'
 run = 'move-node-to-workspace 5'
 
 [workspace-to-monitor-force-assignment]
 1 = 1                            # Monitor sequence number from left to right. 1-based indexing
-2 = 'main'                       # Main monitor
-9 = 'secondary'
+# 2 = 'main'                       # Main monitor
+# 9 = 'secondary'
