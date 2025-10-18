@@ -3,14 +3,15 @@
     "output": ["DP-2", "HDMI-A-1"],
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 20, // Waybar height (to be removed for auto height)
+    "height": 30, // Waybar height (to be removed for auto height)
     "spacing": 1, // Gaps between modules (4px)
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "tray"],
+    "margin": 0,
+    "modules-left": ["sway/workspaces", "ext/workspaces","wlr/taskbar","dwl/window", "sway/mode", "tray"],
     "modules-center": ["sway/window"],
     "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
-        "all-outputs": false,
+        "all-outputs": true,
         "active-only": true,
         "sort-by-number": true,
         "format": "{name}: {icon}",
@@ -18,36 +19,64 @@
             "urgent": "",
             "focused": "",
             "default": ""
+        },
+        "persistent_workspaces": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
         }
     },
-    // "keyboard-state": {
-    //     "numlock": true,
-    //     "capslock": true,
-    //     "format": "{name} {icon}",
-    //     "format-icons": {
-    //         "locked": "",
-    //         "unlocked": ""
-    //     }
-    // },
+    "ext/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+          "urgent": "",
+          "focused": "",
+          "default": ""
+      },
+      "on-click": "activate",
+      "on-click-right": "deactivate",
+      "sort-by-number": true,
+      "all-outputs": true,
+      "active-only": false,
+      "persistent_workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
+      },
+    },
+    "wlr/taskbar": {
+      "num-tags": 5,
+    },
+    "dwl/window": {
+        "format": "[{layout}]{title}"
+    },
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 20,
+      "all-outputs": false,
+      "tooltip-format": "{title}",
+      "markup": true,
+      "on-click": "activate",
+      "on-click-right": "close",
+      "ignore-list": ["Rofi", "wofi"]
+    },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
-    },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
     },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        }
+        },
+        "tooltip": true,
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 18,
         "spacing": 5
     },
     "clock": {
@@ -56,14 +85,32 @@
         "format": "{:%Y-%m-%d(%a) %H:%M}",
         "format-alt": "{:%Y-%m-%d(%a) %H:%M}",
         "interval": 1,
-        "locale": "ja_JP.UTF-8"
+        "locale": "ja_JP.UTF-8",
+        "calendar": {
+            "start-day": "sunday",
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span color='#d3c6aa'><b>{}</b></span>",
+                "days":       "<span color='#e67e80'>{}</span>",
+                "weeks":      "<span color='#a7c080'><b>W{}</b></span>",
+                "weekdays":   "<span color='#7fbbb3'><b>{}</b></span>",
+                "today":      "<span color='#dbbc7f'><b><u>{}</u></b></span>"
+            }
+        }
     },
     "cpu": {
         "format": "CPU:{usage}%",
+        "interval": 1,
         "tooltip": true
     },
     "memory": {
-        "format": "Mem: {}%"
+        "format": "Mem: {}%",
+        "interval": 1,
+        "tooltip": true
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -107,23 +154,26 @@
       "path": "/"
     },
     "backlight": {
-      "device": "intel_backlight",
+      // "device": "intel_backlight",
       "format": "{percent}% {icon}",
-      "format-icons": ["", ""]
+      "format-icons": ["", ""],
+      "on-scroll-up": "brightnessctl set +5%",
+      "on-scroll-down": "brightnessctl set 5%-"
     }
   },
   {
     "output": ["DP-3"],
     "layer": "top",
     "position": "top",
-    "height": 20,
+    "height": 30,
     "spacing": 1,
-    "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad", "tray"],
+    "mergin": 0,
+    "modules-left": ["sway/workspaces","ext/workspaces","wlr/taskbar","dwl/window","sway/mode", "tray"],
     "modules-center": ["sway/window"],
     "modules-right": ["cpu", "memory", "disk", "temperature", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
-        "all-outputs": false,
+        "all-outputs": true,
         "active-only": true,
         "sort-by-number": true,
         "format": "{name}: {icon}",
@@ -131,7 +181,50 @@
             "urgent": "",
             "focused": "",
             "default": ""
+        },
+        "persistent_workspaces": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
         }
+    },
+    "ext/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+          "urgent": "",
+          "focused": "",
+          "default": ""
+      },
+      "on-click": "activate",
+      "on-click-right": "deactivate",
+      "sort-by-number": true,
+      "all-outputs": true,
+      "active-only": false,
+      "persistent_workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
+      },
+    },
+    "wlr/taskbar": {
+      "num-tags": 5,
+    },
+    "dwl/window": {
+        "format": "[{layout}]{title}"
+    },
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 20,
+      "all-outputs": false,
+      "tooltip-format": "{title}",
+      "markup": true,
+      "on-click": "activate",
+      "on-click-right": "close",
+      "ignore-list": ["Rofi", "wofi"]
     },
     "keyboard-state": {
         "numlock": true,
@@ -145,15 +238,8 @@
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 18,
         "spacing": 5
     },
     "clock": {
@@ -162,14 +248,32 @@
         "format": "{:%Y-%m-%d(%a) %H:%M}",
         "format-alt": "{:%Y-%m-%d(%a) %H:%M}",
         "interval": 1,
-        "locale": "ja_JP.UTF-8"
+        "locale": "ja_JP.UTF-8",
+        "calendar": {
+            "start-day": "sunday",
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span color='#d3c6aa'><b>{}</b></span>",
+                "days":       "<span color='#e67e80'>{}</span>",
+                "weeks":      "<span color='#a7c080'><b>W{}</b></span>",
+                "weekdays":   "<span color='#7fbbb3'><b>{}</b></span>",
+                "today":      "<span color='#dbbc7f'><b><u>{}</u></b></span>"
+            }
+        }
     },
     "cpu": {
         "format": "CPU:{usage}%",
+        "interval": 1,
         "tooltip": true
     },
     "memory": {
-        "format": "Mem: {}%"
+        "format": "Mem: {}%",
+        "interval": 1,
+        "tooltip": true
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -198,14 +302,15 @@
     "output": ["Unknown-1"],
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 20, // Waybar height (to be removed for auto height)
+    "height": 30, // Waybar height (to be removed for auto height)
     "spacing": 1, // Gaps between modules (4px)
-    "modules-left": ["battery", "sway/workspaces", "sway/mode", "sway/scratchpad", "tray"],
+    "margin": 0,
+    "modules-left": ["battery", "sway/workspaces","ext/workspaces","wlr/taskbar","dwl/window","sway/mode", "tray"],
     "modules-center": ["sway/window"],
     "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
-        "all-outputs": false,
+        "all-outputs": true,
         "active-only": true,
         "sort-by-number": true,
         "format": "{name}: {icon}",
@@ -213,27 +318,64 @@
             "urgent": "",
             "focused": "",
             "default": ""
+        },
+        "persistent_workspaces": {
+          "1": [],
+          "2": [],
+          "3": [],
+          "4": [],
+          "5": []
         }
+    },
+    "ext/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+          "urgent": "",
+          "focused": "",
+          "default": ""
+      },
+      "on-click": "activate",
+      "on-click-right": "deactivate",
+      "sort-by-number": true,
+      "all-outputs": true,
+      "active-only": false,
+      "persistent_workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
+      },
+    },
+    "wlr/taskbar": {
+      "num-tags": 5,
+    },
+    "dwl/window": {
+        "format": "[{layout}]{title}"
+    },
+    "wlr/taskbar": {
+      "format": "{icon}",
+      "icon-size": 20,
+      "all-outputs": false,
+      "tooltip-format": "{title}",
+      "markup": true,
+      "on-click": "activate",
+      "on-click-right": "close",
+      "ignore-list": ["Rofi", "wofi"]
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
-    },
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
     },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        }
+        },
+        "tooltip": true,
     },
     "tray": {
-        // "icon-size": 21,
+        "icon-size": 18,
         "spacing": 5
     },
     "clock": {
@@ -242,14 +384,32 @@
         "format": "{:%Y-%m-%d(%a) %H:%M}",
         "format-alt": "{:%Y-%m-%d(%a) %H:%M}",
         "interval": 1,
-        "locale": "ja_JP.UTF-8"
+        "locale": "ja_JP.UTF-8",
+        "calendar": {
+            "start-day": "sunday",
+            "mode"          : "month",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span color='#d3c6aa'><b>{}</b></span>",
+                "days":       "<span color='#e67e80'>{}</span>",
+                "weeks":      "<span color='#a7c080'><b>W{}</b></span>",
+                "weekdays":   "<span color='#7fbbb3'><b>{}</b></span>",
+                "today":      "<span color='#dbbc7f'><b><u>{}</u></b></span>"
+            }
+        }
     },
     "cpu": {
         "format": "CPU:{usage}%",
+        "interval": 1,
         "tooltip": true
     },
     "memory": {
-        "format": "Mem: {}%"
+        "format": "Mem: {}%",
+        "interval": 1,
+        "tooltip": true
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -294,13 +454,15 @@
     },
     "backlight": {
       // "device": "intel_backlight",
-      "device": "gpio-bl",
       "format": "{percent}% {icon}",
-      "format-icons": ["", ""]
+      "format-icons": ["", ""],
+      "on-scroll-up": "brightnessctl set +5%",
+      "on-scroll-down": "brightnessctl set 5%-"
     },
     "battery": {
       "interval": 60,
       "states": {
+          "good": 95,
           "warning": 30,
           "critical": 15
       },
@@ -311,5 +473,4 @@
       "max-length": 25
     }
   },
-
 ]
