@@ -1,0 +1,378 @@
+[
+  {
+    "output": ["DP-1", "HDMI-A-1"],
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    "spacing": 1, // Gaps between modules (4px)
+    "margin": 0,
+    "modules-left": [
+      "ext/workspaces",
+      "tray"
+    ],
+    "modules-center": [
+      "dwl/window"
+    ],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
+    "ext/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+          "urgent": "",
+          "focused": "",
+          "default": ""
+      },
+      "on-click": "activate",
+      "on-click-right": "deactivate",
+      "sort-by-number": true,
+      "all-outputs": true,
+      "persistent_workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
+      },
+    },
+    "dwl/window": {
+        "format": "[{layout}]{title}"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip": true,
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 5
+    },
+    "clock": {
+        "timezone": "Asia/Tokyo",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%Y-%m-%d(%a) %H:%M}",
+        "format-alt": "{:%Y-%m-%d(%a) %H:%M}",
+        "interval": 1,
+        "locale": "ja_JP.UTF-8",
+        "calendar": {
+            "start-day": "sunday",
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span color='#d3c6aa'><b>{}</b></span>",
+                "days":       "<span color='#e67e80'>{}</span>",
+                "weeks":      "<span color='#a7c080'><b>W{}</b></span>",
+                "weekdays":   "<span color='#7fbbb3'><b>{}</b></span>",
+                "today":      "<span color='#dbbc7f'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+    "cpu": {
+        "format": "CPU:{usage}%",
+        "interval": 1,
+        "tooltip": true
+    },
+    "memory": {
+        "format": "Mem: {}%",
+        "interval": 1,
+        "tooltip": true
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "M.2: {icon} {temperatureC}°C",
+        "format-icons": ["🆒", "🌡️", "🥵"]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "🌐 {ipaddr}/{cidr}",
+        "tooltip-format": "🖧 {ifname} via {gwaddr}",
+        "format-linked": "🖧 {ifname} (No IP)",
+        "format-disconnected": " ⚠ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon}ᚼᛒ{format_source}",
+        "format-bluetooth-muted": "🔇{icon}ᚼᛒ{format_source}",
+        "format-muted": "🔇 {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "🎧",
+            "hands-free": "🎧",
+            "headset": "🎧",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "disk": {
+      "interval": 30,
+      "format": "Disk: {percentage_used}%",
+      "path": "/"
+    },
+    "backlight": {
+      // "device": "intel_backlight",
+      "format": "{percent}% {icon}",
+      "format-icons": ["", ""],
+      "on-scroll-up": "brightnessctl set +5%",
+      "on-scroll-down": "brightnessctl set 5%-"
+    }
+  },
+  {
+    "output": ["DP-3"],
+    "layer": "top",
+    "position": "top",
+    "height": 30,
+    "spacing": 1,
+    "mergin": 0,
+    "modules-left": [
+      "ext/workspaces",
+      "tray"
+    ],
+    "modules-center": [
+      "dwl/window"
+    ],
+    "modules-right": ["cpu", "memory", "disk", "temperature", "clock"],
+    "ext/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+          "urgent": "",
+          "focused": "",
+          "default": ""
+      },
+      "on-click": "activate",
+      "on-click-right": "deactivate",
+      "sort-by-number": true,
+      "all-outputs": true,
+      "persistent_workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
+      },
+    },
+    "dwl/window": {
+        "format": "[{layout}]{title}"
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 5
+    },
+    "clock": {
+        "timezone": "Asia/Tokyo",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%Y-%m-%d(%a) %H:%M}",
+        "format-alt": "{:%Y-%m-%d(%a) %H:%M}",
+        "interval": 1,
+        "locale": "ja_JP.UTF-8",
+        "calendar": {
+            "start-day": "sunday",
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span color='#d3c6aa'><b>{}</b></span>",
+                "days":       "<span color='#e67e80'>{}</span>",
+                "weeks":      "<span color='#a7c080'><b>W{}</b></span>",
+                "weekdays":   "<span color='#7fbbb3'><b>{}</b></span>",
+                "today":      "<span color='#dbbc7f'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+    "cpu": {
+        "format": "CPU:{usage}%",
+        "interval": 1,
+        "tooltip": true
+    },
+    "memory": {
+        "format": "Mem: {}%",
+        "interval": 1,
+        "tooltip": true
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "M.2: {icon} {temperatureC}°C",
+        "format-icons": ["🆒", "🌡️", "🥵"]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "🌐 {ipaddr}/{cidr}",
+        "tooltip-format": "🖧 {ifname} via {gwaddr}",
+        "format-linked": "🖧 {ifname} (No IP)",
+        "format-disconnected": " ⚠ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "disk": {
+      "interval": 30,
+      "format": "Disk: {percentage_used}%",
+      "path": "/"
+    }
+  },
+  {
+    "output": ["Unknown-1"],
+    "layer": "top", // Waybar at top layer
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 30, // Waybar height (to be removed for auto height)
+    "spacing": 1, // Gaps between modules (4px)
+    "margin": 0,
+    "modules-left": [
+      "battery",
+      "ext/workspaces",
+      "tray"
+    ],
+    "modules-center": [
+      "dwl/window"
+    ],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
+    "ext/workspaces": {
+      "format": "{icon}",
+      "format-icons": {
+          "urgent": "",
+          "focused": "",
+          "default": ""
+      },
+      "on-click": "activate",
+      "on-click-right": "deactivate",
+      "sort-by-number": true,
+      "all-outputs": true,
+      "persistent_workspaces": {
+        "1": [],
+        "2": [],
+        "3": [],
+        "4": [],
+        "5": []
+      },
+    },
+    "dwl/window": {
+        "format": "[{layout}]{title}"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        },
+        "tooltip": true,
+    },
+    "tray": {
+        "icon-size": 18,
+        "spacing": 5
+    },
+    "clock": {
+        "timezone": "Asia/Tokyo",
+        "tooltip": true,
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "{:%Y-%m-%d(%a) %H:%M}",
+        "format-alt": "{:%Y-%m-%d(%a) %H:%M}",
+        "interval": 1,
+        "locale": "ja_JP.UTF-8",
+        "calendar": {
+            "start-day": "sunday",
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "",
+            "on-scroll"     : 1,
+            "on-click-right": "mode",
+            "format": {
+                "months":     "<span color='#d3c6aa'><b>{}</b></span>",
+                "days":       "<span color='#e67e80'>{}</span>",
+                "weeks":      "<span color='#a7c080'><b>W{}</b></span>",
+                "weekdays":   "<span color='#7fbbb3'><b>{}</b></span>",
+                "today":      "<span color='#dbbc7f'><b><u>{}</u></b></span>"
+            }
+        }
+    },
+    "cpu": {
+        "format": "CPU:{usage}%",
+        "interval": 1,
+        "tooltip": true
+    },
+    "memory": {
+        "format": "Mem: {}%",
+        "interval": 1,
+        "tooltip": true
+    },
+    "temperature": {
+        // "thermal-zone": 2,
+        "hwmon-path": "/sys/class/hwmon/hwmon0/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "M.2: {icon} {temperatureC}°C",
+        "format-icons": ["🆒", "🌡️", "🥵"]
+    },
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "🌐 {ipaddr}/{cidr}",
+        "tooltip-format": "🖧 {ifname} via {gwaddr}",
+        "format-linked": "🖧 {ifname} (No IP)",
+        "format-disconnected": " ⚠ Disconnected",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon}ᚼᛒ{format_source}",
+        "format-bluetooth-muted": "🔇{icon}ᚼᛒ{format_source}",
+        "format-muted": "🔇 {format_source}",
+        "format-source": "{volume}% ",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "🎧",
+            "hands-free": "🎧",
+            "headset": "🎧",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+    "disk": {
+      "interval": 30,
+      "format": "Disk: {percentage_used}%",
+      "path": "/"
+    },
+    "backlight": {
+      // "device": "intel_backlight",
+      "format": "{percent}% {icon}",
+      "format-icons": ["", ""],
+      "on-scroll-up": "brightnessctl set +5%",
+      "on-scroll-down": "brightnessctl set 5%-"
+    },
+    "battery": {
+      "interval": 60,
+      "states": {
+          "good": 95,
+          "warning": 30,
+          "critical": 15
+      },
+      "format": "{capacity}% {icon}",
+      "format-icons": ["", "", "", "", ""],
+      "format-charging": "{capacity}% {icon}",
+      "format-plugged ": "{icon}",
+      "max-length": 25
+    }
+  },
+]
