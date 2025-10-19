@@ -1,24 +1,31 @@
 [
   {
-    "output": ["DP-2", "HDMI-A-1"],
+    "output": ["DP-1", "HDMI-A-1"],
     "layer": "top", // Waybar at top layer
     "position": "top", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
     "spacing": 1, // Gaps between modules (4px)
     "margin": 0,
-    "modules-left": ["sway/workspaces", "ext/workspaces","wlr/taskbar","dwl/window", "sway/mode", "tray"],
-    "modules-center": ["sway/window"],
+    "modules-left": [
+      "sway/workspaces",
+      "ext/workspaces",
+      "sway/mode",
+      "tray"//,"wlr/taskbar",
+    ],
+    "modules-center": [
+      "sway/window" //,"dwl/window"
+    ],
     "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
     "sway/workspaces": {
+        "on-click": "activate",
         "disable-scroll": true,
         "all-outputs": true,
-        "active-only": true,
         "sort-by-number": true,
         "format": "{name}: {icon}",
         "format-icons": {
             "urgent": "",
             "focused": "",
-            "default": ""
+            "default": "",
         },
         "persistent_workspaces": {
           "1": [],
@@ -39,7 +46,6 @@
       "on-click-right": "deactivate",
       "sort-by-number": true,
       "all-outputs": true,
-      "active-only": false,
       "persistent_workspaces": {
         "1": [],
         "2": [],
@@ -81,6 +87,7 @@
     },
     "clock": {
         "timezone": "Asia/Tokyo",
+        "tooltip": true,
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%Y-%m-%d(%a) %H:%M}",
         "format-alt": "{:%Y-%m-%d(%a) %H:%M}",
@@ -88,9 +95,9 @@
         "locale": "ja_JP.UTF-8",
         "calendar": {
             "start-day": "sunday",
-            "mode"          : "month",
+            "mode"          : "year",
             "mode-mon-col"  : 3,
-            "weeks-pos"     : "right",
+            "weeks-pos"     : "",
             "on-scroll"     : 1,
             "on-click-right": "mode",
             "format": {
@@ -123,24 +130,24 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": " {ipaddr}/{cidr}",
-        "tooltip-format": " {ifname} via {gwaddr}",
-        "format-linked": " {ifname} (No IP)",
+        "format-ethernet": "🌐 {ipaddr}/{cidr}",
+        "tooltip-format": "🖧 {ifname} via {gwaddr}",
+        "format-linked": "🖧 {ifname} (No IP)",
         "format-disconnected": " ⚠ Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth": "{volume}% {icon}ᚼᛒ{format_source}",
+        "format-bluetooth-muted": "🔇{icon}ᚼᛒ{format_source}",
+        "format-muted": "🔇 {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "headphone": "🎧",
+            "hands-free": "🎧",
+            "headset": "🎧",
             "phone": "",
             "portable": "",
             "car": "",
@@ -168,13 +175,19 @@
     "height": 30,
     "spacing": 1,
     "mergin": 0,
-    "modules-left": ["sway/workspaces","ext/workspaces","wlr/taskbar","dwl/window","sway/mode", "tray"],
-    "modules-center": ["sway/window"],
+    "modules-left": [
+      "sway/workspaces",
+      "ext/workspaces",
+      "sway/mode",
+      "tray"//,"wlr/taskbar",
+    ],
+    "modules-center": [
+      "sway/window" //"dwl/window",
+    ],
     "modules-right": ["cpu", "memory", "disk", "temperature", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
-        "active-only": true,
         "sort-by-number": true,
         "format": "{name}: {icon}",
         "format-icons": {
@@ -201,7 +214,6 @@
       "on-click-right": "deactivate",
       "sort-by-number": true,
       "all-outputs": true,
-      "active-only": false,
       "persistent_workspaces": {
         "1": [],
         "2": [],
@@ -244,6 +256,7 @@
     },
     "clock": {
         "timezone": "Asia/Tokyo",
+        "tooltip": true,
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%Y-%m-%d(%a) %H:%M}",
         "format-alt": "{:%Y-%m-%d(%a) %H:%M}",
@@ -251,9 +264,9 @@
         "locale": "ja_JP.UTF-8",
         "calendar": {
             "start-day": "sunday",
-            "mode"          : "month",
+            "mode"          : "year",
             "mode-mon-col"  : 3,
-            "weeks-pos"     : "right",
+            "weeks-pos"     : "",
             "on-scroll"     : 1,
             "on-click-right": "mode",
             "format": {
@@ -286,9 +299,9 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": " {ipaddr}/{cidr}",
-        "tooltip-format": " {ifname} via {gwaddr}",
-        "format-linked": " {ifname} (No IP)",
+        "format-ethernet": "🌐 {ipaddr}/{cidr}",
+        "tooltip-format": "🖧 {ifname} via {gwaddr}",
+        "format-linked": "🖧 {ifname} (No IP)",
         "format-disconnected": " ⚠ Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
@@ -305,13 +318,20 @@
     "height": 30, // Waybar height (to be removed for auto height)
     "spacing": 1, // Gaps between modules (4px)
     "margin": 0,
-    "modules-left": ["battery", "sway/workspaces","ext/workspaces","wlr/taskbar","dwl/window","sway/mode", "tray"],
-    "modules-center": ["sway/window"],
+    "modules-left": [
+      "battery",
+      "sway/workspaces",
+      "ext/workspaces",
+      "sway/mode",
+      "tray"//,"wlr/taskbar",
+    ],
+    "modules-center": [
+      "sway/window" // "dwl/window",
+    ],
     "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
     "sway/workspaces": {
         "disable-scroll": true,
         "all-outputs": true,
-        "active-only": true,
         "sort-by-number": true,
         "format": "{name}: {icon}",
         "format-icons": {
@@ -338,7 +358,6 @@
       "on-click-right": "deactivate",
       "sort-by-number": true,
       "all-outputs": true,
-      "active-only": false,
       "persistent_workspaces": {
         "1": [],
         "2": [],
@@ -380,6 +399,7 @@
     },
     "clock": {
         "timezone": "Asia/Tokyo",
+        "tooltip": true,
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
         "format": "{:%Y-%m-%d(%a) %H:%M}",
         "format-alt": "{:%Y-%m-%d(%a) %H:%M}",
@@ -387,9 +407,9 @@
         "locale": "ja_JP.UTF-8",
         "calendar": {
             "start-day": "sunday",
-            "mode"          : "month",
+            "mode"          : "year",
             "mode-mon-col"  : 3,
-            "weeks-pos"     : "right",
+            "weeks-pos"     : "",
             "on-scroll"     : 1,
             "on-click-right": "mode",
             "format": {
@@ -422,24 +442,24 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": " {ipaddr}/{cidr}",
-        "tooltip-format": " {ifname} via {gwaddr}",
-        "format-linked": " {ifname} (No IP)",
+        "format-ethernet": "🌐 {ipaddr}/{cidr}",
+        "tooltip-format": "🖧 {ifname} via {gwaddr}",
+        "format-linked": "🖧 {ifname} (No IP)",
         "format-disconnected": " ⚠ Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth": "{volume}% {icon}ᚼᛒ{format_source}",
+        "format-bluetooth-muted": "🔇{icon}ᚼᛒ{format_source}",
+        "format-muted": "🔇 {format_source}",
         "format-source": "{volume}% ",
         "format-source-muted": "",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
+            "headphone": "🎧",
+            "hands-free": "🎧",
+            "headset": "🎧",
             "phone": "",
             "portable": "",
             "car": "",

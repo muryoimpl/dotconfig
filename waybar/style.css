@@ -9,7 +9,7 @@
 @define-color blue #7aa2f7;
 @define-color magenta #bb9af7;
 @define-color cyan #7dcfff;
-@define-color white #a9b1d6;
+@define-color white #ffffff; /* #a9b1d6; */
 @define-color orange #ff9e64;
 
 /* Module-specific colors */
@@ -22,7 +22,7 @@
 /* Text and border colors for modules */
 @define-color mode-color @orange;
 @define-color playerctl-color @magenta;
-@define-color clock-color @blue;
+@define-color clock-color @foreground;
 @define-color cpu-color @green;
 @define-color memory-color @magenta;
 @define-color temperature-color @yellow;
@@ -41,21 +41,21 @@
 @define-color quote-color @green;
 @define-color idle-inhibitor-color @foreground;
 @define-color idle-inhibitor-active-color @red;
-@define-color keyboard-state-color
+@define-color keyboard-state-color @foreground;
 
 * {
     border: none;
     border-radius: 0;
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 16px;
+    font-family: HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-size: 18px;
     min-height: 0;
 }
 
 
 
 /* Common module styling with border-bottom */
-#mode, #clock, #cpu, #backlight, #disk, #workspaces,
+#mode, #clock, #cpu, #backlight, #disk,
 #memory, #temperature, #battery, #network, #pulseaudio,
 #idle_inhibitor, #tray, #tags, #keyboard-state, #language {
     padding: 0 5px;
@@ -63,7 +63,7 @@
 }
 
 window#waybar {
-    backgroud-color: @background;
+    background-color: @background;
     color: @foreground;
     transition-property: background-color;
     transition-duration: .5s;
@@ -71,17 +71,12 @@ window#waybar {
 }
 
 window#waybar.hidden {
-    opacity: 0.2;
+    /* opacity: 0.2; */
 }
 
 #workspaces button, #tags button {
     background-color: transparent;
     color: @workspaces-color;
-}
-
-#workspaces button:hover, #tags button:hover {
-    background: @background-light;
-    box-shadow: inherit;
 }
 
 #workspaces button.focused, #tags button.focused, #tags button.occupied {
@@ -181,8 +176,7 @@ window#waybar.hidden {
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: #000000;
+        background-color: #24283b;
     }
 }
 
@@ -197,7 +191,8 @@ window#waybar.hidden {
 }
 
 #tray {
-    background-color: transparent;
+    /* background-color: transparent; */
+    background-color: @background-light;
     padding: 0 10px;
     margin: 0 2px;
 }
