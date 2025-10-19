@@ -241,6 +241,15 @@ require("lazy").setup({
   },
   {
     "folke/trouble.nvim",
+    opts = {},
+    cmd = "Trouble",
+    keys = {
+      {
+        "<space>O",
+        "<cmd>Trouble diagnostics toggle<cr>",
+        desc = "Diagnostics (Trouble)",
+      },
+    },
     config = function()
       require("trouble").setup({
         mode = 'document_diagnostics',
@@ -248,9 +257,6 @@ require("lazy").setup({
         auto_close = true,
         use_diagnostic_signs = true,
       })
-      vim.keymap.set("n", "<space>O", "<cmd>Trouble diagnostics toggle<cr>",
-        { silent = true, noremap = true }
-      )
     end
   },
   {
