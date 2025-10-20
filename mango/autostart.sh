@@ -26,4 +26,7 @@ fcitx5 -d
 1password --silent &
 
 # bluetooth
-blueman-applet
+blueman-applet &
+
+# screen layout
+~/.screenlayout/default.sh &
