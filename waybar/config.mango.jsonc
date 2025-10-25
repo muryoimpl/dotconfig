@@ -7,7 +7,7 @@
     "spacing": 1, // Gaps between modules (4px)
     "margin": 0,
     "modules-left": [
-      "ext/workspaces",
+      "dwl/tags",
       "tray"
     ],
     "modules-center": [
@@ -139,7 +139,7 @@
     "spacing": 1,
     "mergin": 0,
     "modules-left": [
-      "ext/workspaces",
+      "dwl/tags",
       "tray"
     ],
     "modules-center": [
@@ -238,7 +238,7 @@
     "margin": 0,
     "modules-left": [
       "battery",
-      "ext/workspaces",
+      "dwl/tags",
       "tray"
     ],
     "modules-center": [
