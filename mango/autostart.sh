@@ -52,6 +52,3 @@ blueman-applet >/dev/null 2>&1 &
 
 # change light and volume value by swayosd-client
 swayosd-server >/dev/null 2>&1 &
-
-# launcher
-~/.config/rofi/rofi_cmd.sh >/dev/null 2>&1 &
