@@ -84,7 +84,8 @@ window#waybar.hidden {
 
 #workspaces button.focused, #tags button.focused {
     box-shadow: inset 0 -2px @workspaces-focused-fg;
-    color: @workspaces-focused-fg;
+    background-color: @white;
+    color: @black;
     font-weight: 900;
 }
 
