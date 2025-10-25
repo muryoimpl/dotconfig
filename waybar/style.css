@@ -1,6 +1,5 @@
 @define-color background #1a1b26;
 @define-color background-light #24283b;
-/* @define-color foreground #c0caf5; */
 @define-color foreground #ffffff;
 @define-color black #15161e;
 @define-color red #f7768e;
@@ -11,6 +10,7 @@
 @define-color cyan #7dcfff;
 @define-color white #ffffff; /* #a9b1d6; */
 @define-color orange #ff9e64;
+@define-color cloudy #c0caf5;
 
 /* Module-specific colors */
 @define-color workspaces-color @foreground;
@@ -18,6 +18,7 @@
 @define-color workspaces-focused-fg @cyan;
 @define-color workspaces-urgent-bg @red;
 @define-color workspaces-urgent-fg @black;
+@define-color workspaces-occupied @cloudy;
 
 /* Text and border colors for modules */
 @define-color mode-color @orange;
@@ -81,9 +82,15 @@ window#waybar.hidden {
     margin: 0 2px;
 }
 
-#workspaces button.focused, #tags button.focused, #tags button.occupied {
+#workspaces button.focused, #tags button.focused {
     box-shadow: inset 0 -2px @workspaces-focused-fg;
     color: @workspaces-focused-fg;
+    font-weight: 900;
+}
+
+#tags button.occupied:not(.focused) {
+    box-shadow: inset 0 -2px @workspaces-occupied;
+    color: @workspaces-occupied;
     font-weight: 900;
 }
 
