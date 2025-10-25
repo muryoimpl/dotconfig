@@ -54,4 +54,4 @@ blueman-applet >/dev/null 2>&1 &
 swayosd-server >/dev/null 2>&1 &
 
 # launcher
-walker --gapplication-service >/dev/null 2>&1 &
+~/.config/rofi/rofi_cmd.sh >/dev/null 2>&1 &
