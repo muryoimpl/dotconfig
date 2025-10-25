@@ -45,7 +45,7 @@ fcitx5 -d >/dev/null 2>&1 &
 blueman-applet >/dev/null 2>&1 &
 
 # screen layout
-~/.screenlayout/default.sh >/dev/null 2>&1 &
+~/.config/screenlayout/default.sh >/dev/null 2>&1 &
 
 # Permission authentication
 /usr/lib/xfce-polkit/xfce-polkit >/dev/null 2>&1 &
