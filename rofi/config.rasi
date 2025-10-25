@@ -19,11 +19,12 @@
 
 configuration {
     font: "HackGen Console NF bold 18";
-    modi: "drun";
+    combi-modes: "window,run,clipboard,ssh,drun,keys,emoji:rofimoji";
     show-icons: true;
     sort: true;
     sorting-method:"fzf";
     display-drun: " ";
+    case-sensitive: false;
 }
 
 listview {
