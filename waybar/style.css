@@ -77,6 +77,8 @@ window#waybar.hidden {
 #workspaces button, #tags button {
     background-color: transparent;
     color: @workspaces-color;
+    padding: 0 5px;
+    margin: 0 2px;
 }
 
 #workspaces button.focused, #tags button.focused, #tags button.occupied {
