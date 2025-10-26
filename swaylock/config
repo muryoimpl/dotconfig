@@ -17,4 +17,4 @@ key-hl-color=3daee9
 clock
 datestr=%Y-%m-%d %a
 
-image=/usr/share/pixmaps/arch-25.png
+image=~/.config/swaylock/arch-linux-wallpaper.jpg
