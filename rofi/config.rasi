@@ -19,7 +19,7 @@
 
 configuration {
     font: "HackGen Console NF bold 18";
-    combi-modes: "window,run,clipboard,ssh,drun,keys,emoji:rofimoji";
+    combi-modes: "window,run,clipboard,ssh,drun,keys";
     show-icons: true;
     sort: true;
     sorting-method:"fzf";
