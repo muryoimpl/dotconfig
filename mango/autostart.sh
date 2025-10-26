@@ -52,3 +52,6 @@ blueman-applet >/dev/null 2>&1 &
 
 # change light and volume value by swayosd-client
 swayosd-server >/dev/null 2>&1 &
+
+# idle configuration
+swayidle -w >/dev/null 2>&1 &
