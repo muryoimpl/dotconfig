@@ -126,10 +126,10 @@
     },
     "custom/notification": {
       "tooltip": true,
-      "format": "<span size='12pt'>{0}{icon}</span>",
+      "format": "<span size='12pt'>{icon}</span>",
       "format-icons": {
         "notification": "🔔",
-        "none": "🔔",
+        "none": "🟦",
         "dnd-notification": "🔕",
         "dnd-none": "🔕",
         "inhibited-notification": "🔕",
@@ -245,10 +245,10 @@
     },
     "custom/notification": {
       "tooltip": true,
-      "format": "<span size='12pt'>{0}{icon}</span>",
+      "format": "<span size='12pt'>{icon}</span>",
       "format-icons": {
         "notification": "🔔",
-        "none": "🔔",
+        "none": "🟦",
         "dnd-notification": "🔕",
         "dnd-none": "🔕",
         "inhibited-notification": "🔕",
@@ -412,10 +412,10 @@
     },
    "custom/notification": {
       "tooltip": true,
-      "format": "<span size='12pt'>{0}{icon}</span>",
+      "format": "<span size='12pt'>{icon}</span>",
       "format-icons": {
         "notification": "🔔",
-        "none": "🔔",
+        "none": "🟦",
         "dnd-notification": "🔕",
         "dnd-none": "🔕",
         "inhibited-notification": "🔕",
