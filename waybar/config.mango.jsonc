@@ -14,7 +14,7 @@
     "modules-center": [
       "dwl/window"
     ],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock", "custom/notification"],
     "ext/workspaces": {
       "format": "{icon}",
       "format-icons": {
@@ -123,6 +123,26 @@
       "interval": 30,
       "format": "Disk: {percentage_used}%",
       "path": "/"
+    },
+    "custom/notification": {
+      "tooltip": true,
+      "format": "<span size='12pt'>{0}{icon}</span>",
+      "format-icons": {
+        "notification": "🔔",
+        "none": "🔔",
+        "dnd-notification": "🔕",
+        "dnd-none": "🔕",
+        "inhibited-notification": "🔕",
+        "inhibited-none": "🔕",
+        "dnd-inhibited-notification": "🔕",
+        "dnd-inhibited-none": "🔕",
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "sway-client -t -sw",
+      "on-click-right": "sway-client -d -sw",
+      "escape": true,
     }
   },
   {
@@ -140,7 +160,7 @@
     "modules-center": [
       "dwl/window"
     ],
-    "modules-right": ["cpu", "memory", "disk", "temperature", "clock"],
+    "modules-right": ["cpu", "memory", "disk", "temperature", "clock", "custom/notification"],
     "ext/workspaces": {
       "format": "{icon}",
       "format-icons": {
@@ -222,6 +242,26 @@
       "interval": 30,
       "format": "Disk: {percentage_used}%",
       "path": "/"
+    },
+    "custom/notification": {
+      "tooltip": true,
+      "format": "<span size='12pt'>{0}{icon}</span>",
+      "format-icons": {
+        "notification": "🔔",
+        "none": "🔔",
+        "dnd-notification": "🔕",
+        "dnd-none": "🔕",
+        "inhibited-notification": "🔕",
+        "inhibited-none": "🔕",
+        "dnd-inhibited-notification": "🔕",
+        "dnd-inhibited-none": "🔕",
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "sway-client -t -sw",
+      "on-click-right": "sway-client -d -sw",
+      "escape": true
     }
   },
   {
@@ -240,7 +280,7 @@
     "modules-center": [
       "dwl/window"
     ],
-    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock"],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock", "custom/notification"],
     "ext/workspaces": {
       "format": "{icon}",
       "format-icons": {
@@ -369,6 +409,26 @@
       "format-charging": "{capacity}% {icon}",
       "format-plugged ": "{icon}",
       "max-length": 25
+    },
+   "custom/notification": {
+      "tooltip": true,
+      "format": "<span size='12pt'>{0}{icon}</span>",
+      "format-icons": {
+        "notification": "🔔",
+        "none": "🔔",
+        "dnd-notification": "🔕",
+        "dnd-none": "🔕",
+        "inhibited-notification": "🔕",
+        "inhibited-none": "🔕",
+        "dnd-inhibited-notification": "🔕",
+        "dnd-inhibited-none": "🔕",
+      },
+      "return-type": "json",
+      "exec-if": "which swaync-client",
+      "exec": "swaync-client -swb",
+      "on-click": "sway-client -t -sw",
+      "on-click-right": "sway-client -d -sw",
+      "escape": true
     }
   },
 ]

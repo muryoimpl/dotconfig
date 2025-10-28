@@ -216,3 +216,8 @@ window#waybar.hidden {
     color: @red;
     border-bottom-color: @red;
 }
+
+#custom-notification {
+    font-family: HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    color: @magenta;
+}
