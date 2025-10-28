@@ -230,8 +230,7 @@ require("lazy").setup({
     config = function()
       mason_lspconfig = require('mason-lspconfig').setup({
         -- ensure_installed = { "ts_ls", "eslint", "gopls", },
-        ensure_installed = { "ruby_lsp", "rubocop", },
-        automatic_installation = true,
+        ensure_installed = { "ruby_lsp", "rubocop", }
       })
     end
   },
