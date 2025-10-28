@@ -1,2 +1,2 @@
 #! /bin/bash
-grim -l 0 -g "$(slurp)" -o ~/Pictures/Screenshots/screenshot_$(date +%Y%m%d_%H%M%S).png"
+slurp | grim -l 0 -g - ~/Pictures/screenshots/screenshot_$(date +%Y%m%d_%H%M%S).png
