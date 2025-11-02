@@ -280,7 +280,7 @@
     "modules-center": [
       "dwl/window"
     ],
-    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock", "custom/notification"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/notification"],
     "ext/workspaces": {
       "format": "{icon}",
       "format-icons": {
@@ -359,20 +359,19 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-wifi": " ",
         "format-ethernet": "🌐 {ipaddr}/{cidr}",
-        "tooltip-format": "🖧 {ifname} via {gwaddr}",
+        "tooltip-format": "🖧 {essid} ({signalStrength}%) {ifname} via {gwaddr}",
         "format-linked": "🖧 {ifname} (No IP)",
         "format-disconnected": " ⚠ Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon}ᚼᛒ{format_source}",
+        "format": "{icon}  {volume}% {format_source}", "format-bluetooth": "{volume}% {icon}ᚼᛒ{format_source}",
         "format-bluetooth-muted": "🔇{icon}ᚼᛒ{format_source}",
         "format-muted": "🔇 {format_source}",
-        "format-source": "{volume}% ",
+        "format-source": " {volume}%",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "🎧",
@@ -383,7 +382,9 @@
             "car": "",
             "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
+        "on-click": "pavucontrol",
+        "tooltip": true,
+        "tooltip-format": "{icon}  {volume}% \n{format_source}"
     },
     "disk": {
       "interval": 30,
