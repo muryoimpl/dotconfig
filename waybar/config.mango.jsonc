@@ -340,12 +340,12 @@
         }
     },
     "cpu": {
-        "format": "CPU:{usage}%",
+        "format": ":{usage}%",
         "interval": 1,
         "tooltip": true
     },
     "memory": {
-        "format": "Mem: {}%",
+        "format": ":{}%",
         "interval": 1,
         "tooltip": true
     },
@@ -388,7 +388,7 @@
     },
     "disk": {
       "interval": 30,
-      "format": "Disk: {percentage_used}%",
+      "format": "🖴:{percentage_used}%",
       "path": "/"
     },
     "backlight": {
