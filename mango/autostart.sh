@@ -55,3 +55,5 @@ swayosd-server >/dev/null 2>&1 &
 
 # idle configuration
 swayidle -w >/dev/null 2>&1 &
+
+tailscale systray >/dev/null 2>&1 &
