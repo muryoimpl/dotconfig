@@ -280,7 +280,7 @@
     "modules-center": [
       "dwl/window"
     ],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/notification"],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/notification"],
     "ext/workspaces": {
       "format": "{icon}",
       "format-icons": {
@@ -392,11 +392,13 @@
       "path": "/"
     },
     "backlight": {
-      // "device": "intel_backlight",
+      "device": "amdgpu_bl1",
       "format": "{percent}% {icon}",
       "format-icons": ["", ""],
       "on-scroll-up": "brightnessctl set +5%",
-      "on-scroll-down": "brightnessctl set 5%-"
+      "on-scroll-down": "brightnessctl set 5%-",
+      "on-click": "brightnessctl set +5%",
+      "on-click-right": "brightnessctl set 5%-"
     },
     "battery": {
       "interval": 60,
