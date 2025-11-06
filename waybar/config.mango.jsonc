@@ -360,8 +360,10 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": " ",
-        "format-ethernet": "🌐 {ipaddr}/{cidr}",
+        "format-ethernet": "🌐",
         "tooltip-format": "🖧 {essid} ({signalStrength}%) {ifname} via {gwaddr}",
+        "tooltip-format-wifi": "  {essid} ({signalStrength}%) {ifname} via {gwaddr}",
+        "tooltip-format-ethernet": "🌐 {ipaddr}/{cidr}",
         "format-linked": "🖧 {ifname} (No IP)",
         "format-disconnected": " ⚠ Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
