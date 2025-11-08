@@ -350,7 +350,7 @@ color "    Tested-by"    yellow  default
 color "    Reviewed-by"    yellow  default
 color default      default  default  normal
 color cursor      white  black bold
-# color cursor      white  green  bold
+color cursor-blur white  black  bold
 color status      green  default
 color delimiter      magenta  default
 color date      blue  default
@@ -364,7 +364,7 @@ color file      default  default
 color grep.file      blue  default
 color file-size      default  default
 color line-number    cyan  default
-color title-blur    white  blue
+color title-blur    black blue bold
 color title-focus    white  blue  bold
 color main-commit    default  default
 color main-tag      magenta  default  bold
