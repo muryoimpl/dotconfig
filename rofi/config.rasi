@@ -25,6 +25,11 @@ configuration {
     sorting-method:"fzf";
     display-drun: " ";
     case-sensitive: false;
+
+    kb-remove-to-eol: "";
+    kb-accept-entry: "Control+m,Return,KP_Enter";
+    kb-row-up: "Control+k,Up";
+    kb-row-down: "Control+j,Down";
 }
 
 listview {
