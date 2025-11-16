@@ -1,3 +1,4 @@
 nvim/plugin
 wayvnc/*.pem
 nvim/lazy-lock.json
+yazi/plugins/*
