@@ -57,7 +57,7 @@ syntect_theme = ""
 
 [tabs]
 active   = { bg = "blue", bold = true }
-inactive = { fg = "blue", bg = "gray" }
+inactive = { fg = "blue", bg = "black" }
 
 # Separator
 sep_inner = { open = "", close = "" }
@@ -70,15 +70,15 @@ sep_outer = { open = "", close = "" }
 
 [mode]
 normal_main = { bg = "blue", bold = true }
-normal_alt  = { fg = "blue", bg = "gray" }
+normal_alt  = { fg = "blue", bg = "black" }
 
 # Select mode
 select_main = { bg = "red", bold = true }
-select_alt  = { fg = "red", bg = "gray" }
+select_alt  = { fg = "red", bg = "black" }
 
 # Unset mode
 unset_main = { bg = "red", bold = true }
-unset_alt  = { fg = "red", bg = "gray" }
+unset_alt  = { fg = "red", bg = "black" }
 
 # : }}}
 
