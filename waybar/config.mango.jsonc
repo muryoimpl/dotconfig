@@ -16,7 +16,7 @@
     ],
     "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock", "custom/notification"],
     "dwl/tags": {
-      "num-tags": 5,
+      "num-tags": 9,
       "disable-click": false
     },
     "tray": {
@@ -142,7 +142,7 @@
     ],
     "modules-right": ["cpu", "memory", "disk", "temperature", "clock", "custom/notification"],
     "dwl/tags": {
-      "num-tags": 5,
+      "num-tags": 9,
       "disable-click": false
     },
     "tray": {
@@ -251,7 +251,7 @@
       "max-length": 25
     },
     "dwl/tags": {
-      "num-tags": 5,
+      "num-tags": 9,
       "disable-click": false
     },
     "tray": {
