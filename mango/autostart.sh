@@ -16,7 +16,7 @@
 
 set +e
 
-swaybg -i ~/.config/mango/Ju5PuBC-arch-linux-wallpaper.jpg -m fill >/dev/null 2>&1 &
+~/.config/mango/bin/awww.sh >/dev/null 2>&1 &
 
 waybar -c ~/.config/waybar/config.mango.jsonc -s ~/.config/waybar/style.css >/dev/null 2>&1 &
 
