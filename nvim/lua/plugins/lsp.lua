@@ -1,5 +1,5 @@
-local lspconfig = require('lspconfig')
-local util = require('lspconfig/util')
+-- local lspconfig = require('lspconfig')
+-- local util = require('lspconfig/util')
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 ---@diagnostic disable:undefined-global
 -- https://zenn.dev/botamotch/articles/21073d78bc68bf

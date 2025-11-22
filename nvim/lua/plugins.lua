@@ -101,19 +101,6 @@ require("lazy").setup({
   { 'AndreM222/copilot-lualine' },
   { 'nvim-tree/nvim-web-devicons' },
   {
-    'tomiis4/BufferTabs.nvim',
-    dependencies = { 'nvim-tree/nvim-web-devicons' },
-    config = function()
-      require("buffertabs").setup({
-        border = 'single',
-        padding = 0,
-        display = 'column',
-        horizontal = 'right',
-        vertical = 'center',
-      })
-    end,
-  },
-  {
     "sontungexpt/stcursorword",
     event = "VeryLazy",
     config = function()
@@ -130,15 +117,6 @@ require("lazy").setup({
         },
       })
     end,
-  },
-  {
-    'stevearc/aerial.nvim',
-    opts = {},
-    -- Optional dependencies
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      "nvim-tree/nvim-web-devicons"
-    },
   },
   {
     "folke/todo-comments.nvim",
@@ -222,7 +200,15 @@ require("lazy").setup({
     'williamboman/mason.nvim',
     build = ':MasonUpdate',
     config = function()
-      require('mason').setup()
+      require('mason').setup({
+        ui = {
+          icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗"
+          }
+        }
+      })
     end
   },
   {
@@ -235,10 +221,6 @@ require("lazy").setup({
     end
   },
   {
-    'neovim/nvim-lspconfig',
-    event = { "BufReadPre", "BufNewFile" },
-  },
-  {
     "folke/trouble.nvim",
     opts = {},
     cmd = "Trouble",
@@ -247,6 +229,11 @@ require("lazy").setup({
         "<space>O",
         "<cmd>Trouble diagnostics toggle<cr>",
         desc = "Diagnostics (Trouble)",
+      },
+      {
+        "<space>o",
+        "<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+        desc = "Diagnostics in current buffer (Trouble)",
       },
     },
     config = function()
@@ -276,6 +263,19 @@ require("lazy").setup({
         init = function()
           require("hover.providers.lsp")
         end,
+        providers = {
+          'hover.providers.diagnostic',
+          'hover.providers.lsp',
+          'hover.providers.dap',
+          'hover.providers.man',
+          'hover.providers.dictionary',
+          -- Optional, disabled by default:
+          -- 'hover.providers.gh',
+          -- 'hover.providers.gh_user',
+          -- 'hover.providers.jira',
+          -- 'hover.providers.fold_preview',
+          -- 'hover.providers.highlight',
+        },
         preview_opts = {
           border = nil,
         },
@@ -467,7 +467,6 @@ require("lazy").setup({
   },
   {
     "CopilotC-Nvim/CopilotChat.nvim",
-    branch = "main",
     build = "make tiktoken",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
@@ -478,25 +477,19 @@ require("lazy").setup({
 
       require("CopilotChat").setup({
         -- Shared config starts here (can be passed to functions at runtime and configured via setup function)
+        system_prompt = require('CopilotChat.config.prompts').COPILOT_INSTRUCTIONS.system_prompt,
 
-        system_prompt = 'COPILOT_INSTRUCTIONS', -- System prompt to use (can be specified manually in prompt via /).
-
-        model = 'gpt-4o', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
-        agent = 'copilot', -- Default agent to use, see ':CopilotChatAgents' for available agents (can be specified manually in prompt via @).
-        context = nil, -- Default context or array of contexts to use (can be specified manually in prompt via #).
+        model = 'Claude Sonnet 4.5', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+        tools = nil,
+        resources = 'selection',
         sticky = nil, -- Default sticky prompt or array of sticky prompts to use at start of every new chat.
+        diff = 'block',
+        language = '日本語',
 
         temperature = 0.1, -- GPT result temperature
         headless = false, -- Do not write to chat buffer and use history (useful for using custom processing)
-        stream = nil, -- Function called when receiving stream updates (returned string is appended to the chat buffer)
         callback = nil, -- Function called when full response is received (retuned string is stored to history)
         remember_as_sticky = true, -- Remember model/agent/context as sticky prompts when asking questions
-
-        -- default selection
-        -- see select.lua for implementation
-        selection = function(source)
-          return select.visual(source) or select.buffer(source)
-        end,
 
         -- default window options
         window = {
@@ -529,21 +522,36 @@ require("lazy").setup({
         proxy = nil, -- [protocol://]host[:port] Use this proxy
         allow_insecure = false, -- Allow insecure server connections
 
+        selection = 'visual',
         chat_autocomplete = true, -- Enable chat autocompletion (when disabled, requires manual `mappings.complete` trigger)
 
         log_path = vim.fn.stdpath('state') .. '/CopilotChat.log', -- Default path to log file
         history_path = vim.fn.stdpath('data') .. '/copilotchat_history', -- Default path to stored history
 
-        question_header = '# User ', -- Header to use for user questions
-        answer_header = '# Copilot ', -- Header to use for AI answers
-        error_header = '# Error ', -- Header to use for errors
+        headers = {
+          user = 'User', -- Header to use for user questions
+          assistant = 'Copilot', -- Header to use for AI answers
+          tool = 'Tool', -- Header to use for tool calls
+        },
+
         separator = '───', -- Separator to use in chat
 
+        -- default providers
+        providers = require('CopilotChat.config.providers'),
+
+        -- default functions
+        functions = require('CopilotChat.config.functions'),
+
+        -- default prompts
+        -- prompts = require('CopilotChat.config.prompts'),
+
+        -- default mappings
+        mappings = require('CopilotChat.config.mappings'),
         -- prompts
         -- see config/prompts.lua for implementation
         prompts = {
           Explain = {
-            prompt = '上記のコードの説明を段落を使って書いてください。',
+            prompt = 'このコードの説明を段落を使って書いてください。',
             system_prompt = 'COPILOT_EXPLAIN',
           },
           Review = {
@@ -551,7 +559,7 @@ require("lazy").setup({
             system_prompt = 'COPILOT_REVIEW',
           },
           Tests = {
-            prompt = '上記のコードの詳細な単体テストを書いてください。',
+            prompt = 'このコードの詳細な単体テストを書いてください。',
           },
           Fix = {
             prompt = 'このコードには問題があります。バグを修正したコードに書き換えてください。',
@@ -571,62 +579,6 @@ require("lazy").setup({
             context = 'git:staged',
           },
         },
-
-        -- default mappings
-        -- see config/mappings.lua for implementation
-        mappings = {
-          complete = {
-            insert = '<Tab>',
-          },
-          close = {
-            normal = 'q',
-            insert = '<C-c>',
-          },
-          reset = {
-            normal = '<C-l>',
-            insert = '<C-l>',
-          },
-          submit_prompt = {
-            normal = '<C-s>',
-            insert = '<C-s>',
-          },
-          toggle_sticky = {
-            normal = 'grr',
-          },
-          clear_stickies = {
-            normal = 'grx',
-          },
-          accept_diff = {
-            normal = '<C-y>',
-            insert = '<C-y>',
-          },
-          jump_to_diff = {
-            normal = 'gj',
-          },
-          quickfix_answers = {
-            normal = 'gqa',
-          },
-          quickfix_diffs = {
-            normal = 'gqd',
-          },
-          yank_diff = {
-            normal = 'gy',
-            register = '"', -- Default register to use for yanking
-          },
-          show_diff = {
-            normal = 'gd',
-            full_diff = false, -- Show full diff instead of unified diff when showing diff window
-          },
-          show_info = {
-            normal = 'gi',
-          },
-          show_context = {
-            normal = 'gc',
-          },
-          show_help = {
-            normal = 'gh',
-          },
-        },
       })
 
       vim.api.nvim_create_autocmd('BufEnter', {
@@ -635,10 +587,14 @@ require("lazy").setup({
           vim.opt_local.relativenumber = true
         end
       })
+
+      -- copilot window toggle
+      vim.keymap.set("n", "<Space>cp", ":CopilotChatToggle<CR>", {desc = "Copilot window toggle"})
     end
   },
   {
     "jackMort/ChatGPT.nvim",
+    event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
       "nvim-lua/plenary.nvim",
@@ -650,11 +606,18 @@ require("lazy").setup({
       local actions_path = home .. "/.config/nvim/lua/plugins/actions.json"
       -- chatbot
       require("chatgpt").setup({
+        api_key_cmd = "op read op://Personal/dw6mpz3jltp4qxfqlfe4okehci/credential --no-newline",
+        openai_params = {
+          model = "Claude Sonnet 4.5",
+          frequency_penalty = 0,
+          presence_penalty = 0,
+          max_tokens = 4095,
+          temperature = 0.2,
+          top_p = 0.1,
+          n = 1,
+        },
         popup_input = {
           submit = "<C-s>",
-        },
-        openai_params = {
-          model = "gpt-4o"
         },
         actions_paths = {
           actions_path
@@ -669,23 +632,23 @@ require("lazy").setup({
     },
     config = true,
     keys = {
-      { "<space>a", nil, desc = "AI/Claude Code" },
-      { "<space>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-      { "<space>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-      { "<space>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-      { "<space>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-      { "<space>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-      { "<space>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-      { "<space>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
+      { "<space>c", nil, desc = "AI/Claude Code" },
+      { "<space>cc", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+      { "<space>cf", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+      { "<space>cr", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
+      { "<space>cC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+      { "<space>cm", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+      { "<space>cb", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+      { "<space>cs", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
       {
-        "<space>as",
+        "<space>cs",
         "<cmd>ClaudeCodeTreeAdd<cr>",
         desc = "Add file",
         ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
       },
       -- Diff management
-      { "<space>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-      { "<space>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
+      { "<space>ca", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+      { "<space>cd", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
     },
   },
   {
@@ -699,7 +662,7 @@ require("lazy").setup({
   },
 
   {
-    'nvim-telescope/telescope.nvim', tag = '0.1.8', branch = '0.1.x',
+    'nvim-telescope/telescope.nvim', tag = '0.1.9',
     dependencies = {
       "nvim-lua/plenary.nvim"
     },
@@ -748,17 +711,10 @@ vim.cmd([[
   endfor
 ]])
 
--- aerial
-vim.cmd([[
-  hi AerialLineNC gui=reverse cterm=reverse
-  hi AerialLine   gui=reverse cterm=reverse
-]])
-
 require('plugins.lualine')
 require('plugins.telescope')
 require('plugins.lsp')
 --require('plugins.efm')
 require('plugins.null_ls')
 require('plugins.cmp')
-require('plugins.aerial')
 require('plugins.bqf')
