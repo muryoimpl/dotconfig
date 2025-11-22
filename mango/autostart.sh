@@ -18,7 +18,8 @@ set +e
 
 ~/.config/mango/bin/awww.sh >/dev/null 2>&1 &
 
-waybar -c ~/.config/waybar/config.mango.jsonc -s ~/.config/waybar/style.css >/dev/null 2>&1 &
+~/.config/mango/bin/waybar.sh >/dev/null 2>&1 &
+# waybar -c ~/.config/waybar/config.mango.jsonc -s ~/.config/waybar/style.css >/dev/null 2>&1 &
 
 # message
 swaymsg layout default >/dev/null 2>&1 &
