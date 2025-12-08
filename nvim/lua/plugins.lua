@@ -606,7 +606,6 @@ require("lazy").setup({
       local actions_path = home .. "/.config/nvim/lua/plugins/actions.json"
       -- chatbot
       require("chatgpt").setup({
-        api_key_cmd = "op read op://Personal/dw6mpz3jltp4qxfqlfe4okehci/credential --no-newline",
         openai_params = {
           model = "Claude Sonnet 4.5",
           frequency_penalty = 0,
