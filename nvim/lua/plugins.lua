@@ -470,14 +470,14 @@ require("lazy").setup({
     build = "make tiktoken",
     dependencies = {
       { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log wrapper
     },
     config = function ()
       local select = require("CopilotChat.select")
 
       require("CopilotChat").setup({
         -- Shared config starts here (can be passed to functions at runtime and configured via setup function)
-        system_prompt = require('CopilotChat.config.prompts').COPILOT_INSTRUCTIONS.system_prompt,
+        system_prompt = require('CopilotChat.config').system_prompt,
 
         model = 'Claude Sonnet 4.5', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
         tools = nil,
@@ -537,16 +537,16 @@ require("lazy").setup({
         separator = '───', -- Separator to use in chat
 
         -- default providers
-        providers = require('CopilotChat.config.providers'),
+        providers = require('CopilotChat.config').providers,
 
         -- default functions
-        functions = require('CopilotChat.config.functions'),
+        functions = require('CopilotChat.config').functions,
 
         -- default prompts
         -- prompts = require('CopilotChat.config.prompts'),
 
         -- default mappings
-        mappings = require('CopilotChat.config.mappings'),
+        mappings = require('CopilotChat.config').mappings,
         -- prompts
         -- see config/prompts.lua for implementation
         prompts = {
