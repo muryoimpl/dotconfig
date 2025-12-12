@@ -195,6 +195,7 @@ require("lazy").setup({
   },
 
   -- lsp
+  { 'neovim/nvim-lspconfig' },
   { 'arkav/lualine-lsp-progress' },
   {
     'williamboman/mason.nvim',
@@ -216,7 +217,7 @@ require("lazy").setup({
     config = function()
       mason_lspconfig = require('mason-lspconfig').setup({
         -- ensure_installed = { "ts_ls", "eslint", "gopls", },
-        ensure_installed = { "ruby_lsp", "rubocop", }
+        ensure_installed = { "ruby_lsp", "rubocop", "gopls"}
       })
     end
   },
