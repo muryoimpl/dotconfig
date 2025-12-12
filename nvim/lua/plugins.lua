@@ -681,6 +681,53 @@ require("lazy").setup({
       vim.keymap.set({ "n", "t" }, "<space>T", term_map.toggle)
     end
   },
+  {
+    'mfussenegger/nvim-dap',
+    config = function()
+      local dap = require('dap')
+
+      vim.keymap.set("n", "<F5>",      function() dap.continue() end,                                                    { silent= true })
+      vim.keymap.set("n", "<F10>",     function() dap.step_over() end,                                                   { silent= true })
+      vim.keymap.set("n", "<F11>",     function() dap.step_into() end,                                                   { silent= true })
+      vim.keymap.set("n", "<F12>",     function() dap.step_out() end,                                                    { silent= true })
+      vim.keymap.set("n", "<Space>tb", function() dap.toggle_breakpoint() end,                                           { silent= true })
+      vim.keymap.set("n", "<Space>bc", function() dap.set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,        { silent= true })
+      vim.keymap.set("n", "<Space>lg", function() dap.set_breakpoint(nil, nil, vim.fn.input('Log point message: ')) end, { silent= true })
+    end
+  },
+  {
+    'rcarriga/nvim-dap-ui',
+    dependencies = { 'mfussenegger/nvim-dap', 'nvim-neotest/nvim-nio' },
+    config = function()
+
+      local dapui = require('dapui')
+      vim.keymap.set("n", "<Space>du", function() dapui.toggle() end, { silent = true })
+      vim.keymap.set("n", "<Space>de", function() dapui.eval() end,   { silent = true })
+    end
+  },
+  {
+    'leoluz/nvim-dap-go',
+    dependencies = { 'mfussenegger/nvim-dap' },
+    config = function()
+      local dap_go = require('dap-go')
+
+      dap_go.setup({
+        dap_configurations = {
+          {
+            type = 'go',
+            name = 'Debug (Build Flags)',
+            request = 'launch',
+            program = '${file}',
+            args = dap_go.get_arguments,
+            buildFlags = dap_go.get_build_flags,
+          },
+        },
+      })
+
+      -- dap-go key map
+      vim.keymap.set("n", "<Space>dt", function() dap_go.debug_test() end,  { silent = true })
+    end
+  }
 },
 {
   ui = {
