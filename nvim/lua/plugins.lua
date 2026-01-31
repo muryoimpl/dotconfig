@@ -727,6 +727,16 @@ require("lazy").setup({
       -- dap-go key map
       vim.keymap.set("n", "<Space>dt", function() dap_go.debug_test() end,  { silent = true })
     end
+  },
+  {
+      'MeanderingProgrammer/render-markdown.nvim',
+      dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+      ---@module 'render-markdown'
+      ---@type render.md.UserConfig
+      opts = {},
+      config = function()
+        vim.keymap.set("n", "<space>mk", function() require('render-markdown').toggle() end,  { silent = true })
+      end
   }
 },
 {
