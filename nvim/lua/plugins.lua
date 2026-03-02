@@ -466,165 +466,165 @@ require("lazy").setup({
       require("copilot_cmp").setup()
     end
   },
-  {
-    "CopilotC-Nvim/CopilotChat.nvim",
-    build = "make tiktoken",
-    dependencies = {
-      { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-      { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log wrapper
-    },
-    config = function ()
-      local select = require("CopilotChat.select")
-
-      require("CopilotChat").setup({
-        -- Shared config starts here (can be passed to functions at runtime and configured via setup function)
-        system_prompt = require('CopilotChat.config').system_prompt,
-
-        model = 'Claude Sonnet 4.5', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
-        tools = nil,
-        resources = 'selection',
-        sticky = nil, -- Default sticky prompt or array of sticky prompts to use at start of every new chat.
-        diff = 'block',
-        language = '日本語',
-
-        temperature = 0.1, -- GPT result temperature
-        headless = false, -- Do not write to chat buffer and use history (useful for using custom processing)
-        callback = nil, -- Function called when full response is received (retuned string is stored to history)
-        remember_as_sticky = true, -- Remember model/agent/context as sticky prompts when asking questions
-
-        -- default window options
-        window = {
-          layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace', or a function that returns the layout
-          width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
-          height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
-          -- Options below only apply to floating windows
-          relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
-          border = 'single', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
-          row = nil, -- row position of the window, default is centered
-          col = nil, -- column position of the window, default is centered
-          title = 'Copilot Chat', -- title of chat window
-          footer = nil, -- footer of chat window
-          zindex = 1, -- determines if window is on top or below other floating windows
-        },
-
-        show_help = true, -- Shows help message as virtual lines when waiting for user input
-        highlight_selection = true, -- Highlight selection
-        highlight_headers = true, -- Highlight headers in chat, disable if using markdown renderers (like render-markdown.nvim)
-        references_display = 'virtual', -- 'virtual', 'write', Display references in chat as virtual text or write to buffer
-        auto_follow_cursor = true, -- Auto-follow cursor in chat
-        auto_insert_mode = false, -- Automatically enter insert mode when opening window and on new prompt
-        insert_at_end = false, -- Move cursor to end of buffer when inserting text
-        clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
-
-        -- Static config starts here (can be configured only via setup function)
-
-        debug = false, -- Enable debug logging (same as 'log_level = 'debug')
-        log_level = 'info', -- Log level to use, 'trace', 'debug', 'info', 'warn', 'error', 'fatal'
-        proxy = nil, -- [protocol://]host[:port] Use this proxy
-        allow_insecure = false, -- Allow insecure server connections
-
-        selection = 'visual',
-        chat_autocomplete = true, -- Enable chat autocompletion (when disabled, requires manual `mappings.complete` trigger)
-
-        log_path = vim.fn.stdpath('state') .. '/CopilotChat.log', -- Default path to log file
-        history_path = vim.fn.stdpath('data') .. '/copilotchat_history', -- Default path to stored history
-
-        headers = {
-          user = 'User', -- Header to use for user questions
-          assistant = 'Copilot', -- Header to use for AI answers
-          tool = 'Tool', -- Header to use for tool calls
-        },
-
-        separator = '───', -- Separator to use in chat
-
-        -- default providers
-        providers = require('CopilotChat.config').providers,
-
-        -- default functions
-        functions = require('CopilotChat.config').functions,
-
-        -- default prompts
-        -- prompts = require('CopilotChat.config.prompts'),
-
-        -- default mappings
-        mappings = require('CopilotChat.config').mappings,
-        -- prompts
-        -- see config/prompts.lua for implementation
-        prompts = {
-          Explain = {
-            prompt = 'このコードの説明を段落を使って書いてください。',
-            system_prompt = 'COPILOT_EXPLAIN',
-          },
-          Review = {
-            prompt = '選択したコードをレビューしてください。',
-            system_prompt = 'COPILOT_REVIEW',
-          },
-          Tests = {
-            prompt = 'このコードの詳細な単体テストを書いてください。',
-          },
-          Fix = {
-            prompt = 'このコードには問題があります。バグを修正したコードに書き換えてください。',
-          },
-          Optimize = {
-            prompt = '選択したコードを最適化し、パフォーマンスと可読性を向上させてください。また、実施した最適化の戦略と、変更することによる利点を説明してください。',
-          },
-          Docs = {
-            prompt = '選択したコードのドキュメントを書いてください。回答は、ドキュメントをコメントとして追加した元のコードを含むコードブロックでなければなりません。使用するプログラミング言語に最も適したドキュメントスタイルを使用してください（例：RubyのRDoc、JavaScriptのJSDocなど）',
-          },
-          Commit = {
-            prompt = 'コミットメッセージをコミット規約に従って記述します。タイトルは最大25文字で、メッセージは36文字で折り返す。メッセージ全体をgitcommit言語でコードブロックにまとめでください。',
-            context = 'git:staged',
-          },
-          CommitEn = {
-            prompt = 'Write commit message for the change with commitizen convention in English. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
-            context = 'git:staged',
-          },
-        },
-      })
-
-      vim.api.nvim_create_autocmd('BufEnter', {
-        pattern = 'copilot-*',
-        callback = function()
-          vim.opt_local.relativenumber = true
-        end
-      })
-
-      -- copilot window toggle
-      vim.keymap.set("n", "<Space>cp", ":CopilotChatToggle<CR>", {desc = "Copilot window toggle"})
-    end
-  },
-  {
-    "jackMort/ChatGPT.nvim",
-    event = "VeryLazy",
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "folke/trouble.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
-    config = function()
-      local home = vim.fn.expand("$HOME")
-      local actions_path = home .. "/.config/nvim/lua/plugins/actions.json"
-      -- chatbot
-      require("chatgpt").setup({
-        openai_params = {
-          model = "Claude Sonnet 4.5",
-          frequency_penalty = 0,
-          presence_penalty = 0,
-          max_tokens = 4095,
-          temperature = 0.2,
-          top_p = 0.1,
-          n = 1,
-        },
-        popup_input = {
-          submit = "<C-s>",
-        },
-        actions_paths = {
-          actions_path
-        },
-      })
-    end
-  },
+-- {
+--   "CopilotC-Nvim/CopilotChat.nvim",
+--   build = "make tiktoken",
+--   dependencies = {
+--     { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+--     { "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log wrapper
+--   },
+--   config = function ()
+--     local select = require("CopilotChat.select")
+--
+--     require("CopilotChat").setup({
+--       -- Shared config starts here (can be passed to functions at runtime and configured via setup function)
+--       system_prompt = require('CopilotChat.config').system_prompt,
+--
+--       model = 'Claude Sonnet 4.5', -- Default model to use, see ':CopilotChatModels' for available models (can be specified manually in prompt via $).
+--       tools = nil,
+--       resources = 'selection',
+--       sticky = nil, -- Default sticky prompt or array of sticky prompts to use at start of every new chat.
+--       diff = 'block',
+--       language = '日本語',
+--
+--       temperature = 0.1, -- GPT result temperature
+--       headless = false, -- Do not write to chat buffer and use history (useful for using custom processing)
+--       callback = nil, -- Function called when full response is received (retuned string is stored to history)
+--       remember_as_sticky = true, -- Remember model/agent/context as sticky prompts when asking questions
+--
+--       -- default window options
+--       window = {
+--         layout = 'vertical', -- 'vertical', 'horizontal', 'float', 'replace', or a function that returns the layout
+--         width = 0.5, -- fractional width of parent, or absolute width in columns when > 1
+--         height = 0.5, -- fractional height of parent, or absolute height in rows when > 1
+--         -- Options below only apply to floating windows
+--         relative = 'editor', -- 'editor', 'win', 'cursor', 'mouse'
+--         border = 'single', -- 'none', single', 'double', 'rounded', 'solid', 'shadow'
+--         row = nil, -- row position of the window, default is centered
+--         col = nil, -- column position of the window, default is centered
+--         title = 'Copilot Chat', -- title of chat window
+--         footer = nil, -- footer of chat window
+--         zindex = 1, -- determines if window is on top or below other floating windows
+--       },
+--
+--       show_help = true, -- Shows help message as virtual lines when waiting for user input
+--       highlight_selection = true, -- Highlight selection
+--       highlight_headers = true, -- Highlight headers in chat, disable if using markdown renderers (like render-markdown.nvim)
+--       references_display = 'virtual', -- 'virtual', 'write', Display references in chat as virtual text or write to buffer
+--       auto_follow_cursor = true, -- Auto-follow cursor in chat
+--       auto_insert_mode = false, -- Automatically enter insert mode when opening window and on new prompt
+--       insert_at_end = false, -- Move cursor to end of buffer when inserting text
+--       clear_chat_on_new_prompt = false, -- Clears chat on every new prompt
+--
+--       -- Static config starts here (can be configured only via setup function)
+--
+--       debug = false, -- Enable debug logging (same as 'log_level = 'debug')
+--       log_level = 'info', -- Log level to use, 'trace', 'debug', 'info', 'warn', 'error', 'fatal'
+--       proxy = nil, -- [protocol://]host[:port] Use this proxy
+--       allow_insecure = false, -- Allow insecure server connections
+--
+--       selection = 'visual',
+--       chat_autocomplete = true, -- Enable chat autocompletion (when disabled, requires manual `mappings.complete` trigger)
+--
+--       log_path = vim.fn.stdpath('state') .. '/CopilotChat.log', -- Default path to log file
+--       history_path = vim.fn.stdpath('data') .. '/copilotchat_history', -- Default path to stored history
+--
+--       headers = {
+--         user = 'User', -- Header to use for user questions
+--         assistant = 'Copilot', -- Header to use for AI answers
+--         tool = 'Tool', -- Header to use for tool calls
+--       },
+--
+--       separator = '───', -- Separator to use in chat
+--
+--       -- default providers
+--       providers = require('CopilotChat.config').providers,
+--
+--       -- default functions
+--       functions = require('CopilotChat.config').functions,
+--
+--       -- default prompts
+--       -- prompts = require('CopilotChat.config.prompts'),
+--
+--       -- default mappings
+--       mappings = require('CopilotChat.config').mappings,
+--       -- prompts
+--       -- see config/prompts.lua for implementation
+--       prompts = {
+--         Explain = {
+--           prompt = 'このコードの説明を段落を使って書いてください。',
+--           system_prompt = 'COPILOT_EXPLAIN',
+--         },
+--         Review = {
+--           prompt = '選択したコードをレビューしてください。',
+--           system_prompt = 'COPILOT_REVIEW',
+--         },
+--         Tests = {
+--           prompt = 'このコードの詳細な単体テストを書いてください。',
+--         },
+--         Fix = {
+--           prompt = 'このコードには問題があります。バグを修正したコードに書き換えてください。',
+--         },
+--         Optimize = {
+--           prompt = '選択したコードを最適化し、パフォーマンスと可読性を向上させてください。また、実施した最適化の戦略と、変更することによる利点を説明してください。',
+--         },
+--         Docs = {
+--           prompt = '選択したコードのドキュメントを書いてください。回答は、ドキュメントをコメントとして追加した元のコードを含むコードブロックでなければなりません。使用するプログラミング言語に最も適したドキュメントスタイルを使用してください（例：RubyのRDoc、JavaScriptのJSDocなど）',
+--         },
+--         Commit = {
+--           prompt = 'コミットメッセージをコミット規約に従って記述します。タイトルは最大25文字で、メッセージは36文字で折り返す。メッセージ全体をgitcommit言語でコードブロックにまとめでください。',
+--           context = 'git:staged',
+--         },
+--         CommitEn = {
+--           prompt = 'Write commit message for the change with commitizen convention in English. Make sure the title has maximum 50 characters and message is wrapped at 72 characters. Wrap the whole message in code block with language gitcommit.',
+--           context = 'git:staged',
+--         },
+--       },
+--     })
+--
+--     vim.api.nvim_create_autocmd('BufEnter', {
+--       pattern = 'copilot-*',
+--       callback = function()
+--         vim.opt_local.relativenumber = true
+--       end
+--     })
+--
+--     -- copilot window toggle
+--     vim.keymap.set("n", "<Space>cp", ":CopilotChatToggle<CR>", {desc = "Copilot window toggle"})
+--   end
+-- },
+-- {
+--   "jackMort/ChatGPT.nvim",
+--   event = "VeryLazy",
+--   dependencies = {
+--     "MunifTanjim/nui.nvim",
+--     "nvim-lua/plenary.nvim",
+--     "folke/trouble.nvim",
+--     "nvim-telescope/telescope.nvim",
+--   },
+--   config = function()
+--     local home = vim.fn.expand("$HOME")
+--     local actions_path = home .. "/.config/nvim/lua/plugins/actions.json"
+--     -- chatbot
+--     require("chatgpt").setup({
+--       openai_params = {
+--         model = "Claude Sonnet 4.5",
+--         frequency_penalty = 0,
+--         presence_penalty = 0,
+--         max_tokens = 4095,
+--         temperature = 0.2,
+--         top_p = 0.1,
+--         n = 1,
+--       },
+--       popup_input = {
+--         submit = "<C-s>",
+--       },
+--       actions_paths = {
+--         actions_path
+--       },
+--     })
+--   end
+-- },
   {
     "coder/claudecode.nvim",
     dependencies = {
