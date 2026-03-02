@@ -120,6 +120,7 @@ telescope.setup({
       theme = "ivy",
       hidden = true,
       no_ignore = true,
+      follow_symlinks = true,
       hijack_netrw = false,
       prompt_prefix="🔍 ",
       mappings = {
