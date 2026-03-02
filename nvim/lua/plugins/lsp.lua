@@ -42,6 +42,33 @@ local capabilities = cmp_nvim_lsp.default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
 
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "ruby",
+  callback = function(args)
+    local root_dir = vim.fs.root(args.buf, { "Gemfile", ".rubocop.yml" })
+    if not root_dir then return end
+
+    local cmd = { "rubocop", "--lsp" }
+    local gemfile = root_dir .. "/Gemfile"
+    if vim.fn.filereadable(gemfile) == 1 then
+      local lines = vim.fn.readfile(gemfile)
+      for _, line in ipairs(lines) do
+        if line:match("gem%s+['\"]rubocop") then
+          cmd = { "bundle", "exec", "rubocop", "--lsp" }
+          break
+        end
+      end
+    end
+
+    vim.lsp.start({
+      name = "rubocop",
+      cmd = cmd,
+      root_dir = root_dir,
+      capabilities = capabilities,
+    })
+  end,
+})
+
 vim.lsp.config("lua_ls", {
   cappabilities = capabilities,
   settings = {
