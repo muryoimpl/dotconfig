@@ -83,6 +83,26 @@ vim.lsp.config("lua_ls", {
   },
 })
 
+local cspell_config_path = ".cspell/cspell.config.yml"
+vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+  group = vim.api.nvim_create_augroup("CspellLsp", {}),
+  callback = function(args)
+    local root = vim.fs.root(args.buf, { ".git" })
+    if not root then return end
+    if vim.fn.filereadable(root .. "/" .. cspell_config_path) ~= 1 then return end
+
+    vim.lsp.start({
+      name = "cspell_ls",
+      cmd = { "cspell-lsp", "--stdio" },
+      root_dir = root,
+      capabilities = capabilities,
+      init_options = {
+        config = cspell_config_path,
+      },
+    })
+  end,
+})
+
 -- LSP handlers
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
