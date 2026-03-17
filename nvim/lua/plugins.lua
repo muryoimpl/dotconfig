@@ -52,31 +52,6 @@ require("lazy").setup({
       { "<Space>sm", "<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split" }
     },
   },
-  {
-    "klen/nvim-test", config = function()
-      require("nvim-test").setup({
-        silent = true,
-        termOpts = {
-          direction = "horizontal",
-          stopinsert = false,
-        },
-      })
-
-      -- vim-test のキーマッピングを継承する
-      local t_opts = { noremap = true, silent = true }
-      vim.api.nvim_set_keymap('n', '<space>tn', "<cmd>:TestNearest<CR>", t_opts);
-      vim.api.nvim_set_keymap('n', '<space>tf', "<cmd>:TestFile<CR>",    t_opts);
-      vim.api.nvim_set_keymap('n', '<space>ts', "<cmd>:TestSuite<CR>",   t_opts);
-      vim.api.nvim_set_keymap('n', '<space>tl', "<cmd>:TestLast<CR>",    t_opts);
-      vim.api.nvim_set_keymap('n', '<space>tg', "<cmd>:TestVisit<CR>",   t_opts);
-
-      require('nvim-test.runners.rspec'):setup({
-        command = "bundle",
-        file_pattern = "\\v(spec_[^.]+|[^.]+_spec)\\.rb$",
-        find_files = { "{name}_spec.rb" },
-      })
-    end
-  },
   -- { 'soramugi/auto-ctags.vim' },
   {
     'lukas-reineke/indent-blankline.nvim',
