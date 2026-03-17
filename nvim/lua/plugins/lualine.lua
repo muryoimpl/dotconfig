@@ -28,7 +28,7 @@ local filetype_opts = { 'filetype', icons_enabled = false }
 local lsp_name_opts = {
   function()
     local msg = 'none'
-    local buf_clients = vim.lsp.buf_get_clients()
+    local buf_clients = vim.lsp.get_clients()
     if next(buf_clients) == nil then
       return msg
     end
