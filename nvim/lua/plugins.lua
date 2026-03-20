@@ -303,6 +303,7 @@ require("lazy").setup({
   {
     'nvim-treesitter/nvim-treesitter',
     build = ':TSUpdate',
+    lazy = false,
     config = function()
       require('nvim-treesitter').setup({
         sync_install = false,
@@ -339,15 +340,18 @@ require("lazy").setup({
           "javascript",
           "json",
           "lua",
-          "python",
-          "ruby",
-          "rust",
-          "typescript",
-          "yaml",
-          "sql",
           "markdown",
           "markdown_inline",
+          "python",
+          "rbs",
+          "regex",
+          "ruby",
+          "rust",
+          "sql",
+          "tmux",
+          "toml",
           "typescript",
+          "yaml",
         },
       })
     end,
