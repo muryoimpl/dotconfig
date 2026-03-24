@@ -719,6 +719,39 @@ require("lazy").setup({
       config = function()
         vim.keymap.set("n", "<space>mk", function() require('render-markdown').toggle() end,  { silent = true })
       end
+  },
+  {
+    'muryoimpl/daily-memo',
+    cmd = { "DailyMemo" },
+    config = function()
+      require("daily-memo").setup({
+        base_dir = "~/local/memo",
+        template = "# {{date}}\n\n## TODO\n\n- \n\n## MEMO\n",
+        -- template = table.concat({
+        --   "# {{yyyymmdd}}",
+        --   "",
+        --   "## 日報",
+        --   "",
+        --   "```",
+        --   "{{date_ja}}",
+        --   "- やったこと",
+        --   "  - ",
+        --   "  -",
+        --   "- やること",
+        --   "  - ",
+        --   "- 詰まっていること・気づき",
+        --   "  - ",
+        --   "- 一言コメント",
+        --   "  - ",
+        --   "",
+        --   "",
+        --   "```",
+        --   "",
+        --   "## その他",
+        --   "",
+        -- }, "\n"),
+      })
+    end,
   }
 },
 {
