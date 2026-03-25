@@ -722,7 +722,6 @@ require("lazy").setup({
   },
   {
     'muryoimpl/daily-memo',
-    cmd = { "DailyMemo" },
     config = function()
       require("daily-memo").setup({
         base_dir = "~/local/memo",
@@ -751,6 +750,7 @@ require("lazy").setup({
         --   "",
         -- }, "\n"),
       })
+      vim.keymap.set("n", "<space>dm", function() require("daily-memo").open() end, {})
     end,
   }
 },
