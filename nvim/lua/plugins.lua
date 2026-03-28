@@ -360,7 +360,6 @@ require("lazy").setup({
   -- git
   {
     'tpope/vim-fugitive',
-    keys = { "<space>gb" },
     config = function()
       vim.cmd([[
         nnoremap <Space>gd :<C-u>Gdiff<Enter>
