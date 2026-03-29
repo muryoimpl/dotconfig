@@ -34,7 +34,7 @@ local lsp_name_opts = {
     end
 
     local buf_client_names = {}
-    for _, client in ipairs(vim.lsp.get_active_clients { bufnr = 0 }) do
+    for _, client in ipairs(vim.lsp.get_clients { bufnr = 0 }) do
       table.insert(buf_client_names, client.name)
     end
 
