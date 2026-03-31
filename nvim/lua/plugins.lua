@@ -767,6 +767,7 @@ require("lazy").setup({
 
       vim.g["test#go#runner"] = "delve"
 
+      -- vim.g["test#ruby#rspec#executable"] = "docker compose run --rm web bundle exec rspec"
       vim.g["test#ruby#rspec#options"] = {
         all = "--backtrace",
         suite = "--tag ~slow",
