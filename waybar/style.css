@@ -222,3 +222,10 @@ window#waybar.hidden {
     font-family: HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     color: @magenta;
 }
+
+#custom-power {
+    font-family: HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    color: @cloudy;
+    margin: 0 5px 3px 5px;
+    font-size: 145%;
+}
