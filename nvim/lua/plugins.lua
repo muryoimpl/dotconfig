@@ -751,6 +751,27 @@ require("lazy").setup({
       })
       vim.keymap.set("n", "<space>dm", function() require("daily-memo").open() end, {})
     end,
+  },
+  {
+    "vim-test/vim-test",
+    keys = {
+      { "<space>tn", "<cmd>TestNearest<cr>" },
+      { "<space>tf", "<cmd>TestFile<cr>" },
+      { "<space>ts", "<cmd>TestSuite<cr>" },
+      { "<space>tl", "<cmd>TestLast<cr>" },
+    },
+    init = function()
+      vim.g["test#preserve_screen"] = 1
+      vim.g["test#strategy"] = "neovim_sticky"
+      vim.g["test#neovim#term_position"] = "botright 15"
+
+      vim.g["test#go#runner"] = "delve"
+
+      vim.g["test#ruby#rspec#options"] = {
+        all = "--backtrace",
+        suite = "--tag ~slow",
+      }
+    end,
   }
 },
 {
