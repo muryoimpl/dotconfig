@@ -30,14 +30,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- Show sign
--- アイコンはここから選んだ https://www.nerdfonts.com/cheat-sheet
-local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
-for type, icon in pairs(signs) do
-  local hl = "DiagnosticSign" .. type
-  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-end
-
 local capabilities = cmp_nvim_lsp.default_capabilities(
   vim.lsp.protocol.make_client_capabilities()
 )
@@ -112,9 +104,24 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
     underline = false,
   }
 )
+-- Show sign
+-- アイコンはここから選んだ https://www.nerdfonts.com/cheat-sheet
 vim.diagnostic.config({
   virtual_text = false,
-  signs = true,
+  signs = {
+    text = {
+      [vim.diagnostic.severity.ERROR] = " ",
+      [vim.diagnostic.severity.WARN] = " ",
+      [vim.diagnostic.severity.HINT] = " ",
+      [vim.diagnostic.severity.INFO] = " ",
+    },
+    numhl = {
+      [vim.diagnostic.severity.ERROR] = "DiagnosticLineNrError",
+      [vim.diagnostic.severity.WARN] = "DiagnosticLineNrWarn",
+      [vim.diagnostic.severity.INFO] = "DiagnosticLineNrInfo",
+      [vim.diagnostic.severity.HINT] = "DiagnosticLineNrHint",
+    },
+  },
   update_in_insert = true,
   underline = false,
 })
@@ -124,9 +131,4 @@ vim.cmd [[
   highlight! DiagnosticLineNrWarn guibg=#51412A guifg=#FFA500 gui=bold
   highlight! DiagnosticLineNrInfo guibg=#1E535D guifg=#00FFFF gui=bold
   highlight! DiagnosticLineNrHint guibg=#1E205D guifg=#0000FF gui=bold
-
-  sign define DiagnosticSignError text= texthl=DiagnosticSignError linehl= numhl=DiagnosticLineNrError
-  sign define DiagnosticSignWarn text= texthl=DiagnosticSignWarn linehl= numhl=DiagnosticLineNrWarn
-  sign define DiagnosticSignInfo text= texthl=DiagnosticSignInfo linehl= numhl=DiagnosticLineNrInfo
-  sign define DiagnosticSignHint text= texthl=DiagnosticSignHint linehl= numhl=DiagnosticLineNrHint
 ]]
