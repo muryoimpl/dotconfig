@@ -753,6 +753,9 @@ require("lazy").setup({
       })
       vim.keymap.set("n", "<space>dm", function() require("daily-memo").open() end, {})
       vim.keymap.set("n", "<space>dw", "<cmd>DailyMemo work<CR>", { desc = "Open daily memo (work template)" } )
+
+      -- topic ファイルを作成する
+      vim.keymap.set("n", "<space>dT", function() require("daily-memo").prompt_topic() end, { desc = "DailyMemo: open topic" })
     end,
   },
   {
