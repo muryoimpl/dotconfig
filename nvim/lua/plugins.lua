@@ -724,10 +724,21 @@ require("lazy").setup({
     config = function()
       require("daily-memo").setup({
         base_dir = "~/local/memo",
+        placeholders = {
+          week = function(date) os.date('%W', os.time(date)) end,
+          wday = function(date)
+            local names = { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" }
+            return names[date.wday]
+          end,
+          wday_ja = function(date)
+            local names = { "日", "月", "火", "水", "木", "金", "土" }
+            return names[date.wday]
+          end,
+        },
         templates = {
-          default = "# {{date}}\n\n## TODO\n\n- \n\n## MEMO\n",
+          default = "# {{date}}({{ wday }}): 第 {{ week }} 週\n\n## TODO\n\n- \n\n## MEMO\n",
           work = table.concat({
-            "# {{yyyymmdd}}",
+            "# {{yyyymmdd}}({{ wday_ja }}): 第 {{ week }} 週",
             "",
             "## 日報",
             "",
