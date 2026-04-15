@@ -95,15 +95,6 @@ vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
   end,
 })
 
--- LSP handlers
-vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  vim.lsp.diagnostic.on_publish_diagnostics, {
-    virtual_text = false,
-    signs = true,
-    update_in_insert = true,
-    underline = false,
-  }
-)
 -- Show sign
 -- アイコンはここから選んだ https://www.nerdfonts.com/cheat-sheet
 vim.diagnostic.config({
