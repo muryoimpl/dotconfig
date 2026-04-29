@@ -805,7 +805,13 @@ require("lazy").setup({
         suite = "--tag ~slow",
       }
     end,
-  }
+  },
+-- {
+--   'rcarriga/nvim-notify',
+--   config = function()
+--     vim.notify = require("notify")
+--   end
+-- }
 },
 {
   ui = {
