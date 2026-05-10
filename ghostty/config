@@ -5,5 +5,3 @@ font-size = 15
 
 cursor-style = block
 cursor-style-blink = true
-
-keybind = ctrl+o=unbind
