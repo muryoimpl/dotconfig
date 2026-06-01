@@ -806,6 +806,15 @@ require("lazy").setup({
       }
     end,
   },
+  {
+    "muryoimpl/git-utils.nvim",
+    dependencies = { "nvim-telescope/telescope.nvim" },
+    config = function()
+      vim.keymap.set("n", "<space>fw", "<cmd>Telescope git_utils worktrees<cr>", {
+        desc = "Git worktrees",
+      })
+    end,
+  }
 -- {
 --   'rcarriga/nvim-notify',
 --   config = function()

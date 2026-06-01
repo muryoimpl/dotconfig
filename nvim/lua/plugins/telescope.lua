@@ -161,6 +161,12 @@ telescope.setup({
         },
       },
     },
+    git_utils = {
+      cd_command = "cd",
+      prompt_prefix="🔍 ",
+      theme = "ivy",
+      theme_opts = {},
+    },
   },
 })
 
@@ -228,3 +234,5 @@ vim.api.nvim_set_keymap('n', '-', ":Telescope file_browser path=%:p:h<CR>", kopt
 -- end, kopts)
 
 telescope.load_extension("ui-select")
+
+telescope.load_extension("git_utils")

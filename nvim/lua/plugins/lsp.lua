@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
     keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
     keymap.set('n', 'K',  '<cmd>lua require("hover").hover()<CR>', opts)
-    keymap.set('n', 'Gf', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
+    keymap.set('n', 'gF', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
     keymap.set('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
     keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
     keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
