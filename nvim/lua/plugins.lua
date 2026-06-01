@@ -748,7 +748,7 @@ require("lazy").setup({
           end,
         },
         templates = {
-          default = "# {{date}}: 第 {{week}} 週\n\n## TODO\n\n- \n\n## MEMO\n",
+          default = "# {{date}}({{wday}}): 第 {{week}} 週\n\n## TODO\n\n- \n\n## MEMO\n",
           work = table.concat({
             "# {{yyyymmdd}}({{wday_ja}}): 第 {{week}} 週",
             "",
