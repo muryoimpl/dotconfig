@@ -1,0 +1,179 @@
+# herdr config
+# 既存の tmux/tmux.conf をベースに、同じような使用感で使えるよう設計。
+# 参照: https://herdr.dev/docs/configuration/
+
+# ==========================================================================
+# core
+# ==========================================================================
+[update]
+channel = "stable"
+
+[terminal]
+default_shell = "zsh"
+shell_mode    = "login"
+new_cwd       = "current"   # tmux の split 時 cwd 継承と揃える
+
+[worktrees]
+directory = "~/ghq/worktrees"
+
+[remote]
+manage_ssh_config = false
+
+[session]
+resume_agents_on_restore = true
+
+# ==========================================================================
+# keybindings — tmux.conf の bind を herdr にマップ
+# ==========================================================================
+[keys]
+# tmux: set -g prefix C-a
+prefix = "ctrl+a"
+
+# --- 設定リロード -----------------------------------------------------------
+# tmux: bind r source-file ~/.config/tmux/tmux.conf
+# reload_config を prefix+r に取り、resize_mode は退避
+reload_config = "prefix+r"
+resize_mode   = "prefix+ctrl+r"
+
+# --- tab (= tmux window) ---------------------------------------------------
+# tmux: bind Space choose-window
+switch_tab   = "prefix+space"
+# tmux: bind -r C-h/C-l select-window -t :-/+
+previous_tab = "prefix+ctrl+h"
+next_tab     = "prefix+ctrl+l"
+# tmux デフォルト系
+new_tab      = "prefix+c"
+close_tab    = "prefix+&"
+rename_tab   = "prefix+,"
+detach       = "prefix+d"
+# goto は "prefix+1..9" のデフォルト維持 (tmux base-index=1 相当)
+
+# --- pane 分割 -------------------------------------------------------------
+# tmux: bind | split-window -h (左右並び=分割線が縦)
+split_vertical   = "prefix+|"
+# tmux: bind - split-window -v (上下並び=分割線が横)
+split_horizontal = "prefix+-"
+
+# --- pane 移動 -------------------------------------------------------------
+# tmux: bind h/j/k/l select-pane
+focus_pane_left  = "prefix+h"
+focus_pane_down  = "prefix+j"
+focus_pane_up    = "prefix+k"
+focus_pane_right = "prefix+l"
+
+# --- pane rotation ---------------------------------------------------------
+# tmux: bind -n C-o select-pane -t :.+ (prefix なし)
+# 単独 ctrl+o が受理されない場合は "prefix+o" にフォールバック
+cycle_pane_next     = "ctrl+o"
+cycle_pane_previous = "prefix+shift+o"
+
+# --- その他 pane 操作 -------------------------------------------------------
+zoom       = "prefix+z"
+close_pane = "prefix+x"
+
+# --- copy mode -------------------------------------------------------------
+# tmux: bind v copy-mode
+# 開始キーのみカスタム可、mode 内の v/V/y/Enter/w/e/b/g/G/// は herdr 内蔵に一任
+copy_mode = "prefix+v"
+
+# ==========================================================================
+# custom commands — tmux で `[[keys.command]]` に置き換えるもの
+# ==========================================================================
+
+# tmux: bind T display-popup -w 80% -h 80% -d "#{pane_current_path}" "tig"
+# herdr に popup は無いので、現在 tab 内に新 pane で tig を起動して代替
+[[keys.command]]
+key         = "prefix+shift+t"
+type        = "pane"
+command     = "tig"
+description = "Open tig in a new pane (tmux popup 相当)"
+
+# tmux: bind -r H/J/K/L resize-pane 5
+# resize_mode に頼らず tmux 風の prefix+SHIFT+hjkl を維持
+[[keys.command]]
+key         = "prefix+shift+h"
+type        = "shell"
+command     = "herdr pane resize --direction left --amount 0.05 --current"
+description = "Resize pane left by 5% (tmux 風)"
+
+[[keys.command]]
+key         = "prefix+shift+j"
+type        = "shell"
+command     = "herdr pane resize --direction down --amount 0.05 --current"
+description = "Resize pane down by 5% (tmux 風)"
+
+[[keys.command]]
+key         = "prefix+shift+k"
+type        = "shell"
+command     = "herdr pane resize --direction up --amount 0.05 --current"
+description = "Resize pane up by 5% (tmux 風)"
+
+[[keys.command]]
+key         = "prefix+shift+l"
+type        = "shell"
+command     = "herdr pane resize --direction right --amount 0.05 --current"
+description = "Resize pane right by 5% (tmux 風)"
+
+# ==========================================================================
+# theme — tmux の bg=black + current-window bg=green に寄せる
+# ==========================================================================
+[theme]
+name        = "gruvbox"
+auto_switch = false
+
+[theme.custom]
+panel_bg = "#000000"   # tmux の完全な黒に寄せる
+green    = "#00cd00"   # alacritty 側の green と統一
+accent   = "#00cd00"
+
+# ==========================================================================
+# ui
+# ==========================================================================
+[ui]
+# tmux: set -g mouse on
+mouse_capture                     = true
+# tmux: set -g focus-event on
+redraw_on_focus_gained            = true
+pane_borders                      = true
+pane_gaps                         = 0
+# tmux 側の claude-window-flag.sh 相当を、herdr 内蔵 agent 検出で置き換える
+show_agent_labels_on_pane_borders = true
+agent_panel_sort                  = "activity"
+agent_panel_scope                 = "workspace"
+sidebar_width                     = 32
+confirm_close                     = true
+accent                            = "#00cd00"
+
+[ui.toast]
+delivery      = "herdr"
+delay_seconds = 3
+
+[ui.toast.herdr]
+position = "bottom-right"
+
+# tmux-yank 相当のコピー通知
+[ui.toast.clipboard]
+enabled  = true
+position = "bottom-right"
+
+[ui.sound]
+enabled = true
+
+# tmux の claude ハイライトの意図 (「見落とさない」) を音でも担保
+[ui.sound.agents]
+claude = "on"
+droid  = "off"
+
+# ==========================================================================
+# advanced / experimental
+# ==========================================================================
+[advanced]
+scrollback_limit_bytes = 10_485_760   # 10 MiB
+
+[experimental]
+allow_nested                        = false
+# tmux: set -g allow-passthrough on の代替 (画像プロトコル通し)
+kitty_graphics                      = true
+# 日本語 IME 対応
+cjk_ime_agents                      = true
+switch_ascii_input_source_in_prefix = false
