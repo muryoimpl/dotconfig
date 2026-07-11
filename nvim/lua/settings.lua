@@ -4,7 +4,6 @@ vim.opt.scrolloff = 5 -- スクロール時の余白確保
 vim.opt.hidden = true -- 編集中でも他のファイルを開けるようにする
 vim.opt.backspace = { 'indent', 'eol', 'start' } -- バックスペースで何でも消せる
 vim.opt.formatoptions = { 'lmoq' } -- テキスト整形オプション、マルチバイト系を追加
--- vim.opt.browsedir = 'buffer' -- Explorerの初期dir
 vim.opt.showcmd = true -- コマンド入力状況表示
 vim.opt.showmode = true -- 現在のモードを表示する
 vim.opt.number = true -- 行番号を表示
@@ -41,9 +40,6 @@ vim.opt.termguicolors = true
 -- gutter系signの表示
 vim.opt.signcolumn = "yes"
 
--- ambiguous width 対応
--- vim.opt.ambiwidth='double'
-
 vim.opt.guifont = 'HackGen Console NF:h12'
 
 -- clipboard
@@ -52,7 +48,6 @@ vim.cmd([[
   if has("mac")
     set clipboard^=unnamed
   else
-    "set clipboard^=unnamedplus
     set clipboard=unnamedplus
   end
 
@@ -75,7 +70,6 @@ vim.opt.shiftwidth = 2 -- シフト移動幅は2
 vim.opt.smarttab = true -- tabを打ち込むとshiftwidth分だけインデント
 vim.opt.smartindent = true -- 高度な自動インデント
 vim.opt.tabstop = 2 -- タブの表示を2に
-vim.opt.ts = 2 -- タブのスペースを２に
 vim.opt.showtabline = 2 -- "タブ表示を常に
 
 if (vim.g.vscode ) then

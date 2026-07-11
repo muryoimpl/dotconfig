@@ -52,7 +52,6 @@ require("lazy").setup({
       { "<Space>sm", "<cmd>MaximizerToggle<CR>", desc = "Maximize/minimize a split" }
     },
   },
-  -- { 'soramugi/auto-ctags.vim' },
   {
     'lukas-reineke/indent-blankline.nvim',
     main = "ibl",
@@ -267,11 +266,6 @@ require("lazy").setup({
       vim.keymap.set("n", "gK", require("hover").hover_select, {desc = "hover.nvim (select)"})
     end
   },
--- { -- 使う際は Mason から efm を再インストールすること
---   'creativenull/efmls-configs-nvim',
---   version = 'v1.x.x', -- version is optional, but recommended
---   dependencies = { 'neovim/nvim-lspconfig' },
--- },
   {
     'nvimtools/none-ls.nvim',
     dependencies = {
@@ -630,12 +624,6 @@ require("lazy").setup({
       })
     end,
   }
--- {
---   'rcarriga/nvim-notify',
---   config = function()
---     vim.notify = require("notify")
---   end
--- }
 },
 {
   ui = {
@@ -669,7 +657,6 @@ vim.cmd([[
 require('plugins.lualine')
 require('plugins.telescope')
 require('plugins.lsp')
---require('plugins.efm')
 require('plugins.null_ls')
 require('plugins.cmp')
 require('plugins.bqf')

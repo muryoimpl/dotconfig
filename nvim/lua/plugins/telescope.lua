@@ -63,7 +63,6 @@ telescope.setup({
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-c>"] = actions.close,
-        ["<C-c>"] = actions.close,
         ["q"] = actions.send_to_qflist + actions.open_qflist,
       },
     },
@@ -192,18 +191,6 @@ vim.keymap.set('n', '<space>hp', function() builtin.help_tags()                 
 vim.keymap.set('n', '<space>tr', function() builtin.treesitter()                end, kopts)
 vim.keymap.set('n', '<space>ma', function() builtin.man_pages()                 end, kopts)
 
--- local chat_actions = require("CopilotChat.actions")
--- local chat_telescope_integ = require("CopilotChat.integrations.telescope")
--- -- CopilotChat
--- vim.keymap.set( -- Show Copilot actions
---   "n",
---   "<space>cp",
---   function()
---     chat_telescope_integ.pick(chat_actions.prompt_actions())
---   end,
---   kopts
--- )
-
 -- https://github.com/nvim-telescope/telescope.nvim/issues/1923
 function vim.getVisualSelection()
   vim.cmd('noau normal! "vy"')
@@ -226,12 +213,6 @@ end, kopts)
 telescope.load_extension("file_browser")
 vim.api.nvim_set_keymap('n', '<space>fb', ":Telescope file_browser<CR>", kopts)
 vim.api.nvim_set_keymap('n', '-', ":Telescope file_browser path=%:p:h<CR>", kopts)
-
--- aerial.nvim
--- telescope.load_extension("aerial")
--- vim.keymap.set('n', 'ta<space>', function()
---   telescope.extensions.aerial.aerial(themes.get_ivy())
--- end, kopts)
 
 telescope.load_extension("ui-select")
 
