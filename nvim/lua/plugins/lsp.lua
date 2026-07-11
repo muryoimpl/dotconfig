@@ -23,8 +23,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     keymap.set('n', 'gn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
     keymap.set('n', 'ga', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     keymap.set('n', 'ge', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
-    keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
-    keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+    keymap.set('n', 'g]', '<cmd>lua vim.diagnostic.jump({ count = 1, float = true })<CR>', opts)
+    keymap.set('n', 'g[', '<cmd>lua vim.diagnostic.jump({ count = -1, float = true })<CR>', opts)
   end,
 })
 
