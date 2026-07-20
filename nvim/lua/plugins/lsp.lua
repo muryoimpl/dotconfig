@@ -1,8 +1,11 @@
 local cmp_nvim_lsp = require('cmp_nvim_lsp')
 ---@diagnostic disable:undefined-global
 -- https://zenn.dev/botamotch/articles/21073d78bc68bf
-
-require('mason').setup()
+--
+-- サーバーごとの設定は nvim/after/lsp/<サーバー名>.lua に置く。
+-- after/ 側は runtimepath の並びに関係なく nvim-lspconfig 同梱の
+-- デフォルト設定より後に読まれるため、上書きが確実になる。
+-- https://zenn.dev/ncdc/articles/e920f5306ff3de
 
 vim.api.nvim_create_autocmd("LspAttach", {
   group = vim.api.nvim_create_augroup("UserLspConfig", {}),
@@ -28,70 +31,15 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-local capabilities = cmp_nvim_lsp.default_capabilities(
-  vim.lsp.protocol.make_client_capabilities()
-)
-
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "ruby",
-  callback = function(args)
-    local root_dir = vim.fs.root(args.buf, { "Gemfile", ".rubocop.yml" })
-    if not root_dir then return end
-
-    local cmd = { "rubocop", "--lsp" }
-    local gemfile = root_dir .. "/Gemfile"
-    if vim.fn.filereadable(gemfile) == 1 then
-      local lines = vim.fn.readfile(gemfile)
-      for _, line in ipairs(lines) do
-        if line:match("gem%s+['\"]rubocop") then
-          cmd = { "bundle", "exec", "rubocop", "--lsp" }
-          break
-        end
-      end
-    end
-
-    vim.lsp.start({
-      name = "rubocop",
-      cmd = cmd,
-      root_dir = root_dir,
-      capabilities = capabilities,
-    })
-  end,
+-- 全サーバー共通の設定。"*" はファイルベースの解決対象外なのでここに書く。
+vim.lsp.config("*", {
+  capabilities = cmp_nvim_lsp.default_capabilities(
+    vim.lsp.protocol.make_client_capabilities()
+  ),
 })
 
-vim.lsp.config("lua_ls", {
-  cappabilities = capabilities,
-  settings = {
-    Lua = {
-      diagnostics = {
-        globals = { "vim" },
-      },
-      completion = {
-        callSnippet = "Replace",
-      }
-    },
-  },
-})
-
-local cspell_config_path = ".cspell/cspell.config.yml"
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-  group = vim.api.nvim_create_augroup("CspellLsp", {}),
-  callback = function(args)
-    local root = vim.fs.root(args.buf, { ".git" })
-    if not root then return end
-    if vim.fn.filereadable(root .. "/" .. cspell_config_path) ~= 1 then return end
-
-    vim.lsp.start({
-      name = "cspell_ls",
-      cmd = { "cspell-lsp", "--stdio" },
-      root_dir = root,
-      capabilities = capabilities,
-      init_options = {
-        config = cspell_config_path,
-      },
-    })
-  end,
-})
+-- gopls は mason-lspconfig の automatic_enable 任せ
+vim.lsp.enable({ "lua_ls", "ruby_lsp", "rubocop", "cspell_ls" })
 
 -- Show sign
 -- アイコンはここから選んだ https://www.nerdfonts.com/cheat-sheet
