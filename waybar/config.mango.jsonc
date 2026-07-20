@@ -66,7 +66,7 @@
         "format": ":{}%",
         "interval": 1,
         "tooltip": true,
-        "tooltip-format": "Memory: {used}/{total} ({percentage_used}% used)"
+        "tooltip-format": "Memory: {used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB ({swapPercentage}%)"
     },
     "disk": {
       "interval": 30,
@@ -167,7 +167,7 @@
         "format": ":{}%",
         "interval": 1,
         "tooltip": true,
-        "tooltip-format": "Memory: {used}/{total} ({percentage_used}% used)"
+        "tooltip-format": "Memory: {used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB ({swapPercentage}%)"
     },
     "disk": {
       "interval": 30,
@@ -317,7 +317,7 @@
         "format": ":{}%",
         "interval": 1,
         "tooltip": true,
-        "tooltip-format": "Memory: {used}/{total} ({percentage_used}% used)"
+        "tooltip-format": "Memory: {used:0.1f}GiB / {total:0.1f}GiB ({percentage}%)\nSwap: {swapUsed:0.1f}GiB / {swapTotal:0.1f}GiB ({swapPercentage}%)"
     },
     "disk": {
       "interval": 30,
