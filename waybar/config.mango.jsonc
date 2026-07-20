@@ -65,7 +65,8 @@
     "memory": {
         "format": ":{}%",
         "interval": 1,
-        "tooltip": true
+        "tooltip": true,
+        "tooltip-format": "Memory: {used}/{total} ({percentage_used}% used)"
     },
     "disk": {
       "interval": 30,
@@ -165,7 +166,8 @@
     "memory": {
         "format": ":{}%",
         "interval": 1,
-        "tooltip": true
+        "tooltip": true,
+        "tooltip-format": "Memory: {used}/{total} ({percentage_used}% used)"
     },
     "disk": {
       "interval": 30,
@@ -314,7 +316,8 @@
     "memory": {
         "format": ":{}%",
         "interval": 1,
-        "tooltip": true
+        "tooltip": true,
+        "tooltip-format": "Memory: {used}/{total} ({percentage_used}% used)"
     },
     "disk": {
       "interval": 30,
