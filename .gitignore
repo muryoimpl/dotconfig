@@ -2,3 +2,5 @@ nvim/plugin
 wayvnc/*.pem
 nvim/lazy-lock.json
 yazi/plugins/*
+# herdr は config と同じディレクトリに socket とログを作る (*.log は global ignore 済み)
+herdr/*.sock

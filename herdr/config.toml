@@ -11,7 +11,9 @@ channel = "stable"
 [terminal]
 default_shell = "zsh"
 shell_mode    = "login"
-new_cwd       = "current"   # tmux の split 時 cwd 継承と揃える
+# tmux の split 時 cwd 継承と揃える。
+# "current" は herdr プロセスの cwd を指すため継承にはならない ("follow" が継承)。
+new_cwd       = "follow"
 
 [worktrees]
 directory = "~/ghq/worktrees"
@@ -37,7 +39,11 @@ resize_mode   = "prefix+ctrl+r"
 
 # --- tab (= tmux window) ---------------------------------------------------
 # tmux: bind Space choose-window
-switch_tab   = "prefix+space"
+# 対応するのは herdr の navigate mode (= goto)。switch_tab は "1..9" 専用の
+# indexed binding で、それ以外を書くと binding ごと無効化される。
+goto         = "prefix+space"
+# tmux base-index=1 相当。prefix+1..9 でタブ直接切替
+switch_tab   = "prefix+1..9"
 # tmux: bind -r C-h/C-l select-window -t :-/+
 previous_tab = "prefix+ctrl+h"
 next_tab     = "prefix+ctrl+l"
@@ -46,7 +52,6 @@ new_tab      = "prefix+c"
 close_tab    = "prefix+&"
 rename_tab   = "prefix+,"
 detach       = "prefix+d"
-# goto は "prefix+1..9" のデフォルト維持 (tmux base-index=1 相当)
 
 # --- pane 分割 -------------------------------------------------------------
 # tmux: bind | split-window -h (左右並び=分割線が縦)
@@ -81,12 +86,15 @@ copy_mode = "prefix+v"
 # ==========================================================================
 
 # tmux: bind T display-popup -w 80% -h 80% -d "#{pane_current_path}" "tig"
-# herdr に popup は無いので、現在 tab 内に新 pane で tig を起動して代替
+# herdr の popup は tab レイアウトを変えない session-modal terminal で、
+# tmux の display-popup とほぼ同じ挙動になる
 [[keys.command]]
 key         = "prefix+shift+t"
-type        = "pane"
+type        = "popup"
 command     = "tig"
-description = "Open tig in a new pane (tmux popup 相当)"
+width       = "80%"
+height      = "80%"
+description = "Open tig in a popup (tmux display-popup 相当)"
 
 # tmux: bind -r H/J/K/L resize-pane 5
 # resize_mode に頼らず tmux 風の prefix+SHIFT+hjkl を維持
@@ -135,11 +143,13 @@ mouse_capture                     = true
 # tmux: set -g focus-event on
 redraw_on_focus_gained            = true
 pane_borders                      = true
-pane_gaps                         = 0
+# tmux は border のみでペイン間にギャップを作らない
+pane_gaps                         = false
 # tmux 側の claude-window-flag.sh 相当を、herdr 内蔵 agent 検出で置き換える
 show_agent_labels_on_pane_borders = true
-agent_panel_sort                  = "activity"
-agent_panel_scope                 = "workspace"
+# 有効値は spaces / workspaces / priority。
+# 「claude を見落とさない」意図には attention queue の priority が近い
+agent_panel_sort                  = "priority"
 sidebar_width                     = 32
 confirm_close                     = true
 accent                            = "#00cd00"
@@ -172,8 +182,14 @@ scrollback_limit_bytes = 10_485_760   # 10 MiB
 
 [experimental]
 allow_nested                        = false
-# tmux: set -g allow-passthrough on の代替 (画像プロトコル通し)
+# tmux: set -g allow-passthrough on の代替 (画像プロトコル通し)。
+# kitty graphics 対応端末でのみ効く (ghostty/kitty は対応、alacritty は非対応)
 kitty_graphics                      = true
-# 日本語 IME 対応
-cjk_ime_agents                      = true
+# 日本語 IME 対応。TUI が自前でカーソルを描く際に候補ウィンドウが追従するよう、
+# focus 中の pane のカーソルを外側端末に露出させる。
+# cjk_ime_agents は単体では効かず、reveal_hidden_cursor_for_cjk_ime の
+# allow-list として働く (空配列なら全 pane 対象)。
+reveal_hidden_cursor_for_cjk_ime    = true
+cjk_ime_agents                      = ["claude"]
+# macOS 専用のため Linux では無効
 switch_ascii_input_source_in_prefix = false
