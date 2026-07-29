@@ -7,24 +7,31 @@
     "spacing": 1, // Gaps between modules (4px)
     "margin": 0,
     "modules-left": [
-      "dwl/tags",
+      "mango/workspaces",
       "tray",
       "wlr/taskbar"
     ],
     "modules-center": [
-      "dwl/window"
+      "mango/layout",
+      "mango/window"
     ],
     "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock", "custom/notification", "custom/power"],
-    "dwl/tags": {
-      "num-tags": 9,
-      "disable-click": false
+    "mango/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "on-click-right": "toggle",
+        "overview-label": "OVERVIEW",
+    },
+    "mango/window": {
+      "format": "{title}",
+      "icon-size": 20
+    },
+    "mango/layout": {
+        "format": "[{symbol}] ",
     },
     "tray": {
         "icon-size": 18,
         "spacing": 5
-    },
-    "dwl/window": {
-        "format": "[{layout}]{title}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
@@ -139,24 +146,31 @@
     "spacing": 1,
     "mergin": 0,
     "modules-left": [
-      "dwl/tags",
+      "mango/workspaces",
       "tray",
       "wlr/taskbar"
     ],
     "modules-center": [
-      "dwl/window"
+      "mango/layout",
+      "mango/window"
     ],
     "modules-right": ["cpu", "memory", "disk", "temperature", "clock", "custom/notification"],
-    "dwl/tags": {
-      "num-tags": 9,
-      "disable-click": false
+    "mango/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "on-click-right": "toggle",
+        "overview-label": "OVERVIEW",
+    },
+    "mango/window": {
+      "format": "{title}",
+      "icon-size": 20
+    },
+    "mango/layout": {
+        "format": "[{symbol}] ",
     },
     "tray": {
         "icon-size": 18,
         "spacing": 5
-    },
-    "dwl/window": {
-        "format": "[{layout}]{title}"
     },
     "cpu": {
         "format": ":{usage}%",
@@ -258,10 +272,6 @@
       "format-plugged ": "{icon}",
       "max-length": 25
     },
-    "dwl/tags": {
-      "num-tags": 9,
-      "disable-click": false
-    },
     "mango/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
@@ -278,9 +288,6 @@
     "tray": {
         "icon-size": 18,
         "spacing": 5
-    },
-    "dwl/window": {
-        "format": "[{layout}]{title}"
     },
     "backlight": {
       "device": "amdgpu_bl1",
