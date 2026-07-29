@@ -58,7 +58,7 @@
 /* Common module styling with border-bottom */
 #mode, #clock, #cpu, #backlight, #disk,
 #memory, #temperature, #battery, #network, #pulseaudio,
-#idle_inhibitor, #tray, #tags, #keyboard-state, #language {
+#idle_inhibitor, #tray, #tags, #workspaces, #keyboard-state, #language {
     padding: 0 5px;
     margin: 0 2px;
 }
@@ -89,7 +89,10 @@ window#waybar.hidden {
     font-weight: 900;
 }
 
-#workspaces button.visible, #tags button.occupied:not(.focused) {
+/* occupied: dwl は .occupied、mango/sway/hyprland は .empty の否定で表す */
+#workspaces button.visible,
+#workspaces button:not(.empty):not(.active):not(.focused):not(.overview),
+#tags button.occupied:not(.focused) {
     box-shadow: inset 0 -2px @workspaces-occupied;
     color: @workspaces-occupied;
     font-weight: 900;
@@ -98,6 +101,14 @@ window#waybar.hidden {
 #workspaces button.urgent, #tags button.urgent {
     background-color: @workspaces-urgent-bg;
     color: @workspaces-urgent-fg;
+}
+
+/* mango の overview モード時に表示されるボタン。focused と同じ扱いにする */
+#workspaces button.overview {
+    box-shadow: inset 0 -2px @workspaces-focused-fg;
+    background-color: @white;
+    color: @black;
+    font-weight: 900;
 }
 
 #mode {

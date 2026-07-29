@@ -236,12 +236,13 @@
     "margin": 0,
     "modules-left": [
       "battery",
-      "dwl/tags",
+      "mango/workspaces",
       "tray",
       "wlr/taskbar"
     ],
     "modules-center": [
-      "dwl/window"
+      "mango/layout",
+      "mango/window"
     ],
     "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/notification", "custom/power"],
     "battery": {
@@ -260,6 +261,19 @@
     "dwl/tags": {
       "num-tags": 9,
       "disable-click": false
+    },
+    "mango/workspaces": {
+        "format": "{icon}",
+        "on-click": "activate",
+        "on-click-right": "toggle",
+        "overview-label": "OVERVIEW",
+    },
+    "mango/window": {
+      "format": "{title}",
+      "icon-size": 20
+    },
+    "mango/layout": {
+        "format": "[{symbol}] ",
     },
     "tray": {
         "icon-size": 18,
