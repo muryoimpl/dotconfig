@@ -15,7 +15,7 @@
       "mango/layout",
       "mango/window"
     ],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock", "custom/notification", "custom/power"],
+    "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock", "custom/scroll", "custom/notification", "custom/power"],
     "mango/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
@@ -112,6 +112,16 @@
             }
         }
     },
+    "custom/scroll": {
+      "tooltip": true,
+      "return-type": "json",
+      "format": "<span size='12pt'>{}</span>",
+      "exec": "$HOME/.config/mango/bin/scroll-profile.sh status",
+      "interval": "once",
+      "signal": 1,
+      "on-click": "$HOME/.config/mango/bin/scroll-profile.sh toggle",
+      "escape": true
+    },
     "custom/notification": {
       "tooltip": true,
       "format": "<span size='12pt'>{icon}</span>",
@@ -154,7 +164,7 @@
       "mango/layout",
       "mango/window"
     ],
-    "modules-right": ["cpu", "memory", "disk", "temperature", "clock", "custom/notification"],
+    "modules-right": ["cpu", "memory", "disk", "temperature", "clock", "custom/scroll", "custom/notification"],
     "mango/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
@@ -239,6 +249,16 @@
       "on-click": "sway-client -t -sw",
       "on-click-right": "sway-client -d -sw",
       "escape": true
+    },
+    "custom/scroll": {
+      "tooltip": true,
+      "return-type": "json",
+      "format": "<span size='12pt'>{}</span>",
+      "exec": "$HOME/.config/mango/bin/scroll-profile.sh status",
+      "interval": "once",
+      "signal": 1,
+      "on-click": "$HOME/.config/mango/bin/scroll-profile.sh toggle",
+      "escape": true
     }
   },
   {
@@ -258,7 +278,7 @@
       "mango/layout",
       "mango/window"
     ],
-    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/notification", "custom/power"],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/scroll", "custom/notification", "custom/power"],
     "battery": {
       "interval": 60,
       "states": {
@@ -368,6 +388,16 @@
                 "today":      "<span color='#dbbc7f'><b><u>{}</u></b></span>"
             }
         }
+    },
+    "custom/scroll": {
+      "tooltip": true,
+      "return-type": "json",
+      "format": "<span size='12pt'>{}</span>",
+      "exec": "$HOME/.config/mango/bin/scroll-profile.sh status",
+      "interval": "once",
+      "signal": 1,
+      "on-click": "$HOME/.config/mango/bin/scroll-profile.sh toggle",
+      "escape": true
     },
    "custom/notification": {
       "tooltip": true,
