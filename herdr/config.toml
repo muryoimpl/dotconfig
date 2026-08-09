@@ -49,15 +49,19 @@ previous_tab = "prefix+ctrl+h"
 next_tab     = "prefix+ctrl+l"
 # tmux デフォルト系
 new_tab      = "prefix+c"
-close_tab    = "prefix+&"
-rename_tab   = "prefix+,"
+# 記号キーは herdr 推奨の名前付き表記 (minus/comma/ampersand/plus/backtick)
+close_tab    = "prefix+ampersand"
+# tmux: bind T command-prompt -I "#W" "rename-window '%%'"
+# (bind T の tig popup は 17c9195 で rename-window に置き換え済み)
+rename_tab   = "prefix+shift+t"
 detach       = "prefix+d"
 
 # --- pane 分割 -------------------------------------------------------------
 # tmux: bind | split-window -h (左右並び=分割線が縦)
+# "|" は生の記号のみ受理される ("pipe"/"bar" は invalid keybinding)
 split_vertical   = "prefix+|"
 # tmux: bind - split-window -v (上下並び=分割線が横)
-split_horizontal = "prefix+-"
+split_horizontal = "prefix+minus"
 
 # --- pane 移動 -------------------------------------------------------------
 # tmux: bind h/j/k/l select-pane
@@ -85,16 +89,17 @@ copy_mode = "prefix+v"
 # custom commands — tmux で `[[keys.command]]` に置き換えるもの
 # ==========================================================================
 
-# tmux: bind T display-popup -w 80% -h 80% -d "#{pane_current_path}" "tig"
-# herdr の popup は tab レイアウトを変えない session-modal terminal で、
-# tmux の display-popup とほぼ同じ挙動になる
-[[keys.command]]
-key         = "prefix+shift+t"
-type        = "popup"
-command     = "tig"
-width       = "80%"
-height      = "80%"
-description = "Open tig in a popup (tmux display-popup 相当)"
+# tmux 側の tig popup (bind T) は rename-window に置き換え済みのため未定義。
+# prefix+shift+t は rename_tab に返している。
+# 復活させる場合、herdr の popup は tab レイアウトを変えない session-modal
+# terminal で tmux の display-popup とほぼ同じ挙動になる:
+#   [[keys.command]]
+#   key         = "prefix+alt+t"
+#   type        = "popup"
+#   command     = "tig"
+#   width       = "80%"
+#   height      = "80%"
+#   description = "Open tig in a popup (tmux display-popup 相当)"
 
 # tmux: bind -r H/J/K/L resize-pane 5
 # resize_mode に頼らず tmux 風の prefix+SHIFT+hjkl を維持
@@ -152,6 +157,10 @@ show_agent_labels_on_pane_borders = true
 agent_panel_sort                  = "priority"
 sidebar_width                     = 32
 confirm_close                     = true
+# tmux: bind c は名前を尋ねず即座に window を作る
+prompt_new_tab_name               = false
+# tmux: set -g status-position top
+tab_bar_position                  = "top"
 accent                            = "#00cd00"
 
 [ui.toast]
@@ -190,6 +199,7 @@ kitty_graphics                      = true
 # cjk_ime_agents は単体では効かず、reveal_hidden_cursor_for_cjk_ime の
 # allow-list として働く (空配列なら全 pane 対象)。
 reveal_hidden_cursor_for_cjk_ime    = true
-cjk_ime_agents                      = ["claude"]
+cjk_ime_cursor_shape                = "steady_block"
+cjk_ime_agents                      = ["claude", "codex"]
 # macOS 専用のため Linux では無効
 switch_ascii_input_source_in_prefix = false

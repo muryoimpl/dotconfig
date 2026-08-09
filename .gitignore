@@ -4,3 +4,6 @@ nvim/lazy-lock.json
 yazi/plugins/*
 # herdr は config と同じディレクトリに socket とログを作る (*.log は global ignore 済み)
 herdr/*.sock
+# ~/.config/herdr を symlink 化したため herdr が書き出すランタイムファイル
+herdr/session.json
+herdr/release-notes.json
