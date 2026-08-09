@@ -127,7 +127,7 @@
       "format": "<span size='12pt'>{icon}</span>",
       "format-icons": {
         "notification": "🔔",
-        "none": "🟦",
+        "none": "",
         "dnd-notification": "🔕",
         "dnd-none": "🔕",
         "inhibited-notification": "🔕",
@@ -235,7 +235,7 @@
       "format": "<span size='12pt'>{icon}</span>",
       "format-icons": {
         "notification": "🔔",
-        "none": "🟦",
+        "none": "",
         "dnd-notification": "🔕",
         "dnd-none": "🔕",
         "inhibited-notification": "🔕",
