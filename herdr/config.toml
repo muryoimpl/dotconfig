@@ -131,7 +131,7 @@ command     = "herdr pane resize --direction right --amount 0.05 --current"
 description = "Resize pane right by 5% (tmux 風)"
 
 # ==========================================================================
-# theme — tmux の bg=black + current-window bg=green に寄せる
+# theme — 背景は tmux の bg=black に寄せ、accent は catppuccin 既定 (#cba6f7)
 # ==========================================================================
 [theme]
 name        = "catppuccin"
@@ -140,7 +140,6 @@ auto_switch = false
 [theme.custom]
 panel_bg = "#000000"   # tmux の完全な黒に寄せる
 green    = "#00cd00"   # alacritty 側の green と統一
-accent   = "#00cd00"
 
 # ==========================================================================
 # ui
@@ -167,7 +166,8 @@ confirm_close                     = true
 prompt_new_tab_name               = false
 # tmux: set -g status-position top
 tab_bar_position                  = "top"
-accent                            = "#00cd00"
+# accent は未設定。theme (catppuccin) 既定の #cba6f7 が
+# アクティブ tab / pane border / navigator のハイライトに使われる
 
 [ui.toast]
 delivery      = "herdr"
