@@ -45,8 +45,8 @@ goto         = "prefix+space"
 # tmux base-index=1 相当。prefix+1..9 でタブ直接切替
 switch_tab   = "prefix+1..9"
 # tmux: bind -r C-h/C-l select-window -t :-/+
-previous_tab = "prefix+ctrl+h"
-next_tab     = "prefix+ctrl+l"
+previous_tab = "prefix+p"
+next_tab     = "prefix+n"
 # tmux デフォルト系
 new_tab      = "prefix+c"
 # 記号キーは herdr 推奨の名前付き表記 (minus/comma/ampersand/plus/backtick)
@@ -84,6 +84,9 @@ close_pane = "prefix+x"
 # tmux: bind v copy-mode
 # 開始キーのみカスタム可、mode 内の v/V/y/Enter/w/e/b/g/G/// は herdr 内蔵に一任
 copy_mode = "prefix+v"
+
+# --- default ---
+# toggle_sidebar = "prefix+b"
 
 # ==========================================================================
 # custom commands — tmux で `[[keys.command]]` に置き換えるもの
@@ -131,7 +134,7 @@ description = "Resize pane right by 5% (tmux 風)"
 # theme — tmux の bg=black + current-window bg=green に寄せる
 # ==========================================================================
 [theme]
-name        = "gruvbox"
+name        = "catppuccin"
 auto_switch = false
 
 [theme.custom]
@@ -158,6 +161,9 @@ agent_panel_sort                  = "priority"
 sidebar_width                     = 32
 confirm_close                     = true
 # tmux: bind c は名前を尋ねず即座に window を作る
+# false の間タブのラベルは生成名 (= 番号) のみ。名前を付けたい場合は
+# rename_tab (prefix+shift+t) か `herdr tab rename <TAB_ID> <LABEL>` を使う。
+# tmux の automatic-rename 相当 (プロセス名の自動反映) は herdr にない。
 prompt_new_tab_name               = false
 # tmux: set -g status-position top
 tab_bar_position                  = "top"
@@ -168,12 +174,12 @@ delivery      = "herdr"
 delay_seconds = 3
 
 [ui.toast.herdr]
-position = "bottom-right"
+position = "top-right"
 
 # tmux-yank 相当のコピー通知
 [ui.toast.clipboard]
 enabled  = true
-position = "bottom-right"
+position = "top-right"
 
 [ui.sound]
 enabled = true
