@@ -51,7 +51,6 @@ telescope.setup({
     layout_strategy = "cursor",
     mappings = {
       i = {
-        ["<C-u>"] = false,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-c>"] = actions.close,
@@ -59,7 +58,6 @@ telescope.setup({
         ["<C-r>"] = actions.to_fuzzy_refine,
       },
       n = {
-        ["<C-u>"] = false,
         ["<C-j>"] = actions.move_selection_next,
         ["<C-k>"] = actions.move_selection_previous,
         ["<C-c>"] = actions.close,
