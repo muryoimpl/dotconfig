@@ -181,7 +181,11 @@ confirm_close                     = true
 # tmux: bind c は名前を尋ねず即座に window を作る
 # false の間タブのラベルは生成名 (= 番号) のみ。名前を付けたい場合は
 # rename_tab (prefix+shift+t) か `herdr tab rename <TAB_ID> <LABEL>` を使う。
-# tmux の automatic-rename 相当 (プロセス名の自動反映) は herdr にない。
+# tmux の automatic-rename 相当 (プロセス名の自動反映) は herdr にない
+# (タブラベルは custom_name か位置番号の 2 択で、cwd もプロセス名も OSC も見ない)。
+# 代替として ~/.zsh.d/herdr-title.zsh が precmd/preexec から
+# `herdr tab rename` / `herdr pane rename` を叩き、
+# "<repo>" / "<repo>:<コマンド名>" を自動で入れている。
 prompt_new_tab_name               = false
 # workspace の名前について (0.8.0 時点):
 #   - 起動時に workspace 名を指定するオプションは存在しない
