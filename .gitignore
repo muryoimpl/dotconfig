@@ -7,3 +7,5 @@ herdr/*.sock
 # ~/.config/herdr を symlink 化したため herdr が書き出すランタイムファイル
 herdr/session.json
 herdr/release-notes.json
+# 0.8.0 の名前付き session。socket / ログ / session.json が入る
+herdr/sessions/
