@@ -85,8 +85,26 @@ close_pane = "prefix+x"
 # 開始キーのみカスタム可、mode 内の v/V/y/Enter/w/e/b/g/G/// は herdr 内蔵に一任
 copy_mode = "prefix+v"
 
+# --- agent / workspace ナビゲーション (tmux には対応物なし) -----------------
+# herdr 固有。agent panel の並び順 (= agent_panel_sort) で agent 間を移動する。
+# priority と組み合わせると「次に見るべき agent」へ順に飛べる。
+# prefix+n/p は tab、prefix+shift+* は resize custom command で埋まっているため
+# prefix+ctrl+* を使う。
+next_agent     = "prefix+ctrl+n"
+previous_agent = "prefix+ctrl+p"
+# agent を 1..9 で直接フォーカス (switch_tab と同じ indexed 構文)
+focus_agent    = "prefix+alt+1..9"
+# workspace を 1..9 で直接切替。workspace を作業単位に分けると tab より使う
+switch_workspace = "prefix+shift+1..9"
+# tmux: bind ';' last-pane 相当。herdr では workspace/tab をまたいで戻れる
+last_pane      = "prefix+semicolon"
+
 # --- default ---
 # toggle_sidebar = "prefix+b"
+# prefix+o    = open_notification_target (通知の対象 pane へジャンプ)
+# prefix+e    = edit_scrollback ($EDITOR で pane の scrollback を開く)
+# prefix+w    = workspace picker
+# prefix+g    = 空き (goto を prefix+space に移したため)
 
 # ==========================================================================
 # custom commands — tmux で `[[keys.command]]` に置き換えるもの
@@ -155,8 +173,9 @@ pane_gaps                         = false
 # tmux 側の claude-window-flag.sh 相当を、herdr 内蔵 agent 検出で置き換える
 show_agent_labels_on_pane_borders = true
 # 有効値は spaces / workspaces / priority。
-# 「claude を見落とさない」意図には attention queue の priority が近い
-agent_panel_sort                  = "priority"
+# 「claude を見落とさない」意図そのままに、blocked > done > working の
+# attention queue 順で agent panel を並べる。並行 agent 時は spaces より直接的
+agent_panel_sort = "priority"
 sidebar_width                     = 32
 confirm_close                     = true
 # tmux: bind c は名前を尋ねず即座に window を作る
@@ -164,10 +183,37 @@ confirm_close                     = true
 # rename_tab (prefix+shift+t) か `herdr tab rename <TAB_ID> <LABEL>` を使う。
 # tmux の automatic-rename 相当 (プロセス名の自動反映) は herdr にない。
 prompt_new_tab_name               = false
+# workspace の名前について (0.8.0 時点):
+#   - 起動時に workspace 名を指定するオプションは存在しない
+#   - 名前付きで起動できるのは session (`herdr --session <名前>` = tmux new -s 相当)
+#   - workspace に名前を付けるのは起動後。
+#     `herdr workspace create --label <名前> --cwd <dir> --focus` か、
+#     prompt_new_workspace_name = true で作成時 (prefix+shift+n) に入力を求める
 # tmux: set -g status-position top
 tab_bar_position                  = "top"
 # accent は未設定。theme (catppuccin) 既定の #cba6f7 が
 # アクティブ tab / pane border / navigator のハイライトに使われる
+
+# sidebar の Agent 行。既定は [["state_icon","workspace","tab"],["agent"]] だが、
+# 並行 agent 時は「どの agent が今どの状態か」を先に読みたいので順序を入れ替える
+[ui.sidebar.agents]
+rows = [
+  ["state_icon", "agent", "state_text"],
+  ["workspace", "tab"],
+]
+
+# claude だけ OSC タイトル (spinner glyph 除去済み) を 1 行足す。
+# キーは canonical id で、検出エイリアスの "claude-code" は不可。
+# rows_by_agent は rows を「置き換える」ので、共通行も書き下す必要がある
+[ui.sidebar.agents.rows_by_agent]
+claude = [
+  ["state_icon", "agent", "state_text"],
+  ["terminal_title_stripped"],
+  ["workspace", "tab"],
+]
+
+# [ui.sidebar.spaces] は既定 [["state_icon","workspace"],["branch","git_status"]]。
+# workspace をリポジトリ単位に分けると branch と ahead/behind が出る
 
 [ui.toast]
 delivery      = "herdr"
