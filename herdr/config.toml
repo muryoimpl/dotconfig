@@ -207,13 +207,20 @@ rows = [
   ["workspace", "tab"],
 ]
 
-# claude だけ OSC タイトル (spinner glyph 除去済み) を 1 行足す。
+# claude だけ「最新のプロンプト」を 1 行足す。
 # キーは canonical id で、検出エイリアスの "claude-code" は不可。
 # rows_by_agent は rows を「置き換える」ので、共通行も書き下す必要がある
+#
+# $prompt は built-in token ではなく pane metadata のカスタム token で、
+# ~/.claude/scripts/herdr-prompt-token.sh (UserPromptSubmit フック) が
+# `herdr pane report-metadata --token prompt=...` で毎プロンプト更新している。
+# built-in の terminal_title / terminal_title_stripped を使っていた頃は、
+# Claude Code が OSC タイトルを毎プロンプト更新しないため初回プロンプト由来の
+# 要約が固定表示され続けていた (spinner glyph ◑ も実際には除去されていなかった)。
 [ui.sidebar.agents.rows_by_agent]
 claude = [
   ["state_icon", "agent", "state_text"],
-  ["terminal_title_stripped"],
+  ["$prompt"],
   ["workspace", "tab"],
 ]
 
