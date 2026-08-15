@@ -211,8 +211,11 @@ prompt_new_tab_name               = false
 #     prompt_new_workspace_name = true で作成時 (prefix+shift+n) に入力を求める
 # tmux: set -g status-position top
 tab_bar_position                  = "top"
-# accent は未設定。theme (catppuccin) 既定の #cba6f7 が
-# アクティブ tab / pane border / navigator のハイライトに使われる
+# accent は未設定。theme (catppuccin) 既定の #89b4fa (blue) が
+# アクティブ tab / pane border / navigator のハイライトに使われる。
+# 2e723cc のコミットメッセージとここのコメントは長らく #cba6f7 と書いていたが、
+# それは同じ palette の mauve (branch 名の色) で accent ではなかった。
+# 実体は app/state.rs Palette::catppuccin() の accent: Rgb(137, 180, 250)。
 
 # sidebar の Agent 行。既定は [["state_icon","workspace","tab"],["agent"]] だが、
 # 並行 agent 時は「どの agent が今どの状態か」を先に読みたいので順序を入れ替える
