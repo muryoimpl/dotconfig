@@ -207,24 +207,35 @@ rows = [
   ["workspace", "tab"],
 ]
 
-# claude だけ OSC タイトルを 1 行足す。
+# claude だけ OSC タイトルと最新プロンプトを 1 行ずつ足す。
 # キーは canonical id で、検出エイリアスの "claude-code" は不可。
 # rows_by_agent は rows を「置き換える」ので、共通行も書き下す必要がある
 #
-# このタイトルは Claude Code がセッション開始時に決めたきり毎プロンプトでは
-# 更新しないので、会話が進んでも初回プロンプト由来の要約が出続ける。
-# 一度 UserPromptSubmit フックから pane metadata の $prompt を更新して
-# 「最新プロンプト」を出す方式にしたが、herdr agent prompt 等で agent 側から
-# 投げられたプロンプトでも同じように書き換わり、自分が書いたものと
-# 区別できなくなるため戻した。セッション単位で内容が変わらないことは
-# 「この pane が何の作業か」の目印としてはむしろ都合が良い。
+# 2 行は役割が違うので両方出す:
+#   terminal_title_stripped … Claude Code がセッション開始時に決めたきり毎プロンプト
+#     では更新しないため、会話が進んでも初回プロンプト由来の要約が出続ける。
+#     裏を返せばセッション単位で不変なので「この pane が何の作業か」の目印になる。
+#     なお spinner glyph を必ず落とすわけではなく "◑ ..." のまま残ることがある。
+#   $prompt … 「いま何を指示したか」。built-in token ではなく pane metadata の
+#     カスタム token で、~/.claude/scripts/herdr-prompt-token.sh
+#     (dotfiles/_claude/scripts/、UserPromptSubmit フック) が毎プロンプト
+#     `herdr pane report-metadata --token prompt=...` で更新している。
+#     config だけ見ても出処を辿れないのでここに書いておく。
+#     token が無い間 (初回プロンプト前 / フック未登録 / claude 終了後) は
+#     行ごと消える。空行にはならない (ui/sidebar/tokens.rs の resolved.is_empty)。
 #
-# なお terminal_title_stripped は spinner glyph を必ず落とすわけではなく、
-# "◑ ..." のようにそのまま残ることがある。
+# $prompt の先頭に "«" が付いているものは herdr agent prompt 等で agent 側から
+# 投げられたプロンプト。UserPromptSubmit は投げ元に関係なく発火するため、
+# フック側が「自 pane が focus されているか」で人間が打ったものかを判定している。
+# focus 中の pane に他 agent が投げた場合は marker が付かない、ヒューリスティック。
+#
+# 幅: sidebar_width = 32 から区切り 1 桁と 2 行目以降のインデント 3 桁を引いて
+# 実効 28 桁。フック側 HERDR_PROMPT_MAX_WIDTH の既定値と一致させてある。
 [ui.sidebar.agents.rows_by_agent]
 claude = [
   ["state_icon", "agent", "state_text"],
   ["terminal_title_stripped"],
+  ["$prompt"],
   ["workspace", "tab"],
 ]
 
