@@ -42,6 +42,10 @@
 @define-color quote-color @green;
 @define-color idle-inhibitor-color @foreground;
 @define-color idle-inhibitor-active-color @red;
+@define-color power-profile-color @cloudy;
+@define-color power-profile-performance-color @red;
+@define-color power-profile-balanced-color @cloudy;
+@define-color power-profile-saver-color @green;
 @define-color keyboard-state-color @foreground;
 
 * {
@@ -58,7 +62,8 @@
 /* Common module styling with border-bottom */
 #mode, #clock, #cpu, #backlight, #disk,
 #memory, #temperature, #battery, #network, #pulseaudio,
-#idle_inhibitor, #tray, #tags, #workspaces, #keyboard-state, #language {
+#idle_inhibitor, #tray, #tags, #workspaces, #keyboard-state, #language,
+#power-profiles-daemon {
     padding: 0 5px;
     margin: 0 2px;
 }
@@ -184,6 +189,26 @@ window#waybar.hidden {
 #backlight {
     color: @backlight-color;
     border-bottom-color: @backlight-color;
+}
+
+#power-profiles-daemon {
+    color: @power-profile-color;
+    font-size: 145%;
+    margin: 0 4px;
+}
+
+#power-profiles-daemon.performance {
+    color: @power-profile-performance-color;
+    border-bottom-color: @power-profile-performance-color;
+}
+
+#power-profiles-daemon.balanced {
+    color: @power-profile-balanced-color;
+}
+
+#power-profiles-daemon.power-saver {
+    color: @power-profile-saver-color;
+    border-bottom-color: @power-profile-saver-color;
 }
 
 /* If workspaces is the leftmost module, omit left margin */

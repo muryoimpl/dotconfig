@@ -258,7 +258,7 @@
       "mango/layout",
       "mango/window"
     ],
-    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/notification", "custom/power"],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "power-profiles-daemon", "custom/notification", "custom/power"],
     "battery": {
       "interval": 60,
       "states": {
@@ -368,6 +368,19 @@
                 "today":      "<span color='#dbbc7f'><b><u>{}</u></b></span>"
             }
         }
+    },
+    // クリックで performance -> balanced -> power-saver を巡回する。
+    // 実体は tlp-pd (TLP の power-profiles-daemon 互換 D-Bus API)。
+    "power-profiles-daemon": {
+      "format": "{icon}",
+      "tooltip": true,
+      "tooltip-format": "Power profile: {profile}\nCPU driver: {cpu_driver}\nPlatform driver: {platform_driver}",
+      "format-icons": {
+        "default": "󰾅",
+        "performance": "󰓅",
+        "balanced": "󰾅",
+        "power-saver": "󰾆"
+      }
     },
    "custom/notification": {
       "tooltip": true,
