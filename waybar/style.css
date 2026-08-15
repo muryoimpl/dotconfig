@@ -42,8 +42,6 @@
 @define-color quote-color @green;
 @define-color idle-inhibitor-color @foreground;
 @define-color idle-inhibitor-active-color @red;
-@define-color scroll-color @cloudy;
-@define-color scroll-fine-color @cyan;
 @define-color keyboard-state-color @foreground;
 
 * {
@@ -234,17 +232,6 @@ window#waybar.hidden {
 #custom-notification {
     font-family: HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     color: @magenta;
-}
-
-#custom-scroll {
-    font-family: HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    color: @scroll-color;
-    margin: 0 5px 0 5px;
-}
-
-#custom-scroll.fine {
-    color: @scroll-fine-color;
-    border-bottom-color: @scroll-fine-color;
 }
 
 #custom-power {
