@@ -160,6 +160,21 @@ auto_switch = false
 panel_bg = "#000000"   # tmux の完全な黒に寄せる
 green    = "#00cd00"   # alacritty 側の green と統一
 
+# sidebar のハイライト背景を明るくする。
+# sidebar_bg は Reset (端末の背景をそのまま使う) で、alacritty の background は
+# #000000。一方 catppuccin 既定の surface_dim は #1e1e2e で、純黒に対する
+# コントラスト比は 1.28 しかなく、agents パネルで「いまアクティブな行」が
+# ほとんど見分けられなかった。3 段とも 1 段ずつ明るい側にずらす。
+#   surface_dim … agents パネルのアクティブ行 / workspace のアクティブ行の背景。
+#                 区切り線と scrollbar のトラック (fg) も同じ色を使う
+#   surface0    … spaces パネルで navigate 中に選択している行の背景
+#   surface1    … workspace をドラッグ中の行の背景
+# 対 #000000 のコントラスト比: dim 1.28→1.61 / surface0 1.67→2.30 / surface1 2.30→3.15
+# 段差は残してあるので「アクティブ」と「navigate 選択中」は引き続き区別できる。
+surface_dim = "#2f2f45"
+surface0    = "#45475a"
+surface1    = "#585b70"
+
 # ==========================================================================
 # ui
 # ==========================================================================
