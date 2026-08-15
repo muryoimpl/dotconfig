@@ -259,9 +259,25 @@ window#waybar.hidden {
     color: @magenta;
 }
 
+/* 電源アイコン 󰐥 (U+F0425, Nerd Font の MDI power) は細いリング状で塗りが少なく、
+   隣の #power-profiles-daemon の 󰾅 (U+F0F85, 塗りつぶしのメーター) より小さく見える。
+   font-size を上げたいが、上限を決めるのは字面ではなくフォントの行ボックスで、
+   これが waybar の見る「モジュール要求高」になり、バー高を超えるとバーが広がる。
+   HackGen Console NF は CJK 用に行の高さが 1.15em 近くあるため 145% が限界だった。
+   行の高さが 1.0em 程度の Symbols Nerd Font に替えると、同じバー高でも上げられる。
+   実測 (要求高 / 字面 / 塗り px):
+     HackGen   145% (旧)          17x19  155px
+     SymbolsNF 165%      30px     20x22  215px
+     SymbolsNF 170%      32px     21x23  226px  <- 現在
+     SymbolsNF 175%      33px     22x23  229px
+     隣の 󰾅 HackGen 145% 30px     21x21  192px
+   170% は要求高 32px。config.mango.jsonc のバー高を全部 32 に揃えてあるので
+   どの出力でも収まるが、175% にすると 33px になりバーが広がる。バー高を
+   下げる場合はここも 165% (要求高 30px) まで戻すこと。
+   上下マージンは #power-profiles-daemon と同様に持たせない (要求高が増えるため)。 */
 #custom-power {
-    font-family: HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    font-family: Symbols Nerd Font, HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     color: @cloudy;
-    margin: 0 5px 3px 5px;
-    font-size: 145%;
+    margin: 0 5px;
+    font-size: 170%;
 }
