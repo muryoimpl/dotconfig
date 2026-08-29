@@ -4,7 +4,19 @@ mode = "auto"
 [bar]
 order = [ "default" ]
 
+# バーは出力ごとにインスタンス化され、既定では全モニタに出る。bar には
+# "このモニタだけ" という許可リスト (monitors) が無いので、ベースを無効に
+# しておき、モニタ単位の override で出したい画面だけ有効にする。
+# 外部モニタは waybar 側に per-output のバー定義があるのでそちらに任せる。
 [bar.default]
+enabled = false
+
+# ラップトップの内蔵ディスプレイ用。テーブルのキー ("eDP-1") がコネクタ名との
+# マッチに使われる。同じテーブルに match フィールドも書けるが、キーが一致し
+# ないと match だけでは効かず、キーが一致していれば match は無くてよい。
+# font_weight と order 以外の bar の設定はここで上書きできる。
+[bar.default.monitor."eDP-1"]
+enabled = true
 position = "left"
 
 # バー本体の帯を消し、ウィジェットのカプセルだけを見せる。
