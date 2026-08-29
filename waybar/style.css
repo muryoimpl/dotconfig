@@ -273,6 +273,24 @@ window#waybar.hidden {
     border-bottom-color: @idle-inhibitor-active-color;
 }
 
+/* group/power の入口アイコン。畳んだ状態の唯一のクリック対象なので押しやすくする。
+   font-family と font-size は #custom-power と同じにしてある。Symbols Nerd Font は
+   行の高さが 1.0em 程度なので、170% でも要求高 32px に収まりバーが広がらない
+   (詳細は #custom-power のコメント参照)。175% にすると 33px になるので上げないこと。
+   クリック領域は padding の左右で稼ぐ。上下の padding は要求高を増やすので入れない。 */
+#custom-power-menu {
+    font-family: Symbols Nerd Font, HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    color: @cloudy;
+    font-size: 170%;
+    padding: 0 10px;
+}
+
+/* 展開中は入口を強調する。group drawer は展開時に .expanded が付く。
+   グループ側の id 名に依存しないよう .expanded だけで拾う (group は 1 つだけ)。 */
+.expanded #custom-power-menu {
+    color: @power-profile-performance-color;
+}
+
 /* 電源アイコン 󰐥 (U+F0425, Nerd Font の MDI power) は細いリング状で塗りが少なく、
    隣の #power-profiles-daemon の 󰾅 (U+F0F85, 塗りつぶしのメーター) より小さく見える。
    font-size を上げたいが、上限を決めるのは字面ではなくフォントの行ボックスで、
