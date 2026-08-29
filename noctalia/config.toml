@@ -34,6 +34,10 @@ end = []
 blur_intensity = 0.5
 enabled = true
 
+[location]
+# 天気の地域。IP から自動判定する (noctalia.dev 経由)。
+auto_locate = true
+
 [lockscreen]
 # ロックは swaylock に寄せる。swayidle が before-sleep 'swaylock -f' を実行するため、
 # noctalia がサスペンド前に独自のロック画面を出すと二重になる。
