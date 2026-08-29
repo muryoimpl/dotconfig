@@ -33,6 +33,9 @@ widget_spacing = 13
 
 start = [
   "control-center",
+  # mango のレイアウト切替 (ezequiel/mango_layouts プラグイン)。
+  # 現在のレイアウト記号を表示し、クリックで切替パネルを開く。
+  "ezequiel/mango_layouts:btn",
   "clipboard",
   "screenshot",
   "bluetooth",
@@ -48,6 +51,18 @@ end = []
 [backdrop]
 blur_intensity = 0.5
 enabled = true
+
+# プラグインの有効化。CLI (noctalia msg plugins enable) で有効にすると
+# ~/.local/state/noctalia/settings.toml 側に書かれてリポジトリ管理から漏れるため、
+# こちらに明示してバージョン管理下に置く。
+[plugins]
+enabled = [ "ezequiel/mango_layouts" ]
+
+# プラグインパネルの位置。plugin.toml の既定は bottom_right だが左下に寄せる。
+# このキーは設定 UI (Plugins > Position) が state 側に書くものを移してきたもの。
+# [shell.panel] の *_position は組み込みパネル 6 種類専用でプラグインには効かない。
+[plugin_settings."ezequiel/mango_layouts"]
+panel_position = "bottom_left"
 
 [location]
 # 天気の地域。IP から自動判定する (noctalia.dev 経由)。
