@@ -261,7 +261,7 @@
       "mango/layout",
       "mango/window"
     ],
-    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "power-profiles-daemon", "custom/notification", "custom/power"],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "power-profiles-daemon", "custom/caffeine", "custom/notification", "custom/power"],
     "battery": {
       "interval": 60,
       "states": {
@@ -384,6 +384,22 @@
         "balanced": "󰾅",
         "power-saver": "󰾆"
       }
+    },
+    // noctalia の caffeine (アイドル抑止) の状態表示とトグル。
+    // noctalia のバーには状態表示を置かず、こちらに寄せている。
+    // 状態は caffeine-status.sh が logind の inhibitor から読んで JSON で流す。
+    "custom/caffeine": {
+      "tooltip": true,
+      "format": "<span size='12pt'>{icon}</span>",
+      "format-icons": {
+        "on": "☕",
+        "off": "💤"
+      },
+      "return-type": "json",
+      "exec-if": "which noctalia",
+      "exec": "~/.config/mango/bin/caffeine-status.sh",
+      "on-click": "noctalia msg caffeine-toggle",
+      "escape": true
     },
    "custom/notification": {
       "tooltip": true,

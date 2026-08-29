@@ -128,6 +128,16 @@ tooltip = "Screenshot"
 left = "screenshot-region"
 right = "screenshot-fullscreen"
 
+# caffeine の ON/OFF 表示は waybar (custom/caffeine) に寄せたので、
+# ここはトグル用のボタンに割り切って tooltip を付ける。
+[widget.caffeine]
+type = "custom_button"
+glyph = "coffee"
+tooltip = "Caffeine"
+
+[widget.caffeine.actions]
+left = "caffeine-toggle"
+
 # built-in ウィジェットは tooltip 設定を受け付けず (unknown setting)、
 # 型ごとにツールチップ内容を持つ一部の型しか hover に反応しない。
 # アイコンが静的な 3 つは custom_button に置き換えて hover を付ける。

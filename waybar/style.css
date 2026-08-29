@@ -259,6 +259,20 @@ window#waybar.hidden {
     color: @magenta;
 }
 
+/* noctalia の caffeine。組み込みの idle_inhibitor モジュールと同じ配色を使う
+   (config.mango.jsonc では組み込みではなく custom/caffeine を使っている)。
+   #custom-notification と同じく font-size は上げない。上げるとモジュール要求高が
+   増えてバー高 32px を超える (詳細は #custom-power のコメント参照)。 */
+#custom-caffeine {
+    font-family: HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
+    color: @idle-inhibitor-color;
+}
+
+#custom-caffeine.on {
+    color: @idle-inhibitor-active-color;
+    border-bottom-color: @idle-inhibitor-active-color;
+}
+
 /* 電源アイコン 󰐥 (U+F0425, Nerd Font の MDI power) は細いリング状で塗りが少なく、
    隣の #power-profiles-daemon の 󰾅 (U+F0F85, 塗りつぶしのメーター) より小さく見える。
    font-size を上げたいが、上限を決めるのは字面ではなくフォントの行ボックスで、
