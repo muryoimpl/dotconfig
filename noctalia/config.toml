@@ -22,10 +22,13 @@ widget_spacing = 13
 start = [
   "control-center",
   "clipboard",
+  "screenshot",
   "bluetooth",
   "system",
   "caffeine",
-  "session"
+  "session",
+  # privacy は使用中だけ出るので、他のアイコンがずれないよう最後に置く
+  "privacy"
 ]
 center = []
 end = []
@@ -108,6 +111,22 @@ tooltip = "System"
 
 [widget.system.actions]
 left = "panel-toggle control-center system"
+
+# カメラ/マイク/画面共有のインジケータ。使用中だけ表示してスペースを取らない。
+[widget.privacy]
+type = "privacy"
+hide_inactive = true
+
+# screenshot は組み込みのツールチップを持たないので custom_button に置き換える。
+# (privacy は bar.widgets.privacy.* の組み込み文言があるのでそのまま)
+[widget.screenshot]
+type = "custom_button"
+glyph = "screenshot"
+tooltip = "Screenshot"
+
+[widget.screenshot.actions]
+left = "screenshot-region"
+right = "screenshot-fullscreen"
 
 # built-in ウィジェットは tooltip 設定を受け付けず (unknown setting)、
 # 型ごとにツールチップ内容を持つ一部の型しか hover に反応しない。
