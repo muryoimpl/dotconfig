@@ -261,7 +261,7 @@
       "mango/layout",
       "mango/window"
     ],
-    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/caffeine", "custom/notification", "group/power"],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "custom/fan", "clock", "custom/caffeine", "custom/notification", "group/power"],
     "battery": {
       "interval": 60,
       "states": {
@@ -411,6 +411,43 @@
     "custom/power-menu": {
       "format": "󰍜",
       "tooltip-format": "Power menu"
+    },
+    // ThinkPad のファンレベル切替。auto -> quiet -> max を巡回する。
+    // 実体は thinkpad_acpi の hwmon (pwm1_enable / pwm1) で、書き込み権限は
+    // udev/99-thinkpad-fan.rules が wheel に与える (リポジトリ管理だが
+    // /etc/udev/rules.d/ への配置は手動。手順は README.md)。
+    // 本体固有の機能なので eDP-1 のバーにだけ置く。
+    //
+    // signal は custom/scroll 廃止 (b4e914d) 以降空いている 1 番を使う。
+    // このモジュールが config に居ない状態で fan-profile.sh の
+    // pkill -RTMIN+1 waybar を撃つと waybar が静かに死ぬので、片方だけ
+    // 消さないこと。interval は tooltip の RPM 更新用で、signal と併用できる。
+    "custom/fan": {
+      "tooltip": true,
+      "return-type": "json",
+      "format": "{icon}",
+      // アイコンは custom/caffeine と同じく config 側に持たせる。off と full は
+      // 巡回に含めないが、他ツールや直接 echo でその状態になることがあるので
+      // 独立したグリフを割り当てて quiet / max と取り違えないようにする。
+      // 7 つとも HackGen Console NF が収録している (fc-list ":charset=<cp>")。
+      "format-icons": {
+        "auto":        "󱜝", // U+F171D nf-md-fan_auto
+        "quiet":       "󱑳", // U+F1473 nf-md-fan_speed_2
+        "max":         "󱑴", // U+F1474 nf-md-fan_speed_3
+        "manual":      "󰈐", // U+F0210 nf-md-fan
+        "off":         "󰠝", // U+F081D nf-md-fan_off
+        "full":        "󱑮", // U+F146E nf-md-fan_chevron_up
+        "unavailable": "󱑬"  // U+F146C nf-md-fan_alert
+      },
+      // fan_control パラメータの有無ではなく hwmon の実在を見る
+      // (fan-profile.sh のパス解決と同じアンカー)。
+      "exec-if": "test -d /sys/devices/platform/thinkpad_hwmon",
+      "exec": "$HOME/.config/mango/bin/fan-profile.sh status",
+      "interval": 5,
+      "signal": 1,
+      "on-click": "$HOME/.config/mango/bin/fan-profile.sh cycle",
+      "on-click-right": "$HOME/.config/mango/bin/fan-profile.sh set auto",
+      "escape": true
     },
     // noctalia の caffeine (アイドル抑止) の状態表示とトグル。
     // noctalia のバーには状態表示を置かず、こちらに寄せている。

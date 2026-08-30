@@ -46,6 +46,11 @@
 @define-color power-profile-performance-color @red;
 @define-color power-profile-balanced-color @cloudy;
 @define-color power-profile-saver-color @green;
+@define-color fan-color @cloudy;
+@define-color fan-quiet-color @green;
+@define-color fan-max-color @red;
+@define-color fan-manual-color @yellow;
+@define-color fan-danger-color @orange;
 @define-color keyboard-state-color @foreground;
 
 * {
@@ -271,6 +276,50 @@ window#waybar.hidden {
 #custom-caffeine.on {
     color: @idle-inhibitor-active-color;
     border-bottom-color: @idle-inhibitor-active-color;
+}
+
+/* ThinkPad のファンレベル (custom/fan)。アイコンは Nerd Font の MDI グリフで、
+   HackGen Console NF がネイティブに収録している (fc-list ":charset=f0210" 等で
+   確認)。同条件の #power-profiles-daemon が 145% (実測 要求高 30px) で動いて
+   いるので、ここも 145% で安全にバー高 32px に収まる。#custom-caffeine が
+   font-size を上げられないのは絵文字が Color Emoji にフォールバックして行
+   ボックスが高くなるからで、Nerd Font グリフのこのモジュールには当てはまらない。
+   上下の padding/margin は入れない (要求高が増えるため)。 */
+#custom-fan {
+    color: @fan-color;
+    font-size: 145%;
+    padding: 0 5px;
+    margin: 0 2px;
+}
+
+/* * の border: none で border-width が 0 になるため border-bottom-color は
+   実質効かない (既存の #battery.warning などでも同じ)。つまり状態を伝えて
+   いるのは色とアイコンだけなので、区別の付く色を選ぶ必要がある。 */
+
+/* 手動プロファイル中は色を付けて、auto へ戻し忘れたことに気付けるようにする。
+   hwmon 経由では thinkpad_acpi の watchdog が使えず自動復帰しないため、
+   この表示が唯一の安全弁になる。中立の auto にだけ色を足さないのは
+   #power-profiles-daemon の .balanced と同じ扱い。 */
+#custom-fan.quiet {
+    color: @fan-quiet-color;
+}
+
+#custom-fan.max {
+    color: @fan-max-color;
+}
+
+/* 巡回に含まれない手動レベル (2-6)。他ツールが設定した状態。 */
+#custom-fan.manual {
+    color: @fan-manual-color;
+}
+
+/* 巡回に含まれない危険側の状態。off はファン停止、full は EC 制御外の全開。
+   unavailable は udev ルール未適用などで書き込めない状態で、いずれも
+   「気付いて対処すべき」ので沈めずに警告色にする。 */
+#custom-fan.off,
+#custom-fan.full,
+#custom-fan.unavailable {
+    color: @fan-danger-color;
 }
 
 /* group/power の入口アイコン。畳んだ状態の唯一のクリック対象なので押しやすくする。
