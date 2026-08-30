@@ -52,6 +52,7 @@
 @define-color fan-manual-color @yellow;
 @define-color fan-danger-color @orange;
 @define-color keyboard-state-color @foreground;
+@define-color noctalia-bar-color @cloudy;
 
 * {
     border: none;
@@ -262,6 +263,17 @@ window#waybar.hidden {
 #custom-notification {
     font-family: HackGen Console NF, FontAwesome, Roboto, Helvetica, Arial, sans-serif;
     color: @magenta;
+}
+
+/* noctalia の bar の表示/非表示トグル (custom/noctalia-bar)。アイコンは Nerd Font
+   の MDI グリフなので、#custom-fan と同じ理由で 145% まで上げてもバー高 32px に
+   収まる (絵文字と違い Color Emoji にフォールバックしない)。上下の padding/margin
+   は要求高が増えるので入れない。 */
+#custom-noctalia-bar {
+    color: @noctalia-bar-color;
+    font-size: 145%;
+    padding: 0 5px;
+    margin: 0 2px;
 }
 
 /* noctalia の caffeine。組み込みの idle_inhibitor モジュールと同じ配色を使う

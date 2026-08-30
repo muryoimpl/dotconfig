@@ -261,7 +261,7 @@
       "mango/layout",
       "mango/window"
     ],
-    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/caffeine", "custom/notification", "group/power"],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/noctalia-bar", "custom/caffeine", "custom/notification", "group/power"],
     "battery": {
       "interval": 60,
       "states": {
@@ -451,6 +451,31 @@
       "signal": 1,
       "on-click": "$HOME/.config/mango/bin/fan-profile.sh cycle",
       "on-click-right": "$HOME/.config/mango/bin/fan-profile.sh set auto",
+      "escape": true
+    },
+    // noctalia の bar (eDP-1 の左端に縦置き) の表示/非表示トグル。bar を隠すと
+    // bar 上のウィジェットからは戻せなくなるので、外側の waybar に入口を置く。
+    //
+    // 状態表示は付けていない。バーは目の前に見えているのでアイコンで重複して
+    // 伝える価値が薄いのと、noctalia には bar 表示のフック ([hooks] は battery /
+    // wifi / wallpaper 等だけ) も D-Bus プロパティ (dev.noctalia.Debug はログ制御
+    // のみ) も無く、状態を追うには noctalia msg status の定期ポーリングしか手が
+    // ないため。caffeine のような無ポーリング常駐は組めない。
+    //
+    // exec-if は exec を実行するかどうかしか見ないので、format だけの静的モジュール
+    // では noctalia の有無を判定できない。アイコンを exec の出力にして
+    // interval: once で起動時 1 回だけ実行させ、ポーリング無しで判定している
+    // (exec-on-event が既定 true なので、クリックのたびに再判定もされる)。
+    "custom/noctalia-bar": {
+      "tooltip": true,
+      "tooltip-format": "noctalia の bar を表示 / 非表示",
+      "format": "{}",
+      "exec-if": "which noctalia",
+      // U+F06FD nf-md-page_layout_sidebar_left。HackGen Console NF が収録済み
+      // (フォントの post テーブルで glyph 名を確認)。
+      "exec": "echo 󰛽",
+      "interval": "once",
+      "on-click": "noctalia msg bar-toggle",
       "escape": true
     },
     // noctalia の caffeine (アイドル抑止) の状態表示とトグル。
