@@ -67,6 +67,31 @@ directory = "~/.config/wallpapers"
 [wallpaper.default]
 path = "~/.config/wallpapers/Ju5PuBC-arch-linux-wallpaper.jpg"
 
+# Control Center の home タブに並ぶショートカットタイル。上限 6 個で、配列なので
+# 部分指定できずデフォルトの 6 個をすべて明示する。壁紙ピッカーは独立パネルなので
+# control-center のタブには出せず、ここに wallpaper を置くのが唯一の導線になる。
+# 枠が埋まっているので nightlight と差し替えた (nightlight 自体は無効化されないし、
+# noctalia msg nightlight-toggle も使える)。
+[control_center]
+
+[[control_center.shortcuts]]
+type = "wifi"
+
+[[control_center.shortcuts]]
+type = "bluetooth"
+
+[[control_center.shortcuts]]
+type = "caffeine"
+
+[[control_center.shortcuts]]
+type = "wallpaper"
+
+[[control_center.shortcuts]]
+type = "notification"
+
+[[control_center.shortcuts]]
+type = "power_profile"
+
 # プラグインの有効化。CLI (noctalia msg plugins enable) で有効にすると
 # ~/.local/state/noctalia/settings.toml 側に書かれてリポジトリ管理から漏れるため、
 # こちらに明示してバージョン管理下に置く。
