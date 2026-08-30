@@ -52,6 +52,21 @@ end = []
 blur_intensity = 0.5
 enabled = true
 
+# 壁紙。noctalia がある環境では壁紙も noctalia に任せ、mango の autostart から
+# awww を起動しないようにしてある (mango/autostart.conf)。画像は
+# ~/.config/wallpapers (リポジトリの wallpapers/) に集約し、awww 側も同じ場所を見る。
+#
+# noctalia の設定は「設定ディレクトリの *.toml → state の settings.toml が上書き」の
+# 順に積まれる。directory は設定 UI で変えると state 側に書かれてリポジトリ管理から
+# 漏れるため、こちらに置いて state 側からは消してある。last / monitors / favorite は
+# 実行時の状態なので state に残したままでよい。
+[wallpaper]
+directory = "~/.config/wallpapers"
+
+# 新規環境で最初に表示される壁紙。
+[wallpaper.default]
+path = "~/.config/wallpapers/Ju5PuBC-arch-linux-wallpaper.jpg"
+
 # プラグインの有効化。CLI (noctalia msg plugins enable) で有効にすると
 # ~/.local/state/noctalia/settings.toml 側に書かれてリポジトリ管理から漏れるため、
 # こちらに明示してバージョン管理下に置く。
