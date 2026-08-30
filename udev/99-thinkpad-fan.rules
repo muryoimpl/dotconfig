@@ -1,0 +1,15 @@
+# ThinkPad の hwmon ファン制御属性を wheel グループから書けるようにする。
+# waybar の custom/fan (mango/bin/fan-profile.sh) が sudo 無しで
+# pwm1_enable / pwm1 に書くために必要。
+#
+# 制御の入口は /proc/acpi/ibm/fan と hwmon の 2 つあるが hwmon 側を使う。
+# procfs は udev の管理外なので、/proc/acpi/ibm/fan を RUN+= の chmod で
+# 開けようとすると、thinkpad_acpi が proc エントリを作る時刻と hwmon を
+# 登録する時刻の順序に依存してしまい、起動によっては取りこぼす。
+# sysfs なら、このルールが発火する時点で属性の存在が保証される。
+#
+# 書き込み自体は modprobe.d の fan_control=1 (/etc/modprobe.d/thinkfan.conf)
+# が有効でないとカーネルに蹴られる。権限とモジュールパラメータの両方が要る。
+ACTION=="add", SUBSYSTEM=="hwmon", ATTR{name}=="thinkpad", \
+  RUN+="/usr/bin/chgrp wheel %S%p/pwm1 %S%p/pwm1_enable", \
+  RUN+="/usr/bin/chmod 0664 %S%p/pwm1 %S%p/pwm1_enable"

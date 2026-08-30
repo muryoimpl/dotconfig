@@ -9,7 +9,7 @@ ignored =
   when /darwin/
     IGNORE_FILES
   when /linux/
-    IGNORE_FILES + %w(picom polybar systemd)
+    IGNORE_FILES + %w(picom polybar systemd udev)
   end
 
 current_dir = Dir.pwd
