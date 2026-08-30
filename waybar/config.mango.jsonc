@@ -261,7 +261,7 @@
       "mango/layout",
       "mango/window"
     ],
-    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "custom/fan", "clock", "custom/caffeine", "custom/notification", "group/power"],
+    "modules-right": ["backlight", "pulseaudio", "network", "cpu", "memory", "disk", "clock", "custom/caffeine", "custom/notification", "group/power"],
     "battery": {
       "interval": 60,
       "states": {
@@ -385,7 +385,8 @@
         "power-saver": "󰾆"
       }
     },
-    // 電源系 (パワープロファイル + 電源メニュー) を畳んで 1 ボタン分に収める。
+    // 電源系 (パワープロファイル + ファン + 電源メニュー) を畳んで
+    // 1 ボタン分に収める。
     // drawer は先頭のモジュールだけ残して他を隠し、左クリックで展開する。
     //
     // 入口を専用のアイコンにしているのは、drawer が展開のクリックを食っても
@@ -395,6 +396,9 @@
     // プロファイルが巡回してしまう。
     //
     // caffeine は状態を常に見たいのでグループに入れず独立させている。
+    // ファンは同じ「機体の回し方」の設定なので power-profiles-daemon の
+    // 隣に入れた。畳むと手動固定中かどうかが見えなくなるが、fan-profile.sh の
+    // 温度セーフガードが高温時に auto へ戻すので、色を常時見せる必要はない。
     "group/power": {
       "orientation": "inherit",
       "drawer": {
@@ -403,7 +407,7 @@
         "transition-left-to-right": false,
         "click-to-reveal": true
       },
-      "modules": ["custom/power-menu", "power-profiles-daemon", "custom/power"]
+      "modules": ["custom/power-menu", "custom/fan", "power-profiles-daemon", "custom/power"]
     },
     // group/power の入口。クリック動作を持たせないこと (上のコメント参照)。
     // グリフは Nerd Font に実在するものを使うこと。⚙ のような一般記号は別フォント
@@ -416,7 +420,7 @@
     // 実体は thinkpad_acpi の hwmon (pwm1_enable / pwm1) で、書き込み権限は
     // udev/99-thinkpad-fan.rules が wheel に与える (リポジトリ管理だが
     // /etc/udev/rules.d/ への配置は手動。手順は README.md)。
-    // 本体固有の機能なので eDP-1 のバーにだけ置く。
+    // 本体固有の機能なので eDP-1 のバーにだけ置く (group/power の中)。
     //
     // signal は custom/scroll 廃止 (b4e914d) 以降空いている 1 番を使う。
     // このモジュールが config に居ない状態で fan-profile.sh の

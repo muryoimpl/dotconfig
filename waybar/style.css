@@ -297,9 +297,10 @@ window#waybar.hidden {
    いるのは色とアイコンだけなので、区別の付く色を選ぶ必要がある。 */
 
 /* 手動プロファイル中は色を付けて、auto へ戻し忘れたことに気付けるようにする。
-   hwmon 経由では thinkpad_acpi の watchdog が使えず自動復帰しないため、
-   この表示が唯一の安全弁になる。中立の auto にだけ色を足さないのは
-   #power-profiles-daemon の .balanced と同じ扱い。 */
+   group/power の drawer の中なので畳んでいる間は見えないが、実質的な安全弁は
+   fan-profile.sh の温度セーフガードの方なので、ここは開いたときの確認用。
+   中立の auto にだけ色を足さないのは #power-profiles-daemon の .balanced と
+   同じ扱い。 */
 #custom-fan.quiet {
     color: @fan-quiet-color;
 }
