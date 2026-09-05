@@ -214,6 +214,11 @@ prompt_new_tab_name               = false
 #     prompt_new_workspace_name = true で作成時 (prefix+shift+n) に入力を求める
 # tmux: set -g status-position top
 tab_bar_position                  = "top"
+# 外側 (ghostty) のウィンドウタイトル。既定は "{hostname}: {workspace}"。
+# タブラベルに Linear の issue ID を入れる運用にしたので {tab} まで出すと、
+# ウィンドウを切り替えて戻ってきたときにも「どのタスクか」が分かる。
+# タブ名は ~/.claude/scripts/herdr-task.sh と ~/.zsh.d/herdr-title.zsh が付けている。
+window_title                      = "{workspace} · {tab}"
 # accent は未設定。theme (catppuccin) 既定の #89b4fa (blue) が
 # アクティブ tab / pane border / navigator のハイライトに使われる。
 # 2e723cc のコミットメッセージとここのコメントは長らく #cba6f7 と書いていたが、
