@@ -160,20 +160,41 @@ auto_switch = false
 panel_bg = "#000000"   # tmux の完全な黒に寄せる
 green    = "#00cd00"   # alacritty 側の green と統一
 
+# sidebar の背景は theme 側の既定が Color::Reset = 端末の背景そのまま。
+# ただし 0.9.0 の --default-config が sidebar_bg = "#181825" を例示しており、既定が
+# 変わるとハイライトのコントラストが軒並み落ちる (下の surface_dim なら 2.22→1.86)。
+# alacritty の background と揃えた純黒に固定したいので明示しておく。
+sidebar_bg = "reset"
+
 # sidebar のハイライト背景を明るくする。
-# sidebar_bg は Reset (端末の背景をそのまま使う) で、alacritty の background は
-# #000000。一方 catppuccin 既定の surface_dim は #1e1e2e で、純黒に対する
-# コントラスト比は 1.28 しかなく、agents パネルで「いまアクティブな行」が
-# ほとんど見分けられなかった。3 段とも 1 段ずつ明るい側にずらす。
-#   surface_dim … agents パネルのアクティブ行 / workspace のアクティブ行の背景。
-#                 区切り線と scrollbar のトラック (fg) も同じ色を使う
-#   surface0    … spaces パネルで navigate 中に選択している行の背景
-#   surface1    … workspace をドラッグ中の行の背景
-# 対 #000000 のコントラスト比: dim 1.28→1.61 / surface0 1.67→2.30 / surface1 2.30→3.15
-# 段差は残してあるので「アクティブ」と「navigate 選択中」は引き続き区別できる。
-surface_dim = "#2f2f45"
-surface0    = "#45475a"
-surface1    = "#585b70"
+# 上記のとおり背景は #000000。catppuccin 既定の surface_dim (#1e1e2e) は純黒に対する
+# コントラスト比が 1.28 しかなく、一度 #2f2f45 (1.61) まで上げたが、それでも agents
+# パネルの「いまアクティブな行」と通常行の差が読み取りにくかった。色相 (240) と彩度
+# (約 0.19) はそのままに、3 段とももう 1 段引き上げる。3 段は
+# 「アクティブ < navigate 選択 < ドラッグ」という序列なので、1 つだけ上げると段差が潰れる。
+#   surface_dim / active_row_bg … agents パネルのアクティブ行 / workspace のアクティブ行
+#                 の背景。区切り線・scrollbar のトラック・非アクティブ pane border の fg
+#                 にも同じ色が使われる (ui/sidebar.rs, ui/panes.rs)
+#   surface0 / selection_bg … spaces パネルで navigate 中に選択している行の背景
+#   surface1  … workspace をドラッグ中の行の背景 (0.9.0 でも新名称はない)
+# 対 #000000 のコントラスト比: dim 1.61→2.22 / surface0 2.30→3.03 / surface1 3.15→3.88
+#
+# 0.9.0 で active_row_bg / selection_bg という名前が増えたが、旧名も CustomThemeColors に
+# 残っていて、どちらが優先されるかはバイナリからは判別できなかった。どちらが勝っても
+# 同じ色になるよう、新旧を同じ値で書いてある。
+surface_dim   = "#434363"
+active_row_bg = "#434363"
+surface0      = "#575780"
+selection_bg  = "#575780"
+surface1      = "#676794"
+
+# sidebar の二次情報 (agent 名 / tab 名 / terminal_title / $prompt / トークン区切り) の色。
+# catppuccin 既定の overlay0 (#6c7086) はアクティブ行の背景 #434363 に対するコントラスト比が
+# 1.94 しかなく、さらに ui/sidebar.rs:1510 がこれらに DIM を付けるため端末側で暗く合成されて
+# 背景に沈む。背景を明るくした分、ここも overlay2 相当まで 2 段上げる。
+# 対 #434363 は 1.94→3.35、対 #000000 は 4.30→7.44。一次情報の workspace 名
+# (subtext0 #a6adc8 = 対黒 9.33 + BOLD) より暗いままなので、情報の序列は崩れない。
+overlay0 = "#9399b2"
 
 # ==========================================================================
 # ui
@@ -227,10 +248,24 @@ window_title                      = "{workspace} · {tab}"
 
 # sidebar の Agent 行。既定は [["state_icon","workspace","tab"],["agent"]] だが、
 # 並行 agent 時は「どの agent が今どの状態か」を先に読みたいので順序を入れ替える
+#
+# state_text は 0.9.0 のスタイル付きトークンにして、値が "working" のときだけ強調する。
+# herdr には「実行中の行だけ背景色を変える」機能がない (背景が付くのはアクティブ行だけで、
+# 状態は前景色にしか出ない: ui/status.rs state_label_color)。しかも ui/sidebar.rs は
+# 非アクティブ行の状態ラベルに DIM を付けるため、裏で走っている claude ほど読みにくかった。
+# そこで bold を足し dim を打ち消す。fg は書かない — 省略したフィールドは文脈既定を保つので
+# 状態色 (yellow) はそのまま残る。rules は text 値のトークンにしか付けられない
+# (state_icon と git_status は不可)。1 トークンあたり最大 16 ルール。
+#
+# agent / tab / terminal_title_stripped / $prompt は ui/sidebar.rs:1510 が overlay0 + DIM で
+# 描いている。DIM は端末側で色を背景寄りに合成するため、行背景を明るくした状態では
+# overlay0 を上げただけでは読めるようにならない。dim = false で DIM 自体を外す
+# (apply_token_style は false のとき remove_modifier する)。色は overlay0 に任せるので
+# fg は書かない。workspace は name_style (text/subtext0 + BOLD) で DIM が付かないため素のまま。
 [ui.sidebar.agents]
 rows = [
-  ["state_icon", "agent", "state_text"],
-  ["workspace", "tab"],
+  ["state_icon", { token = "agent", dim = false }, { token = "state_text", rules = [{ equals = "working", bold = true, dim = false }] }],
+  ["workspace", { token = "tab", dim = false }],
 ]
 
 # claude だけ OSC タイトルと最新プロンプトを 1 行ずつ足す。
@@ -259,10 +294,10 @@ rows = [
 # 実効 28 桁。フック側 HERDR_PROMPT_MAX_WIDTH の既定値と一致させてある。
 [ui.sidebar.agents.rows_by_agent]
 claude = [
-  ["state_icon", "agent", "state_text"],
-  ["terminal_title_stripped"],
-  ["$prompt"],
-  ["workspace", "tab"],
+  ["state_icon", { token = "agent", dim = false }, { token = "state_text", rules = [{ equals = "working", bold = true, dim = false }] }],
+  [{ token = "terminal_title_stripped", dim = false }],
+  [{ token = "$prompt", dim = false }],
+  ["workspace", { token = "tab", dim = false }],
 ]
 
 # [ui.sidebar.spaces] は既定 [["state_icon","workspace"],["branch","git_status"]]。
