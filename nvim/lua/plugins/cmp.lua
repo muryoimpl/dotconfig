@@ -36,7 +36,6 @@ local kind_icons = {
   Event = "",
   Operator = "󰆕",
   TypeParameter = "󰅲",
-  Copilot = "",
 }
 local cmp = require('cmp')
 cmp.setup({
@@ -80,8 +79,6 @@ cmp.setup({
   sorting = {
     priority_weight = 2,
     comparators = {
-      require("copilot_cmp.comparators").prioritize,
-
       -- Below is the default comparitor list and order for nvim-cmp
       cmp.config.compare.offset,
       -- cmp.config.compare.scopes, --this is commented in nvim-cmp too
@@ -96,7 +93,6 @@ cmp.setup({
     },
   },
   sources = cmp.config.sources({
-    { name = "copilot", group_index = 2 },
     { name = "nvim_lsp", group_index = 2 },
     { name = "vsnip", group_index = 2 },
     { name = "buffer", group_index = 2 },

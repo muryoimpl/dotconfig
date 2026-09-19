@@ -72,7 +72,6 @@ require("lazy").setup({
     end,
   },
   { 'nvim-lualine/lualine.nvim' },
-  { 'AndreM222/copilot-lualine' },
   { 'nvim-tree/nvim-web-devicons' },
   {
     "sontungexpt/stcursorword",
@@ -421,35 +420,6 @@ require("lazy").setup({
   },
 
   -- coding
-  {
-    "zbirenbaum/copilot.lua",
-    cmd = { "Copilot" },
-    event = { "InsertEnter", "LspAttach" },
-    config = function()
-      require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = false },
-      })
-    end,
-  },
-  {
-    "zbirenbaum/copilot-cmp",
-    config = function ()
-      require("copilot_cmp").setup()
-      -- copilot-cmp は self.client.is_stopped() という deprecated 呼び出しを
-      -- 残しているため、is_available をメソッド呼び出し形式に差し替える
-      local source = require("copilot_cmp.source")
-      source.is_available = function(self)
-        if not self.client or self.client:is_stopped() or self.client.name ~= "copilot" then
-          return false
-        end
-        return next(vim.lsp.get_clients({
-          bufnr = vim.api.nvim_get_current_buf(),
-          id = self.client.id,
-        })) ~= nil
-      end
-    end
-  },
   {
     "MaximilianLloyd/tw-values.nvim",
   },
