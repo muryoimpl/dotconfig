@@ -169,3 +169,5 @@ bower_components
 .git/**/*
 
 **/.claude/settings.local.json
+
+LEARNING.md
