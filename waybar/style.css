@@ -375,3 +375,19 @@ window#waybar.hidden {
     margin: 0 5px;
     font-size: 170%;
 }
+
+#custom-vpn {
+    color: @cloudy;
+    padding: 0 5px;
+    margin: 0 2px;
+}
+
+#custom-vpn.on {
+    color: @green;
+    font-weight: 900;
+}
+
+#custom-vpn.down {
+    color: @red;
+    font-weight: 900;
+}

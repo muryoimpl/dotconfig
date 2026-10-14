@@ -17,7 +17,7 @@
       "mango/layout",
       "mango/window"
     ],
-    "modules-right": ["pulseaudio", "network", "cpu", "memory", "disk", "temperature", "clock", "custom/notification", "custom/power"],
+    "modules-right": ["pulseaudio", "network", "custom/vpn", "cpu", "memory", "disk", "temperature", "clock", "custom/notification", "custom/power"],
     "mango/workspaces": {
         "format": "{icon}",
         "on-click": "activate",
@@ -65,6 +65,16 @@
         "format-linked": "🖧 {ifname} (No IP)",
         "format-disconnected": " ⚠ Disconnected",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
+    },
+    "custom/vpn": {
+      "tooltip": true,
+      "return-type": "json",
+      "format": "{}",
+      "exec": "$HOME/.config/mango/bin/vpn-proxy.sh status",
+      "interval": 15,
+      "signal": 8,
+      "on-click": "$HOME/.config/mango/bin/vpn-proxy.sh toggle",
+      "escape": true
     },
     "cpu": {
         "format": ":{usage}%",
