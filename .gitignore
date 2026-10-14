@@ -9,3 +9,4 @@ herdr/session.json
 herdr/release-notes.json
 # 0.8.0 の名前付き session。socket / ログ / session.json が入る
 herdr/sessions/
+mango/bin/vpn-proxy.sh
