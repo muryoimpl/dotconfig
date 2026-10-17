@@ -470,6 +470,7 @@ require("lazy").setup({
     config = function()
 
       local dapui = require('dapui')
+      dapui.setup()
       vim.keymap.set("n", "<Space>du", function() dapui.toggle() end, { silent = true })
       vim.keymap.set("n", "<Space>de", function() dapui.eval() end,   { silent = true })
     end
@@ -571,7 +572,7 @@ require("lazy").setup({
       vim.g["test#strategy"] = "neovim_sticky"
       vim.g["test#neovim#term_position"] = "botright 15"
 
-      vim.g["test#go#runner"] = "delve"
+      vim.g["test#go#runner"] = "gotest"
 
       -- vim.g["test#ruby#rspec#executable"] = "docker compose run --rm web bundle exec rspec"
       vim.g["test#ruby#rspec#options"] = {
