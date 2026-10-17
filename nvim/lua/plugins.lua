@@ -582,6 +582,20 @@ require("lazy").setup({
     end,
   },
   {
+    "muryoimpl/rails-i18n.nvim",
+    ft = { "ruby", "eruby", "slim", "haml" },
+    cmd = "RailsI18n",
+    config = function()
+      require("rails-i18n").setup({
+        -- locale = "ja",
+        virtual_text = { position = "below", max_length = 60 },
+      })
+      vim.keymap.set("n", "<leader>ih", function() require("rails-i18n").hover() end, { desc = "rails-i18n: hover" })
+      vim.keymap.set("n", "<leader>ig", function() require("rails-i18n").goto_definition() end, { desc = "rails-i18n: goto definition" })
+      vim.keymap.set("n", "<leader>it", function() require("rails-i18n").toggle() end, { desc = "rails-i18n: toggle virtual text" })
+    end,
+  },
+  {
     "muryoimpl/git-utils.nvim",
     dependencies = { "nvim-telescope/telescope.nvim" },
     config = function()
